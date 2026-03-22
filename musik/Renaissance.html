@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Musik der Renaissance – Lernübersicht</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c9a84c;
+    --gold-light: #e8cc7e;
+    --deep: #0e0b1a;
+    --surface: #16122a;
+    --surface2: #1e1a35;
+    --surface3: #252040;
+    --text: #e8e0d0;
+    --muted: #9a90a0;
+    --accent-red: #c0392b;
+    --accent-green: #1a7a4a;
+    --accent-blue: #2855a0;
+    --radius: 10px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--deep);
+    color: var(--text);
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    background-image:
+      radial-gradient(ellipse at 20% 10%, rgba(201,168,76,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 90%, rgba(40,85,160,0.08) 0%, transparent 50%);
+  }
+
+  /* HEADER */
+  header {
+    text-align: center;
+    padding: 48px 20px 36px;
+    position: relative;
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+  }
+  header::before {
+    content: '𝄞';
+    position: absolute; top: 12px; left: 50%;
+    transform: translateX(-50%);
+    font-size: 28px; color: var(--gold); opacity: 0.4;
+  }
+  header h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.6rem, 4vw, 2.8rem);
+    font-weight: 900;
+    color: var(--gold-light);
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+  }
+  header p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  /* NAV TABS */
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 20px 24px 0;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .tab-btn {
+    background: var(--surface);
+    border: 1px solid rgba(201,168,76,0.2);
+    color: var(--muted);
+    font-family: 'Lato', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+  .tab-btn:hover { color: var(--gold-light); border-color: var(--gold); }
+  .tab-btn.active {
+    background: var(--gold);
+    color: var(--deep);
+    border-color: var(--gold);
+  }
+
+  /* MAIN CONTENT */
+  main {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 24px;
+  }
+
+  .section { display: none; animation: fadeIn 0.3s ease; }
+  .section.active { display: block; }
+
+  @keyframes fadeIn { from { opacity:0; transform: translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+  /* CARDS */
+  .card {
+    background: var(--surface);
+    border: 1px solid rgba(201,168,76,0.12);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+  .card-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.05rem;
+    color: var(--gold);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .card-title .icon { font-size: 1.2rem; }
+
+  .tag {
+    display: inline-block;
+    background: rgba(201,168,76,0.15);
+    color: var(--gold-light);
+    border: 1px solid rgba(201,168,76,0.3);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+  .tag.red { background: rgba(192,57,43,0.2); color: #e87a70; border-color: rgba(192,57,43,0.4); }
+  .tag.green { background: rgba(26,122,74,0.2); color: #6ecfa0; border-color: rgba(26,122,74,0.4); }
+
+  ul.points { list-style: none; }
+  ul.points li {
+    padding: 5px 0 5px 20px;
+    position: relative;
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--text);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  ul.points li:last-child { border-bottom: none; }
+  ul.points li::before {
+    content: '▸';
+    position: absolute; left: 0;
+    color: var(--gold);
+    font-size: 0.8rem;
+  }
+  ul.points li strong { color: var(--gold-light); font-weight: 700; }
+
+  /* COMPARE TABLE */
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .compare-col {
+    background: var(--surface2);
+    border-radius: 8px;
+    padding: 16px;
+    border-top: 3px solid;
+  }
+  .compare-col.hom { border-color: #2855a0; }
+  .compare-col.pol { border-color: #c0392b; }
+  .compare-col h4 {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+  .compare-col.hom h4 { color: #7faeff; }
+  .compare-col.pol h4 { color: #ff8080; }
+  .compare-col p { font-size: 0.88rem; color: var(--muted); margin-bottom: 6px; line-height: 1.5; }
+  .compare-col .badge {
+    display: inline-block;
+    margin-top: 8px;
+    background: rgba(255,255,255,0.06);
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    color: var(--text);
+  }
+
+  /* ACCORDION */
+  .accordion { margin-bottom: 10px; }
+  .accordion-header {
+    background: var(--surface2);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 8px;
+    padding: 14px 18px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text);
+    transition: all 0.2s;
+    user-select: none;
+  }
+  .accordion-header:hover { border-color: var(--gold); color: var(--gold-light); }
+  .accordion-header.open {
+    border-radius: 8px 8px 0 0;
+    border-color: var(--gold);
+    color: var(--gold-light);
+    background: var(--surface3);
+  }
+  .accordion-arrow { transition: transform 0.25s; font-size: 0.8rem; }
+  .accordion-header.open .accordion-arrow { transform: rotate(180deg); }
+  .accordion-body {
+    display: none;
+    background: var(--surface3);
+    border: 1px solid var(--gold);
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    padding: 16px 18px;
+  }
+  .accordion-body.open { display: block; animation: fadeIn 0.2s ease; }
+
+  /* TABLE */
+  .styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    margin-top: 8px;
+  }
+  .styled-table th {
+    background: rgba(201,168,76,0.15);
+    color: var(--gold-light);
+    font-family: 'Cinzel', serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid rgba(201,168,76,0.3);
+  }
+  .styled-table td {
+    padding: 9px 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    color: var(--text);
+    vertical-align: top;
+  }
+  .styled-table tr:hover td { background: rgba(255,255,255,0.03); }
+
+  /* QUIZ */
+  .quiz-card {
+    background: var(--surface2);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 14px;
+  }
+  .quiz-question {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 14px;
+    line-height: 1.5;
+  }
+  .quiz-options { display: flex; flex-direction: column; gap: 8px; }
+  .quiz-option {
+    background: var(--surface3);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--text);
+    font-family: 'Lato', sans-serif;
+    font-size: 0.9rem;
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s;
+  }
+  .quiz-option:hover:not(:disabled) { border-color: var(--gold); color: var(--gold-light); }
+  .quiz-option.correct { background: rgba(26,122,74,0.25); border-color: #1a7a4a; color: #6ecfa0; }
+  .quiz-option.wrong { background: rgba(192,57,43,0.2); border-color: #c0392b; color: #e87a70; }
+  .quiz-option:disabled { cursor: default; }
+  .quiz-feedback { margin-top: 10px; font-size: 0.88rem; min-height: 20px; }
+  .quiz-feedback.ok { color: #6ecfa0; }
+  .quiz-feedback.nope { color: #e87a70; }
+
+  .quiz-score {
+    text-align: center;
+    padding: 16px;
+    background: var(--surface);
+    border-radius: var(--radius);
+    margin-bottom: 16px;
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    color: var(--gold-light);
+  }
+
+  /* FLASH CARDS */
+  .flashcard-wrap {
+    perspective: 1000px;
+    margin-bottom: 16px;
+  }
+  .flashcard {
+    position: relative;
+    width: 100%;
+    min-height: 160px;
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
+    cursor: pointer;
+  }
+  .flashcard.flipped { transform: rotateY(180deg); }
+  .flashcard-front, .flashcard-back {
+    position: absolute; inset: 0;
+    backface-visibility: hidden;
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    text-align: center;
+  }
+  .flashcard-front {
+    background: var(--surface2);
+    border: 1px solid rgba(201,168,76,0.3);
+    font-family: 'Cinzel', serif;
+    font-size: 1.15rem;
+    color: var(--gold-light);
+  }
+  .flashcard-back {
+    background: var(--surface3);
+    border: 1px solid var(--gold);
+    transform: rotateY(180deg);
+    font-size: 0.95rem;
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .flashcard-hint { text-align: center; color: var(--muted); font-size: 0.78rem; margin-bottom: 8px; }
+  .fc-nav { display: flex; gap: 10px; justify-content: center; margin-top: 12px; }
+  .fc-nav button {
+    background: var(--surface2);
+    border: 1px solid rgba(201,168,76,0.3);
+    color: var(--gold);
+    padding: 8px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.88rem;
+    transition: all 0.2s;
+  }
+  .fc-nav button:hover { background: var(--gold); color: var(--deep); }
+  .fc-counter { text-align: center; color: var(--muted); font-size: 0.8rem; margin-top: 8px; }
+
+  /* MEMO TABLE */
+  .memo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 10px;
+    margin-top: 8px;
+  }
+  .memo-item {
+    background: var(--surface2);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    padding: 12px 14px;
+  }
+  .memo-term {
+    font-family: 'Cinzel', serif;
+    font-size: 0.88rem;
+    color: var(--gold-light);
+    margin-bottom: 4px;
+  }
+  .memo-def { font-size: 0.82rem; color: var(--muted); line-height: 1.4; }
+
+  /* PROGRESS */
+  .progress-bar-wrap { background: rgba(255,255,255,0.06); border-radius: 20px; height: 6px; margin-top: 6px; }
+  .progress-bar { height: 100%; border-radius: 20px; background: linear-gradient(90deg, var(--gold), var(--gold-light)); transition: width 0.4s; }
+
+  @media(max-width:600px) {
+    .compare-grid { grid-template-columns: 1fr; }
+    header h1 { font-size: 1.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Musik der Renaissance</h1>
+  <p>1400 – 1600  &nbsp;·&nbsp;  Frankoflämische Vokalpolyphonie  &nbsp;·&nbsp;  Lernübersicht</p>
+</header>
+
+<nav>
+  <button class="tab-btn active" data-tab="epoche">🏛 Epoche</button>
+  <button class="tab-btn" data-tab="musik">🎵 Musik</button>
+  <button class="tab-btn" data-tab="gattungen">📜 Gattungen</button>
+  <button class="tab-btn" data-tab="komponisten">👤 Komponisten</button>
+  <button class="tab-btn" data-tab="begriffe">📖 Begriffe</button>
+  <button class="tab-btn" data-tab="karteikarten">🃏 Karteikarten</button>
+  <button class="tab-btn" data-tab="quiz">✏️ Quiz</button>
+</nav>
+
+<main>
+
+<!-- EPOCHE -->
+<div class="section active" id="epoche">
+  <div class="card">
+    <div class="card-title"><span class="icon">🏛</span> Geschichte & Zeitraum</div>
+    <ul class="points">
+      <li><strong>Zeitraum:</strong> ca. 14.–16. Jh., beginnend in Italien, dann ganz Europa</li>
+      <li><strong>„Wiedergeburt der Antike":</strong> antike Schriften, Bauformen & Denkweisen werden neu entdeckt und zum Vorbild genommen</li>
+      <li><strong>Aufstieg des Bürgertums:</strong> Kaufleute & Bankiers in Handelsstädten wie Florenz gewinnen Macht & Einfluss</li>
+      <li><strong>Mäzene:</strong> wohlhabende Familien fördern Künstler & Gelehrte, um Ansehen & polit. Einfluss zu stärken</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="icon">⚗️</span> Fortschritt</div>
+    <ul class="points">
+      <li><strong>Wissenschaft:</strong> neues Interesse an Naturbeobachtung, Mathematik, Anatomie & Technik</li>
+      <li><strong>Buchdruck:</strong> verbreitet Wissen schneller in einer breiteren Öffentlichkeit</li>
+      <li><strong>Entdeckungsfahrten:</strong> erweitern das Weltbild Europas</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="icon">🎨</span> Kunst & Kultur</div>
+    <ul class="points">
+      <li><strong>Humanismus:</strong> Bildungsideal – der gebildete, selbstbestimmte Mensch; Antike, Christentum & Gegenwart werden verbunden</li>
+      <li><strong>Mensch im Zentrum:</strong> idealisiert und naturgetreu dargestellt</li>
+      <li><strong>Technik:</strong> Zentralperspektive, Licht-/Schattenwirkung, genaue Körperstudien</li>
+      <li><strong>Städte als Kulturzentren:</strong> Florenz, Rom → Malerei, Bildhauerei, Architektur, Musik, Literatur</li>
+    </ul>
+  </div>
+</div>
+
+<!-- MUSIK -->
+<div class="section" id="musik">
+  <div class="card">
+    <div class="card-title"><span class="icon">🎵</span> Musik der Renaissance – Allgemein</div>
+    <ul class="points">
+      <li>Keine direkte Anknüpfung an die Antike möglich → <strong>Weiterentwicklung der mittelalterlichen Musik</strong></li>
+      <li>Neue Impulse aus England, Niederlande, Belgien, Nordfrankreich & Italien</li>
+      <li><strong>Frührenaissance:</strong> Franko-flämische Vokalpolyphonie</li>
+      <li><strong>Spätrenaissance:</strong> Venezianische Schule</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">✨</span> 1. Klangsinnlichkeit, Einfachheit & Natürlichkeit <span class="tag red">★ Prüfung</span></div>
+    <ul class="points">
+      <li>Ergänzung der Mehrstimmigkeit um <strong>Terzen und Sexten → DREIKLÄNGE</strong></li>
+      <li>Natürliche, <strong>atemgerechte Phrasierung</strong> – Melodik orientiert sich am menschlichen Atem</li>
+      <li>Komplexe Rhythmen der Gotik → <strong>einfachere Rhythmen</strong></li>
+      <li><strong>Simultankonzeption:</strong> alle Stimmen gleichzeitig komponiert (nicht nacheinander wie in der Gotik)</li>
+      <li>Akkordische Kompositionsweise verdrängt die lineare mittelalterliche Satzstruktur</li>
+      <li>Musik drückt <strong>Affekt & Ausdrucksgehalt</strong> eines Textes aus (Nicola Vicentino, 1555)</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">⚖️</span> 2. Homophonie vs. Polyphonie <span class="tag red">★ Prüfung</span></div>
+    <div class="compare-grid">
+      <div class="compare-col hom">
+        <h4>Homophonie</h4>
+        <p>Griech. <em>„Gleichklang"</em></p>
+        <p>= Mehrstimmigkeit, in der sich <strong>alle Stimmen einer Hauptstimme (Melodie) unterordnen</strong></p>
+        <p>Beispiel: Lied mit Akkordbegleitung</p>
+        <div class="badge">→ vertikale Satztechnik</div>
+      </div>
+      <div class="compare-col pol">
+        <h4>Polyphonie</h4>
+        <p>Griech. <em>„Vielklang"</em></p>
+        <p>= Mehrstimmigkeit, bei der <strong>alle Stimmen gleichberechtigt</strong> sind (Kanon, Fuge)</p>
+        <p>Begriff: <strong>Kontrapunkt</strong> = Gegenstimme zum Thema</p>
+        <div class="badge">→ horizontale Satztechnik</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">🏛</span> 3. Venezianische Mehrchörigkeit & konzertierendes Prinzip <span class="tag red">★ Prüfung</span></div>
+    <ul class="points">
+      <li>Spezifischer Musizierstil des 16. Jh.: getrennt voneinander platzierte vokale/instrumentale <strong>„Chöre" im Wechsel oder gleichzeitig</strong></li>
+      <li>→ effektvolle <strong>Echowirkungen & Kontrastbildungen</strong> durch Raumverhältnisse (<em>Coro-Spezzato-Technik</em>)</li>
+      <li><strong>Entstehung im Markusdom Venedig:</strong> gegenüberliegende Emporen & Orgeln = ideale Voraussetzung</li>
+      <li><strong>Konzertierendes Prinzip:</strong> alternierendes Musizieren verschiedener Instrumental- und Vokalgruppen im motivischen Wechselspiel</li>
+      <li>→ Bedeutung dieses Prinzips im <strong>Solokonzert und Concerto grosso (Barock)</strong></li>
+    </ul>
+  </div>
+</div>
+
+<!-- GATTUNGEN -->
+<div class="section" id="gattungen">
+  <div class="card">
+    <div class="card-title"><span class="icon">📋</span> Vokal-Gattungen im Überblick</div>
+    <table class="styled-table">
+      <tr><th>Weltlich</th><th>Geistlich</th></tr>
+      <tr><td>Motette</td><td>Motette</td></tr>
+      <tr><td>Madrigal (Italien)</td><td>Kirchenlied / Choral (Deutsch)</td></tr>
+      <tr><td>Chanson (Frankreich)</td><td>Messe (Ordinarium, Proprium)</td></tr>
+      <tr><td>Tenorlied (Deutschland)</td><td></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">🎭</span> Das Renaissance-Madrigal <span class="tag red">★ Prüfung</span></div>
+    <ul class="points">
+      <li>Ursprünglich: literarische Gattungsbezeichnung für <strong>Liebesdichtung</strong></li>
+      <li>Auch: derb-erotische, humoristische und satirische Inhalte</li>
+      <li>= kontrapunktisch-vielstimmige Gattung → virtuose Gesellschaftskunst</li>
+    </ul>
+    <br>
+    <div style="color:var(--gold-light); font-weight:700; margin-bottom:10px;">Merkmale:</div>
+    <ul class="points">
+      <li>Meist <strong>fünfstimmig</strong> (5. Stimme = meist 2. Sopran oder 2. Tenor)</li>
+      <li>Überwiegend <strong>syllabisch</strong></li>
+      <li>Expressive Melodik, bewegliche Rhythmik</li>
+      <li>Moderne bis kühne Harmonik</li>
+      <li>Textausdeutung bis zur <strong>Tonmalerei</strong> (Hühnergegacker, Vogelstimmen, Glocken, Schlachtenlärm)</li>
+      <li><em>Vertreter: Orlando di Lasso, Claudio Monteverdi, Luca Marenzio, Carlo Gesualdo</em></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">🎸</span> Werkbeispiel: Orlando di Lasso – „Matona mia cara"</div>
+    <ul class="points">
+      <li>Inhalt: ein deutscher Landsknecht umwirbt in schlechtem Italienisch ein Fräulein</li>
+      <li>Text vielfach <strong>doppeldeutig</strong> und schwer zu übersetzen</li>
+      <li>Derbe Sprache drückt mehr oder weniger direkt <strong>sexuelle Interessen</strong> des Landsknechtes aus</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="icon">🎻</span> Instrumentalmusik der Renaissance</div>
+    <ul class="points">
+      <li>Ab Mitte 16. Jh.: Instrumentalmusik wird zunehmend <strong>unabhängig von Vokalmusik</strong></li>
+      <li><strong>Faktor 1:</strong> Erfindung des Notendrucks 1501 → Verbreitung in breiter Öffentlichkeit</li>
+      <li><strong>Faktor 2:</strong> Herausbildung des Bürgertums → kommerzielle Interessen in der Musikwelt</li>
+      <li>Beliebte Instrumente: <strong>Tasteninstrumente & Laute</strong> (Griffschrift: Tabulatur)</li>
+      <li>Besetzung: solistisch oder im <strong>Consort</strong> (kleines Ensemble)</li>
+      <li>Gattungen: <strong>Ricercar, Toccata, Fantasie, Präludium</strong> (angelehnt an freie Improvisation)</li>
+    </ul>
+  </div>
+</div>
+
+<!-- KOMPONISTEN -->
+<div class="section" id="komponisten">
+  <div class="card">
+    <div class="card-title"><span class="icon">👤</span> Komponisten nach Region <span class="tag">Lebensdaten unwichtig!</span></div>
+    <table class="styled-table">
+      <tr><th>Region</th><th>Komponisten</th></tr>
+      <tr><td><strong>Frankoflämisch</strong></td><td>Guillaume Dufay · Johann Ockeghem · Josquin Desprez · Orlando di Lasso (alias Rudolfus Lassus)</td></tr>
+      <tr><td><strong>England</strong></td><td>John Dunstable · John Dowland (bes. Lautenmusik)</td></tr>
+      <tr><td><strong>Italien</strong></td><td>Andrea Gabrieli · Giovanni Gabrieli · Giovanni Pierluigi da Palestrina · Claudio Monteverdi</td></tr>
+      <tr><td><strong>Sonstige</strong></td><td>William Byrd · Martin Luther</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <div class="card-title"><span class="icon">🎼</span> Wichtige Werke</div>
+    <ul class="points">
+      <li><strong>Palestrina:</strong> Missa Papae Marcelli (1597) – führende Figur des römischen Stils der Vokalpolyphonie</li>
+      <li><strong>Orlando di Lasso:</strong> Matona mia cara (Madrigal) – bekannt für enorme stilistische Vielfalt, über 2000 Werke</li>
+    </ul>
+  </div>
+</div>
+
+<!-- BEGRIFFE -->
+<div class="section" id="begriffe">
+  <div class="card">
+    <div class="card-title"><span class="icon">📖</span> Fachbegriffe-Lexikon</div>
+    <div class="memo-grid">
+      <div class="memo-item"><div class="memo-term">Polyphonie</div><div class="memo-def">Griech. „Vielklang" – Mehrstimmigkeit, alle Stimmen gleichberechtigt → horizontale Satztechnik</div></div>
+      <div class="memo-item"><div class="memo-term">Homophonie</div><div class="memo-def">Griech. „Gleichklang" – Hauptstimme + Begleitung → vertikale Satztechnik</div></div>
+      <div class="memo-item"><div class="memo-term">Kontrapunkt</div><div class="memo-def">Gegenstimme zum Thema; Prinzip der Polyphonie</div></div>
+      <div class="memo-item"><div class="memo-term">Coro Spezzato</div><div class="memo-def">„Gespaltener Chor" – venezianische Mehrchörigkeit, Chöre räumlich getrennt</div></div>
+      <div class="memo-item"><div class="memo-term">Konz. Prinzip</div><div class="memo-def">Alternierendes Musizieren verschiedener Vokal-/Instrumentalgruppen</div></div>
+      <div class="memo-item"><div class="memo-term">Tabulatur</div><div class="memo-def">Instrumentenorientierte Griffschrift, bes. für Laute</div></div>
+      <div class="memo-item"><div class="memo-term">Dreiklang</div><div class="memo-def">Terz + Quint über Grundton – Renaissance-Neuerung durch Ergänzung mit Terzen/Sexten</div></div>
+      <div class="memo-item"><div class="memo-term">Affekt</div><div class="memo-def">Ausdruck von Idee, Leidenschaft, Wirkung eines Textes durch musikalische Mittel</div></div>
+      <div class="memo-item"><div class="memo-term">Madrigal</div><div class="memo-def">Weltliche, meist 5-stimmige Vokalmusik; Textausdeutung bis Tonmalerei</div></div>
+      <div class="memo-item"><div class="memo-term">Motette</div><div class="memo-def">Vokalwerk – existiert sowohl als weltliche als auch als geistliche Gattung</div></div>
+      <div class="memo-item"><div class="memo-term">Tonmalerei</div><div class="memo-def">Musikal. Nachahmung von Geräuschen/Bildern (z.B. Vogelstimmen im Madrigal)</div></div>
+      <div class="memo-item"><div class="memo-term">Simultankonzeption</div><div class="memo-def">Alle Stimmen werden gleichzeitig (nicht nacheinander) komponiert – Renaissance-Neuerung</div></div>
+      <div class="memo-item"><div class="memo-term">Consort</div><div class="memo-def">Kleines Instrumentalensemble der Renaissance</div></div>
+      <div class="memo-item"><div class="memo-term">Syllabisch</div><div class="memo-def">Eine Silbe pro Note – Merkmal des Madrigals</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- KARTEIKARTEN -->
+<div class="section" id="karteikarten">
+  <div class="card">
+    <div class="card-title"><span class="icon">🃏</span> Karteikarten – Anklicken zum Umdrehen</div>
+    <div id="fc-container">
+      <p class="flashcard-hint">Klicke auf die Karte zum Aufdecken</p>
+      <div class="flashcard-wrap">
+        <div class="flashcard" id="fc">
+          <div class="flashcard-front" id="fc-front"></div>
+          <div class="flashcard-back" id="fc-back"></div>
+        </div>
+      </div>
+      <p class="fc-counter" id="fc-counter"></p>
+      <div class="fc-nav">
+        <button id="btn-prev">← Zurück</button>
+        <button id="btn-next">Weiter →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div class="section" id="quiz">
+  <div class="quiz-score" id="quiz-score" style="display:none"></div>
+  <div id="quiz-container"></div>
+  <div style="text-align:center;margin-top:16px;">
+    <button id="btn-reset-quiz" style="background:var(--gold);color:var(--deep);border:none;padding:10px 28px;border-radius:6px;font-family:Lato;font-weight:700;cursor:pointer;font-size:0.95rem;">🔄 Quiz neu starten</button>
+  </div>
+</div>
+
+</main>
+
+<script>
+// TABS - use addEventListener, no inline onclick
+document.querySelectorAll('.tab-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.section').forEach(function(s) { s.classList.remove('active'); });
+    document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+    document.getElementById(btn.dataset.tab).classList.add('active');
+    btn.classList.add('active');
+  });
+});
+
+// FLASH CARDS
+var cards = [
+  { q: "Was ist Polyphonie?", a: "Griech. Vielklang - Mehrstimmigkeit, bei der alle Stimmen gleichberechtigt sind (Kanon, Fuge) - horizontale Satztechnik. Begriff: Kontrapunkt." },
+  { q: "Was ist Homophonie?", a: "Griech. Gleichklang - Mehrstimmigkeit, alle Stimmen unterordnen sich einer Hauptstimme (Melodie) - vertikale Satztechnik." },
+  { q: "Was ist der Kontrapunkt?", a: "Die Gegenstimme zum Thema; zentrales Prinzip der Polyphonie." },
+  { q: "Was ist die Coro-Spezzato-Technik?", a: "Gespaltener Chor - raeumlich getrennte Choere im Markusdom Venedig, die im Wechsel oder gleichzeitig musizieren. Echowirkungen." },
+  { q: "Was ist das konzertierendes Prinzip?", a: "Alternierendes Musizieren verschiedener Instrumental- und Vokalgruppen - Vorlaeufer von Solokonzert und Concerto grosso (Barock)." },
+  { q: "Welche 3 Kompositionsprinzipien kennzeichnen die Renaissance-Musik?", a: "1. Klangsinnlichkeit / Natuerlichkeit / Einfachheit\n2. Homophonie vs. Polyphonie\n3. Venezianische Mehrchörigkeit und konzertierendes Prinzip" },
+  { q: "Nenne die weltlichen Vokal-Gattungen!", a: "Motette · Madrigal (Italien) · Chanson (Frankreich) · Tenorlied (Deutschland)" },
+  { q: "Nenne die geistlichen Vokal-Gattungen!", a: "Motette · Kirchenlied / Choral (Deutsch) · Messe (Ordinarium, Proprium)" },
+  { q: "Merkmale des Renaissance-Madrigals?", a: "Meist 5-stimmig, überwiegend syllabisch, expressive Melodik, bewegliche Rhythmik, Textausdeutung bis Tonmalerei" },
+  { q: "Was bedeutet Simultankonzeption?", a: "Alle Stimmen werden gleichzeitig (nicht nacheinander) komponiert - Neuerung gegenueber der Gotik." },
+  { q: "Nenne die Instrumentalgattungen der Renaissance!", a: "Ricercar · Toccata · Fantasie · Praeludium (angelehnt an freie Improvisation)" },
+  { q: "Wer sind die wichtigsten frankoflaemischen Komponisten?", a: "Guillaume Dufay · Johann Ockeghem · Josquin Desprez · Orlando di Lasso" },
+  { q: "Wer sind die wichtigsten italienischen Komponisten?", a: "Andrea Gabrieli · Giovanni Gabrieli · Giovanni Pierluigi da Palestrina · Claudio Monteverdi" },
+  { q: "Worum geht es in Matona mia cara?", a: "Ein deutscher Landsknecht umwirbt in schlechtem Italienisch ein Fraeulein - derbe, doppeldeutige Sprache, sexuelle Anspielungen." },
+  { q: "Was ist die Tabulatur?", a: "Instrumentenorientierte Griffschrift (Notation) - besonders fuer Laute und Tasteninstrumente der Renaissance." },
+];
+
+var fcIdx = 0;
+function renderCard() {
+  var fc = document.getElementById('fc');
+  fc.classList.remove('flipped');
+  document.getElementById('fc-front').textContent = cards[fcIdx].q;
+  document.getElementById('fc-back').textContent = cards[fcIdx].a;
+  document.getElementById('fc-counter').textContent = (fcIdx + 1) + ' / ' + cards.length;
+}
+document.getElementById('fc').addEventListener('click', function() { this.classList.toggle('flipped'); });
+document.getElementById('btn-next').addEventListener('click', function() { fcIdx = (fcIdx + 1) % cards.length; renderCard(); });
+document.getElementById('btn-prev').addEventListener('click', function() { fcIdx = (fcIdx - 1 + cards.length) % cards.length; renderCard(); });
+renderCard();
+
+// QUIZ
+var quizData = [
+  { q: "Was bedeutet Polyphonie?", opts: ["Alle Stimmen unterordnen sich einer Hauptstimme", "Alle Stimmen sind gleichberechtigt - horizontale Satztechnik", "Einstimmige Musik mit Begleitung", "Musik fuer ein einzelnes Instrument"], a: 1 },
+  { q: "Was ist die Coro-Spezzato-Technik?", opts: ["Komposition einer einzelnen Solostimme", "Eine Art Fuge mit zwei Themen", "Raeumlich getrennte Choere im Wechsel - Echowirkungen", "Verzierung der Melodiestimme"], a: 2 },
+  { q: "Welche Gattungen gehoeren zur weltlichen Vokalmusik der Renaissance?", opts: ["Messe und Kirchenlied", "Madrigal, Chanson, Tenorlied, Motette", "Toccata, Praeludium, Ricercar", "Sonate und Symphonie"], a: 1 },
+  { q: "Worum geht es in Matona mia cara von Orlando di Lasso?", opts: ["Eine fromme Marienhymne", "Ein Trauerstueck ueber den Tod", "Ein deutscher Landsknecht umwirbt ein Fraeulein in schlechtem Italienisch", "Eine Tanzmusik fuer hoefische Feste"], a: 2 },
+  { q: "Was ist das konzertierendes Prinzip?", opts: ["Solist spielt gegen Orchester", "Alternierendes Musizieren von Vokal-/Instrumentalgruppen im Wechselspiel", "Eine Variationsform ueber ein Thema", "Gleichzeitiges Singen aller Stimmen"], a: 1 },
+  { q: "Welche Instrumente waren in der Renaissance besonders beliebt?", opts: ["Geige und Trompete", "Oboe und Fagott", "Tasteninstrumente und Laute (Tabulatur)", "Schlagzeug und Bass"], a: 2 },
+  { q: "Was ist ein Merkmal des Renaissance-Madrigals?", opts: ["Meist einstimmig und sehr schlicht", "Meist 5-stimmig, syllabisch, mit Tonmalerei", "Nur fuer Kirchenauffuehrungen bestimmt", "Immer im 4/4-Takt notiert"], a: 1 },
+  { q: "Wer komponierte die Missa Papae Marcelli?", opts: ["Josquin Desprez", "Orlando di Lasso", "Giovanni Pierluigi da Palestrina", "Claudio Monteverdi"], a: 2 },
+  { q: "Was kennzeichnet die Homophonie?", opts: ["Alle Stimmen gleichberechtigt", "Eine Hauptstimme, alle anderen ordnen sich unter - vertikale Satztechnik", "Wechsel zwischen zwei Choeren", "Freie Improvisation"], a: 1 },
+  { q: "Was ist die Simultankonzeption?", opts: ["Alle Instrumente spielen gleichzeitig sehr laut", "Alle Stimmen werden gleichzeitig (nicht nacheinander) komponiert", "Zwei Choere singen exakt dasselbe", "Eine Art Echo-Effekt"], a: 1 },
+];
+
+var quizAnswered = 0;
+var quizCorrect = 0;
+
+function buildQuiz() {
+  var c = document.getElementById('quiz-container');
+  c.innerHTML = '';
+  quizAnswered = 0; quizCorrect = 0;
+  document.getElementById('quiz-score').style.display = 'none';
+
+  quizData.forEach(function(item, qi) {
+    var div = document.createElement('div');
+    div.className = 'quiz-card';
+    var optsHtml = item.opts.map(function(o, oi) {
+      return '<button class="quiz-option" data-qi="' + qi + '" data-oi="' + oi + '" data-correct="' + item.a + '">' + o + '</button>';
+    }).join('');
+    div.innerHTML = '<div class="quiz-question">' + (qi+1) + '. ' + item.q + '</div><div class="quiz-options">' + optsHtml + '</div><div class="quiz-feedback" id="qfb-' + qi + '"></div>';
+    c.appendChild(div);
+  });
+
+  document.querySelectorAll('.quiz-option').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var qi = parseInt(this.dataset.qi);
+      var oi = parseInt(this.dataset.oi);
+      var correct = parseInt(this.dataset.correct);
+      var btns = this.closest('.quiz-options').querySelectorAll('.quiz-option');
+      btns.forEach(function(b) { b.disabled = true; });
+      var fb = document.getElementById('qfb-' + qi);
+      if (oi === correct) {
+        this.classList.add('correct');
+        fb.textContent = 'Richtig!';
+        fb.className = 'quiz-feedback ok';
+        quizCorrect++;
+      } else {
+        this.classList.add('wrong');
+        btns[correct].classList.add('correct');
+        fb.textContent = 'Falsch. Die richtige Antwort ist markiert.';
+        fb.className = 'quiz-feedback nope';
+      }
+      quizAnswered++;
+      if (quizAnswered === quizData.length) {
+        var score = document.getElementById('quiz-score');
+        var pct = Math.round(quizCorrect / quizData.length * 100);
+        var emoji = pct >= 80 ? ' Super!' : pct >= 60 ? ' Gut!' : ' Nochmal ueben!';
+        score.textContent = 'Ergebnis: ' + quizCorrect + ' / ' + quizData.length + ' richtig (' + pct + '%)' + emoji;
+        score.style.display = 'block';
+        score.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+}
+
+document.getElementById('btn-reset-quiz').addEventListener('click', function() {
+  buildQuiz();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+buildQuiz();
+</script>
+</body>
+</html>

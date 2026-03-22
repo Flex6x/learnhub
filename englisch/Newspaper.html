@@ -1,0 +1,1523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Newspapers – Learning Overview</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1208;
+    --paper: #f5f0e8;
+    --cream: #ede7d5;
+    --accent: #b5201c;
+    --gold: #c9913a;
+    --mid: #6b5e4e;
+    --light: #d4c9b4;
+    --quality: #1a3a5c;
+    --popular: #8b1a1a;
+    --green-good: #2d6a35;
+    --yellow-ok: #a07c10;
+    --red-bad: #8b1a1a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* ─── MASTHEAD ─── */
+  .masthead {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0;
+    border-bottom: 4px solid var(--accent);
+    position: relative;
+    overflow: hidden;
+  }
+  .masthead::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 28px, rgba(255,255,255,0.04) 28px, rgba(255,255,255,0.04) 29px);
+    pointer-events: none;
+  }
+  .masthead-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 28px 32px 20px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .masthead-title-block { flex: 1; }
+  .masthead-date {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--light);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .masthead-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.6rem);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    color: #fff;
+  }
+  .masthead-sub {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--gold);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 8px;
+  }
+
+  /* ─── LANG TOGGLE ─── */
+  .lang-toggle-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+  }
+  .lang-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--light);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .lang-toggle {
+    display: flex;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .lang-btn {
+    padding: 8px 20px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: rgba(255,255,255,0.5);
+    transition: all 0.2s;
+  }
+  .lang-btn.active {
+    background: var(--accent);
+    color: #fff;
+  }
+  .lang-btn:hover:not(.active) { color: #fff; background: rgba(255,255,255,0.1); }
+
+  /* ─── RULE LINES ─── */
+  .rule-line {
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--gold), var(--accent));
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* ─── NAV TABS ─── */
+  .nav-strip {
+    background: var(--cream);
+    border-bottom: 2px solid var(--light);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+  }
+  .nav-tab {
+    padding: 14px 22px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: var(--mid);
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+    transition: all 0.2s;
+    margin-bottom: -2px;
+  }
+  .nav-tab.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+  .nav-tab:hover:not(.active) { color: var(--ink); }
+
+  /* ─── CONTENT ─── */
+  .content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 36px 24px 60px;
+  }
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* ─── SECTION TITLE ─── */
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 700;
+    margin-bottom: 6px;
+    position: relative;
+    display: inline-block;
+  }
+  .section-title::after {
+    content: '';
+    display: block;
+    height: 3px;
+    background: var(--accent);
+    width: 60%;
+    margin-top: 4px;
+  }
+  .section-intro {
+    color: var(--mid);
+    font-size: 0.92rem;
+    margin-bottom: 28px;
+    margin-top: 10px;
+    max-width: 700px;
+    line-height: 1.6;
+  }
+
+  /* ─── COMPARISON TABLE ─── */
+  .comparison-grid {
+    display: grid;
+    grid-template-columns: 160px 1fr 1fr;
+    gap: 0;
+    border: 2px solid var(--ink);
+    border-radius: 6px;
+    overflow: hidden;
+    font-size: 0.88rem;
+  }
+  .cg-header {
+    padding: 14px 18px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .cg-header.label-col { background: var(--ink); color: var(--paper); border-right: 2px solid var(--ink); }
+  .cg-header.popular-col { background: var(--popular); color: #fff; text-align: center; border-right: 1px solid rgba(255,255,255,0.3); }
+  .cg-header.quality-col { background: var(--quality); color: #fff; text-align: center; }
+  .cg-row { display: contents; }
+  .cg-row > div {
+    padding: 14px 18px;
+    border-top: 1px solid var(--light);
+    line-height: 1.55;
+    vertical-align: top;
+  }
+  .cg-row > .label-cell {
+    background: var(--cream);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.74rem;
+    font-weight: 600;
+    color: var(--mid);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-right: 2px solid var(--ink);
+  }
+  .cg-row > .pop-cell {
+    background: #fdf7f7;
+    border-right: 1px solid var(--light);
+  }
+  .cg-row > .qual-cell { background: #f7f9fc; }
+  .cg-row:hover > div { filter: brightness(0.97); }
+  .tag {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 2px;
+    margin: 2px 2px 2px 0;
+    letter-spacing: 0.05em;
+  }
+  .tag-pop { background: #f5e0e0; color: var(--popular); }
+  .tag-qual { background: #dde8f5; color: var(--quality); }
+
+  /* ─── EXAMPLES GRID ─── */
+  .examples-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+    margin-top: 20px;
+  }
+  .newspaper-card {
+    border: 1.5px solid var(--light);
+    border-radius: 6px;
+    padding: 16px;
+    background: #fff;
+    transition: transform 0.15s, box-shadow 0.15s;
+    cursor: default;
+  }
+  .newspaper-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+  .nc-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .nc-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--mid);
+    margin-bottom: 8px;
+    letter-spacing: 0.05em;
+  }
+  .nc-desc { font-size: 0.82rem; color: var(--mid); line-height: 1.5; }
+  .nc-popular { border-top: 3px solid var(--popular); }
+  .nc-quality { border-top: 3px solid var(--quality); }
+
+  /* ─── INFLUENCE LIST ─── */
+  .influence-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+    margin-top: 20px;
+  }
+  .inf-card {
+    background: #fff;
+    border: 1.5px solid var(--light);
+    border-radius: 6px;
+    padding: 18px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .inf-icon {
+    font-size: 1.6rem;
+    flex-shrink: 0;
+    line-height: 1;
+    margin-top: 2px;
+  }
+  .inf-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+  .inf-text { font-size: 0.86rem; line-height: 1.55; }
+
+  /* ─── MEDIA LITERACY ─── */
+  .literacy-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 20px;
+  }
+  @media(max-width:600px) { .literacy-grid { grid-template-columns: 1fr; } }
+  .lit-card {
+    background: #fff;
+    border: 1.5px solid var(--light);
+    border-radius: 6px;
+    padding: 20px;
+  }
+  .lit-card.good { border-left: 4px solid var(--green-good); }
+  .lit-card.bad { border-left: 4px solid var(--red-bad); }
+  .lit-card-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .lit-card.good .lit-card-title { color: var(--green-good); }
+  .lit-card.bad .lit-card-title { color: var(--red-bad); }
+  .lit-item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 0.87rem;
+    line-height: 1.5;
+  }
+  .lit-item::before { content: '→'; font-family: monospace; flex-shrink: 0; }
+  .lit-card.bad .lit-item::before { content: '⚠'; color: var(--red-bad); }
+  .lit-card.good .lit-item::before { content: '✓'; color: var(--green-good); }
+
+  /* ─── PRESS FREEDOM ─── */
+  .freedom-intro-box {
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin-bottom: 28px;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  .freedom-intro-box strong { color: var(--gold); }
+  .freedom-intro-box a { color: var(--gold); }
+
+  .country-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 18px;
+    margin-bottom: 32px;
+  }
+  .country-card {
+    background: #fff;
+    border: 1.5px solid var(--light);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .cc-header {
+    padding: 14px 18px 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .cc-flag { font-size: 2rem; line-height: 1; }
+  .cc-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+  }
+  .cc-rank {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--mid);
+    letter-spacing: 0.05em;
+  }
+  .cc-bar-wrap { padding: 0 18px 4px; }
+  .cc-bar-label {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--mid);
+    margin-bottom: 4px;
+  }
+  .cc-bar-bg {
+    height: 8px;
+    background: var(--light);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+  .cc-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 1s ease;
+  }
+  .cc-body {
+    padding: 0 18px 16px;
+    font-size: 0.83rem;
+    color: var(--mid);
+    line-height: 1.5;
+  }
+  .cc-badge {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 3px;
+    letter-spacing: 0.07em;
+    margin-bottom: 8px;
+  }
+  .badge-good { background: #d4edda; color: var(--green-good); }
+  .badge-satisfactory { background: #d4edda; color: #2d6a35; }
+  .badge-problematic { background: #fff3cd; color: #856404; }
+  .badge-difficult { background: #f8d7da; color: #721c24; }
+  .badge-serious { background: #f5c6cb; color: #491217; }
+
+  /* RSF scale legend */
+  .scale-legend {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  .sl-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 0.78rem;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .sl-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ─── VOCAB / GLOSSARY ─── */
+  .vocab-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .vocab-card {
+    background: #fff;
+    border: 1.5px solid var(--light);
+    border-radius: 5px;
+    padding: 14px 16px;
+    transition: border-color 0.2s;
+  }
+  .vocab-card:hover { border-color: var(--gold); }
+  .vocab-en {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+  .vocab-de {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--gold);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+  }
+  .vocab-def { font-size: 0.83rem; color: var(--mid); line-height: 1.5; }
+
+  /* ─── QUIZ ─── */
+  .quiz-wrap { max-width: 700px; }
+  .quiz-card {
+    background: #fff;
+    border: 1.5px solid var(--light);
+    border-radius: 6px;
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+  .quiz-q {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    line-height: 1.4;
+  }
+  .quiz-options { display: flex; flex-direction: column; gap: 8px; }
+  .quiz-opt {
+    padding: 10px 16px;
+    border: 1.5px solid var(--light);
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.15s;
+    background: transparent;
+    text-align: left;
+    font-family: inherit;
+  }
+  .quiz-opt:hover:not(:disabled) { border-color: var(--gold); background: #fffbf2; }
+  .quiz-opt.correct { border-color: var(--green-good); background: #d4edda; color: var(--green-good); font-weight: 600; }
+  .quiz-opt.wrong { border-color: var(--red-bad); background: #f8d7da; color: var(--red-bad); }
+  .quiz-feedback {
+    margin-top: 12px;
+    font-size: 0.85rem;
+    color: var(--mid);
+    display: none;
+    padding: 10px;
+    background: var(--cream);
+    border-radius: 4px;
+    line-height: 1.5;
+  }
+  .quiz-score-bar {
+    background: var(--cream);
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .quiz-score-num {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--accent);
+  }
+  .quiz-score-label { font-size: 0.8rem; color: var(--mid); letter-spacing: 0.05em; }
+
+  /* ─── CHECKLIST ─── */
+  .cl-progress-wrap {
+    background: var(--ink);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .cl-progress-ring {
+    position: relative;
+    width: 70px; height: 70px;
+    flex-shrink: 0;
+  }
+  .cl-progress-ring svg { transform: rotate(-90deg); }
+  .cl-progress-ring .ring-bg { fill: none; stroke: rgba(255,255,255,0.1); stroke-width: 6; }
+  .cl-progress-ring .ring-fill { fill: none; stroke: var(--gold); stroke-width: 6; stroke-linecap: round; transition: stroke-dashoffset 0.5s ease; }
+  .cl-ring-label {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem; font-weight: 600;
+    color: #fff;
+  }
+  .cl-progress-text { flex: 1; }
+  .cl-progress-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem; font-weight: 700;
+    color: #fff; margin-bottom: 4px;
+  }
+  .cl-progress-sub {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem; color: rgba(255,255,255,0.5);
+    letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .cl-progress-bar-wrap { width: 100%; margin-top: 10px; }
+  .cl-progress-bar-bg {
+    height: 6px; background: rgba(255,255,255,0.1);
+    border-radius: 3px; overflow: hidden;
+  }
+  .cl-progress-bar-fill {
+    height: 100%; background: var(--gold);
+    border-radius: 3px; transition: width 0.5s ease;
+  }
+
+  .cl-category { margin-bottom: 28px; }
+  .cl-cat-header {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--light);
+  }
+  .cl-cat-icon { font-size: 1.2rem; }
+  .cl-cat-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--mid);
+  }
+  .cl-cat-count {
+    margin-left: auto;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem; color: var(--mid);
+  }
+  .cl-items { display: flex; flex-direction: column; gap: 6px; }
+  .cl-item {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: #fff;
+    border: 1.5px solid var(--light);
+    border-radius: 5px;
+    padding: 12px 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
+  }
+  .cl-item:hover { border-color: var(--gold); }
+  .cl-item.done {
+    background: #f0faf1;
+    border-color: var(--green-good);
+  }
+  .cl-item.done .cl-item-text { color: var(--mid); text-decoration: line-through; }
+  .cl-checkbox {
+    width: 20px; height: 20px; flex-shrink: 0;
+    border: 2px solid var(--light);
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem;
+    transition: all 0.2s;
+    margin-top: 1px;
+  }
+  .cl-item.done .cl-checkbox {
+    background: var(--green-good);
+    border-color: var(--green-good);
+    color: #fff;
+  }
+  .cl-item-text { font-size: 0.9rem; line-height: 1.4; flex: 1; }
+  .cl-item-sub {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem; color: var(--mid);
+    margin-top: 3px; letter-spacing: 0.04em;
+  }
+  .cl-reset-btn {
+    background: transparent;
+    border: 1.5px solid var(--light);
+    color: var(--mid);
+    padding: 8px 18px;
+    border-radius: 4px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 8px;
+  }
+  .cl-reset-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    padding: 20px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+  }
+  footer a { color: var(--gold); text-decoration: none; }
+
+  @media(max-width:700px) {
+    .comparison-grid { grid-template-columns: 110px 1fr 1fr; font-size: 0.82rem; }
+    .cg-header, .cg-row > div { padding: 10px 12px; }
+  }
+  @media(max-width:480px) {
+    .comparison-grid { grid-template-columns: 1fr; }
+    .cg-header.label-col, .cg-row > .label-cell { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="masthead-title-block">
+      <div class="masthead-date" data-en="Monday, March 16, 2026 — LK Preparation" data-de="Montag, 16. März 2026 — LK-Vorbereitung">Monday, March 16, 2026 — LK Preparation</div>
+      <div class="masthead-headline">NEWSPAPERS</div>
+      <div class="masthead-sub" data-en="Quality & Popular Press · Media Literacy · Press Freedom" data-de="Qualitäts- & Boulevardpresse · Medienkompetenz · Pressefreiheit">Quality & Popular Press · Media Literacy · Press Freedom</div>
+    </div>
+    <div class="lang-toggle-wrap">
+      <div class="lang-label" data-en="Language" data-de="Sprache">Language</div>
+      <div class="lang-toggle">
+        <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" id="btn-de" onclick="setLang('de')">DE</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="nav-strip">
+  <div class="nav-inner">
+    <button class="nav-tab active" onclick="showSection('comparison')" data-en="Comparison" data-de="Vergleich">Comparison</button>
+    <button class="nav-tab" onclick="showSection('examples')" data-en="Examples" data-de="Beispiele">Examples</button>
+    <button class="nav-tab" onclick="showSection('influence')" data-en="Influence" data-de="Einfluss">Influence</button>
+    <button class="nav-tab" onclick="showSection('literacy')" data-en="Media Literacy" data-de="Medienkompetenz">Media Literacy</button>
+    <button class="nav-tab" onclick="showSection('freedom')" data-en="Press Freedom" data-de="Pressefreiheit">Press Freedom</button>
+    <button class="nav-tab" onclick="showSection('vocab')" data-en="Vocabulary" data-de="Vokabular">Vocabulary</button>
+    <button class="nav-tab" onclick="showSection('quiz')" data-en="Quiz" data-de="Quiz">Quiz</button>
+    <button class="nav-tab" onclick="showSection('checklist')" data-en="✓ Checklist" data-de="✓ Checkliste">✓ Checklist</button>
+  </div>
+</nav>
+
+<!-- ═══════════════ CONTENT ═══════════════ -->
+<main class="content">
+
+  <!-- ── 1. COMPARISON ── -->
+  <section class="section active" id="sec-comparison">
+    <div class="section-title" data-en="Types of Newspapers" data-de="Zeitungstypen">Types of Newspapers</div>
+    <p class="section-intro" data-en="Newspapers fall into two broad categories: popular papers (tabloids) and quality papers (broadsheets). Each has a distinct style, audience, and purpose." data-de="Zeitungen lassen sich in zwei Kategorien einteilen: Boulevardblätter (Tabloids) und Qualitätszeitungen (Broadsheets). Beide haben einen eigenen Stil, eine eigene Zielgruppe und einen eigenen Zweck.">
+      Newspapers fall into two broad categories: popular papers (tabloids) and quality papers (broadsheets). Each has a distinct style, audience, and purpose.
+    </p>
+
+    <div class="comparison-grid">
+      <!-- Headers -->
+      <div class="cg-header label-col"></div>
+      <div class="cg-header popular-col">📰 <span data-en="Popular Papers" data-de="Boulevardblätter">Popular Papers</span><br><small style="font-weight:400;opacity:.8" data-en="Tabloid / Red Top" data-de="Tabloid / Boulevardzeitung">Tabloid / Red Top</small></div>
+      <div class="cg-header quality-col">🗞 <span data-en="Quality Papers" data-de="Qualitätszeitungen">Quality Papers</span><br><small style="font-weight:400;opacity:.8" data-en="Broadsheet" data-de="Broadsheet">Broadsheet</small></div>
+
+      <!-- Content -->
+      <div class="cg-row">
+        <div class="label-cell" data-en="Content" data-de="Inhalt">Content</div>
+        <div class="pop-cell" data-en="Celebrities &amp; gossip, rumours, sensational news, scandals" data-de="Prominente &amp; Klatsch, Gerüchte, reißerische Neuigkeiten, Skandale">Celebrities &amp; gossip, rumours, sensational news, scandals</div>
+        <div class="qual-cell" data-en="Detailed news reports, society, culture, business, politics, international events" data-de="Detaillierte Berichte, Gesellschaft, Kultur, Wirtschaft, Politik, internationale Ereignisse">Detailed news reports, society, culture, business, politics, international events</div>
+      </div>
+      <div class="cg-row">
+        <div class="label-cell" data-en="Why read?" data-de="Warum lesen?">Why read?</div>
+        <div class="pop-cell" data-en="Appeals to emotions, entertaining, more illustrative" data-de="Spricht Emotionen an, unterhaltend, viele Bilder">Appeals to emotions, entertaining, more illustrative</div>
+        <div class="qual-cell" data-en="Serious, high editorial standards, longer stories with greater analysis — informing" data-de="Seriös, hohe redaktionelle Standards, längere Artikel mit Analyse — informierend">Serious, high editorial standards, longer stories with greater analysis — informing</div>
+      </div>
+      <div class="cg-row">
+        <div class="label-cell" data-en="Orientation" data-de="Ausrichtung">Orientation</div>
+        <div class="pop-cell" data-en="One-sided, opinion &amp; person-oriented" data-de="Einseitig, meinungs- &amp; personenorientiert">One-sided, opinion &amp; person-oriented</div>
+        <div class="qual-cell" data-en="Objective, problem-oriented" data-de="Objektiv, problemorientiert">Objective, problem-oriented</div>
+      </div>
+      <div class="cg-row">
+        <div class="label-cell" data-en="Layout" data-de="Layout">Layout</div>
+        <div class="pop-cell" data-en="Many large pictures, banner headline ('red top'), compact format" data-de="Viele große Bilder, Banner-Schlagzeile ('red top'), kompaktes Format">Many large pictures, banner headline ('red top'), compact format</div>
+        <div class="qual-cell" data-en="Long headlines &amp; paragraphs, few pictures, structured, larger format" data-de="Lange Schlagzeilen &amp; Absätze, wenige Bilder, strukturiert, größeres Format">Long headlines &amp; paragraphs, few pictures, structured, larger format</div>
+      </div>
+      <div class="cg-row">
+        <div class="label-cell" data-en="Language" data-de="Sprache">Language</div>
+        <div class="pop-cell" data-en="Simple, slang, dramatic — 'emotivestyle'" data-de="Einfach, Slang, dramatisch — 'Emotivstil'">Simple, slang, dramatic — 'emotivestyle'</div>
+        <div class="qual-cell" data-en="Formal, complex, serious, neutral" data-de="Formal, komplex, seriös, neutral">Formal, complex, serious, neutral</div>
+      </div>
+      <div class="cg-row">
+        <div class="label-cell" data-en="Also called" data-de="Auch bekannt als">Also called</div>
+        <div class="pop-cell">
+          <span class="tag tag-pop">Tabloid</span>
+          <span class="tag tag-pop">Red top</span>
+          <span class="tag tag-pop" data-en="Yellow press" data-de="Boulevardpresse">Yellow press</span>
+          <span class="tag tag-pop" data-en="Gutter press" data-de="Regenbogenpresse">Gutter press</span>
+        </div>
+        <div class="qual-cell">
+          <span class="tag tag-qual">Broadsheet</span>
+          <span class="tag tag-qual" data-en="Quality paper" data-de="Qualitätszeitung">Quality paper</span>
+          <span class="tag tag-qual" data-en="Serious press" data-de="Seriöse Presse">Serious press</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 2. EXAMPLES ── -->
+  <section class="section" id="sec-examples">
+    <div class="section-title" data-en="Newspaper Examples" data-de="Zeitungsbeispiele">Newspaper Examples</div>
+    <p class="section-intro" data-en="Key newspapers from the UK, USA, and Germany — know which category each belongs to!" data-de="Wichtige Zeitungen aus UK, USA und Deutschland — wisse, welcher Kategorie jede angehört!">
+      Key newspapers from the UK, USA, and Germany — know which category each belongs to!
+    </p>
+
+    <h3 style="font-family:'IBM Plex Mono',monospace;font-size:0.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--popular);margin-bottom:12px;" data-en="📰 Popular Papers (Tabloids)" data-de="📰 Boulevardblätter (Tabloids)">📰 Popular Papers (Tabloids)</h3>
+    <div class="examples-grid">
+      <div class="newspaper-card nc-popular">
+        <div class="nc-name">The Sun</div>
+        <div class="nc-meta">🇬🇧 UK · Popular</div>
+        <div class="nc-desc" data-en="Best-selling UK tabloid. Known for bold red masthead, celebrity gossip, and sensational headlines. Owned by News UK (Murdoch)." data-de="Meistverkauftes britisches Tabloid. Bekannt für roten Schriftzug, Prominentenklatsch und reißerische Schlagzeilen. Gehört News UK (Murdoch).">Best-selling UK tabloid. Known for bold red masthead, celebrity gossip, and sensational headlines.</div>
+      </div>
+      <div class="newspaper-card nc-popular">
+        <div class="nc-name">Daily Mirror</div>
+        <div class="nc-meta">🇬🇧 UK · Popular</div>
+        <div class="nc-desc" data-en="Centre-left tabloid focusing on celebrity news, human interest stories, and popular culture." data-de="Mitte-Links-Tabloid mit Fokus auf Prominentennews, menschlichen Schicksalen und Populärkultur.">Centre-left tabloid focusing on celebrity news, human interest stories, and popular culture.</div>
+      </div>
+      <div class="newspaper-card nc-popular">
+        <div class="nc-name">People Magazine</div>
+        <div class="nc-meta">🇺🇸 USA · Popular</div>
+        <div class="nc-desc" data-en="American celebrity and entertainment magazine with a large readership. Entertainment, gossip, human interest." data-de="Amerikanisches Promi- und Unterhaltungsmagazin mit großer Leserschaft. Unterhaltung, Klatsch und Geschichten aus dem Leben.">American celebrity and entertainment magazine. Entertainment, gossip, human interest.</div>
+      </div>
+      <div class="newspaper-card nc-popular">
+        <div class="nc-name">Bild</div>
+        <div class="nc-meta">🇩🇪 Deutschland · Boulevard</div>
+        <div class="nc-desc" data-en="Germany's most-read tabloid. Short texts, big pictures, sensationalist reporting. Germany's equivalent of The Sun." data-de="Deutschlands meistgelesenes Boulevardblatt. Kurze Texte, große Bilder, reißerische Berichterstattung. Deutschlands Pendant zur Sun.">Deutschlands meistgelesenes Boulevardblatt. Kurze Texte, große Bilder, reißerische Berichterstattung.</div>
+      </div>
+      <div class="newspaper-card nc-popular">
+        <div class="nc-name">Abendzeitung</div>
+        <div class="nc-meta">🇩🇪 Deutschland · Boulevard</div>
+        <div class="nc-desc" data-en="Munich-based tabloid with regional focus. Entertainment, sport, local news." data-de="Münchner Boulevardzeitung mit regionalem Fokus. Unterhaltung, Sport, Lokalnachrichten.">Münchner Boulevardzeitung mit regionalem Fokus. Unterhaltung, Sport, Lokalnachrichten.</div>
+      </div>
+      <div class="newspaper-card nc-popular">
+        <div class="nc-name">Berliner Kurier</div>
+        <div class="nc-meta">🇩🇪 Deutschland · Boulevard</div>
+        <div class="nc-desc" data-en="Berlin tabloid, sensationalist style, regional focus." data-de="Berliner Boulevardzeitung im Sensationsstil, regionaler Fokus.">Berliner Boulevardzeitung im Sensationsstil, regionaler Fokus.</div>
+      </div>
+    </div>
+
+    <h3 style="font-family:'IBM Plex Mono',monospace;font-size:0.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--quality);margin-top:28px;margin-bottom:12px;" data-en="🗞 Quality Papers (Broadsheets)" data-de="🗞 Qualitätszeitungen (Broadsheets)">🗞 Quality Papers (Broadsheets)</h3>
+    <div class="examples-grid">
+      <div class="newspaper-card nc-quality">
+        <div class="nc-name">The Times</div>
+        <div class="nc-meta">🇬🇧 UK · Quality</div>
+        <div class="nc-desc" data-en="One of Britain's oldest and most respected newspapers. Serious news, politics, business, arts." data-de="Eine der ältesten und angesehensten britischen Zeitungen. Seriöse Nachrichten, Politik, Wirtschaft, Kultur.">One of Britain's oldest newspapers. Serious news, politics, business, arts.</div>
+      </div>
+      <div class="newspaper-card nc-quality">
+        <div class="nc-name">The Guardian</div>
+        <div class="nc-meta">🇬🇧 UK · Quality</div>
+        <div class="nc-desc" data-en="Progressive broadsheet known for investigative journalism and long-form analysis. Free online." data-de="Fortschrittliche Qualitätszeitung, bekannt für Investigativjournalismus und tiefgehende Analysen. Online kostenlos.">Progressive broadsheet, investigative journalism, long-form analysis. Free online.</div>
+      </div>
+      <div class="newspaper-card nc-quality">
+        <div class="nc-name">The Washington Post</div>
+        <div class="nc-meta">🇺🇸 USA · Quality</div>
+        <div class="nc-desc" data-en="Major US quality paper. Broke the Watergate scandal. Strong political coverage and investigative journalism." data-de="Große US-Qualitätszeitung. Deckte den Watergate-Skandal auf. Starke politische Berichterstattung und Investigativjournalismus.">Broke the Watergate scandal. Strong political coverage and investigative journalism.</div>
+      </div>
+      <div class="newspaper-card nc-quality">
+        <div class="nc-name">Los Angeles Times</div>
+        <div class="nc-meta">🇺🇸 USA · Quality</div>
+        <div class="nc-desc" data-en="Major West Coast quality paper covering national and international affairs alongside West Coast culture." data-de="Große Westküsten-Qualitätszeitung mit nationalen und internationalen Themen sowie Westküsten-Kultur.">Major West Coast quality paper, national and international affairs.</div>
+      </div>
+      <div class="newspaper-card nc-quality">
+        <div class="nc-name">Süddeutsche Zeitung</div>
+        <div class="nc-meta">🇩🇪 Deutschland · Qualität</div>
+        <div class="nc-desc" data-en="Germany's most widely distributed quality daily. Centre-left, known for the Panama Papers investigation." data-de="Deutschlands meistverbreitete Qualitätszeitung. Mitte-Links, bekannt für die Panama-Papers-Enthüllung.">Deutschlands meistverbreitete Qualitätszeitung. Mitte-Links, Panama Papers.</div>
+      </div>
+      <div class="newspaper-card nc-quality">
+        <div class="nc-name">Die Zeit</div>
+        <div class="nc-meta">🇩🇪 Deutschland · Qualität</div>
+        <div class="nc-desc" data-en="Weekly quality newspaper. Known for in-depth reporting, essays and cultural coverage." data-de="Wöchentliche Qualitätszeitung. Bekannt für tiefgründige Berichte, Essays und Kulturberichterstattung.">Wöchentliche Qualitätszeitung. Bekannt für tiefgründige Berichte und Essays.</div>
+      </div>
+      <div class="newspaper-card nc-quality">
+        <div class="nc-name">Frankfurter Allgemeine</div>
+        <div class="nc-meta">🇩🇪 Deutschland · Qualität</div>
+        <div class="nc-desc" data-en="Conservative quality daily. High journalistic standards, strong business and feuilleton sections." data-de="Konservative Qualitätszeitung. Hohe journalistische Standards, starke Wirtschafts- und Feuilletonteile.">Konservative Qualitätszeitung. Starkes Wirtschafts- und Feuilletonressort.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 3. INFLUENCE ── -->
+  <section class="section" id="sec-influence">
+    <div class="section-title" data-en="Influence of the Press" data-de="Einfluss der Presse">Influence of the Press</div>
+    <p class="section-intro" data-en="The press shapes public opinion in many powerful ways. Understanding these mechanisms is key to media literacy." data-de="Die Presse beeinflusst die öffentliche Meinung auf viele Weisen. Diese Mechanismen zu kennen ist entscheidend für Medienkompetenz.">
+      The press shapes public opinion in many powerful ways. Understanding these mechanisms is key to media literacy.
+    </p>
+    <div class="influence-list">
+      <div class="inf-card">
+        <div class="inf-icon">📢</div>
+        <div>
+          <div class="inf-title" data-en="Informing" data-de="Informieren">Informing</div>
+          <div class="inf-text" data-en="Informs citizens about events and facts — everyone can decide how information affects their views." data-de="Informiert Bürger über Ereignisse und Fakten — jeder kann entscheiden, wie diese Informationen auf ihn wirken.">Informs citizens about events and facts — everyone can decide how information affects their views.</div>
+        </div>
+      </div>
+      <div class="inf-card">
+        <div class="inf-icon">🗳</div>
+        <div>
+          <div class="inf-title" data-en="Opinion Building" data-de="Meinungsbildung">Opinion Building</div>
+          <div class="inf-text" data-en="Can build your own opinion depending on the newspaper, e.g. when an election is coming up." data-de="Kann die eigene Meinung beeinflussen, z.B. vor Wahlen. Zeitungen nehmen aktiv Stellung.">Can build your opinion depending on the newspaper, e.g. when an election is coming up.</div>
+        </div>
+      </div>
+      <div class="inf-card">
+        <div class="inf-icon">🛒</div>
+        <div>
+          <div class="inf-title" data-en="Advertising & Consumerism" data-de="Werbung & Konsum">Advertising & Consumerism</div>
+          <div class="inf-text" data-en="Leads readers to buy products or services through advertising and sponsored content." data-de="Verleitet Leser zum Kauf von Produkten oder Dienstleistungen durch Werbung und gesponserteInhalte.">Leads readers to buy products or services through advertising and sponsored content.</div>
+        </div>
+      </div>
+      <div class="inf-card">
+        <div class="inf-icon">⚡</div>
+        <div>
+          <div class="inf-title" data-en="Fast Belief Formation" data-de="Schnelle Meinungsbildung">Fast Belief Formation</div>
+          <div class="inf-text" data-en="Lets you believe news fast without questioning — especially a problem with tabloids and social media." data-de="Lässt Leser Nachrichten schnell glauben, ohne zu hinterfragen — besonders bei Boulevardblättern und sozialen Medien ein Problem.">Lets you believe news fast without questioning — especially a problem with tabloids.</div>
+        </div>
+      </div>
+      <div class="inf-card">
+        <div class="inf-icon">🔥</div>
+        <div>
+          <div class="inf-title" data-en="Sensationalism" data-de="Sensationalismus">Sensationalism</div>
+          <div class="inf-text" data-en="Provokes public interest or excitement (= sensationalism) — exaggerated reporting to attract more readers." data-de="Erregt öffentliches Interesse oder Aufregung (= Sensationalismus) — übertriebene Berichterstattung, um mehr Leser anzulocken.">Provokes public interest or excitement — exaggerated reporting to attract more readers.</div>
+        </div>
+      </div>
+      <div class="inf-card">
+        <div class="inf-icon">🔍</div>
+        <div>
+          <div class="inf-title" data-en="Watchdog Function" data-de="Kontrollinstanz">Watchdog Function</div>
+          <div class="inf-text" data-en="Quality press holds governments, corporations, and powerful individuals accountable (the 'Fourth Estate')." data-de="Qualitätspresse hält Regierungen, Unternehmen und mächtige Personen verantwortlich ('Vierte Gewalt').">Quality press holds governments accountable — the so-called 'Fourth Estate'.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 4. MEDIA LITERACY ── -->
+  <section class="section" id="sec-literacy">
+    <div class="section-title" data-en="Media Literacy" data-de="Medienkompetenz">Media Literacy</div>
+    <p class="section-intro" data-en="Media literacy means critically evaluating sources: Is the source reliable? Is it biased or unbiased?" data-de="Medienkompetenz bedeutet, Quellen kritisch zu bewerten: Ist die Quelle zuverlässig? Ist sie voreingenommen oder neutral?">
+      Media literacy means critically evaluating sources: Is the source reliable? Is it biased or unbiased?
+    </p>
+    <div class="literacy-grid">
+      <div class="lit-card good">
+        <div class="lit-card-title" data-en="✓ Signs of a reliable source" data-de="✓ Merkmale einer zuverlässigen Quelle">✓ Signs of a reliable source</div>
+        <div class="lit-item" data-en="Clear authorship and credentials" data-de="Klare Autorenschaft und Qualifikationen">Clear authorship and credentials</div>
+        <div class="lit-item" data-en="Multiple confirmed sources cited" data-de="Mehrere bestätigte Quellen angegeben">Multiple confirmed sources cited</div>
+        <div class="lit-item" data-en="Separation of news and opinion" data-de="Trennung von Nachrichten und Meinung">Separation of news and opinion</div>
+        <div class="lit-item" data-en="Corrections policy published" data-de="Korrekturen werden veröffentlicht">Corrections policy published</div>
+        <div class="lit-item" data-en="Neutral, formal language" data-de="Neutrale, formale Sprache">Neutral, formal language</div>
+        <div class="lit-item" data-en="Editorial board / standards visible" data-de="Redaktionsstatut / Standards erkennbar">Editorial board / standards visible</div>
+      </div>
+      <div class="lit-card bad">
+        <div class="lit-card-title" data-en="⚠ Warning signs (bias / unreliable)" data-de="⚠ Warnsignale (Voreingenommenheit)">⚠ Warning signs (bias / unreliable)</div>
+        <div class="lit-item" data-en="Emotional, dramatic language (emotivestyle)" data-de="Emotionale, dramatische Sprache (Emotivstil)">Emotional, dramatic language (emotivestyle)</div>
+        <div class="lit-item" data-en="Headlines do not match content" data-de="Schlagzeilen stimmen nicht mit dem Inhalt überein">Headlines do not match content</div>
+        <div class="lit-item" data-en="Only one perspective presented" data-de="Nur eine Perspektive wird dargestellt">Only one perspective presented</div>
+        <div class="lit-item" data-en="Anonymous or unclear authorship" data-de="Anonyme oder unklare Autorenschaft">Anonymous or unclear authorship</div>
+        <div class="lit-item" data-en="No sources or evidence given" data-de="Keine Quellen oder Beweise angegeben">No sources or evidence given</div>
+        <div class="lit-item" data-en="Frequent use of 'shock' content" data-de="Häufige Nutzung von Schockinhalt">Frequent use of 'shock' content</div>
+      </div>
+    </div>
+    <div style="background:#fff;border:1.5px solid var(--light);border-radius:6px;padding:20px;margin-top:18px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;" data-en="Key Vocabulary: Bias" data-de="Schlüsselvokabular: Voreingenommenheit">Key Vocabulary: Bias</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;font-size:.87rem;">
+        <div><strong data-en="Biased / one-sided" data-de="Voreingenommen / einseitig">Biased / one-sided</strong> = <span data-en="presenting only one view, not objective" data-de="Voreingenommen / einseitig = nur eine Sichtweise, nicht objektiv">presenting only one view, not objective</span></div>
+        <div><strong data-en="Unbiased / neutral" data-de="Unvoreingenommen / neutral">Unbiased / neutral</strong> = <span data-en="balanced, shows multiple perspectives" data-de="ausgeglichen, zeigt mehrere Perspektiven">balanced, shows multiple perspectives</span></div>
+        <div><strong data-en="Trustworthy / reliable" data-de="Vertrauenswürdig / zuverlässig">Trustworthy / reliable</strong> = <span data-en="can be believed, backed by evidence" data-de="kann man glauben, durch Beweise gestützt">can be believed, backed by evidence</span></div>
+        <div><strong data-en="Source" data-de="Quelle">Source</strong> = <span data-en="where information comes from — always check!" data-de="woher die Information stammt — immer prüfen!">where information comes from — always check!</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 5. PRESS FREEDOM ── -->
+  <section class="section" id="sec-freedom">
+    <div class="section-title" data-en="Press Freedom" data-de="Pressefreiheit">Press Freedom</div>
+    <p class="section-intro" data-en="The RSF (Reporters Without Borders) World Press Freedom Index ranks 180 countries annually. A lower score = more restricted press freedom." data-de="Der RSF (Reporter ohne Grenzen) Weltindex der Pressefreiheit bewertet jährlich 180 Länder. Je niedriger der Score, desto eingeschränkter die Pressefreiheit.">
+      The RSF (Reporters Without Borders) World Press Freedom Index ranks 180 countries annually. A lower score = more restricted press freedom.
+    </p>
+
+    <div class="freedom-intro-box">
+      <strong data-en="What is the RSF Index?" data-de="Was ist der RSF-Index?">What is the RSF Index?</strong><br>
+      <span data-en="Reporters Without Borders (RSF) publishes an annual index of press freedom in 180 countries. It evaluates five indicators: political context, legal framework, economic context, sociocultural context, and journalist safety. The scale runs from 0–100, where 100 = maximum freedom. → " data-de="Reporter ohne Grenzen (RSF) veröffentlicht jährlich einen Index der Pressefreiheit in 180 Ländern. Er bewertet fünf Indikatoren: politischer Kontext, Rechtsrahmen, wirtschaftlicher Kontext, soziokultureller Kontext und Journalistensicherheit. Die Skala reicht von 0–100, wobei 100 = maximale Freiheit. → ">Reporters Without Borders (RSF) publishes an annual index of press freedom in 180 countries. It evaluates five indicators: political context, legal framework, economic context, sociocultural context, and journalist safety. The scale runs from 0–100, where 100 = maximum freedom. → </span>
+      <a href="https://rsf.org/en/index" target="_blank">rsf.org/en/index</a>
+    </div>
+
+    <!-- Scale legend -->
+    <div class="scale-legend">
+      <div class="sl-item"><div class="sl-dot" style="background:#2d6a35"></div><span data-en="Good (100–75)" data-de="Gut (100–75)">Good (100–75)</span></div>
+      <div class="sl-item"><div class="sl-dot" style="background:#5a9c5a"></div><span data-en="Satisfactory (74–55)" data-de="Zufriedenstellend (74–55)">Satisfactory (74–55)</span></div>
+      <div class="sl-item"><div class="sl-dot" style="background:#e0a030"></div><span data-en="Problematic (54–40)" data-de="Problematisch (54–40)">Problematic (54–40)</span></div>
+      <div class="sl-item"><div class="sl-dot" style="background:#cc4444"></div><span data-en="Difficult (39–20)" data-de="Schwierig (39–20)">Difficult (39–20)</span></div>
+      <div class="sl-item"><div class="sl-dot" style="background:#7a0000"></div><span data-en="Very serious (19–0)" data-de="Sehr ernst (19–0)">Very serious (19–0)</span></div>
+    </div>
+
+    <div class="country-cards">
+      <!-- Norway — #1 -->
+      <div class="country-card">
+        <div class="cc-header">
+          <div class="cc-flag">🇳🇴</div>
+          <div>
+            <div class="cc-name">Norway</div>
+            <div class="cc-rank" data-en="Rank #1 of 180 · 2025 RSF Index" data-de="Platz #1 von 180 · RSF-Index 2025">Rank #1 of 180 · 2025 RSF Index</div>
+          </div>
+        </div>
+        <div class="cc-bar-wrap">
+          <div class="cc-bar-label"><span data-en="Score" data-de="Score">Score</span><span>~93.5/100</span></div>
+          <div class="cc-bar-bg"><div class="cc-bar-fill" style="width:93.5%;background:#2d6a35"></div></div>
+        </div>
+        <div class="cc-body">
+          <span class="cc-badge badge-good" data-en="GOOD" data-de="GUT">GOOD</span><br>
+          <span data-en="Top-ranked country for press freedom for the 9th year running. Strong legal protection, no journalist imprisonments, robust independent media." data-de="Seit 9 Jahren auf Platz 1. Starker gesetzlicher Schutz, keine inhaftierten Journalisten, robuste unabhängige Medien.">Top-ranked for press freedom for the 9th year. Strong legal protection, no journalist imprisonments.</span>
+        </div>
+      </div>
+
+      <!-- Germany -->
+      <div class="country-card">
+        <div class="cc-header">
+          <div class="cc-flag">🇩🇪</div>
+          <div>
+            <div class="cc-name">Germany</div>
+            <div class="cc-rank" data-en="Rank #17 · 2025 RSF Index" data-de="Platz #17 · RSF-Index 2025">Rank #17 · 2025 RSF Index</div>
+          </div>
+        </div>
+        <div class="cc-bar-wrap">
+          <div class="cc-bar-label"><span data-en="Score" data-de="Score">Score</span><span>~89.8/100</span></div>
+          <div class="cc-bar-bg"><div class="cc-bar-fill" style="width:89.8%;background:#2d6a35"></div></div>
+        </div>
+        <div class="cc-body">
+          <span class="cc-badge badge-good" data-en="GOOD" data-de="GUT">GOOD</span><br>
+          <span data-en="Strong press freedom. Rose 11 places in 2024 after decline in far-right attacks on journalists. Press freedom protected by Article 5 of the Basic Law (Grundgesetz)." data-de="Starke Pressefreiheit. 2024 um 11 Plätze gestiegen nach Rückgang rechtsextremer Angriffe auf Journalisten. Pressefreiheit durch Art. 5 GG geschützt.">Strong press freedom. Rose sharply in recent years. Press freedom protected by Article 5 of the Basic Law (Grundgesetz).</span>
+        </div>
+      </div>
+
+      <!-- UK -->
+      <div class="country-card">
+        <div class="cc-header">
+          <div class="cc-flag">🇬🇧</div>
+          <div>
+            <div class="cc-name">United Kingdom</div>
+            <div class="cc-rank" data-en="Rank #29 · 2025 RSF Index" data-de="Platz #29 · RSF-Index 2025">Rank #29 · 2025 RSF Index</div>
+          </div>
+        </div>
+        <div class="cc-bar-wrap">
+          <div class="cc-bar-label"><span data-en="Score" data-de="Score">Score</span><span>~83.1/100</span></div>
+          <div class="cc-bar-bg"><div class="cc-bar-fill" style="width:83.1%;background:#5a9c5a"></div></div>
+        </div>
+        <div class="cc-body">
+          <span class="cc-badge badge-satisfactory" data-en="SATISFACTORY" data-de="ZUFRIEDENSTELLEND">SATISFACTORY</span><br>
+          <span data-en="Generally free press but economic pressures have worsened. Job cuts in major outlets weakened the economic indicator. Phone hacking scandals and press regulation debates ongoing." data-de="Generell freie Presse, aber wirtschaftlicher Druck hat zugenommen. Stellenabbau in großen Verlagen. Phone-Hacking-Skandale und Presseregelungsdebatte dauern an.">Generally free press, but economic pressures and job cuts have weakened indicators. Phone-hacking scandals in tabloids were a major issue.</span>
+        </div>
+      </div>
+
+      <!-- USA -->
+      <div class="country-card">
+        <div class="cc-header">
+          <div class="cc-flag">🇺🇸</div>
+          <div>
+            <div class="cc-name">United States</div>
+            <div class="cc-rank" data-en="Rank #32 · 2025 RSF Index" data-de="Platz #32 · RSF-Index 2025">Rank #32 · 2025 RSF Index</div>
+          </div>
+        </div>
+        <div class="cc-bar-wrap">
+          <div class="cc-bar-label"><span data-en="Score" data-de="Score">Score</span><span>~81.8/100</span></div>
+          <div class="cc-bar-bg"><div class="cc-bar-fill" style="width:81.8%;background:#5a9c5a"></div></div>
+        </div>
+        <div class="cc-body">
+          <span class="cc-badge badge-satisfactory" data-en="SATISFACTORY" data-de="ZUFRIEDENSTELLEND">SATISFACTORY</span><br>
+          <span data-en="Despite the First Amendment guarantee of free speech, the US has dropped significantly. Growing media distrust, political pressure on journalists, and economic challenges in the media sector." data-de="Trotz dem Ersten Verfassungszusatz ist die USA stark gefallen. Wachsendes Medienmisstrauen, politischer Druck auf Journalisten und wirtschaftliche Herausforderungen.">Despite First Amendment protections, dropped significantly in recent years. Growing media distrust, political attacks on press, economic challenges.</span>
+        </div>
+      </div>
+
+      <!-- Russia (worst) -->
+      <div class="country-card">
+        <div class="cc-header">
+          <div class="cc-flag">🇷🇺</div>
+          <div>
+            <div class="cc-name">Russia</div>
+            <div class="cc-rank" data-en="Rank ~#162 · 2025 RSF Index" data-de="Platz ~#162 · RSF-Index 2025">Rank ~#162 · 2025 RSF Index</div>
+          </div>
+        </div>
+        <div class="cc-bar-wrap">
+          <div class="cc-bar-label"><span data-en="Score" data-de="Score">Score</span><span>~22/100</span></div>
+          <div class="cc-bar-bg"><div class="cc-bar-fill" style="width:22%;background:#7a0000"></div></div>
+        </div>
+        <div class="cc-body">
+          <span class="cc-badge badge-serious" data-en="VERY SERIOUS" data-de="SEHR ERNST">VERY SERIOUS</span><br>
+          <span data-en="State-controlled media, widespread censorship, journalists imprisoned or killed. RSF's website was blocked by Russia ahead of the 2024 index release." data-de="Staatlich kontrollierte Medien, weitverbreitete Zensur, Journalisten inhaftiert oder getötet. RSF-Website wurde von Russland vor Veröffentlichung des 2024er Index blockiert.">State-controlled media, censorship, journalists imprisoned or killed. Independent reporting is heavily suppressed.</span>
+        </div>
+      </div>
+
+      <!-- Eritrea (absolute worst) -->
+      <div class="country-card">
+        <div class="cc-header">
+          <div class="cc-flag">🇪🇷</div>
+          <div>
+            <div class="cc-name">Eritrea</div>
+            <div class="cc-rank" data-en="Rank #180 (last) · 2025 RSF Index" data-de="Platz #180 (letzter) · RSF-Index 2025">Rank #180 (last) · 2025 RSF Index</div>
+          </div>
+        </div>
+        <div class="cc-bar-wrap">
+          <div class="cc-bar-label"><span data-en="Score" data-de="Score">Score</span><span>~2/100</span></div>
+          <div class="cc-bar-bg"><div class="cc-bar-fill" style="width:2%;background:#7a0000"></div></div>
+        </div>
+        <div class="cc-body">
+          <span class="cc-badge badge-serious" data-en="VERY SERIOUS" data-de="SEHR ERNST">VERY SERIOUS</span><br>
+          <span data-en="Worst-ranked country. No private press, all media state-run, journalists arbitrarily detained. Called 'Africa's North Korea'." data-de="Schlechtplatziertes Land. Keine Privatpresse, alle Medien staatlich, Journalisten willkürlich inhaftiert. Als 'Afrikas Nordkorea' bezeichnet.">Worst-ranked country. No private press, all media state-run. Often called 'Africa's North Korea'.</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:var(--cream);border-radius:6px;padding:18px;font-size:.86rem;line-height:1.6;border:1.5px solid var(--light);">
+      <strong style="font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);" data-en="Why does press freedom matter?" data-de="Warum ist Pressefreiheit wichtig?">Why does press freedom matter?</strong><br>
+      <span data-en="Press freedom is the foundation of democracy. Without independent journalism, governments cannot be held accountable, corruption goes unchecked, and citizens cannot make informed decisions. Article 5 of Germany's Basic Law and the First Amendment of the US Constitution both protect freedom of the press — but legal protection alone is not enough." data-de="Pressefreiheit ist das Fundament der Demokratie. Ohne unabhängigen Journalismus können Regierungen nicht zur Rechenschaft gezogen, Korruption nicht aufgedeckt werden, und Bürger können keine informierten Entscheidungen treffen. Artikel 5 des deutschen Grundgesetzes und der Erste Zusatzartikel der US-Verfassung schützen die Pressefreiheit — aber rechtlicher Schutz allein reicht nicht aus.">Press freedom is the foundation of democracy. Without independent journalism, governments cannot be held accountable. Article 5 of Germany's Basic Law and the First Amendment of the US Constitution protect freedom of the press — but legal protection alone is not enough.</span>
+    </div>
+  </section>
+
+  <!-- ── 6. VOCABULARY ── -->
+  <section class="section" id="sec-vocab">
+    <div class="section-title" data-en="Key Vocabulary" data-de="Schlüsselvokabular">Key Vocabulary</div>
+    <p class="section-intro" data-en="Essential terms for the exam — English with German explanation." data-de="Wichtige Begriffe für die LK — Englisch mit deutschen Erklärungen.">Essential terms for the exam.</p>
+    <div class="vocab-grid">
+      <div class="vocab-card">
+        <div class="vocab-en">Tabloid</div>
+        <div class="vocab-de">Boulevardzeitung / Tabloid</div>
+        <div class="vocab-def" data-en="A popular newspaper in compact format, known for sensational stories and pictures. Half the size of a broadsheet." data-de="Eine Boulevardzeitung im kompakten Format, bekannt für reißerische Geschichten und Bilder. Halb so groß wie ein Broadsheet.">A popular newspaper in compact format, known for sensational stories and pictures.</div>
+      </div>
+      <div class="vocab-card">
+        <div class="vocab-en">Broadsheet</div>
+        <div class="vocab-de">Großformatige Qualitätszeitung</div>
+        <div class="vocab-def" data-en="A large-format quality newspaper with in-depth, serious reporting." data-de="Eine großformatige Qualitätszeitung mit tiefgehender, seriöser Berichterstattung.">A large-format quality newspaper with in-depth, serious reporting.</div>
+      </div>
+      <div class="vocab-card">
+        <div class="vocab-en">Sensationalism</div>
+        <div class="vocab-de">Sensationalismus / Reißerische Berichterstattung</div>
+        <div class="vocab-def" data-en="Exaggerating or distorting stories to provoke excitement or public interest." data-de="Übertriebene oder verzerrte Berichte, um Aufregung oder öffentliches Interesse zu wecken.">Exaggerating stories to provoke excitement or public interest.</div>
+      </div>
+      <div class="vocab-card">
+        <div class="vocab-en">Bias / Biased</div>
+        <div class="vocab-de">Voreingenommenheit / voreingenommen</div>
+        <div class="vocab-def" data-en="Presenting news from only one perspective, not giving a balanced view." data-de="Nachrichten aus nur einer Perspektive darstellen, keine ausgewogene Sichtweise.">Presenting news from only one perspective, not balanced.</div>
+      </div>
+      <div class="vocab-card">
+        <div class="vocab-en">Editorial</div>
+        <div class="vocab-de">Leitartikel / Meinungsartikel</div>
+        <div class="vocab-def" data-en="An article expressing the newspaper's official opinion on a topic." data-de="Ein Artikel, der die offizielle Meinung der Zeitung zu einem Thema ausdrückt.">An article expressing the newspaper's official opinion on a topic.</div>
+      </div>
+      <div class="vocab-card">
+        <div class="vocab-en">Headline</div>
+        <div class="vocab-de">Schlagzeile</div>
+        <div class="vocab-def" data-en="The title of a newspaper article, designed to grab the reader's attention." data-de="Der Titel eines Zeitungsartikels, um die Aufmerksamkeit des Lesers zu erregen.">The title of a newspaper article, designed to grab attention.</div>
+      </div>
+      <div class="vocab-card">
+        <div class="vocab-en">Readership</div>
+        <div class="vocab-de">Leserschaft</div>
+        <div class="vocab-def" data-en="The total number of people who read a particular newspaper or publication." data-de="Die Gesamtzahl der Personen, die eine bestimmte Zeitung oder Publikation lesen.">The total number of people who read a publication.</div>
+      </div>
+      <div class="vocab-card">
+        <div class="vocab-en">Press Freedom</div>
+        <div class="vocab-de">Pressefreiheit</div>
+        <div class="vocab-def" data-en="The right of the press to report news without government censorship or control." data-de="Das Recht der Presse, Nachrichten ohne staatliche Zensur oder Kontrolle zu berichten.">The right to report news without government censorship.</div>
+      </div>
+      <div class="vocab-card">
+        <div class="vocab-en">Investigative journalism</div>
+        <div class="vocab-de">Investigativer Journalismus</div>
+        <div class="vocab-def" data-en="In-depth reporting that uncovers hidden wrongdoing, corruption or injustice." data-de="Tiefgehende Berichterstattung, die verborgene Missstände, Korruption oder Unrecht aufdeckt.">In-depth reporting that uncovers wrongdoing or corruption.</div>
+      </div>
+      <div class="vocab-card">
+        <div class="vocab-en">Fourth Estate</div>
+        <div class="vocab-de">Vierte Gewalt</div>
+        <div class="vocab-def" data-en="A term for the press, considered a fourth branch of power alongside legislature, executive and judiciary." data-de="Ein Begriff für die Presse als vierte Macht neben Legislative, Exekutive und Judikative.">The press as a fourth branch of power in democracy.</div>
+      </div>
+      <div class="vocab-card">
+        <div class="vocab-en">Emotivestyle</div>
+        <div class="vocab-de">Emotivstil</div>
+        <div class="vocab-def" data-en="Writing style using emotional, dramatic language to appeal to feelings rather than reason." data-de="Schreibstil, der emotionale, dramatische Sprache verwendet, um Gefühle statt Vernunft anzusprechen.">Emotional, dramatic writing style appealing to feelings, not reason.</div>
+      </div>
+      <div class="vocab-card">
+        <div class="vocab-en">Yellow press / Gutter press</div>
+        <div class="vocab-de">Boulevardpresse / Regenbogenpresse</div>
+        <div class="vocab-def" data-en="Derogatory terms for tabloid journalism that prioritises shock value over truth." data-de="Abwertende Begriffe für Boulevardjournalismus, der Schockwert über Wahrheit stellt.">Derogatory terms for tabloids prioritising shock over truth.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 7. QUIZ ── -->
+  <section class="section" id="sec-quiz">
+    <div class="section-title" data-en="Test Yourself" data-de="Teste dich">Test Yourself</div>
+    <p class="section-intro" data-en="Quick quiz to check your knowledge before the exam. Click an answer!" data-de="Schnelles Quiz zur Überprüfung deines Wissens vor der LK. Klicke eine Antwort an!">Quick quiz to check your knowledge. Click an answer!</p>
+
+    <div class="quiz-score-bar">
+      <div class="quiz-score-num" id="quiz-score">0</div>
+      <div>
+        <div class="quiz-score-label" data-en="CORRECT ANSWERS" data-de="RICHTIGE ANTWORTEN">CORRECT ANSWERS</div>
+        <div id="quiz-total" style="font-size:.75rem;color:var(--mid);" data-en="out of 6 questions" data-de="von 6 Fragen">out of 6 questions</div>
+      </div>
+    </div>
+
+    <div class="quiz-wrap" id="quiz-container"></div>
+    <button onclick="resetQuiz()" style="margin-top:20px;padding:12px 28px;background:var(--accent);color:#fff;border:none;border-radius:4px;font-family:'IBM Plex Mono',monospace;font-size:.78rem;font-weight:600;letter-spacing:.1em;cursor:pointer;text-transform:uppercase;" data-en="Reset Quiz" data-de="Quiz zurücksetzen">Reset Quiz</button>
+  </section>
+
+  <!-- ── 8. CHECKLIST ── -->
+  <section class="section" id="sec-checklist">
+    <div class="section-title" data-en="Learning Checklist" data-de="Lerncheckliste">Learning Checklist</div>
+    <p class="section-intro" data-en="Tick off everything you've already learned. Progress is saved in your browser!" data-de="Hake alles ab, was du schon gelernt hast. Der Fortschritt wird im Browser gespeichert!">
+      Tick off everything you've already learned. Progress is saved in your browser!
+    </p>
+
+    <!-- Progress Ring -->
+    <div class="cl-progress-wrap">
+      <div class="cl-progress-ring">
+        <svg viewBox="0 0 70 70" width="70" height="70">
+          <circle class="ring-bg" cx="35" cy="35" r="29"/>
+          <circle class="ring-fill" id="ring-fill" cx="35" cy="35" r="29" stroke-dasharray="182.2" stroke-dashoffset="182.2"/>
+        </svg>
+        <div class="cl-ring-label" id="ring-pct">0%</div>
+      </div>
+      <div class="cl-progress-text">
+        <div class="cl-progress-title" id="cl-prog-title" data-en="Keep going!" data-de="Weiter so!">Keep going!</div>
+        <div class="cl-progress-sub" id="cl-prog-sub" data-en="0 of 30 topics checked" data-de="0 von 30 Themen abgehakt">0 of 30 topics checked</div>
+        <div class="cl-progress-bar-wrap">
+          <div class="cl-progress-bar-bg"><div class="cl-progress-bar-fill" id="cl-bar" style="width:0%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="cl-body"></div>
+    <button class="cl-reset-btn" onclick="resetChecklist()" data-en="↺ Reset all" data-de="↺ Alle zurücksetzen">↺ Reset all</button>
+  </section>
+
+</main>
+
+<footer>
+  <span data-en="Newspaper Overview · LK Preparation · Sources: RSF World Press Freedom Index 2025 · " data-de="Zeitungsübersicht · LK-Vorbereitung · Quellen: RSF Weltindex der Pressefreiheit 2025 · ">Newspaper Overview · LK Preparation · Sources: RSF World Press Freedom Index 2025 · </span>
+  <a href="https://rsf.org/en/index" target="_blank">rsf.org/en/index</a>
+</footer>
+
+<script>
+// ─── LANGUAGE ───
+let currentLang = 'en';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.getElementById('btn-de').classList.toggle('active', lang === 'de');
+  document.querySelectorAll('[data-en]').forEach(el => {
+    el.innerHTML = el.getAttribute('data-' + lang) || el.innerHTML;
+  });
+  // Re-render quiz with new language
+  renderQuiz();
+  // Re-render checklist with new language
+  renderChecklist();
+}
+
+// ─── NAVIGATION ───
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById('sec-' + id).classList.add('active');
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ─── QUIZ DATA ───
+const quizData = [
+  {
+    q_en: "Which type of newspaper uses an 'emotivestyle' and simple, dramatic language?",
+    q_de: "Welcher Zeitungstyp verwendet einen 'Emotivstil' und einfache, dramatische Sprache?",
+    opts_en: ["Quality paper (Broadsheet)", "Popular paper (Tabloid)", "Academic journal", "Weekly magazine"],
+    opts_de: ["Qualitätszeitung (Broadsheet)", "Boulevardblatt (Tabloid)", "Akademische Zeitschrift", "Wochenmagazin"],
+    correct: 1,
+    exp_en: "Popular papers (tabloids) use emotional, dramatic language (emotivestyle) to appeal to readers' feelings rather than reason.",
+    exp_de: "Boulevardblätter verwenden emotionale, dramatische Sprache (Emotivstil), um Leser gefühlsmäßig anzusprechen statt rational."
+  },
+  {
+    q_en: "Which country ranks #1 in the 2025 RSF World Press Freedom Index?",
+    q_de: "Welches Land steht auf Platz 1 im RSF Weltindex der Pressefreiheit 2025?",
+    opts_en: ["Germany", "Norway", "United Kingdom", "Finland"],
+    opts_de: ["Deutschland", "Norwegen", "Vereinigtes Königreich", "Finnland"],
+    correct: 3,
+    exp_en: "Finland ranks #1 in the 2025 RSF Press Freedom Index (Norway had held this spot for 9 years before).",
+    exp_de: "Finnland steht im RSF-Index 2025 auf Platz 1 (Norwegen hatte diesen Platz 9 Jahre lang inne)."
+  },
+  {
+    q_en: "The Sun (UK) is best classified as a …",
+    q_de: "The Sun (UK) wird am besten klassifiziert als …",
+    opts_en: ["Quality paper / Broadsheet", "Academic publication", "Popular paper / Tabloid", "State-owned newspaper"],
+    opts_de: ["Qualitätszeitung / Broadsheet", "Akademische Publikation", "Boulevardblatt / Tabloid", "Staatliche Zeitung"],
+    correct: 2,
+    exp_en: "The Sun is the UK's best-selling tabloid, known for its red masthead ('red top') and sensational celebrity coverage.",
+    exp_de: "The Sun ist Großbritanniens meistverkauftes Tabloid, bekannt für sein rotes Titellogo ('red top') und reißerische Promiberichterstattung."
+  },
+  {
+    q_en: "What does 'biased' mean in the context of journalism?",
+    q_de: "Was bedeutet 'biased' im journalistischen Kontext?",
+    opts_en: ["Well-researched and fact-checked", "Presenting only one perspective, not balanced", "Written by a professional journalist", "Published in a broadsheet format"],
+    opts_de: ["Gut recherchiert und faktengeprüft", "Nur eine Perspektive darstellend, nicht ausgewogen", "Von einem professionellen Journalisten geschrieben", "Im Broadsheet-Format veröffentlicht"],
+    correct: 1,
+    exp_en: "'Biased' means presenting news from only one perspective without balanced representation of different views. The opposite is 'unbiased' or 'neutral'.",
+    exp_de: "'Biased' (voreingenommen) bedeutet, Nachrichten aus nur einer Perspektive darzustellen. Das Gegenteil ist 'unbiased' oder 'neutral'."
+  },
+  {
+    q_en: "Which German newspaper is a quality paper (Qualitätszeitung)?",
+    q_de: "Welche deutsche Zeitung ist eine Qualitätszeitung?",
+    opts_en: ["Bild", "Abendzeitung", "Berliner Kurier", "Süddeutsche Zeitung"],
+    opts_de: ["Bild", "Abendzeitung", "Berliner Kurier", "Süddeutsche Zeitung"],
+    correct: 3,
+    exp_en: "Süddeutsche Zeitung is Germany's most widely distributed quality daily. Bild, Abendzeitung and Berliner Kurier are tabloids.",
+    exp_de: "Die Süddeutsche Zeitung ist Deutschlands meistverbreitete Qualitätszeitung. Bild, Abendzeitung und Berliner Kurier sind Boulevardzeitungen."
+  },
+  {
+    q_en: "What is the 'Fourth Estate'?",
+    q_de: "Was ist die 'Vierte Gewalt'?",
+    opts_en: ["The fourth branch of government (after legislature, executive, judiciary)", "A reference to the fourth page of a newspaper", "The fourth most popular newspaper in a country", "A term for tabloid journalism"],
+    opts_de: ["Die vierte Staatsgewalt (nach Legislative, Exekutive, Judikative)", "Ein Verweis auf die vierte Zeitungsseite", "Die viertmeistgelesene Zeitung eines Landes", "Ein Begriff für Boulevardjournalismus"],
+    correct: 0,
+    exp_en: "The 'Fourth Estate' refers to the press as a fourth power in democracy, alongside the legislative, executive, and judicial branches. It holds power accountable.",
+    exp_de: "Die 'Vierte Gewalt' bezeichnet die Presse als vierte Macht in der Demokratie neben Legislative, Exekutive und Judikative. Sie kontrolliert die Macht."
+  }
+];
+
+let scores = new Array(quizData.length).fill(null);
+
+function renderQuiz() {
+  const container = document.getElementById('quiz-container');
+  container.innerHTML = '';
+  quizData.forEach((q, qi) => {
+    const qText = currentLang === 'de' ? q.q_de : q.q_en;
+    const opts = currentLang === 'de' ? q.opts_de : q.opts_en;
+    const exp = currentLang === 'de' ? q.exp_de : q.exp_en;
+    const answered = scores[qi] !== null;
+    const card = document.createElement('div');
+    card.className = 'quiz-card';
+    card.innerHTML = `<div class="quiz-q">${qi+1}. ${qText}</div>
+      <div class="quiz-options">
+        ${opts.map((o, oi) => {
+          let cls = 'quiz-opt';
+          if (answered) {
+            if (oi === q.correct) cls += ' correct';
+            else if (oi === scores[qi] && scores[qi] !== q.correct) cls += ' wrong';
+          }
+          return `<button class="${cls}" ${answered ? 'disabled' : ''} onclick="answerQuiz(${qi},${oi})">${o}</button>`;
+        }).join('')}
+      </div>
+      <div class="quiz-feedback" id="fb-${qi}" style="${answered ? 'display:block' : ''}">${exp}</div>`;
+    container.appendChild(card);
+  });
+  updateScore();
+}
+
+function answerQuiz(qi, oi) {
+  if (scores[qi] !== null) return;
+  scores[qi] = oi;
+  renderQuiz();
+}
+
+function updateScore() {
+  const correct = scores.filter((s, i) => s === quizData[i].correct).length;
+  document.getElementById('quiz-score').textContent = correct;
+}
+
+function resetQuiz() {
+  scores = new Array(quizData.length).fill(null);
+  renderQuiz();
+}
+
+// ─── CHECKLIST ───
+const checklistData = [
+  {
+    cat_en: "Types of Newspapers", cat_de: "Zeitungstypen", icon: "📰",
+    items: [
+      { en: "Know the difference: Popular paper vs. Quality paper", de: "Unterschied kennen: Boulevardblatt vs. Qualitätszeitung", sub_en: "Tabloid / Red Top vs. Broadsheet", sub_de: "Tabloid / Red Top vs. Broadsheet" },
+      { en: "Content differences (celebrities vs. politics/business)", de: "Inhaltsunterschiede (Prominente vs. Politik/Wirtschaft)", sub_en: "Comparison table", sub_de: "Vergleichstabelle" },
+      { en: "Layout differences (big pictures vs. structured/long texts)", de: "Layoutunterschiede (große Bilder vs. strukturiert/lange Texte)", sub_en: "Banner headline / red top vs. long headline", sub_de: "Banner-Schlagzeile / red top vs. langer Titel" },
+      { en: "Language differences (emotivestyle vs. formal/neutral)", de: "Sprachunterschiede (Emotivstil vs. formal/neutral)", sub_en: "Simple, slang, dramatic vs. complex, serious", sub_de: "Einfach, Slang, dramatisch vs. komplex, seriös" },
+      { en: "Orientation differences (one-sided vs. objective)", de: "Ausrichtungsunterschiede (einseitig vs. objektiv)", sub_en: "Opinion-oriented vs. problem-oriented", sub_de: "Meinungsorientiert vs. problemorientiert" },
+      { en: "Why people read each type (entertaining vs. informing)", de: "Warum man beide Typen liest (unterhaltend vs. informierend)", sub_en: "Emotions / appeal vs. high editorial standards", sub_de: "Emotionen / Unterhaltung vs. hohe redaktionelle Standards" },
+    ]
+  },
+  {
+    cat_en: "Newspaper Examples", cat_de: "Zeitungsbeispiele", icon: "🗞",
+    items: [
+      { en: "UK Popular Papers: The Sun, Daily Mirror", de: "UK Boulevardblätter: The Sun, Daily Mirror", sub_en: "Tabloids", sub_de: "Tabloids" },
+      { en: "UK Quality Papers: The Times, The Guardian", de: "UK Qualitätszeitungen: The Times, The Guardian", sub_en: "Broadsheets", sub_de: "Broadsheets" },
+      { en: "US Popular: People Magazine", de: "US Boulevard: People Magazine", sub_en: "Entertainment/gossip", sub_de: "Unterhaltung/Klatsch" },
+      { en: "US Quality: Washington Post, LA Times", de: "US Qualität: Washington Post, LA Times", sub_en: "Broadsheets", sub_de: "Broadsheets" },
+      { en: "German Popular (Boulevard): Bild, Abendzeitung, Berliner Kurier", de: "Deutsche Boulevardzeitungen: Bild, Abendzeitung, Berliner Kurier", sub_en: "German tabloids", sub_de: "Deutsche Tabloids" },
+      { en: "German Quality: Süddeutsche Zeitung, Die Zeit, FAZ", de: "Deutsche Qualität: Süddeutsche Zeitung, Die Zeit, FAZ", sub_en: "German broadsheets", sub_de: "Deutsche Broadsheets" },
+    ]
+  },
+  {
+    cat_en: "Influence of the Press", cat_de: "Einfluss der Presse", icon: "📢",
+    items: [
+      { en: "Press informs citizens about events and facts", de: "Presse informiert Bürger über Ereignisse und Fakten", sub_en: "Everyone can decide how info affects them", sub_de: "Jeder kann entscheiden, wie Infos auf ihn wirken" },
+      { en: "Press can build public opinion (e.g. before elections)", de: "Presse kann öffentliche Meinung formen (z.B. vor Wahlen)", sub_en: "Opinion-building function", sub_de: "Meinungsbildungsfunktion" },
+      { en: "Press leads to buying products/services (advertising)", de: "Presse verleitet zum Kauf von Produkten/Diensten (Werbung)", sub_en: "Commercial influence", sub_de: "Kommerzieller Einfluss" },
+      { en: "Sensationalism: provoking excitement / public interest", de: "Sensationalismus: Aufregung / öffentliches Interesse wecken", sub_en: "= exaggerated reporting to get more readers", sub_de: "= übertriebene Berichterstattung für mehr Leser" },
+      { en: "Fourth Estate: press as watchdog of democracy", de: "Vierte Gewalt: Presse als Kontrollinstanz der Demokratie", sub_en: "Holding governments/corporations accountable", sub_de: "Regierungen und Konzerne zur Rechenschaft ziehen" },
+    ]
+  },
+  {
+    cat_en: "Media Literacy", cat_de: "Medienkompetenz", icon: "🔍",
+    items: [
+      { en: "Know: biased vs. unbiased / voreingenommen vs. neutral", de: "Wissen: biased vs. unbiased / voreingenommen vs. neutral", sub_en: "Key vocabulary", sub_de: "Schlüsselvokabular" },
+      { en: "Know: reliable / trustworthy vs. unreliable source", de: "Wissen: reliable/trustworthy vs. unreliable Quelle", sub_en: "Always check the source!", sub_de: "Immer die Quelle prüfen!" },
+      { en: "Signs of a reliable source (authorship, multiple sources, corrections…)", de: "Merkmale einer zuverlässigen Quelle (Autorenschaft, Quellen, Korrekturen…)", sub_en: "Checklist of trustworthiness", sub_de: "Vertrauenswürdigkeits-Checkliste" },
+      { en: "Warning signs of bias (emotional language, no sources, one-sided…)", de: "Warnsignale für Voreingenommenheit (Emotivstil, keine Quellen, einseitig…)", sub_en: "Critical reading skills", sub_de: "Kritisches Lesevermögen" },
+    ]
+  },
+  {
+    cat_en: "Press Freedom", cat_de: "Pressefreiheit", icon: "🗽",
+    items: [
+      { en: "What the RSF index is and how it works (0–100 scale, 180 countries)", de: "Was der RSF-Index ist und wie er funktioniert (0–100 Skala, 180 Länder)", sub_en: "Reporters Without Borders / Reporter ohne Grenzen", sub_de: "Reporters Without Borders / Reporter ohne Grenzen" },
+      { en: "Best country: Norway / Finland (~rank #1, score ~93)", de: "Bestes Land: Norwegen / Finnland (~Platz 1, Score ~93)", sub_en: "Strong legal protection, no journalist imprisonments", sub_de: "Starker Schutz, keine inhaftierten Journalisten" },
+      { en: "Germany: ~Rank 17, score ~89.8 — 'Good'", de: "Deutschland: ~Platz 17, Score ~89.8 — 'Gut'", sub_en: "Art. 5 Grundgesetz protects press freedom", sub_de: "Art. 5 GG schützt die Pressefreiheit" },
+      { en: "UK: ~Rank 29, score ~83.1 — 'Satisfactory'", de: "UK: ~Platz 29, Score ~83.1 — 'Zufriedenstellend'", sub_en: "Economic pressures, phone-hacking scandal history", sub_de: "Wirtschaftlicher Druck, Phone-Hacking-Skandale" },
+      { en: "USA: ~Rank 32, score ~81.8 — 'Satisfactory'", de: "USA: ~Platz 32, Score ~81.8 — 'Zufriedenstellend'", sub_en: "First Amendment, but political pressure on press", sub_de: "1. Zusatzartikel, aber politischer Druck auf Presse" },
+      { en: "Worst examples: Russia (~#162), Eritrea (#180)", de: "Schlimmste Beispiele: Russland (~#162), Eritrea (#180)", sub_en: "State control, censorship, journalists imprisoned", sub_de: "Staatskontrolle, Zensur, Journalisten inhaftiert" },
+    ]
+  },
+  {
+    cat_en: "Key Vocabulary", cat_de: "Schlüsselvokabular", icon: "📖",
+    items: [
+      { en: "Tabloid, Broadsheet, Red top, Yellow/Gutter press", de: "Tabloid, Broadsheet, Red Top, Yellow/Gutter Press", sub_en: "Types of newspapers", sub_de: "Zeitungstypen" },
+      { en: "Sensationalism, Bias/Biased, Unbiased/Neutral", de: "Sensationalismus, Bias/Biased, Unbiased/Neutral", sub_en: "Key concepts", sub_de: "Schlüsselbegriffe" },
+      { en: "Editorial, Headline, Readership", de: "Editorial (Leitartikel), Headline (Schlagzeile), Readership (Leserschaft)", sub_en: "Newspaper vocabulary", sub_de: "Zeitungsvokabular" },
+      { en: "Emotivestyle, Fourth Estate, Investigative journalism", de: "Emotivstil, Vierte Gewalt, Investigativer Journalismus", sub_en: "Advanced concepts", sub_de: "Fortgeschrittene Begriffe" },
+    ]
+  }
+];
+
+let checkState = {};
+const STORAGE_KEY = 'newspaper_checklist_v1';
+
+function loadChecklist() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) checkState = JSON.parse(saved);
+  } catch(e) { checkState = {}; }
+}
+
+function saveChecklist() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(checkState)); } catch(e) {}
+}
+
+function toggleItem(key) {
+  checkState[key] = !checkState[key];
+  saveChecklist();
+  renderChecklist();
+}
+
+function resetChecklist() {
+  checkState = {};
+  saveChecklist();
+  renderChecklist();
+}
+
+function getTotals() {
+  let total = 0, done = 0;
+  checklistData.forEach((cat, ci) => {
+    cat.items.forEach((_, ii) => {
+      total++;
+      if (checkState[`${ci}-${ii}`]) done++;
+    });
+  });
+  return { total, done };
+}
+
+function renderChecklist() {
+  const lang = currentLang;
+  const body = document.getElementById('cl-body');
+  if (!body) return;
+  const { total, done } = getTotals();
+  const pct = total > 0 ? Math.round(done / total * 100) : 0;
+
+  // Update ring
+  const circumference = 182.2;
+  const offset = circumference - (pct / 100) * circumference;
+  const ring = document.getElementById('ring-fill');
+  if (ring) ring.style.strokeDashoffset = offset;
+  const ringPct = document.getElementById('ring-pct');
+  if (ringPct) ringPct.textContent = pct + '%';
+  const bar = document.getElementById('cl-bar');
+  if (bar) bar.style.width = pct + '%';
+
+  // Update text
+  const titles = { 0: {en:'Keep going!',de:'Weiter so!'}, 50: {en:'Halfway there!',de:'Auf halbem Weg!'}, 80: {en:'Almost done!',de:'Fast geschafft!'}, 100: {en:'Ready for the exam! 🎉',de:'Bereit für die LK! 🎉'} };
+  let titleKey = 0;
+  if (pct >= 100) titleKey = 100;
+  else if (pct >= 80) titleKey = 80;
+  else if (pct >= 50) titleKey = 50;
+  const progTitle = document.getElementById('cl-prog-title');
+  const progSub = document.getElementById('cl-prog-sub');
+  if (progTitle) progTitle.textContent = titles[titleKey][lang];
+  if (progSub) progSub.textContent = lang === 'de' ? `${done} von ${total} Themen abgehakt` : `${done} of ${total} topics checked`;
+
+  // Render categories
+  body.innerHTML = checklistData.map((cat, ci) => {
+    const catDone = cat.items.filter((_, ii) => checkState[`${ci}-${ii}`]).length;
+    const catTitle = lang === 'de' ? cat.cat_de : cat.cat_en;
+    const items = cat.items.map((item, ii) => {
+      const key = `${ci}-${ii}`;
+      const isDone = !!checkState[key];
+      const text = lang === 'de' ? item.de : item.en;
+      const sub = lang === 'de' ? item.sub_de : item.sub_en;
+      return `<div class="cl-item ${isDone ? 'done' : ''}" onclick="toggleItem('${key}')">
+        <div class="cl-checkbox">${isDone ? '✓' : ''}</div>
+        <div>
+          <div class="cl-item-text">${text}</div>
+          <div class="cl-item-sub">${sub}</div>
+        </div>
+      </div>`;
+    }).join('');
+    return `<div class="cl-category">
+      <div class="cl-cat-header">
+        <span class="cl-cat-icon">${cat.icon}</span>
+        <span class="cl-cat-title">${catTitle}</span>
+        <span class="cl-cat-count">${catDone}/${cat.items.length}</span>
+      </div>
+      <div class="cl-items">${items}</div>
+    </div>`;
+  }).join('');
+}
+
+// Init checklist
+loadChecklist();
+renderChecklist();
+</script>
+</body>
+</html>

@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Industrialisierung – Lernübersicht</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0e17;
+    --surface: #1a1928;
+    --card: #22213a;
+    --accent1: #e8a838;
+    --accent2: #4ecdc4;
+    --accent3: #ff6b6b;
+    --accent4: #a8dadc;
+    --text: #fffffe;
+    --muted: #a7a9be;
+    --border: rgba(255,255,255,0.07);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Background pattern */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 20% 10%, rgba(232,168,56,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 80%, rgba(78,205,196,0.07) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+  /* HEADER */
+  header {
+    padding: 48px 0 32px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 48px;
+  }
+
+  .badge {
+    display: inline-block;
+    background: rgba(232,168,56,0.15);
+    border: 1px solid rgba(232,168,56,0.4);
+    color: var(--accent1);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, #fffffe 0%, var(--accent1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .subtitle {
+    color: var(--muted);
+    font-size: 15px;
+    font-weight: 400;
+  }
+
+  /* TAB NAV */
+  .tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 36px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .tab {
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .tab:hover { border-color: var(--accent1); color: var(--accent1); }
+  .tab.active { background: var(--accent1); border-color: var(--accent1); color: #0f0e17; font-weight: 600; }
+
+  /* SECTIONS */
+  .section { display: none; animation: fadeIn 0.4s ease; }
+  .section.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* CARDS */
+  .cards { display: grid; gap: 16px; }
+  .cards-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+  .cards-3 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .card:hover { transform: translateY(-3px); border-color: rgba(255,255,255,0.15); }
+
+  .card-icon { font-size: 28px; margin-bottom: 12px; }
+  .card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--text);
+  }
+
+  .card ul { list-style: none; }
+  .card ul li {
+    font-size: 13.5px;
+    color: var(--muted);
+    padding: 5px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    line-height: 1.5;
+  }
+  .card ul li:last-child { border-bottom: none; }
+  .card ul li::before { content: '→'; color: var(--accent1); flex-shrink: 0; margin-top: 1px; }
+
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+  }
+  .tag-geo { background: rgba(168,218,220,0.2); color: var(--accent4); }
+  .tag-eco { background: rgba(78,205,196,0.2); color: var(--accent2); }
+  .tag-pol { background: rgba(232,168,56,0.2); color: var(--accent1); }
+  .tag-soc { background: rgba(255,107,107,0.2); color: var(--accent3); }
+  .tag-tech { background: rgba(180,140,255,0.2); color: #c3a6ff; }
+
+  /* TIMELINE */
+  .timeline { position: relative; padding-left: 40px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 14px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--accent1), var(--accent2));
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 24px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .timeline-item:hover { transform: translateX(4px); border-color: var(--accent1); }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -33px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    background: var(--accent1);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(232,168,56,0.5);
+  }
+
+  .timeline-year {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--accent1);
+    margin-bottom: 4px;
+  }
+
+  .timeline-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .timeline-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* DEFINITION BOX */
+  .def-box {
+    background: var(--card);
+    border: 1px solid rgba(232,168,56,0.3);
+    border-left: 4px solid var(--accent1);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+  }
+  .def-box h3 { font-size: 13px; font-weight: 600; color: var(--accent1); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+  .def-box p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+  .def-box strong { color: var(--text); }
+
+  /* COMPARE TABLE */
+  .compare {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .compare table { width: 100%; border-collapse: collapse; }
+  .compare th {
+    background: rgba(232,168,56,0.1);
+    padding: 14px 18px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent1);
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border);
+  }
+  .compare td {
+    padding: 12px 18px;
+    font-size: 13.5px;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+  .compare tr:last-child td { border-bottom: none; }
+  .compare td:first-child { color: var(--text); font-weight: 500; width: 40%; }
+
+  /* QUIZ */
+  .quiz-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+  .quiz-question {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+  .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+  .quiz-option {
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    font-size: 13.5px;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
+    text-align: left;
+  }
+  .quiz-option:hover { border-color: var(--accent1); color: var(--text); }
+  .quiz-option.correct { background: rgba(78,205,196,0.15); border-color: var(--accent2); color: var(--accent2); }
+  .quiz-option.wrong { background: rgba(255,107,107,0.15); border-color: var(--accent3); color: var(--accent3); }
+  .quiz-feedback { margin-top: 12px; font-size: 13px; padding: 10px 14px; border-radius: 8px; display: none; line-height: 1.5; }
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.correct-fb { background: rgba(78,205,196,0.1); color: var(--accent2); }
+  .quiz-feedback.wrong-fb { background: rgba(255,107,107,0.1); color: var(--accent3); }
+
+  .quiz-score {
+    text-align: center;
+    padding: 20px;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--accent1);
+    display: none;
+  }
+
+  /* SECTION TITLE */
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .highlight {
+    background: rgba(232,168,56,0.12);
+    border: 1px solid rgba(232,168,56,0.25);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 16px;
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .highlight strong { color: var(--accent1); }
+
+  footer {
+    text-align: center;
+    padding: 40px 0 32px;
+    color: var(--muted);
+    font-size: 12px;
+    border-top: 1px solid var(--border);
+    margin-top: 60px;
+  }
+  footer span { color: var(--accent1); }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="badge">Geschichte · Klasse · Kontrolle</div>
+    <h1>Industrialisierung</h1>
+    <p class="subtitle">Alles, was du für die Kontrolle brauchst — kompakt & interaktiv</p>
+  </header>
+
+  <div class="tabs">
+    <button class="tab active" onclick="showSection('grundlagen')">📚 Grundlagen</button>
+    <button class="tab" onclick="showSection('england')">🇬🇧 England als Pionier</button>
+    <button class="tab" onclick="showSection('technik')">⚙️ Technik & Erfindungen</button>
+    <button class="tab" onclick="showSection('deutschland')">🇩🇪 Deutschland</button>
+    <button class="tab" onclick="showSection('quiz')">🧠 Quiz</button>
+  </div>
+
+  <!-- GRUNDLAGEN -->
+  <div class="section active" id="grundlagen">
+    <p class="section-title">Grundbegriffe & Definitionen</p>
+
+    <div class="def-box">
+      <h3>Industrielle Revolution</h3>
+      <p><strong>Einschneidender technischer, wirtschaftlicher und gesellschaftlicher Umwälzungsprozess</strong>, ausgelöst durch die ab <strong>ca. 1760</strong> in England einsetzende Industrialisierung. → Wandel von der <strong>Agrar- zur Industriegesellschaft</strong>. Erreicht Deutschland ab ca. <strong>1840</strong>.</p>
+    </div>
+
+    <div class="compare">
+      <table>
+        <tr>
+          <th>Begriff</th>
+          <th>Bedeutung</th>
+        </tr>
+        <tr>
+          <td>Industrialisierung</td>
+          <td>Langfristiger <em>historischer Entwicklungsprozess</em> über Jahrzehnte – schließt die Industrielle Revolution ein – ist heute noch nicht abgeschlossen.</td>
+        </tr>
+        <tr>
+          <td>Industrielle Revolution</td>
+          <td>Beschreibt die Radikalität der <em>beschleunigten Wirtschaftsentwicklung</em>. Eigenname für die Epoche in Großbritannien ca. 1780–1850.</td>
+        </tr>
+        <tr>
+          <td>Interdependenz</td>
+          <td><em>Wechselseitige Abhängigkeit / Verstrickung</em> zwischen wirtschaftlichen, sozialen, geografischen und politischen Strukturen.</td>
+        </tr>
+      </table>
+    </div>
+
+    <p class="section-title">Merkmale der Industrialisierung</p>
+    <div class="cards cards-3">
+      <div class="card">
+        <div class="card-icon">📈</div>
+        <h3>Wirtschaft</h3>
+        <ul>
+          <li>Dauerhaftes Wirtschaftswachstum</li>
+          <li>Massenproduktion in Fabriken</li>
+          <li>Arbeitsteilung & Spezialisierung</li>
+          <li>Geregelte Lohnarbeit</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-icon">🏭</div>
+        <h3>Technik</h3>
+        <ul>
+          <li>Tech.-organisatorische Neuerungen</li>
+          <li>Einsatz von Arbeitsmaschinen</li>
+          <li>Energieerzeugungsmaschinen</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-icon">🌆</div>
+        <h3>Gesellschaft</h3>
+        <ul>
+          <li>Landflucht & Urbanisierung</li>
+          <li>Wandel vom Agrar- zum Industriestaat</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ENGLAND -->
+  <div class="section" id="england">
+    <p class="section-title">Warum war England das Pionierland?</p>
+
+    <div class="highlight">
+      <strong>Kernfrage:</strong> Welche Vorraussetzungen und Erfindungen ebneten England den Weg zum Pionierland der Industrialisierung? → Stichwort: <strong>Interdependenz</strong> aller Faktoren!
+    </div>
+
+    <div class="cards cards-2">
+      <div class="card">
+        <div class="tag tag-geo">🌍 Geografisch</div>
+        <h3>Geografie & Infrastruktur</h3>
+        <ul>
+          <li>Häfen → Seehandel & Import/Export</li>
+          <li>Gut ausgebautes Verkehrsnetz</li>
+          <li>Viele große, leicht abbaubare Kohlevorkommen als Energiequelle</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="tag tag-eco">💰 Wirtschaftlich</div>
+        <h3>Wirtschaft & Kapital</h3>
+        <ul>
+          <li>Ausreichend und breit gestreutes Kapital</li>
+          <li>Liberale Wirtschaftsordnung</li>
+          <li>Freies Unternehmertum</li>
+          <li>Privates Kapital</li>
+          <li>Offene Geschäftsstruktur</li>
+          <li>Erlaubte flexible Reaktionen auf wirtschaftl. Herausforderungen</li>
+          <li>Keine Zunftschranken</li>
+          <li>Freie Lohnvereinbarungen</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="tag tag-soc">👥 Bevölkerung</div>
+        <h3>Gesellschaft & Arbeit</h3>
+        <ul>
+          <li>Stark wachsende Bevölkerung</li>
+          <li>Mehr Arbeitskräfte für Fabriken</li>
+          <li>Extensive Landwirtschaft</li>
+          <li>Fortschritte in der LW (Dünger, Zunahme bebautes Land)</li>
+          <li>Ernährung der wachsenden Bevölkerung gesichert</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="tag tag-pol">🏛️ Politisch</div>
+        <h3>Politik & Kolonialmacht</h3>
+        <ul>
+          <li>England = Seemacht mit Kolonien</li>
+          <li>Gesicherter Import von Rohbaumwolle</li>
+          <li>Abnehmer für exportierte Waren</li>
+          <li>Günstige Arbeitskräfte</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- TECHNIK -->
+  <div class="section" id="technik">
+    <p class="section-title">Führungsbranchen & Erfindungen</p>
+
+    <div class="cards cards-2" style="margin-bottom: 32px;">
+      <div class="card">
+        <div class="tag tag-tech">🧵 A</div>
+        <h3>Textilindustrie</h3>
+        <ul>
+          <li>Bevölkerungsexplosion → steigende Nachfrage an Textilien</li>
+          <li>Gesicherter Import von Rohbaumwolle</li>
+          <li>Suche nach Innovationen zur Produktionssteigerung</li>
+          <li>Spinning Jenny, Water Frame, Mule-Maschine → rasanter Baumwollimport</li>
+          <li>Mechanischer Webstuhl → Massenproduktion von Textilien</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="tag tag-tech">🔧 B–D</div>
+        <h3>Weitere Branchen</h3>
+        <ul>
+          <li><strong style="color:var(--text)">B) Maschinenindustrie</strong> – Dampfmaschine als Schrittmacher</li>
+          <li><strong style="color:var(--text)">C) Schwerindustrie</strong> – Koksgewinnung (Kohle → Eisen)</li>
+          <li><strong style="color:var(--text)">D) Verkehr</strong> – Eisenbahn ermöglicht Massentransport</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="section-title">Die Dampfmaschine 🔑</p>
+
+    <div class="cards cards-2" style="margin-bottom: 32px;">
+      <div class="card">
+        <div class="card-icon">⚡</div>
+        <h3>Wirkung für die Industrialisierung</h3>
+        <ul>
+          <li>Ursprüngl. für Bergwerke, später in Textilfabriken</li>
+          <li>Ersetzt menschliche Kraft durch maschinelle Energie</li>
+          <li>Unabhängigkeit von Wind, Wasser, Wetter</li>
+          <li>Produktion wird <em>planbar & kalkulierbar</em></li>
+          <li>Ermöglicht Bau weiterer Maschinen → Schrittmacher</li>
+          <li>Grundlage für Fabrik- & Massenproduktion</li>
+          <li>Fördert neue Eisenverhüttungsverfahren (Puddelverfahren)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-icon">💼</div>
+        <h3>Vorteile für Unternehmer</h3>
+        <ul>
+          <li>Produktionssteigerung (schneller & effizienter als Menschen)</li>
+          <li>Unabhängigkeit von Umweltfaktoren</li>
+          <li>Ortsunabhängigkeit → Fabriken nahe Handelszentren</li>
+          <li>Gleichbleibende, planbare Leistung</li>
+          <li>Kostenersparnis: weniger Arbeitskräfte nötig</li>
+          <li>Wettbewerbsvorteil gegenüber anderen Betrieben</li>
+          <li>Exportsteigerung (v.a. Textilien)</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="section-title">Wichtigste Jahreszahlen ⚠️</p>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-year">~1760</div>
+        <div class="timeline-title">Beginn der Industrialisierung in England</div>
+        <div class="timeline-desc">Startpunkt der Industriellen Revolution in Großbritannien.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">1764</div>
+        <div class="timeline-title">Spinning Jenny (Hargreaves)</div>
+        <div class="timeline-desc">Erste mechanische Spinnmaschine → behebt den Spinnfadenhunger nach Kays verbessertem Webstuhl (1773).</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">1769</div>
+        <div class="timeline-title">Dampfmaschine (James Watt) + Water Frame (Arkwright)</div>
+        <div class="timeline-desc">Watt perfektioniert die Dampfmaschine → breiter industrieller Einsatz. Arkwright erfindet die wasserbetriebene Feinspinnmaschine.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">~1780–1850</div>
+        <div class="timeline-title">Industrielle Revolution in Großbritannien</div>
+        <div class="timeline-desc">Kernepoche der Industriellen Revolution als Eigenname für GB.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">~1840</div>
+        <div class="timeline-title">Industrialisierung erreicht Deutschland</div>
+        <div class="timeline-desc">Durch Reformen, Zollverein und Eisenbahn nimmt die Industrialisierung in Deutschland Fahrt auf.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DEUTSCHLAND -->
+  <div class="section" id="deutschland">
+    <p class="section-title">Deutschland: Rückstand & Aufholen</p>
+
+    <div class="highlight">
+      <strong>Kernfrage:</strong> War Deutschlands Rückstand Zufall oder war er vorprogrammiert? → Viele <strong>strukturelle Gründe</strong> sprechen dafür, dass er nicht zufällig war.
+    </div>
+
+    <div class="compare" style="margin-bottom: 28px;">
+      <table>
+        <tr>
+          <th>Faktor</th>
+          <th>Rückstand (Anfang 19. Jh.)</th>
+          <th>Überwindung (Reformen)</th>
+        </tr>
+        <tr>
+          <td>🗺️ Geografisch / Politisch</td>
+          <td>Kein einheitlicher Staat – 300 Territorialstaaten; keine Kolonien, keine Seemacht</td>
+          <td>Gründung des Deutschen Zollvereins <strong>1834</strong>: einheitlicher Wirtschaftsraum, keine Zollschranken</td>
+        </tr>
+        <tr>
+          <td>🛤️ Infrastruktur</td>
+          <td>Kaum Kanalsystem, schlechtes Verkehrsnetz, schlechter Hafenzugang</td>
+          <td>Ausbau des Schienen- und Verkehrsnetzes</td>
+        </tr>
+        <tr>
+          <td>🏛️ Politisch</td>
+          <td>Feudalabgaben, staatliche Steuern, viele Zölle zwischen Staaten</td>
+          <td>Städteordnung, Verwaltungs-, Heeresreform, Bauernbefreiung</td>
+        </tr>
+        <tr>
+          <td>👥 Gesellschaftlich</td>
+          <td>40% Kinder ohne regelmäßige Schulbildung; Standesschranken; konservative Grundhaltung; Bevölkerung lebt auf dem Land</td>
+          <td>Bauernbefreiung (freie Berufswahl, Freizügigkeit), Bildungsreform, Judenemanzipation, Abwanderung in Städte</td>
+        </tr>
+        <tr>
+          <td>💰 Wirtschaftlich</td>
+          <td>Mangel an Kapital; kein Vertrauen in industr. Wirtschaft; Handelsmonopole; abweichende Maß- & Münzsysteme; rückständige LW; Zünfte</td>
+          <td>Wirtschaftsreform 1810 (Gewerbefreiheit, keine Zünfte), Agrarreform (Fruchtwechsel, Dünger, Maschinen), Münz- & Steuerreform</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="def-box">
+      <h3>🔑 Schlüsselreform: Zollverein 1834</h3>
+      <p>Die Gründung des Deutschen Zollvereins <strong>1834</strong> war eine der wichtigsten Voraussetzungen für Deutschlands Industrialisierung: Er schuf einen <strong>einheitlichen Wirtschaftsraum</strong>, beseitigte Zollschranken zwischen den Staaten und ermöglichte freien Handel – ähnlich wie England ihn schon lange hatte.</p>
+    </div>
+
+    <div class="def-box">
+      <h3>🔑 Bauernbefreiung</h3>
+      <p>Die Bauernbefreiung hob Feudalstrukturen auf: <strong>freie Berufswahl, freie Heirat, persönliche Freiheit, keine Abgaben oder Frondienste</strong> mehr. Folge: Abwanderung in Städte → mehr Arbeitskräfte für Fabriken.</p>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="section" id="quiz">
+    <p class="section-title">🧠 Wissen testen</p>
+    <div id="quiz-container"></div>
+    <div class="quiz-score" id="quiz-score"></div>
+  </div>
+
+</div>
+
+<footer>
+  Viel Erfolg bei der Kontrolle! <span>15 NP</span> kommen! 🎯
+</footer>
+
+<script>
+  function showSection(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  const questions = [
+    {
+      q: "Was bedeutet der Begriff 'Industrielle Revolution' im engeren Sinne?",
+      options: ["Den langen Prozess der weltweiten Industrialisierung", "Die radikale Wirtschaftsentwicklung in GB ca. 1780–1850", "Den Wandel vom Industriestaat zum Agrarstaat", "Die Erfindung der Dampfmaschine durch James Watt"],
+      correct: 1,
+      feedback: "Die 'Industrielle Revolution' bezeichnet im engeren Sinne die Epoche in Großbritannien ca. 1780–1850. 'Industrialisierung' ist der längerfristige, globale Prozess."
+    },
+    {
+      q: "Was ist 'Interdependenz' im Kontext der Industrialisierung?",
+      options: ["Die Unabhängigkeit Englands von anderen Ländern", "Die wechselseitige Abhängigkeit wirtschaftlicher, sozialer, geografischer und politischer Strukturen", "Der wirtschaftliche Rückstand Deutschlands", "Die Spezialisierung in der Industrieproduktion"],
+      correct: 1,
+      feedback: "Interdependenz = wechselseitige Abhängigkeit/Verstrickung. Alle Faktoren (geo., wirtschaftl., sozial, politisch) bedingen sich gegenseitig."
+    },
+    {
+      q: "Welche Erfindung war besonders wichtig als 'Schrittmacher' der Industrialisierung?",
+      options: ["Der mechanische Webstuhl", "Die Spinning Jenny", "Die Dampfmaschine", "Die Eisenbahn"],
+      correct: 2,
+      feedback: "Die Dampfmaschine (perfektioniert von James Watt 1769) gilt als 'Schrittmacher', weil sie den Bau weiterer Maschinen ermöglichte und in vielen Branchen eingesetzt wurde."
+    },
+    {
+      q: "Was war eine wichtige Voraussetzung Englands gegenüber Deutschland?",
+      options: ["England hatte keine Steuern", "England war in 300 Territorialstaaten aufgeteilt", "England hatte Kolonien, eine Seemacht und keine Zunftschranken", "England hatte eine rückständige Landwirtschaft"],
+      correct: 2,
+      feedback: "England war Seemacht mit Kolonien (gesicherter Rohstoffimport & Absatzmärkte), hatte Häfen, Kapital und keine Zunftschranken – alles Vorteile, die Deutschland fehlten."
+    },
+    {
+      q: "Was bewirkte die Gründung des Deutschen Zollvereins 1834?",
+      options: ["Einführung neuer Zölle zwischen den deutschen Staaten", "Einheitlicher Wirtschaftsraum und Abschaffung von Zollschranken", "Gründung der ersten deutschen Fabriken", "Abschaffung der Zunftsysteme"],
+      correct: 1,
+      feedback: "Der Zollverein 1834 schuf einen einheitlichen Wirtschaftsraum und beseitigte Zollschranken – ein entscheidender Schritt für Deutschlands Industrialisierung."
+    },
+    {
+      q: "Was war ein Nachteil Deutschlands zu Beginn des 19. Jahrhunderts?",
+      options: ["Zu viele Kolonien", "Zersplitterung in ca. 300 Territorialstaaten", "Zu starke Industrialisierung", "Zu viele Kapitalinvestoren"],
+      correct: 1,
+      feedback: "Deutschland war in rund 300 kleine Territorialstaaten zersplittert – mit vielen Zollgrenzen, unterschiedlichen Maß- und Münzsystemen, was Handel enorm erschwerte."
+    },
+    {
+      q: "Was ermöglichte die Bauernbefreiung in Deutschland?",
+      options: ["Einführung der Leibeigenschaft", "Abschaffung der Fabriken", "Freie Berufswahl, persönliche Freiheit und Abwanderung in Städte", "Gründung neuer Zunftsysteme"],
+      correct: 2,
+      feedback: "Die Bauernbefreiung gab Bauern freie Berufswahl, Freizügigkeit und persönliche Freiheit. Folge: Abwanderung in Städte und mehr Arbeitskräfte für die Industrie."
+    },
+    {
+      q: "Was beschreibt den Unterschied zwischen 'Industrialisierung' und 'Industrieller Revolution'?",
+      options: ["Es gibt keinen Unterschied", "'Industrialisierung' ist der kürzere, 'Industrielle Revolution' der längere Begriff", "'Industrialisierung' = langfristiger Prozess (noch heute); 'Industr. Revolution' = GB 1780–1850", "'Industrielle Revolution' betrifft nur Deutschland"],
+      correct: 2,
+      feedback: "Industrialisierung = langfristiger hist. Prozess, noch heute nicht abgeschlossen. Industrielle Revolution = Eigenname für die radikale Entwicklungsphase in GB ca. 1780–1850."
+    }
+  ];
+
+  let answered = new Array(questions.length).fill(false);
+  let score = 0;
+
+  function renderQuiz() {
+    const container = document.getElementById('quiz-container');
+    container.innerHTML = '';
+    questions.forEach((q, i) => {
+      const div = document.createElement('div');
+      div.className = 'quiz-card';
+      div.innerHTML = `
+        <div class="quiz-question">Frage ${i+1}: ${q.q}</div>
+        <div class="quiz-options">
+          ${q.options.map((opt, j) => `<button class="quiz-option" onclick="answer(${i}, ${j}, this)">${opt}</button>`).join('')}
+        </div>
+        <div class="quiz-feedback" id="fb-${i}"></div>
+      `;
+      container.appendChild(div);
+    });
+  }
+
+  function answer(qi, oi, btn) {
+    if (answered[qi]) return;
+    answered[qi] = true;
+    const q = questions[qi];
+    const opts = btn.parentElement.querySelectorAll('.quiz-option');
+    opts.forEach(o => o.disabled = true);
+    const fb = document.getElementById('fb-' + qi);
+    if (oi === q.correct) {
+      btn.classList.add('correct');
+      fb.className = 'quiz-feedback show correct-fb';
+      fb.textContent = '✅ Richtig! ' + q.feedback;
+      score++;
+    } else {
+      btn.classList.add('wrong');
+      opts[q.correct].classList.add('correct');
+      fb.className = 'quiz-feedback show wrong-fb';
+      fb.textContent = '❌ Falsch. ' + q.feedback;
+    }
+    if (answered.every(Boolean)) {
+      const scoreEl = document.getElementById('quiz-score');
+      scoreEl.style.display = 'block';
+      let msg = score >= 7 ? '🏆 Ausgezeichnet! Du bist bereit für die Kontrolle!' : score >= 5 ? '👍 Gut! Noch ein bisschen üben und du schaffst die 15 NP!' : '📖 Nochmal drüberlesen – du schaffst das!';
+      scoreEl.innerHTML = `Du hast <span style="color:var(--accent1)">${score} von ${questions.length}</span> Fragen richtig! ${msg}`;
+    }
+  }
+
+  renderQuiz();
+</script>
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enzyme – Lernübersicht</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f0f4ff;
+    color: #1a1a2e;
+    padding: 30px;
+  }
+  h1 {
+    text-align: center;
+    font-size: 2.2em;
+    color: #fff;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    padding: 22px 30px;
+    border-radius: 16px;
+    margin-bottom: 28px;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 20px rgba(79,70,229,0.3);
+  }
+  h1 span { font-size: 0.5em; display: block; opacity: 0.85; font-weight: 400; margin-top: 4px; }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .card {
+    background: white;
+    border-radius: 14px;
+    padding: 22px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    border-top: 5px solid;
+  }
+  .card.purple { border-color: #7c3aed; }
+  .card.blue   { border-color: #2563eb; }
+  .card.green  { border-color: #16a34a; }
+  .card.orange { border-color: #ea580c; }
+  .card.pink   { border-color: #db2777; }
+  .card.teal   { border-color: #0d9488; }
+  .card.full   { grid-column: span 2; }
+
+  .card h2 {
+    font-size: 1.1em;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card.purple h2 { color: #7c3aed; }
+  .card.blue h2   { color: #2563eb; }
+  .card.green h2  { color: #16a34a; }
+  .card.orange h2 { color: #ea580c; }
+  .card.pink h2   { color: #db2777; }
+  .card.teal h2   { color: #0d9488; }
+
+  ul { list-style: none; }
+  ul li {
+    padding: 6px 0 6px 18px;
+    position: relative;
+    font-size: 0.93em;
+    border-bottom: 1px solid #f0f0f0;
+    line-height: 1.5;
+  }
+  ul li:last-child { border-bottom: none; }
+  ul li::before { content: "▸"; position: absolute; left: 0; color: #9ca3af; }
+
+  .highlight {
+    background: #fef9c3;
+    border-left: 4px solid #eab308;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.9em;
+    margin-top: 10px;
+  }
+
+  .steps {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 6px;
+  }
+  .step {
+    background: #eff6ff;
+    border: 2px solid #bfdbfe;
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-size: 0.85em;
+    flex: 1;
+    min-width: 140px;
+    text-align: center;
+  }
+  .step strong { display: block; color: #2563eb; margin-bottom: 4px; }
+  .arrow { font-size: 1.5em; align-self: center; color: #9ca3af; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88em;
+    margin-top: 8px;
+  }
+  th {
+    background: #f0fdf4;
+    color: #16a34a;
+    padding: 8px 12px;
+    text-align: left;
+    border-bottom: 2px solid #bbf7d0;
+  }
+  td {
+    padding: 7px 12px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  tr:last-child td { border-bottom: none; }
+
+  .merksatz {
+    background: linear-gradient(135deg, #fdf4ff, #fce7f3);
+    border: 2px dashed #e879f9;
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-size: 0.92em;
+    margin-top: 14px;
+    text-align: center;
+    font-weight: 600;
+    color: #86198f;
+  }
+  .emoji { font-size: 1.2em; }
+</style>
+</head>
+<body>
+
+<h1>🧬 Enzyme
+  <span>Lernübersicht für die Bio-Kontrolle</span>
+</h1>
+
+<div class="grid">
+
+  <div class="card purple">
+    <h2><span class="emoji">🔬</span> Definition & Bau</h2>
+    <ul>
+      <li><strong>Enzyme</strong> = Funktionsproteine im Stoff- & Energiewechsel</li>
+      <li>= <em>„Werkzeug"</em> des Stoffwechsels = <strong>Biokatalysatoren</strong></li>
+      <li><strong>Apoenzym</strong> = Proteinanteil des Enzyms</li>
+      <li><strong>Aktives Zentrum</strong> = Bindungsstelle für das Substrat</li>
+    </ul>
+    <div class="highlight">
+      <strong>Cofaktoren:</strong><br>
+      • <strong>Prosthetische Gruppe</strong> – fest am Apoenzym gebunden<br>
+      • <strong>Coenzyme</strong> – kleine, org. Verbindungen, locker gebunden<br>
+      • <strong>Metall-Ionen</strong> – z.B. Zn²⁺, Fe²⁺, Co²⁺
+    </div>
+  </div>
+
+  <div class="card blue">
+    <h2><span class="emoji">✅</span> 7 Eigenschaften</h2>
+    <ul>
+      <li><strong>1.</strong> Beschleunigen chemische Reaktionen</li>
+      <li><strong>2.</strong> Senken die <em>Aktivierungsenergie</em> herab</li>
+      <li><strong>3.</strong> Substrat- & wirkungsspezifisch (Schlüssel-Schloss-Prinzip)</li>
+      <li><strong>4.</strong> Bleiben nach Reaktion unverändert → wiederholt einsetzbar</li>
+      <li><strong>5.</strong> Wirken in kleinen Mengen</li>
+      <li><strong>6.</strong> Kein Einfluss auf die Reaktionswärme Q</li>
+      <li><strong>7.</strong> Temperatur- & pH-Wert-abhängig</li>
+    </ul>
+  </div>
+
+  <div class="card green full">
+    <h2><span class="emoji">⚙️</span> Ablauf einer Biokatalyse – Bsp. Maltoseabbau durch Maltase</h2>
+    <div class="steps">
+      <div class="step"><strong>① Enzym frei</strong>Maltase mit leerem aktivem Zentrum</div>
+      <span class="arrow">→</span>
+      <div class="step"><strong>② Substrat bindet</strong>Maltose → aktives Zentrum</div>
+      <span class="arrow">→</span>
+      <div class="step"><strong>③ ES-Komplex</strong>+ H₂O (Hydrolyse)</div>
+      <span class="arrow">→</span>
+      <div class="step"><strong>④ Produkte + freies Enzym</strong>2× Glucose freigesetzt</div>
+    </div>
+    <div class="merksatz">Maltose + H₂O → 2 Glucose &nbsp;|&nbsp; Enzym bleibt unverändert ♻️</div>
+  </div>
+
+  <div class="card pink">
+    <h2><span class="emoji">🗝️</span> Schlüssel-Schloss-Prinzip</h2>
+    <ul>
+      <li>Nur <strong>passendes Substrat</strong> kann ans aktive Zentrum binden</li>
+      <li>Enzym = Schloss &nbsp;|&nbsp; Substrat = Schlüssel</li>
+      <li>→ erklärt <strong>Substratspezifität</strong></li>
+      <li>→ erklärt <strong>Wirkungsspezifität</strong> (nur 1 Reaktionstyp)</li>
+      <li>Bsp.: Maltase spaltet <em>nur</em> Maltose, nicht andere Zucker</li>
+    </ul>
+  </div>
+
+  <div class="card orange">
+    <h2><span class="emoji">🌡️</span> Temperaturabhängigkeit (RGT-Regel)</h2>
+    <ul>
+      <li><strong>RGT-Regel:</strong> Temp. ↑ um 10 K → Reaktion <strong>2–3× schneller</strong></li>
+      <li>Gilt für den Bereich <strong>0 °C – 40 °C</strong></li>
+      <li>Ab ~40–50 °C → <strong>Denaturierung</strong> des Enzyms</li>
+      <li>Denaturierung = Zerstörung der 3D-Struktur → Enzym dauerhaft inaktiv</li>
+      <li>Temperaturoptimum Körperenzyme: <strong>~37 °C</strong></li>
+    </ul>
+  </div>
+
+  <div class="card teal full">
+    <h2><span class="emoji">⚗️</span> Beeinflussung der Enzymaktivität</h2>
+    <div class="two-col">
+      <div>
+        <table>
+          <tr><th>Faktor</th><th>Wirkung</th></tr>
+          <tr><td>Temperatur ↑ (0–40°C)</td><td>Aktivität ↑ (RGT-Regel)</td></tr>
+          <tr><td>Temperatur > 40°C</td><td>Denaturierung → Aktivität ↓↓</td></tr>
+          <tr><td>pH im Optimum</td><td>Maximale Aktivität</td></tr>
+          <tr><td>pH zu hoch / zu niedrig</td><td>Denaturierung</td></tr>
+          <tr><td>Substratkonzentration ↑</td><td>Reaktionsgeschwindigkeit ↑</td></tr>
+        </table>
+      </div>
+      <div>
+        <ul>
+          <li><strong>Kompetitive Hemmung:</strong> Hemmstoff besetzt aktives Zentrum konkurrierend</li>
+          <li><strong>Allosterische Hemmung:</strong> Hemmstoff bindet woanders → verändert aktives Zentrum</li>
+          <li><strong>Aktivatoren:</strong> steigern die Enzymaktivität positiv</li>
+        </ul>
+        <div class="highlight" style="margin-top:12px;">
+          <strong>Wichtiges Beispiel – Katalase:</strong><br>
+          2 H₂O₂ <strong>→</strong> 2 H₂O + O₂<br>
+          Zersetzt Wasserstoffperoxid (Zellgift) in der Leber
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="merksatz" style="margin-top:20px; font-size:1em;">
+  🍀 Viel Erfolg bei der Kontrolle morgen – du schaffst die 15 NP! 🍀
+</div>
+
+</body>
+</html>
