@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bio Klausur 🧬</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d1117;--surface:#161b22;--surface2:#1c2330;--border:#30363d;
+  --text:#e6edf3;--muted:#8b949e;
+  --green:#3fb950;--blue:#58a6ff;--orange:#f0883e;
+  --purple:#bc8cff;--red:#ff7b72;--yellow:#e3b341;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(13,17,23,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);height:54px;display:flex;align-items:center;padding:0 1rem;gap:1rem}
+.logo{font-family:'Fraunces',serif;font-weight:900;font-size:1.15rem;color:var(--blue);flex-shrink:0}
+.nav-tabs{display:flex;gap:0;overflow-x:auto;flex:1;scrollbar-width:none}
+.nav-tabs::-webkit-scrollbar{display:none}
+.ntab{height:54px;padding:0 .9rem;display:flex;align-items:center;font-size:.8rem;font-weight:500;color:var(--muted);cursor:pointer;border:none;background:none;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s}
+.ntab:hover{color:var(--text)}
+.ntab.active{color:var(--blue);border-bottom-color:var(--blue)}
+.progress-wrap{flex-shrink:0;display:flex;align-items:center;gap:.5rem}
+.pbar{width:90px;height:5px;background:var(--surface2);border-radius:9px;overflow:hidden}
+.pfill{height:100%;background:linear-gradient(90deg,var(--blue),var(--purple));border-radius:9px;width:0%;transition:width .6s}
+.plabel{font-size:.7rem;color:var(--muted)}
+
+/* SECTIONS */
+.sec{display:none;padding:70px 1rem 4rem;max-width:1080px;margin:0 auto;animation:fi .3s ease}
+.sec.active{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* HERO */
+.hero{text-align:center;padding:2rem 0 1.5rem}
+.hero h1{font-family:'Fraunces',serif;font-size:2.6rem;font-weight:900;line-height:1.1;margin-bottom:.5rem}
+.hero h1 span{color:var(--blue)}
+.hero p{color:var(--muted);max-width:500px;margin:0 auto .5rem}
+.hero-tags{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-top:.75rem}
+.htag{background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:.3rem .8rem;font-size:.78rem;font-weight:500}
+
+/* TIP BOX */
+.tip{background:rgba(88,166,255,.08);border:1px solid rgba(88,166,255,.25);border-radius:10px;padding:1rem 1.2rem;margin:1.5rem 0;display:flex;gap:.75rem;align-items:flex-start}
+.tip-icon{font-size:1.2rem;flex-shrink:0;margin-top:.1rem}
+.tip p{font-size:.88rem;line-height:1.6;color:var(--text)}
+.tip strong{color:var(--blue)}
+
+/* SECTION HEADING */
+.sh{font-family:'Fraunces',serif;font-size:1.8rem;font-weight:900;margin:2rem 0 1rem;padding-top:.5rem;border-top:1px solid var(--border);display:flex;align-items:center;gap:.6rem}
+.sh2{font-family:'Fraunces',serif;font-size:1.2rem;font-weight:700;margin:1.5rem 0 .7rem;color:var(--text);display:flex;align-items:center;gap:.5rem}
+.badge{display:inline-flex;align-items:center;padding:.15rem .55rem;border-radius:5px;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.b-blue{background:rgba(88,166,255,.15);color:var(--blue)}
+.b-green{background:rgba(63,185,80,.15);color:var(--green)}
+.b-orange{background:rgba(240,136,62,.15);color:var(--orange)}
+.b-purple{background:rgba(188,140,255,.15);color:var(--purple)}
+.b-red{background:rgba(255,123,114,.15);color:var(--red)}
+.b-yellow{background:rgba(227,179,65,.15);color:var(--yellow)}
+
+/* CARDS */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.2rem;margin-bottom:1rem}
+.card-title{font-weight:600;font-size:.95rem;margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem}
+
+/* DEFINITION BOX */
+.defbox{background:var(--surface2);border-left:3px solid var(--blue);border-radius:0 8px 8px 0;padding:.8rem 1rem;margin:.75rem 0;font-size:.9rem;line-height:1.7}
+.defbox strong{color:var(--blue)}
+.defbox.green{border-left-color:var(--green)}.defbox.green strong{color:var(--green)}
+.defbox.orange{border-left-color:var(--orange)}.defbox.orange strong{color:var(--orange)}
+.defbox.purple{border-left-color:var(--purple)}.defbox.purple strong{color:var(--purple)}
+.defbox.red{border-left-color:var(--red)}.defbox.red strong{color:var(--red)}
+.defbox.yellow{border-left-color:var(--yellow)}.defbox.yellow strong{color:var(--yellow)}
+
+/* LIST */
+ul.clist{list-style:none;display:flex;flex-direction:column;gap:.45rem}
+ul.clist li{padding-left:1.2rem;position:relative;font-size:.9rem;line-height:1.6;color:var(--text)}
+ul.clist li::before{content:'→';position:absolute;left:0;color:var(--blue);font-weight:700}
+ul.clist.green li::before{color:var(--green)}
+ul.clist.orange li::before{color:var(--orange)}
+ul.clist.purple li::before{color:var(--purple)}
+
+/* GRID */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem}
+@media(max-width:680px){.grid2,.grid3{grid-template-columns:1fr}}
+
+/* SVG DIAGRAMS */
+.diagram-wrap{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:1rem;margin:.75rem 0;overflow-x:auto}
+.diagram-title{font-size:.78rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.75rem}
+
+/* IMPORTANT BOX */
+.important{background:rgba(240,136,62,.07);border:1px solid rgba(240,136,62,.3);border-radius:10px;padding:1rem 1.2rem;margin:.75rem 0}
+.important .imp-title{color:var(--orange);font-weight:700;font-size:.85rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.4rem}
+.important p,.important li{font-size:.88rem;line-height:1.65}
+
+/* TABLE */
+.bio-table{width:100%;border-collapse:collapse;font-size:.85rem;margin:.75rem 0}
+.bio-table th{background:var(--surface2);padding:.6rem .8rem;text-align:left;font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);border-bottom:2px solid var(--border)}
+.bio-table td{padding:.6rem .8rem;border-bottom:1px solid var(--border);line-height:1.5}
+.bio-table tr:last-child td{border-bottom:none}
+.bio-table tr:hover td{background:var(--surface2)}
+
+/* PROCESS FLOW */
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;margin:.75rem 0}
+.fstep{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:.5rem .9rem;font-size:.82rem;font-weight:500;text-align:center}
+.fstep.blue{border-color:var(--blue);color:var(--blue);background:rgba(88,166,255,.08)}
+.fstep.green{border-color:var(--green);color:var(--green);background:rgba(63,185,80,.08)}
+.fstep.orange{border-color:var(--orange);color:var(--orange);background:rgba(240,136,62,.08)}
+.fstep.purple{border-color:var(--purple);color:var(--purple);background:rgba(188,140,255,.08)}
+.farrow{color:var(--muted);font-size:1.1rem;font-weight:700}
+
+/* CHECKLIST */
+.checklist-item{display:flex;align-items:flex-start;gap:.75rem;padding:.8rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;margin-bottom:.5rem;cursor:pointer;transition:background .2s}
+.checklist-item:hover{background:var(--surface2)}
+.checklist-item.done{opacity:.55}
+.checklist-item.done .ci-text{text-decoration:line-through;color:var(--muted)}
+.ci-check{width:20px;height:20px;border:2px solid var(--border);border-radius:5px;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:.1rem;transition:all .2s;font-size:.8rem}
+.checklist-item.done .ci-check{background:var(--green);border-color:var(--green);color:#000}
+.ci-text{font-size:.88rem;line-height:1.5}
+.ci-text strong{display:block;font-weight:600;margin-bottom:.1rem}
+.ci-cat{font-size:.72rem;color:var(--muted)}
+.check-progress{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.2rem;margin-bottom:1.5rem;text-align:center}
+.check-progress h3{font-family:'Fraunces',serif;font-weight:700;font-size:1.1rem;margin-bottom:.5rem}
+.check-pbar{height:10px;background:var(--surface2);border-radius:99px;overflow:hidden;margin:.5rem 0}
+.check-pfill{height:100%;background:linear-gradient(90deg,var(--green),var(--blue));border-radius:99px;transition:width .5s}
+.check-stat{font-size:.85rem;color:var(--muted)}
+
+/* FLASHCARDS */
+.fc-controls{display:flex;gap:.75rem;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap}
+.fc-controls select,.fc-controls button{height:36px;border-radius:7px;border:1px solid var(--border);background:var(--surface);color:var(--text);padding:0 .9rem;font-family:'DM Sans',sans-serif;font-size:.85rem;cursor:pointer}
+.fc-controls button{font-weight:500}
+.fc-controls button:hover{background:var(--surface2)}
+.fc-stat{margin-left:auto;font-size:.82rem;color:var(--muted)}
+.flashcard-wrap{perspective:1000px;height:220px;cursor:pointer;margin-bottom:1.25rem}
+.flashcard{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.4,0,.2,1)}
+.flashcard.flipped{transform:rotateY(180deg)}
+.fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem;text-align:center;border:1px solid var(--border)}
+.fc-front{background:var(--surface);border-color:var(--blue)}
+.fc-back{background:var(--surface2);transform:rotateY(180deg)}
+.fc-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:.75rem;font-weight:600}
+.fc-q{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:700;line-height:1.4}
+.fc-a{font-size:.9rem;line-height:1.65;color:var(--text)}
+.fc-nav{display:flex;gap:.75rem;justify-content:center;align-items:center}
+.fc-nav button{width:44px;height:44px;border-radius:50%;border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:1.1rem;cursor:pointer;transition:background .2s}
+.fc-nav button:hover{background:var(--surface2)}
+.fc-nav button:disabled{opacity:.3;cursor:not-allowed}
+.fc-counter{font-size:.85rem;color:var(--muted);min-width:60px;text-align:center}
+.fc-result-btns{display:flex;gap:.5rem;justify-content:center;margin-top:.75rem}
+.fc-result-btns button{padding:.4rem .9rem;border-radius:7px;border:none;font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:600;cursor:pointer}
+.btn-knew{background:rgba(63,185,80,.2);color:var(--green)}
+.btn-knew:hover{background:rgba(63,185,80,.35)}
+.btn-didnt{background:rgba(255,123,114,.2);color:var(--red)}
+.btn-didnt:hover{background:rgba(255,123,114,.35)}
+.fc-score{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.6rem 1rem;font-size:.82rem;color:var(--muted);margin-bottom:1rem;display:flex;gap:1.5rem}
+.fc-score span{color:var(--text);font-weight:600}
+
+/* QUIZ */
+.quiz-intro{text-align:center;padding:2rem;background:var(--surface);border:1px solid var(--border);border-radius:12px;margin-bottom:1.5rem}
+.quiz-intro h2{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:900;margin-bottom:.5rem}
+.quiz-intro p{color:var(--muted);font-size:.9rem;margin-bottom:1.25rem}
+.btn{display:inline-flex;align-items:center;gap:.4rem;padding:.55rem 1.2rem;border-radius:8px;border:none;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:600;cursor:pointer;transition:all .2s}
+.btn-primary{background:var(--blue);color:#000}
+.btn-primary:hover{background:#79b8ff}
+.btn-secondary{background:var(--surface2);color:var(--text);border:1px solid var(--border)}
+.btn-secondary:hover{background:var(--surface)}
+.btn-danger{background:rgba(255,123,114,.15);color:var(--red);border:1px solid rgba(255,123,114,.3)}
+.btn-danger:hover{background:rgba(255,123,114,.25)}
+.btn-success{background:rgba(63,185,80,.15);color:var(--green);border:1px solid rgba(63,185,80,.3)}
+.btn-success:hover{background:rgba(63,185,80,.25)}
+
+.qblock{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.3rem;margin-bottom:1rem}
+.qblock.correct{border-color:var(--green);background:rgba(63,185,80,.05)}
+.qblock.wrong{border-color:var(--red);background:rgba(255,123,114,.05)}
+.qnumber{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:.5rem}
+.qtext{font-size:.95rem;font-weight:500;margin-bottom:1rem;line-height:1.5}
+.qopts{display:flex;flex-direction:column;gap:.45rem}
+.qopt{padding:.6rem .9rem;border-radius:7px;border:1px solid var(--border);background:var(--surface2);cursor:pointer;font-size:.88rem;transition:all .2s;display:flex;align-items:center;gap:.5rem}
+.qopt:hover:not(.disabled){background:rgba(88,166,255,.1);border-color:var(--blue)}
+.qopt.selected{border-color:var(--blue);background:rgba(88,166,255,.1)}
+.qopt.correct-opt{border-color:var(--green)!important;background:rgba(63,185,80,.12)!important;color:var(--green)}
+.qopt.wrong-opt{border-color:var(--red)!important;background:rgba(255,123,114,.12)!important;color:var(--red)}
+.qopt.disabled{cursor:not-allowed}
+.qfeedback{margin-top:.75rem;padding:.65rem .9rem;border-radius:7px;font-size:.84rem;line-height:1.5}
+.qfeedback.ok{background:rgba(63,185,80,.1);border:1px solid rgba(63,185,80,.3);color:var(--green)}
+.qfeedback.fail{background:rgba(255,123,114,.1);border:1px solid rgba(255,123,114,.3);color:var(--red)}
+.fill-input{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:.5rem .8rem;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.9rem;outline:none;transition:border .2s}
+.fill-input:focus{border-color:var(--blue)}
+.fill-input.correct-in{border-color:var(--green);background:rgba(63,185,80,.07)}
+.fill-input.wrong-in{border-color:var(--red);background:rgba(255,123,114,.07)}
+.free-textarea{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:.7rem .9rem;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.88rem;outline:none;resize:vertical;min-height:90px;transition:border .2s;line-height:1.6}
+.free-textarea:focus{border-color:var(--purple)}
+.free-sample{display:none;margin-top:.6rem;padding:.65rem .9rem;border-radius:7px;font-size:.84rem;line-height:1.6;background:rgba(188,140,255,.08);border:1px solid rgba(188,140,255,.25);color:var(--purple)}
+.quiz-result{text-align:center;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:2rem;margin-top:1.5rem}
+.result-score{font-family:'Fraunces',serif;font-size:3.5rem;font-weight:900;color:var(--blue)}
+.result-grade{font-size:1rem;color:var(--muted);margin:.25rem 0 1rem}
+.quiz-progress{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.6rem 1rem;margin-bottom:1rem;display:flex;align-items:center;gap:1rem;font-size:.83rem;color:var(--muted)}
+.qpfill-wrap{flex:1;height:6px;background:var(--surface2);border-radius:9px;overflow:hidden}
+.qpfill{height:100%;background:linear-gradient(90deg,var(--blue),var(--purple));border-radius:9px;transition:width .4s}
+
+/* COLLAPSE */
+.collapse-btn{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:.85rem 1.1rem;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:.92rem;font-weight:600;color:var(--text);transition:background .2s;margin-bottom:.4rem}
+.collapse-btn:hover{background:var(--surface2)}
+.collapse-btn .caret{transition:transform .3s;color:var(--muted)}
+.collapse-btn.open .caret{transform:rotate(180deg)}
+.collapse-content{display:none;background:var(--surface2);border:1px solid var(--border);border-top:none;border-radius:0 0 10px 10px;padding:1rem 1.1rem;margin-top:-.4rem;margin-bottom:.4rem;font-size:.88rem;line-height:1.7}
+.collapse-content.visible{display:block}
+
+/* PILL TABS */
+.ptabs{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1.25rem}
+.ptab{padding:.35rem .9rem;border-radius:99px;border:1px solid var(--border);background:none;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:500;cursor:pointer;transition:all .2s}
+.ptab:hover{color:var(--text)}
+.ptab.active{background:var(--blue);border-color:var(--blue);color:#000;font-weight:600}
+.ptab-content{display:none}.ptab-content.active{display:block}
+
+/* LERNPLAN */
+.day-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.2rem;margin-bottom:.75rem}
+.day-label{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:900;color:var(--orange);margin-bottom:.75rem}
+.day-item{display:flex;gap:.6rem;align-items:flex-start;padding:.4rem 0;border-bottom:1px solid var(--border);font-size:.87rem}
+.day-item:last-child{border-bottom:none}
+.day-item .di-time{color:var(--muted);font-size:.78rem;flex-shrink:0;min-width:70px;margin-top:.15rem}
+
+/* TOOLTIP */
+abbr[title]{text-decoration:underline dotted;cursor:help}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:9px}
+
+/* MOLECULE VIZ */
+.nuc-viz{display:flex;gap:2px;align-items:center;padding:.75rem 1rem;background:var(--surface2);border-radius:8px;margin:.5rem 0;flex-wrap:wrap}
+.base-box{width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:5px;font-weight:700;font-size:.85rem;color:#000;flex-shrink:0}
+.A{background:#3fb950}.T{background:#f0883e}.G{background:#58a6ff}.C{background:#bc8cff}.U{background:#e3b341}
+
+/* STRUCTURE DIAGRAM */
+.struct-row{display:flex;align-items:stretch;gap:.75rem;margin-bottom:.5rem}
+.struct-level{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:.6rem .9rem;flex:1;font-size:.85rem}
+.struct-level .sl-title{font-weight:700;margin-bottom:.25rem;font-size:.88rem}
+.struct-level .sl-desc{color:var(--muted);font-size:.8rem;line-height:1.5}
+.struct-arrow{display:flex;align-items:center;color:var(--muted);font-size:1.2rem}
+
+.enzyme-diagram{position:relative;height:130px;background:var(--surface2);border-radius:10px;margin:.75rem 0;overflow:hidden;border:1px solid var(--border)}
+
+/* HIGHLIGHT */
+mark{background:rgba(227,179,65,.2);color:var(--yellow);border-radius:3px;padding:0 .2rem}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">🧬 Bio Klausur</div>
+  <div class="nav-tabs">
+    <button class="ntab active" onclick="showSection('start')">Start</button>
+    <button class="ntab" onclick="showSection('genetik')">🧬 Genetik</button>
+    <button class="ntab" onclick="showSection('enzyme')">⚗️ Enzyme</button>
+    <button class="ntab" onclick="showSection('foto')">🌿 Fotosynthese</button>
+    <button class="ntab" onclick="showSection('karten')">🃏 Karteikarten</button>
+    <button class="ntab" onclick="showSection('quiz')">❓ Quiz</button>
+    <button class="ntab" onclick="showSection('check')">✅ Checkliste</button>
+  </div>
+  <div class="progress-wrap">
+    <div class="pbar"><div class="pfill" id="globalProgress"></div></div>
+    <div class="plabel" id="progressLabel">0%</div>
+  </div>
+</nav>
+
+<!-- ==================== START ==================== -->
+<div class="sec active" id="sec-start">
+  <div class="hero">
+    <h1>Du schaffst<br><span>15 Notenpunkte.</span></h1>
+    <p>Vollständige Lernübersicht für deine Biologie-Klausur übermorgen. Genetik, Enzyme, Fotosynthese.</p>
+    <div class="hero-tags">
+      <span class="htag">🧬 Genetik (ausführlich)</span>
+      <span class="htag">⚗️ Enzyme</span>
+      <span class="htag">🌿 Fotosynthese</span>
+      <span class="htag">🃏 Karteikarten</span>
+      <span class="htag">❓ Quiz MC + Lückentext + Freitext</span>
+    </div>
+  </div>
+
+  <div class="tip">
+    <div class="tip-icon">💡</div>
+    <p><strong>Strategie für 2 Tage:</strong> Heute Lernübersicht durchlesen + Karteikarten üben (Genetik zuerst!). Morgen Quiz machen, Schwachstellen nochmal nachlesen, Checkliste abhaken. Abends früh schlafen.</p>
+  </div>
+
+  <div class="sh">📅 Dein 2-Tage-Lernplan</div>
+  <div class="day-card">
+    <div class="day-label">Tag 1 – Heute: Verstehen</div>
+    <div class="day-item"><span class="di-time">45 Min</span><span>Genetik-Übersicht komplett lesen (DNA, Replikation, Proteinbiosynthese, Genregulation)</span></div>
+    <div class="day-item"><span class="di-time">20 Min</span><span>Enzyme lesen</span></div>
+    <div class="day-item"><span class="di-time">10 Min</span><span>Fotosynthese-Definition + Überblick lesen</span></div>
+    <div class="day-item"><span class="di-time">30 Min</span><span>Karteikarten durch (mindestens 2 Runden)</span></div>
+    <div class="day-item"><span class="di-time">Abends</span><span>Formeln + Definitionen aufschreiben (ohne zu spicken)</span></div>
+  </div>
+  <div class="day-card">
+    <div class="day-label">Tag 2 – Morgen: Festigen</div>
+    <div class="day-item"><span class="di-time">30 Min</span><span>Quiz komplett durchmachen</span></div>
+    <div class="day-item"><span class="di-time">20 Min</span><span>Falsche Antworten nochmal in der Übersicht nachlesen</span></div>
+    <div class="day-item"><span class="di-time">20 Min</span><span>Karteikarten: nur die „wusste ich nicht"-Karten</span></div>
+    <div class="day-item"><span class="di-time">15 Min</span><span>Checkliste abhaken – was fehlt noch?</span></div>
+    <div class="day-item"><span class="di-time">Abends</span><span>Nichts neues mehr lernen. Früh schlafen! 🌙</span></div>
+  </div>
+
+  <div class="sh">⚠️ Was du UNBEDINGT auswendig können musst</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">🧬 Genetik – Kernwissen</div>
+      <ul class="clist">
+        <li>DNA = Desoxyribonukleinsäure, Doppelhelix, antiparallel</li>
+        <li>Basenpaare: <mark>A–T</mark> (2 H-Brücken), <mark>G–C</mark> (3 H-Brücken)</li>
+        <li>Nukleotid = Phosphat + Zucker + Base</li>
+        <li>Replikation = semikonservativ</li>
+        <li>Transkription: DNA → mRNA (im Zellkern)</li>
+        <li>Translation: mRNA → Protein (am Ribosom)</li>
+        <li>Exons = informative DNA, Introns = nicht-informativ</li>
+        <li>Processing: Cap + Poly-A-Schwanz + Spleißen</li>
+        <li>Genregulation: Transkriptionsfaktoren, DNA-Methylierung</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">⚗️ Enzyme &amp; 🌿 Fotosynthese</div>
+      <ul class="clist green">
+        <li>Enzyme = Biokatalysatoren (Proteine!), Substratspezifisch</li>
+        <li>Schloss-Schlüssel-Prinzip am aktiven Zentrum</li>
+        <li>RGT-Regel: +10°C → 2-3× schneller (gilt 0–40°C)</li>
+        <li>Kompetitive Hemmung: Inhibitor am aktiven Zentrum, reversibel durch mehr Substrat</li>
+        <li>Nichtkompetitive Hemmung: allosterisches Zentrum, nicht reversibel durch Substrat</li>
+        <li>Fotosynthese = autotrophe Assimilation bei Pflanzen</li>
+        <li>6 CO₂ + 6 H₂O → C₆H₁₂O₆ + 6 O₂ (vereinfacht)</li>
+        <li>Ort: Chloroplast (Thylakoid = Lichtreaktion, Stroma = Calvin)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== GENETIK ==================== -->
+<div class="sec" id="sec-genetik">
+  <div class="page-header" style="margin-bottom:1.5rem">
+    <h1 style="font-family:'Fraunces',serif;font-size:2rem;font-weight:900">🧬 Genetik <span class="badge b-blue">Ausführlich</span></h1>
+    <p style="color:var(--muted);margin-top:.3rem">DNA · Replikation · Proteinbiosynthese · Genregulation</p>
+  </div>
+
+  <div class="ptabs">
+    <button class="ptab active" onclick="showPtab('g','dna')">DNA & Chromosomen</button>
+    <button class="ptab" onclick="showPtab('g','repli')">Replikation</button>
+    <button class="ptab" onclick="showPtab('g','pbs')">Proteinbiosynthese</button>
+    <button class="ptab" onclick="showPtab('g','protein')">Proteine</button>
+    <button class="ptab" onclick="showPtab('g','reg')">Genregulation</button>
+    <button class="ptab" onclick="showPtab('g','code')">Gen & Code</button>
+  </div>
+
+  <!-- DNA -->
+  <div class="ptab-content active" id="g-dna">
+    <div class="sh2">🔬 Speicherung der Erbinformation</div>
+    <div class="defbox"><strong>Genom</strong> = die Gesamtheit der Erbinformation eines Individuums. Die Erbinformation liegt in Form von Chromosomen vor, die sich im <strong>Zellkern</strong> befinden.</div>
+
+    <div class="diagram-wrap">
+      <div class="diagram-title">📐 Aufbau des Zellkerns</div>
+      <svg viewBox="0 0 600 220" style="width:100%;max-width:600px;height:auto">
+        <ellipse cx="300" cy="110" rx="180" ry="90" fill="rgba(88,166,255,0.06)" stroke="#58a6ff" stroke-width="2"/>
+        <ellipse cx="300" cy="110" rx="180" ry="90" fill="none" stroke="#30363d" stroke-width="1"/>
+        <!-- Pores -->
+        <circle cx="130" cy="95" r="7" fill="#1c2330" stroke="#58a6ff" stroke-width="1.5"/>
+        <circle cx="127" cy="130" r="7" fill="#1c2330" stroke="#58a6ff" stroke-width="1.5"/>
+        <circle cx="468" cy="95" r="7" fill="#1c2330" stroke="#58a6ff" stroke-width="1.5"/>
+        <circle cx="470" cy="130" r="7" fill="#1c2330" stroke="#58a6ff" stroke-width="1.5"/>
+        <!-- Nucleolus -->
+        <ellipse cx="295" cy="100" rx="50" ry="35" fill="rgba(188,140,255,0.25)" stroke="#bc8cff" stroke-width="1.5"/>
+        <text x="295" y="103" text-anchor="middle" fill="#bc8cff" font-size="11" font-weight="600">Nukleolus (d)</text>
+        <!-- Chromatin -->
+        <path d="M230,140 Q250,120 270,145 Q285,160 300,140 Q315,120 330,145" fill="none" stroke="#3fb950" stroke-width="2.5" stroke-linecap="round"/>
+        <text x="280" y="173" text-anchor="middle" fill="#3fb950" font-size="10" font-weight="600">Chromatin (e)</text>
+        <!-- Labels -->
+        <line x1="118" y1="79" x2="80" y2="55" stroke="#30363d" stroke-width="1"/>
+        <text x="75" y="50" text-anchor="end" fill="#8b949e" font-size="11">Kernmembran (a)</text>
+        <line x1="124" y1="100" x2="60" y2="105" stroke="#30363d" stroke-width="1"/>
+        <text x="55" y="109" text-anchor="end" fill="#8b949e" font-size="11">Poren (b)</text>
+        <line x1="470" y1="79" x2="520" y2="50" stroke="#30363d" stroke-width="1"/>
+        <text x="525" y="50" fill="#8b949e" font-size="11">Raues ER (c)</text>
+        <line x1="375" y1="95" x2="520" y2="80" stroke="#30363d" stroke-width="1"/>
+        <text x="525" y="84" fill="#8b949e" font-size="11">Kerngrundplasma (f)</text>
+      </svg>
+    </div>
+
+    <div class="sh2">🧬 Chromosomen</div>
+    <div class="defbox orange"><strong>Chromosomen</strong> = strukturierte, spiralförmig aufgewundene DNA-Fäden. Sie bestehen hauptsächlich aus einer spiralig aufgewundenen DNA (DNS = Desoxyribonukleinsäure). Eigenschaften: <strong>Träger der Erbinformation</strong>, sichtbar bei Zellteilung.</div>
+
+    <div class="sh2">🔩 Aufbau der DNA</div>
+    <div class="defbox"><strong>DNA</strong> = Desoxyribonukleinsäure (DNS). Ein Makromolekül, das die Erbinformation trägt.</div>
+
+    <div class="grid2">
+      <div class="card">
+        <div class="card-title">Allgemeine strukturelle Eigenschaften</div>
+        <ul class="clist">
+          <li>Doppelstrang (Doppelhelix)</li>
+          <li>Zwei antiparallele Polynukleotidstränge</li>
+          <li>Verbunden durch Wasserstoffbrückenbindungen zwischen den Basen</li>
+          <li>Zucker-Phosphat-Rückgrat außen, Basen innen</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">Primärstruktur – Grundbausteine</div>
+        <div class="defbox" style="margin:0"><strong>Nukleotid</strong> = Phosphat + 2-Desoxyribose (Zucker) + Stickstoffbase<br><br><strong>Nukleosid</strong> = Zucker + Base (ohne Phosphat)<br><br>Bei Replikation: <strong>Nukleotidtriphosphat</strong> (3 Phosphatgruppen)</div>
+      </div>
+    </div>
+
+    <div class="sh2">🔡 Die Stickstoffbasen</div>
+    <div class="diagram-wrap">
+      <div class="diagram-title">Basenpaarung in der DNA (Schlüssel-Schloss-Prinzip)</div>
+      <div style="display:flex;flex-wrap:wrap;gap:1.5rem;align-items:flex-start;padding:.5rem">
+        <div>
+          <div style="font-size:.78rem;color:var(--muted);margin-bottom:.5rem;font-weight:600">PURINE (2 Ringe):</div>
+          <div style="display:flex;gap:.5rem">
+            <div style="text-align:center"><div class="base-box A" style="width:50px;height:50px;font-size:1.1rem">A</div><div style="font-size:.75rem;margin-top:.3rem;color:var(--muted)">Adenin</div></div>
+            <div style="text-align:center"><div class="base-box G" style="width:50px;height:50px;font-size:1.1rem">G</div><div style="font-size:.75rem;margin-top:.3rem;color:var(--muted)">Guanin</div></div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;font-size:1.5rem;color:var(--muted);padding-top:1rem">⇌</div>
+        <div>
+          <div style="font-size:.78rem;color:var(--muted);margin-bottom:.5rem;font-weight:600">PYRIMIDINE (1 Ring):</div>
+          <div style="display:flex;gap:.5rem">
+            <div style="text-align:center"><div class="base-box T" style="width:50px;height:50px;font-size:1.1rem">T</div><div style="font-size:.75rem;margin-top:.3rem;color:var(--muted)">Thymin (DNA)</div></div>
+            <div style="text-align:center"><div class="base-box C" style="width:50px;height:50px;font-size:1.1rem">C</div><div style="font-size:.75rem;margin-top:.3rem;color:var(--muted)">Cytosin</div></div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:1rem;margin-top:.75rem;padding:.5rem">
+        <div style="background:rgba(63,185,80,.1);border:1px solid rgba(63,185,80,.3);border-radius:8px;padding:.6rem 1rem;font-size:.85rem">
+          <strong style="color:var(--green)">A — T</strong> (Adenin-Thymin): <span style="color:var(--muted)">2 Wasserstoffbrücken</span>
+        </div>
+        <div style="background:rgba(88,166,255,.1);border:1px solid rgba(88,166,255,.3);border-radius:8px;padding:.6rem 1rem;font-size:.85rem">
+          <strong style="color:var(--blue)">G ≡ C</strong> (Guanin-Cytosin): <span style="color:var(--muted)">3 Wasserstoffbrücken</span>
+        </div>
+        <div style="background:rgba(227,179,65,.1);border:1px solid rgba(227,179,65,.3);border-radius:8px;padding:.6rem 1rem;font-size:.85rem">
+          <strong style="color:var(--yellow)">In RNA: Uracil (U)</strong> <span style="color:var(--muted)">statt Thymin (T)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sh2">🌀 Sekundärstruktur – Die Doppelhelix</div>
+    <div class="diagram-wrap">
+      <div class="diagram-title">Antiparallele Doppelhelix</div>
+      <svg viewBox="0 0 520 200" style="width:100%;max-width:520px;height:auto">
+        <!-- Backbone left 5'->3' -->
+        <path d="M80,20 Q90,50 80,80 Q70,110 80,140 Q90,170 80,190" fill="none" stroke="#3fb950" stroke-width="4" stroke-linecap="round"/>
+        <!-- Backbone right 3'->5' -->
+        <path d="M200,20 Q190,50 200,80 Q210,110 200,140 Q190,170 200,190" fill="none" stroke="#f0883e" stroke-width="4" stroke-linecap="round"/>
+        <!-- Base pairs -->
+        <line x1="80" y1="50" x2="200" y2="50" stroke="#e6edf3" stroke-width="2.5" stroke-dasharray="4,2"/>
+        <line x1="80" y1="80" x2="200" y2="80" stroke="#e6edf3" stroke-width="2.5" stroke-dasharray="4,2"/>
+        <line x1="80" y1="110" x2="200" y2="110" stroke="#e6edf3" stroke-width="2.5" stroke-dasharray="4,2"/>
+        <line x1="80" y1="140" x2="200" y2="140" stroke="#e6edf3" stroke-width="2.5" stroke-dasharray="4,2"/>
+        <line x1="80" y1="170" x2="200" y2="170" stroke="#e6edf3" stroke-width="2.5" stroke-dasharray="4,2"/>
+        <!-- Base labels -->
+        <text x="115" y="47" fill="#3fb950" font-size="13" font-weight="700">A</text><text x="155" y="47" fill="#f0883e" font-size="13" font-weight="700">T</text>
+        <text x="115" y="77" fill="#58a6ff" font-size="13" font-weight="700">G</text><text x="155" y="77" fill="#bc8cff" font-size="13" font-weight="700">C</text>
+        <text x="115" y="107" fill="#f0883e" font-size="13" font-weight="700">T</text><text x="155" y="107" fill="#3fb950" font-size="13" font-weight="700">A</text>
+        <text x="115" y="137" fill="#bc8cff" font-size="13" font-weight="700">C</text><text x="155" y="137" fill="#58a6ff" font-size="13" font-weight="700">G</text>
+        <text x="115" y="167" fill="#3fb950" font-size="13" font-weight="700">A</text><text x="155" y="167" fill="#f0883e" font-size="13" font-weight="700">T</text>
+        <!-- Direction labels -->
+        <text x="50" y="20" fill="#3fb950" font-size="11" font-weight="700">5'</text>
+        <text x="50" y="195" fill="#3fb950" font-size="11" font-weight="700">3'</text>
+        <text x="210" y="20" fill="#f0883e" font-size="11" font-weight="700">3'</text>
+        <text x="210" y="195" fill="#f0883e" font-size="11" font-weight="700">5'</text>
+        <!-- Labels right side -->
+        <text x="260" y="55" fill="#8b949e" font-size="11">← antiparallel</text>
+        <text x="260" y="80" fill="#8b949e" font-size="11">← 3,4 nm Abstand</text>
+        <text x="260" y="105" fill="#8b949e" font-size="11">← H-Brücken</text>
+        <text x="260" y="130" fill="#8b949e" font-size="11">← Zucker-Phosphat</text>
+        <text x="260" y="148" fill="#8b949e" font-size="10">   Rückgrat</text>
+        <text x="260" y="172" fill="#8b949e" font-size="11">← komplementär</text>
+      </svg>
+    </div>
+
+    <div class="important">
+      <div class="imp-title">⚠️ Merke: Komplementarität</div>
+      <p>Die gegenüberliegenden Polynukleotidstränge sind <strong>komplementär und antiparallel</strong>. Das ermöglicht im Rahmen der Zellteilung eine <strong>semikonservative Replikation</strong> der DNA. Nach dem <strong>Schlüssel-Schloss-Prinzip</strong> können nur <mark>A–T</mark> und <mark>G–C</mark> einander gegenüberstehen.</p>
+    </div>
+  </div>
+
+  <!-- REPLIKATION -->
+  <div class="ptab-content" id="g-repli">
+    <div class="sh2">🔄 DNA-Replikation</div>
+    <div class="defbox purple"><strong>Replikation</strong> = Verdopplung der DNA vor der Zellteilung.<br>Ausgangspunkt: 1 Doppelhelix → Ergebnis: 2 Doppelhelices<br><strong>Ort:</strong> Zellkern (Chromatin)</div>
+
+    <div class="important">
+      <div class="imp-title">⭐ Schlüsselbegriff: Semikonservativ</div>
+      <p><strong>Semikonservativ</strong> bedeutet: Jede neue Doppelhelix enthält <mark>einen alten (Matrizen-) Strang</mark> und <mark>einen neu synthetisierten Strang</mark>. Die DNA-Helix wird aufgetrennt, und jeder Strang dient als Vorlage für einen neuen komplementären Strang.</p>
+    </div>
+
+    <div class="sh2">📋 Wichtige Begriffe</div>
+    <div class="grid2">
+      <div class="defbox purple"><strong>Primer</strong> = kurze RNA-Nukleotid-Sequenz, die als „Startmolekül" für die DNA-Polymerase dient. Ohne Primer kann die Replikation nicht starten.</div>
+      <div class="defbox purple"><strong>Matrize</strong> = der Vorlagestrang der DNA (codogener Strang), an dem neue Nukleotide eingebaut werden.</div>
+    </div>
+    <div class="defbox orange"><strong>Nukleotidtriphosphat</strong>: Bei der Replikation werden an das Phosphat noch zwei weitere Phosphatgruppen angehängt → energiereiche Verbindung, die die Energie für die Bindungsbildung liefert.</div>
+
+    <div class="diagram-wrap">
+      <div class="diagram-title">Ablauf der semikonservativen Replikation</div>
+      <div class="flow" style="flex-direction:column;align-items:flex-start;gap:.6rem">
+        <div style="display:flex;align-items:center;gap:.75rem;width:100%">
+          <div class="fstep blue" style="min-width:180px">1. Entwindung der Helix</div>
+          <div style="font-size:.82rem;color:var(--muted);flex:1">Helikase trennt die Wasserstoffbrücken zwischen den Basen → DNA öffnet sich blasenartig (Replikationsgabel)</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:.75rem;width:100%">
+          <div class="fstep purple" style="min-width:180px">2. Primeranlagerung</div>
+          <div style="font-size:.82rem;color:var(--muted);flex:1">RNA-Primer lagert sich an den Matritzenstrang an → Startpunkt für die DNA-Polymerase</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:.75rem;width:100%">
+          <div class="fstep green" style="min-width:180px">3. Nukleotidanlagerung</div>
+          <div style="font-size:.82rem;color:var(--muted);flex:1">DNA-Polymerase baut komplementäre Nukleotidtriphosphate in 5'→3' Richtung ein</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:.75rem;width:100%">
+          <div class="fstep orange" style="min-width:180px">4. Ergebnis</div>
+          <div style="font-size:.82rem;color:var(--muted);flex:1">2 neue Doppelhelices, jede mit 1 alten + 1 neuen Strang → <strong>semikonservativ</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PBS -->
+  <div class="ptab-content" id="g-pbs">
+    <div class="sh2">🏭 Proteinbiosynthese (PBS)</div>
+    <div class="defbox"><strong>PBS</strong> = molekularbiologischer Prozess, bei dem aus der Nukleotidsequenz eines Gens der DNA die Aminosäuresequenz eines Proteins bzw. Polypeptids gebildet wird. Über Polypeptide bzw. Proteine werden Merkmale ausgebildet.</div>
+
+    <div class="diagram-wrap">
+      <div class="diagram-title">Überblick Proteinbiosynthese</div>
+      <div class="flow" style="padding:.5rem">
+        <div class="fstep blue">Gen (DNA)</div>
+        <div class="farrow">→</div>
+        <div class="fstep" style="border-color:var(--orange);color:var(--orange);background:rgba(240,136,62,.08)">Transkription</div>
+        <div class="farrow">→</div>
+        <div class="fstep purple">prä-mRNA</div>
+        <div class="farrow">→</div>
+        <div class="fstep" style="border-color:var(--yellow);color:var(--yellow);background:rgba(227,179,65,.08)">Processing</div>
+        <div class="farrow">→</div>
+        <div class="fstep green">reife mRNA</div>
+        <div class="farrow">→</div>
+        <div class="fstep" style="border-color:var(--red);color:var(--red);background:rgba(255,123,114,.08)">Translation</div>
+        <div class="farrow">→</div>
+        <div class="fstep blue">Protein</div>
+      </div>
+    </div>
+
+    <div class="sh2">1️⃣ Transkription</div>
+    <div class="defbox orange"><strong>Transkription</strong> = 1. Teilprozess der PBS, bei dem die Nukleotidsequenz eines Gens des codogenen Stranges der DNA in die Nukleotidsequenz der mRNA umgeschrieben wird. <br>mRNA = Genkopie | <strong>Ort: Zellkern</strong></div>
+
+    <div class="card">
+      <div class="card-title">Ablauf der Transkription (Schritt für Schritt)</div>
+      <div style="display:flex;flex-direction:column;gap:.5rem">
+        <div style="display:flex;gap:.75rem;align-items:flex-start">
+          <div style="background:var(--blue);color:#000;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;flex-shrink:0;margin-top:.1rem">1</div>
+          <p style="font-size:.88rem;line-height:1.6">RNA-Polymerase bindet an die spezifische <strong>Promotor-Region</strong> der DNA</p>
+        </div>
+        <div style="display:flex;gap:.75rem;align-items:flex-start">
+          <div style="background:var(--blue);color:#000;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;flex-shrink:0;margin-top:.1rem">2</div>
+          <p style="font-size:.88rem;line-height:1.6">DNA-Strang wird durch das Enzym <strong>entwunden und blasenartig geöffnet</strong> (Wasserstoffbrückenbindungen werden gespalten)</p>
+        </div>
+        <div style="display:flex;gap:.75rem;align-items:flex-start">
+          <div style="background:var(--blue);color:#000;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;flex-shrink:0;margin-top:.1rem">3</div>
+          <p style="font-size:.88rem;line-height:1.6">RNA-Nukleotide lagern sich nach dem Prinzip der <strong>komplementären Basenpaarung</strong> an den codogenen Strang in Richtung <mark>5'→3'</mark> an (DNA wird in 3'→5' Richtung abgelesen)</p>
+        </div>
+        <div style="display:flex;gap:.75rem;align-items:flex-start">
+          <div style="background:var(--blue);color:#000;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;flex-shrink:0;margin-top:.1rem">4</div>
+          <p style="font-size:.88rem;line-height:1.6">RNA-Polymerase wandert weiter entlang des DNA-Stranges bis ein <strong>Stopp-Codon (Terminatorsequenz)</strong> erreicht ist</p>
+        </div>
+        <div style="display:flex;gap:.75rem;align-items:flex-start">
+          <div style="background:var(--blue);color:#000;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;flex-shrink:0;margin-top:.1rem">5</div>
+          <p style="font-size:.88rem;line-height:1.6">Neugebildete mRNA löst sich vom Matrizenstrang, DNA schließt sich wieder → Helix wird wiederhergestellt</p>
+        </div>
+        <div style="display:flex;gap:.75rem;align-items:flex-start">
+          <div style="background:var(--blue);color:#000;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;flex-shrink:0;margin-top:.1rem">6</div>
+          <p style="font-size:.88rem;line-height:1.6">mRNA durchläuft <strong>Processing</strong> und wandert über Kernpore aus dem Zellkern</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="important">
+      <div class="imp-title">🔑 Basenpaarung DNA→RNA</div>
+      <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.3rem">
+        <span style="background:rgba(63,185,80,.15);border-radius:6px;padding:.3rem .6rem;font-size:.85rem"><strong>A</strong> (DNA) → <strong style="color:var(--yellow)">U</strong> (RNA)</span>
+        <span style="background:rgba(240,136,62,.15);border-radius:6px;padding:.3rem .6rem;font-size:.85rem"><strong>T</strong> (DNA) → <strong style="color:var(--green)">A</strong> (RNA)</span>
+        <span style="background:rgba(88,166,255,.15);border-radius:6px;padding:.3rem .6rem;font-size:.85rem"><strong>G</strong> (DNA) → <strong style="color:var(--purple)">C</strong> (RNA)</span>
+        <span style="background:rgba(188,140,255,.15);border-radius:6px;padding:.3rem .6rem;font-size:.85rem"><strong>C</strong> (DNA) → <strong style="color:var(--blue)">G</strong> (RNA)</span>
+      </div>
+      <p style="margin-top:.5rem;font-size:.85rem">⚠️ In RNA gibt es <strong>kein Thymin (T)</strong>, stattdessen <strong>Uracil (U)</strong>!</p>
+    </div>
+
+    <div class="sh2">✂️ Processing (nur bei Eukaryoten!)</div>
+    <div class="defbox green"><strong>Processing</strong> = Reifung der prä-mRNA zur fertigen mRNA</div>
+    <div class="flow" style="flex-direction:column;align-items:flex-start;gap:.5rem">
+      <div style="display:flex;align-items:center;gap:.75rem;width:100%">
+        <div class="fstep blue" style="min-width:200px">1. Anbau Cap-Sequenz</div>
+        <div style="font-size:.82rem;color:var(--muted)">An das <strong>5' Ende</strong> wird eine Schutzkappe (Cap) angebaut</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:.75rem;width:100%">
+        <div class="fstep blue" style="min-width:200px">2. Poly-A-Schwanz</div>
+        <div style="font-size:.82rem;color:var(--muted)">An das <strong>3' Ende</strong> wird ein Poly-A-Schwanz (viele Adenin-Nukleotide) angehängt</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:.75rem;width:100%">
+        <div class="fstep orange" style="min-width:200px">3. Spleißen</div>
+        <div style="font-size:.82rem;color:var(--muted)">Herausschneiden der <strong>Introns</strong> (nicht-informative Abschnitte), Exons werden zusammengefügt</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:.75rem;width:100%">
+        <div class="fstep green" style="min-width:200px">4. Ergebnis</div>
+        <div style="font-size:.82rem;color:var(--muted)">Fertige mRNA verlässt den Zellkern Richtung Ribosom</div>
+      </div>
+    </div>
+
+    <div class="grid2" style="margin-top:1rem">
+      <div class="defbox"><strong>Exons</strong> = informative DNA, enthält Infos für das Protein (werden beibehalten)</div>
+      <div class="defbox red"><strong>Introns</strong> = nicht-informative DNA, enthält keine Proteininfos (werden herausgeschnitten)</div>
+    </div>
+
+    <div class="sh2">2️⃣ Translation</div>
+    <div class="defbox purple"><strong>Translation</strong> = 2. Teilprozess der PBS. Die Nukleotidsequenz der mRNA wird in die Aminosäuresequenz eines Proteins übersetzt. <br><strong>Ort: Ribosom</strong> (im Cytoplasma)</div>
+
+    <div class="sh2">🧫 RNA-Typen im Überblick</div>
+    <table class="bio-table">
+      <thead><tr><th>RNA-Typ</th><th>Bedeutung</th><th>Funktion</th></tr></thead>
+      <tbody>
+        <tr><td><strong style="color:var(--blue)">mRNA</strong></td><td>messenger-RNA</td><td>Genkopie, trägt die Bauanleitung für ein Protein vom Kern zum Ribosom</td></tr>
+        <tr><td><strong style="color:var(--green)">tRNA</strong></td><td>transfer-RNA</td><td>Transportiert Aminosäuren zum Ribosom; besitzt Anticodon</td></tr>
+        <tr><td><strong style="color:var(--orange)">rRNA</strong></td><td>ribosomale RNA</td><td>Strukturbestandteil der Ribosomen</td></tr>
+      </tbody>
+    </table>
+
+    <div class="sh2">🔬 Ribosomen</div>
+    <div class="card">
+      <div class="card-title">Aufbau und Funktion der Ribosomen</div>
+      <ul class="clist">
+        <li>Ort der Translation (Proteinsynthese)</li>
+        <li>Bei Eukaryoten: <strong>80S</strong> (aus großer + kleiner Untereinheit)</li>
+        <li>Kleine Untereinheit: hat <strong>mRNA-Bindungsstelle</strong></li>
+        <li>Große Untereinheit: hat <strong>3 Bindungsstellen für tRNA</strong>: <mark>E – P – A</mark> (Exit, Peptidyl, Aminoacyl)</li>
+        <li>Teilweise im Cytoplasma zu mehreren zusammengelagert (Polyribosomen)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PROTEIN -->
+  <div class="ptab-content" id="g-protein">
+    <div class="sh2">🧪 Proteine – Produkte der PBS</div>
+    <div class="defbox">Über 50% des Trockengewichts einer Zelle besteht aus Proteinen. Es gibt <strong>20 verschiedene Aminosäuren</strong>, die über Peptidbindungen miteinander verknüpft sind. Die Reihenfolge bestimmt die <strong>Primärstruktur</strong> der Polypeptidkette.</div>
+
+    <div class="sh2">🏗️ Die 4 Strukturebenen eines Proteins</div>
+    <div style="display:flex;flex-direction:column;gap:.5rem;margin:.75rem 0">
+      <div class="struct-row">
+        <div style="background:rgba(88,166,255,.1);border:1px solid rgba(88,166,255,.4);border-radius:8px;padding:.7rem 1rem;flex:1">
+          <div style="font-weight:700;color:var(--blue);margin-bottom:.3rem">① Primärstruktur</div>
+          <div style="font-size:.85rem;color:var(--text);line-height:1.5">Lineare Abfolge der Aminosäuren in der Polypeptidkette. Verbunden durch <strong>Peptidbindungen</strong>. Bestimmt durch die Basensequenz des Gens.</div>
+        </div>
+      </div>
+      <div style="padding-left:1.5rem;color:var(--muted)">↓ falten/drehen</div>
+      <div class="struct-row">
+        <div style="background:rgba(63,185,80,.1);border:1px solid rgba(63,185,80,.4);border-radius:8px;padding:.7rem 1rem;flex:1">
+          <div style="font-weight:700;color:var(--green);margin-bottom:.3rem">② Sekundärstruktur</div>
+          <div style="font-size:.85rem;color:var(--text);line-height:1.5">Lokale Faltung durch <strong>Wasserstoffbrückenbindungen</strong>. Zwei Typen:<br>• <strong>α-Helix</strong>: spiralförmig gewundene Kette<br>• <strong>β-Faltblatt</strong>: zickzackförmig nebeneinander angeordnete Ketten</div>
+        </div>
+      </div>
+      <div style="padding-left:1.5rem;color:var(--muted)">↓ weitere Faltung</div>
+      <div class="struct-row">
+        <div style="background:rgba(240,136,62,.1);border:1px solid rgba(240,136,62,.4);border-radius:8px;padding:.7rem 1rem;flex:1">
+          <div style="font-weight:700;color:var(--orange);margin-bottom:.3rem">③ Tertiärstruktur</div>
+          <div style="font-size:.85rem;color:var(--text);line-height:1.5">Unregelmäßige räumliche Gestalt des gesamten Polypeptids. Stabilisiert durch chemische Bindungen zwischen Polypeptidketten, z.B. <strong>Disulfidbrücken (–S–S–)</strong> zwischen zwei Cystein-Aminosäuren.</div>
+        </div>
+      </div>
+      <div style="padding-left:1.5rem;color:var(--muted)">↓ Zusammenlagerung</div>
+      <div class="struct-row">
+        <div style="background:rgba(188,140,255,.1);border:1px solid rgba(188,140,255,.4);border-radius:8px;padding:.7rem 1rem;flex:1">
+          <div style="font-weight:700;color:var(--purple);margin-bottom:.3rem">④ Quartärstruktur</div>
+          <div style="font-size:.85rem;color:var(--text);line-height:1.5">Gesamtstruktur aus 2 oder mehr Polypeptidketten. Bsp.: <strong>Hämoglobin</strong> (sauerstoffbindendes Protein der roten Blutzellen) = 4 Untereinheiten (α- und β-Ketten + Hämgruppe)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sh2">📋 Proteintypen und ihre Funktionen</div>
+    <table class="bio-table">
+      <thead><tr><th>Proteintyp</th><th>Funktion</th><th>Beispiele</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Strukturproteine</strong></td><td>Formgebung, Halt</td><td>Kollagen, Keratin</td></tr>
+        <tr><td><strong>Speicherproteine</strong></td><td>Speicherung von Aminosäuren, Reserve</td><td>Casein (Milch), Ovalbumin</td></tr>
+        <tr><td><strong>Transportproteine</strong></td><td>Transport von Stoffen</td><td>Hämoglobin, Albumin</td></tr>
+        <tr><td><strong>Hormone</strong></td><td>Steuerung von Wachstum und Stoffwechsel</td><td>Insulin, Wachstumshormon</td></tr>
+        <tr><td><strong>Rezeptorproteine</strong></td><td>Aufnahme chemischer Signale</td><td>Hormonrezeptoren</td></tr>
+        <tr><td><strong>Kontraktile Proteine</strong></td><td>Bewegung</td><td>Aktin, Myosin</td></tr>
+        <tr><td><strong>Abwehrproteine</strong></td><td>Schutz, Immunantwort</td><td>Antikörper (Immunglobuline)</td></tr>
+        <tr><td><strong>Enzyme</strong></td><td>Steuerung von Reaktionen, Biokatalysatoren</td><td>Amylase, Katalase, Maltase</td></tr>
+        <tr><td><strong>Gifte</strong></td><td>Abwehr</td><td>Toxine</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- GENREGULATION -->
+  <div class="ptab-content" id="g-reg">
+    <div class="sh2">🎛️ Genregulation bei Eukaryoten</div>
+    <div class="grid3" style="margin-bottom:1rem">
+      <div class="defbox"><strong>Regulierte Gene</strong> = Gene, die nur bei Bedarf angeschaltet werden können</div>
+      <div class="defbox green"><strong>Aktive Gene</strong> = Gene, die gerade durch PBS realisiert werden</div>
+      <div class="defbox red"><strong>Inaktive Gene</strong> = Gene, die gerade nicht durch PBS realisiert werden</div>
+    </div>
+
+    <div class="sh2">📊 Regulationsebenen</div>
+    <div class="grid2">
+      <div class="card">
+        <div class="card-title">Regulation der Transkription</div>
+        <ul class="clist">
+          <li>Transkriptionsfaktoren / TATA-Box</li>
+          <li>Histonmodifikation (Umstrukturierung Chromatin)</li>
+          <li>DNA-Methylierung</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">Regulation der Translation</div>
+        <ul class="clist">
+          <li>Alternatives Spleißen</li>
+          <li>RNA-Interferenz</li>
+          <li>Regulation beim Genprodukt (Enzymaktivität)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sh2">1️⃣ Transkriptionsfaktoren & TATA-Box</div>
+    <div class="defbox purple"><strong>Transkriptionsfaktoren (TF)</strong> = Proteine, die an der Promotor-Region oder an regulatorischen DNA-Sequenzen wirken und so die Transkription beeinflussen.</div>
+
+    <div class="grid2">
+      <div class="card">
+        <div class="card-title">1.1 Allgemeine TF (am Promotor)</div>
+        <ul class="clist purple">
+          <li>RNA-Polymerase bindet an den Promotor</li>
+          <li>Promotor besteht aus: <strong>Initiator-Region</strong> + <strong>TATA-Box</strong></li>
+          <li>An TATA-Box binden mehrere TF an</li>
+          <li>Erst danach kann Transkription am Initiator durch RNA-Polymerase starten</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">1.2 Spezifische TF (an reg. DNA-Sequenzen)</div>
+        <ul class="clist">
+          <li><strong style="color:var(--green)">Aktivatorproteine</strong> = beschleunigen die Transkription</li>
+          <li><strong style="color:var(--red)">Repressorproteine</strong> = verlangsamen die Transkription</li>
+          <li>Aus dem Zusammenwirken aller spez. TF ergibt sich die Transkriptionsrate</li>
+          <li>Wirken an Enhancer-Regionen in der Nähe des Promotors</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sh2">2️⃣ DNA-Methylierung</div>
+    <div class="grid2">
+      <div class="defbox orange">
+        <strong>Methylierung</strong>: Die DNA-Methylierung ist das enzymatische Anhängen einer Methylgruppe (–CH₃) an die Base <strong>Cytosin</strong>. Dadurch wird die Raumstruktur der DNA verändert, die RNA-Polymerase blockiert → Gen wird <strong>abgeschaltet (stummgeschaltet)</strong>.
+      </div>
+      <div class="defbox green">
+        <strong>Demethylierung</strong>: Durch das Enzym <strong>Demethylase</strong> werden die Methylgruppen wieder entfernt → Gen wird wieder <strong>aktiviert (angeschaltet)</strong>.
+      </div>
+    </div>
+
+    <div class="important">
+      <div class="imp-title">⚠️ Wichtig: Epigenetische Weitergabe</div>
+      <p>Der Methylierungszustand der DNA kann <strong>mitotisch an die nächste Zellgeneration</strong> und über die <strong>Keimzellen auch an die Nachkommen</strong> weitergegeben werden (Epigenetik).</p>
+    </div>
+  </div>
+
+  <!-- GEN & CODE -->
+  <div class="ptab-content" id="g-code">
+    <div class="sh2">📖 Gen & Genetischer Code</div>
+    <div class="defbox"><strong>Gen</strong> = DNA-Abschnitt, der die Information für ein Struktur- (z.B. Membranprotein) oder Funktionsprotein enthält.</div>
+
+    <div class="grid2">
+      <div class="defbox green"><strong>Exons</strong> = informative DNA-Abschnitte, enthalten die Information für das Protein (= Merkmal). Werden nach dem Spleißen beibehalten.</div>
+      <div class="defbox red"><strong>Introns</strong> = nicht-informative DNA-Abschnitte, enthalten keine Codierung für das Protein. Werden beim Spleißen herausgeschnitten.</div>
+    </div>
+
+    <div class="tip">
+      <div class="tip-icon">🔑</div>
+      <p>Gene bei Eukaryoten sind „gestückelt": Neben Sequenzen, die Infos für das Protein enthalten (Exons), gibt es auch Sequenzen ohne Codierung (Introns). Beide zusammen bilden das Gen in der DNA.</p>
+    </div>
+
+    <div class="sh2">🔡 Stoff- und Energiewechsel – Übersicht</div>
+    <div class="diagram-wrap">
+      <div class="diagram-title">Überblick Stoff- und Energiewechsel</div>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap">
+        <div style="flex:1;min-width:220px">
+          <div style="text-align:center;font-weight:700;color:var(--green);margin-bottom:.5rem;font-size:.9rem">ASSIMILATION (Aufbau)</div>
+          <div style="background:rgba(63,185,80,.08);border:1px solid rgba(63,185,80,.3);border-radius:8px;padding:.75rem;font-size:.82rem">
+            <div style="margin-bottom:.5rem"><strong>Autotrophe A.</strong>: körperfremde, energiearme anorganische Stoffe → körpereigene, energiereiche, organische Stoffe</div>
+            <div style="padding-left:.75rem;margin-bottom:.3rem">• <strong>Fotosynthese</strong> (Licht + Chlorophyll)</div>
+            <div style="padding-left:.75rem">• <strong>Chemosynthese</strong> (chem. Energie)</div>
+            <div style="margin-top:.5rem"><strong>Heterotrophe A.</strong>: körperfremde, energiereiche organische Stoffe → körpereigene, energiereiche organische Stoffe</div>
+          </div>
+        </div>
+        <div style="flex:1;min-width:220px">
+          <div style="text-align:center;font-weight:700;color:var(--orange);margin-bottom:.5rem;font-size:.9rem">DISSIMILATION (Abbau)</div>
+          <div style="background:rgba(240,136,62,.08);border:1px solid rgba(240,136,62,.3);border-radius:8px;padding:.75rem;font-size:.82rem">
+            <div style="margin-bottom:.5rem"><strong>Atmung</strong>: energiereiche organische Stoffe + O₂ → CO₂ + H₂O (vollständiger Abbau)</div>
+            <div><strong>Gärung</strong>: unvollständiger Abbau zu energieärmeren organischen Stoffen (ohne Sauerstoff)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== ENZYME ==================== -->
+<div class="sec" id="sec-enzyme">
+  <div style="margin-bottom:1.5rem">
+    <h1 style="font-family:'Fraunces',serif;font-size:2rem;font-weight:900">⚗️ Enzyme</h1>
+    <p style="color:var(--muted);margin-top:.3rem">Biokatalysatoren · Wirkungsweise · Hemmung</p>
+  </div>
+
+  <div class="defbox"><strong>Enzyme</strong> = Funktionsproteine im Stoff- und Energiewechsel. Sie sind das „Werkzeug" des Stoffwechsels = <strong>Biokatalysatoren</strong>.</div>
+
+  <div class="sh2">🔩 Aufbau von Enzymen</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">Grundaufbau</div>
+      <ul class="clist">
+        <li><strong>Apoenzym</strong> = Proteinanteil des Enzyms</li>
+        <li><strong>Aktives Zentrum</strong> = räumlich spezifische Bindestelle für das Substrat</li>
+        <li><strong>Cofaktoren</strong> = nicht-Protein-Bestandteile, die für Aktivität nötig sein können</li>
+        <li>Holoenzym = Apoenzym + Cofaktor (vollständig aktives Enzym)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Arten von Cofaktoren</div>
+      <ul class="clist orange">
+        <li><strong>Prosthetische Gruppen</strong> = kleine organische Verbindungen, die fest am Apoenzym gebunden sind</li>
+        <li><strong>Coenzyme</strong> = kleine organische Verbindungen, die locker gebunden sind (z.B. NAD, FAD)</li>
+        <li><strong>Metall-Ionen</strong>: Zn²⁺, Fe²⁺ etc. (z.B. bei Katalase)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sh2">📋 Eigenschaften von Enzymen</div>
+  <div style="display:flex;flex-direction:column;gap:.5rem">
+    <button class="collapse-btn" onclick="toggleCollapse(this)">
+      <span>1. Beschleunigen chemische Reaktionen durch Herabsetzen der Aktivierungsenergie</span>
+      <span class="caret">▼</span>
+    </button>
+    <div class="collapse-content">
+      Enzyme senken die <strong>Aktivierungsenergie</strong>, die notwendig ist, damit eine Reaktion abläuft. Dadurch laufen Reaktionen bei Körpertemperatur ab, die ohne Enzym viel mehr Energie bräuchten. Das Enzym selbst wird dabei nicht verbraucht. → Vergleiche: Katalase zersetzt H₂O₂ zu H₂O + O₂.
+    </div>
+    <button class="collapse-btn" onclick="toggleCollapse(this)">
+      <span>2. Biokatalysatoren – werden nicht verbraucht</span>
+      <span class="caret">▼</span>
+    </button>
+    <div class="collapse-content">
+      Enzyme liegen nach der Reaktion unverändert vor → können <strong>wiederholt eingesetzt</strong> werden. Sie wirken in <strong>kleinen Mengen</strong>.
+    </div>
+    <button class="collapse-btn" onclick="toggleCollapse(this)">
+      <span>3. Substrat- und Wirkungsspezifisch (Schloss-Schlüssel-Prinzip)</span>
+      <span class="caret">▼</span>
+    </button>
+    <div class="collapse-content">
+      <strong>Substratspezifität</strong>: Durch das Schloss-Schlüssel-Prinzip (auch: induced-fit-Modell) binden bestimmte Substrate an das aktive Zentrum des Enzyms. Nur das passende Substrat passt ins aktive Zentrum.<br><br>
+      <strong>Wirkungsspezifität</strong>: Jedes Enzym katalysiert nur eine bestimmte Reaktion.
+      <div class="diagram-wrap" style="margin-top:.75rem">
+        <svg viewBox="0 0 400 100" style="width:100%;max-width:400px;height:auto">
+          <!-- Enzyme -->
+          <rect x="10" y="20" width="120" height="65" rx="12" fill="rgba(88,166,255,.15)" stroke="#58a6ff" stroke-width="1.5"/>
+          <text x="70" y="42" text-anchor="middle" fill="#58a6ff" font-size="11" font-weight="700">Enzym</text>
+          <rect x="35" y="48" width="60" height="28" rx="6" fill="var(--bg)" stroke="#58a6ff" stroke-width="1.5"/>
+          <text x="65" y="67" text-anchor="middle" fill="#8b949e" font-size="9">Aktives Zentrum</text>
+          <!-- Substrate -->
+          <rect x="150" y="50" width="58" height="26" rx="6" fill="rgba(63,185,80,.2)" stroke="#3fb950" stroke-width="1.5"/>
+          <text x="179" y="67" text-anchor="middle" fill="#3fb950" font-size="10" font-weight="600">Substrat ✓</text>
+          <rect x="220" y="50" width="60" height="26" rx="10" fill="rgba(255,123,114,.15)" stroke="#ff7b72" stroke-width="1.5"/>
+          <text x="250" y="67" text-anchor="middle" fill="#ff7b72" font-size="10" font-weight="600">Substrat ✗</text>
+          <!-- Arrow -->
+          <line x1="135" y1="63" x2="150" y2="63" stroke="#3fb950" stroke-width="2" marker-end="url(#arrow)"/>
+        </svg>
+      </div>
+    </div>
+    <button class="collapse-btn" onclick="toggleCollapse(this)">
+      <span>4. Temperatur- und pH-Wert abhängig</span>
+      <span class="caret">▼</span>
+    </button>
+    <div class="collapse-content">
+      <div class="grid2">
+        <div>
+          <strong style="color:var(--orange)">RGT-Regel (Temperatur):</strong><br>
+          Eine Temperaturerhöhung um <strong>10 K</strong> beschleunigt die Reaktion um das <strong>2–3-fache</strong>.<br>
+          Gilt für: <mark>0°C – 40°C</mark><br><br>
+          Über 40–50°C: <strong>Denaturierung</strong> → irreversible Veränderung der Raumstruktur → Enzym inaktiv.
+        </div>
+        <div>
+          <strong style="color:var(--blue)">pH-Wert:</strong><br>
+          Jedes Enzym hat ein <strong>pH-Optimum</strong>. Abweichungen → Konformationsänderung des aktiven Zentrums → Aktivitätsverlust.<br><br>
+          Bsp: Pepsin (Magen) Optimum pH 2 | Amylase (Speichel) Optimum pH 7
+        </div>
+      </div>
+    </div>
+    <button class="collapse-btn" onclick="toggleCollapse(this)">
+      <span>5. Kein Einfluss auf den Energieumsatz (Reaktionswärme)</span>
+      <span class="caret">▼</span>
+    </button>
+    <div class="collapse-content">
+      Enzyme verändern weder die <strong>Reaktionswärme (Q)</strong> noch das Gleichgewicht der Reaktion. Sie beschleunigen lediglich das Erreichen des Gleichgewichts.
+    </div>
+  </div>
+
+  <div class="sh2">🔬 Ablauf einer enzymatischen Reaktion</div>
+  <div class="defbox orange">Beispiel: Abbau von <strong>Maltose</strong> (Disaccharid) durch <strong>Maltase</strong> zu 2× Glucose</div>
+  <div class="flow" style="flex-direction:column;gap:.5rem">
+    <div style="display:flex;align-items:center;gap:.75rem">
+      <div class="fstep blue" style="min-width:170px">1. Enzym-Substrat-Anlagerung</div>
+      <span style="font-size:.85rem;color:var(--muted)">Substrat (Maltose) bindet ans aktive Zentrum des Enzyms (Maltase) → Enzym-Substrat-Komplex</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:.75rem">
+      <div class="fstep orange" style="min-width:170px">2. Katalyse</div>
+      <span style="font-size:.85rem;color:var(--muted)">Reaktion findet statt: Maltose + H₂O → 2× Glucose. Aktivierungsenergie wird gesenkt.</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:.75rem">
+      <div class="fstep green" style="min-width:170px">3. Produktfreisetzung</div>
+      <span style="font-size:.85rem;color:var(--muted)">Produkte (2× Glucose) werden freigesetzt. Enzym liegt unverändert vor → kann erneut reagieren.</span>
+    </div>
+  </div>
+
+  <div class="sh2">🚫 Enzymhemmung</div>
+  <div class="grid2">
+    <div class="card" style="border-color:rgba(88,166,255,.4)">
+      <div class="card-title"><span class="badge b-blue">Kompetitiv</span></div>
+      <ul class="clist">
+        <li>Inhibitor ist dem Substrat <strong>chemisch ähnlich</strong> (z.B. Malonsäure ≈ Bernsteinsäure)</li>
+        <li>Substrat und Inhibitor <strong>konkurrieren</strong> um das aktive Zentrum</li>
+        <li>Durch Erhöhung der <strong>Substratkonzentration rückgängig</strong> machbar (reversibel)</li>
+        <li>Inhibitor blockiert das aktive Zentrum</li>
+      </ul>
+    </div>
+    <div class="card" style="border-color:rgba(255,123,114,.4)">
+      <div class="card-title"><span class="badge b-red">Nichtkompetitiv</span></div>
+      <ul class="clist red">
+        <li>Inhibitor bindet am <strong>allosterischen Zentrum</strong> (außerhalb des aktiven Zentrums)</li>
+        <li>Konformation des aktiven Zentrums wird verändert → Enzym unwirksam</li>
+        <li>Substrat kann noch binden, aber <strong>keine Reaktion</strong></li>
+        <li><strong>Nicht</strong> durch Substraterhöhung aufhebbar</li>
+        <li>Durch Entzug des Inhibitors reversibel</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="diagram-wrap">
+    <div class="diagram-title">Vergleich: Kompetitive vs. Nichtkompetitive Hemmung</div>
+    <svg viewBox="0 0 600 160" style="width:100%;max-width:600px;height:auto">
+      <!-- Ungehemmt -->
+      <text x="100" y="18" text-anchor="middle" fill="#8b949e" font-size="11" font-weight="600">Ungehemmt</text>
+      <rect x="30" y="28" width="80" height="55" rx="12" fill="rgba(63,185,80,.12)" stroke="#3fb950" stroke-width="1.5"/>
+      <rect x="48" y="48" width="44" height="22" rx="5" fill="var(--bg)" stroke="#3fb950" stroke-width="1"/>
+      <rect x="53" y="52" width="34" height="14" rx="4" fill="rgba(63,185,80,.3)" stroke="#3fb950" stroke-width="1"/>
+      <text x="70" y="63" text-anchor="middle" fill="#3fb950" font-size="8" font-weight="700">S</text>
+      <text x="100" y="103" text-anchor="middle" fill="#3fb950" font-size="9">✓ Reaktion</text>
+      <!-- Kompetitiv -->
+      <text x="300" y="18" text-anchor="middle" fill="#8b949e" font-size="11" font-weight="600">Kompetitiv gehemmt</text>
+      <rect x="230" y="28" width="80" height="55" rx="12" fill="rgba(88,166,255,.12)" stroke="#58a6ff" stroke-width="1.5"/>
+      <rect x="248" y="48" width="44" height="22" rx="5" fill="var(--bg)" stroke="#58a6ff" stroke-width="1"/>
+      <rect x="253" y="52" width="34" height="14" rx="4" fill="rgba(255,123,114,.3)" stroke="#ff7b72" stroke-width="1"/>
+      <text x="270" y="63" text-anchor="middle" fill="#ff7b72" font-size="8" font-weight="700">I</text>
+      <text x="300" y="103" text-anchor="middle" fill="#ff7b72" font-size="9">✗ Aktives Z. blockiert</text>
+      <text x="300" y="115" text-anchor="middle" fill="#8b949e" font-size="8">↑ Substrat → reversibel</text>
+      <!-- Nichtkompetitiv -->
+      <text x="500" y="18" text-anchor="middle" fill="#8b949e" font-size="11" font-weight="600">Nichtkompetitiv</text>
+      <rect x="430" y="28" width="80" height="55" rx="12" fill="rgba(255,123,114,.12)" stroke="#ff7b72" stroke-width="1.5"/>
+      <rect x="448" y="48" width="44" height="22" rx="5" fill="var(--bg)" stroke="#8b949e" stroke-width="1"/>
+      <ellipse cx="510" cy="38" rx="12" ry="10" fill="rgba(255,123,114,.3)" stroke="#ff7b72" stroke-width="1.5"/>
+      <text x="510" y="42" text-anchor="middle" fill="#ff7b72" font-size="8" font-weight="700">I</text>
+      <text x="500" y="103" text-anchor="middle" fill="#ff7b72" font-size="9">✗ Alloster. Zentrum</text>
+      <text x="500" y="115" text-anchor="middle" fill="#8b949e" font-size="8">kein Substrat-Effekt</text>
+    </svg>
+  </div>
+
+  <div class="sh2">☠️ Denaturierung</div>
+  <div class="defbox red"><strong>Denaturierung</strong> = irreversible Veränderung der Raumstruktur (Konformationsänderung) eines Proteins. Betrifft besonders Sekundär- und Tertiärstruktur. Führt zum <strong>Verlust der biologischen Funktion</strong>. Ursachen: hohe Temperatur, extremer pH, bestimmte Chemikalien.</div>
+</div>
+
+<!-- ==================== FOTOSYNTHESE ==================== -->
+<div class="sec" id="sec-foto">
+  <div style="margin-bottom:1.5rem">
+    <h1 style="font-family:'Fraunces',serif;font-size:2rem;font-weight:900">🌿 Fotosynthese <span class="badge b-green">Definition!</span></h1>
+    <p style="color:var(--muted);margin-top:.3rem">Die Lehrerin hat gesagt: nur Definition. Trotzdem alles drin für Sicherheit.</p>
+  </div>
+
+  <div class="tip">
+    <div class="tip-icon">⭐</div>
+    <p><strong>Laut deiner Lehrerin:</strong> Nur die Definition ist Klausurstoff. Lerne aber auch die Gesamtgleichung und die biologische Bedeutung – das wird fast immer gefragt!</p>
+  </div>
+
+  <div class="sh2">📖 Definition (Auswendig lernen!)</div>
+  <div style="background:rgba(63,185,80,.08);border:2px solid var(--green);border-radius:12px;padding:1.25rem;margin:.75rem 0">
+    <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--green);margin-bottom:.6rem">📌 DEFINITION FOTOSYNTHESE</div>
+    <p style="font-size:1rem;line-height:1.8;font-weight:500">Fotosynthese = <strong>Form der autotrophen Assimilation bei Pflanzen</strong>, bei der Kohlendioxid und Wasser mithilfe von <strong>Licht und Chlorophyll</strong> in körpereigene, energiereiche, organische Stoffe (Glucose) und Sauerstoff umgewandelt werden.</p>
+  </div>
+
+  <div class="sh2">⚗️ Gesamtgleichungen (Auswendig!)</div>
+  <div class="grid2">
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1rem">
+      <div style="font-size:.75rem;color:var(--muted);font-weight:600;margin-bottom:.5rem">VOLLSTÄNDIG:</div>
+      <div style="font-family:monospace;font-size:.9rem;line-height:2;color:var(--text)">
+        6 CO₂ + 12 H₂O <br>
+        <span style="color:var(--muted);font-size:.8rem">──Licht + Chlorophyll──▶</span><br>
+        C₆H₁₂O₆ + 6 O₂ + 6 H₂O<br>
+        <span style="color:var(--yellow)">Q = +2880 kJ/mol</span>
+      </div>
+    </div>
+    <div style="background:var(--surface);border:1px solid rgba(63,185,80,.4);border-radius:10px;padding:1rem">
+      <div style="font-size:.75rem;color:var(--green);font-weight:600;margin-bottom:.5rem">VEREINFACHT (meistens gefragt):</div>
+      <div style="font-family:monospace;font-size:.9rem;line-height:2;color:var(--text)">
+        6 CO₂ + 6 H₂O <br>
+        <span style="color:var(--muted);font-size:.8rem">──Licht + Chlorophyll──▶</span><br>
+        C₆H₁₂O₆ + 6 O₂<br>
+        <span style="color:var(--yellow)">Q = +2880 kJ/mol</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sh2">🎯 Biologische Bedeutung</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">Ziel der Fotosynthese</div>
+      <ul class="clist green">
+        <li>Aufbau körpereigener, organischer Stoffe (Biomasse)</li>
+        <li>Ermöglichung von Entwicklungsprozessen (Blütenbildung, Wachstum)</li>
+        <li>Grundlage für Zellatmung (aufgebaute Stoffe werden dabei abgebaut)</li>
+        <li>Herstellung von Speicherstoffen (Stärke)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Globale Bedeutung</div>
+      <ul class="clist">
+        <li><strong>Nahrungsgrundlage</strong>: Aufbau von Biomasse – Basis aller Nahrungsketten</li>
+        <li><strong>Sauerstoffquelle</strong>: Freisetzung von O₂ für die Zellatmung</li>
+        <li><strong>UV-Schutz</strong>: Ermöglicht Bildung der Ozonschicht (Landbesiedlung)</li>
+        <li><strong>Klimaregulation</strong>: Bindung von CO₂ aus der Atmosphäre</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sh2">🌱 Ort: Chloroplast</div>
+  <div class="diagram-wrap">
+    <div class="diagram-title">Aufbau des Chloroplasten</div>
+    <svg viewBox="0 0 560 220" style="width:100%;max-width:560px;height:auto">
+      <!-- outer membrane -->
+      <ellipse cx="240" cy="110" rx="210" ry="95" fill="rgba(63,185,80,0.06)" stroke="#3fb950" stroke-width="2"/>
+      <!-- inner membrane -->
+      <ellipse cx="240" cy="110" rx="195" ry="80" fill="rgba(63,185,80,0.04)" stroke="#3fb950" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <!-- Stroma label -->
+      <text x="95" y="155" fill="#3fb950" font-size="10">Stroma (4)</text>
+      <!-- Thylakoids -->
+      <ellipse cx="200" cy="100" rx="50" ry="12" fill="rgba(63,185,80,0.35)" stroke="#3fb950" stroke-width="1.5"/>
+      <ellipse cx="200" cy="116" rx="50" ry="12" fill="rgba(63,185,80,0.28)" stroke="#3fb950" stroke-width="1.5"/>
+      <ellipse cx="200" cy="132" rx="50" ry="12" fill="rgba(63,185,80,0.22)" stroke="#3fb950" stroke-width="1.5"/>
+      <text x="200" y="78" text-anchor="middle" fill="#e3b341" font-size="10" font-weight="700">Granum (7)</text>
+      <!-- Thylakoid label -->
+      <text x="200" y="158" text-anchor="middle" fill="#8b949e" font-size="9">Thylakoid (8)</text>
+      <!-- Starch -->
+      <ellipse cx="320" cy="125" rx="20" ry="15" fill="rgba(227,179,65,.3)" stroke="#e3b341" stroke-width="1.5"/>
+      <text x="320" y="150" text-anchor="middle" fill="#e3b341" font-size="9">Stärke (9)</text>
+      <!-- DNA -->
+      <circle cx="360" cy="90" r="12" fill="rgba(188,140,255,.2)" stroke="#bc8cff" stroke-width="1.5"/>
+      <text x="360" y="94" text-anchor="middle" fill="#bc8cff" font-size="8">DNA</text>
+      <text x="360" y="108" text-anchor="middle" fill="#8b949e" font-size="8">(11)</text>
+      <!-- Ribosom -->
+      <circle cx="395" cy="130" r="8" fill="rgba(88,166,255,.2)" stroke="#58a6ff" stroke-width="1.5"/>
+      <text x="395" y="147" text-anchor="middle" fill="#8b949e" font-size="8">Ribo. (10)</text>
+      <!-- Labels right -->
+      <text x="465" y="40" fill="#3fb950" font-size="10">① äußere Membran</text>
+      <text x="465" y="56" fill="#3fb950" font-size="10">② Intermembranraum</text>
+      <text x="465" y="72" fill="#3fb950" font-size="10">③ innere Membran</text>
+      <text x="465" y="88" fill="#8b949e" font-size="9">  (1+2+3 = Hülle)</text>
+      <text x="465" y="104" fill="#e6edf3" font-size="10">④ Stroma</text>
+      <text x="465" y="120" fill="#e6edf3" font-size="10">⑤ Thylakoidlumen</text>
+      <text x="465" y="136" fill="#e6edf3" font-size="10">⑥ Thylakoidmembran</text>
+      <text x="465" y="152" fill="#e3b341" font-size="10">⑦ Granum</text>
+      <text x="465" y="168" fill="#e6edf3" font-size="10">⑧ Thylakoid</text>
+      <text x="465" y="184" fill="#e3b341" font-size="10">⑨ Stärke</text>
+    </svg>
+  </div>
+  <div style="background:rgba(63,185,80,.07);border:1px solid rgba(63,185,80,.25);border-radius:8px;padding:.75rem 1rem;margin:.5rem 0;font-size:.87rem;line-height:1.7">
+    <strong style="color:var(--green)">Ort der Fotosynthese:</strong> Chloroplasten – in Blättern (Palisaden- und Schwammgewebe) sowie grüne Sprossachsen krautiger Pflanzen.<br>
+    <strong style="color:var(--blue)">Lichtreaktion:</strong> Thylakoidmembran (Fotosystem I + II) → ATP + NADPH<br>
+    <strong style="color:var(--orange)">Calvin-Zyklus (Dunkelreaktion):</strong> Stroma → CO₂ → Glucose (C₆H₁₂O₆)
+  </div>
+</div>
+
+<!-- ==================== KARTEIKARTEN ==================== -->
+<div class="sec" id="sec-karten">
+  <div style="margin-bottom:1.5rem">
+    <h1 style="font-family:'Fraunces',serif;font-size:2rem;font-weight:900">🃏 Karteikarten</h1>
+    <p style="color:var(--muted);margin-top:.3rem">Lerne aktiv – tippe auf die Karte zum Umdrehen</p>
+  </div>
+
+  <div class="fc-score" id="fcScore">
+    Gewusst: <span id="fcKnew">0</span> | Nicht gewusst: <span id="fcDidnt">0</span> | Verbleibend: <span id="fcLeft">0</span>
+  </div>
+
+  <div class="fc-controls">
+    <select id="fcFilter" onchange="loadFlashcards()">
+      <option value="all">Alle Themen</option>
+      <option value="genetik">🧬 Genetik</option>
+      <option value="enzyme">⚗️ Enzyme</option>
+      <option value="foto">🌿 Fotosynthese</option>
+    </select>
+    <button onclick="shuffleCards()">🔀 Mischen</button>
+    <button onclick="resetCards()">↺ Zurücksetzen</button>
+    <div class="fc-stat" id="fcStat">Karte 1 von 1</div>
+  </div>
+
+  <div class="flashcard-wrap" onclick="flipCard()" id="fcWrap">
+    <div class="flashcard" id="fc">
+      <div class="fc-face fc-front">
+        <div class="fc-label">Frage</div>
+        <div class="fc-q" id="fcQ">Lade Karteikarten...</div>
+        <div style="margin-top:.75rem;font-size:.75rem;color:var(--muted)">Tippe zum Umdrehen</div>
+      </div>
+      <div class="fc-face fc-back">
+        <div class="fc-label">Antwort</div>
+        <div class="fc-a" id="fcA"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fc-nav">
+    <button onclick="prevCard()">←</button>
+    <div class="fc-counter" id="fcCounter">1 / 1</div>
+    <button onclick="nextCard()">→</button>
+  </div>
+
+  <div class="fc-result-btns">
+    <button class="btn-knew" onclick="markCard(true)">✓ Gewusst</button>
+    <button class="btn-didnt" onclick="markCard(false)">✗ Nicht gewusst</button>
+  </div>
+</div>
+
+<!-- ==================== QUIZ ==================== -->
+<div class="sec" id="sec-quiz">
+  <div style="margin-bottom:1.5rem">
+    <h1 style="font-family:'Fraunces',serif;font-size:2rem;font-weight:900">❓ Quiz</h1>
+    <p style="color:var(--muted);margin-top:.3rem">Multiple Choice · Lückentext · Freitext</p>
+  </div>
+  <div id="quizContainer"></div>
+</div>
+
+<!-- ==================== CHECKLISTE ==================== -->
+<div class="sec" id="sec-check">
+  <div style="margin-bottom:1.5rem">
+    <h1 style="font-family:'Fraunces',serif;font-size:2rem;font-weight:900">✅ Lerncheckliste</h1>
+    <p style="color:var(--muted);margin-top:.3rem">Hake ab, was du sicher kannst</p>
+  </div>
+  <div class="check-progress">
+    <h3>Dein Fortschritt</h3>
+    <div class="check-pbar"><div class="check-pfill" id="checkPfill"></div></div>
+    <div class="check-stat" id="checkStat">0 von 0 erledigt</div>
+  </div>
+  <div id="checklistContainer"></div>
+  <button class="btn btn-danger" style="margin-top:1rem" onclick="resetChecklist()">↺ Alles zurücksetzen</button>
+</div>
+
+<script>
+// ======================== NAVIGATION ========================
+function showSection(id) {
+  document.querySelectorAll('.sec').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.ntab').forEach(t => t.classList.remove('active'));
+  document.getElementById('sec-'+id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+function showPtab(group, id) {
+  document.querySelectorAll(`#sec-${group === 'g' ? 'genetik' : ''} .ptab-content`).forEach(c => c.classList.remove('active'));
+  document.querySelectorAll(`#sec-${group === 'g' ? 'genetik' : ''} .ptab`).forEach(t => t.classList.remove('active'));
+  document.getElementById(group+'-'+id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+function toggleCollapse(btn) {
+  btn.classList.toggle('open');
+  const content = btn.nextElementSibling;
+  content.classList.toggle('visible');
+}
+
+// ======================== FLASHCARDS ========================
+const ALL_CARDS = [
+  // Genetik
+  {cat:'genetik', q:'Was bedeutet DNA?', a:'DNA = Desoxyribonukleinsäure (DNS). Das Makromolekül, das die Erbinformation trägt. Liegt als Doppelhelix vor.'},
+  {cat:'genetik', q:'Woraus besteht ein Nukleotid?', a:'Nukleotid = Phosphat + 2-Desoxyribose (Zucker) + Stickstoffbase. Ein Nukleosid ist Zucker + Base (ohne Phosphat).'},
+  {cat:'genetik', q:'Welche Basenpaare gibt es in der DNA? Wie viele Wasserstoffbrücken?', a:'A – T: Adenin-Thymin → 2 Wasserstoffbrücken\nG ≡ C: Guanin-Cytosin → 3 Wasserstoffbrücken\nMerke: Je mehr G-C Paare, desto stabiler!'},
+  {cat:'genetik', q:'Was bedeutet antiparallel?', a:'Die beiden DNA-Stränge laufen in entgegengesetzter Richtung: Ein Strang läuft 5\'→3\', der andere 3\'→5\'. Das ist notwendig für die komplementäre Basenpaarung.'},
+  {cat:'genetik', q:'Was bedeutet semikonservativ bei der Replikation?', a:'Jede neue Doppelhelix enthält einen alten (Matrizen-)Strang und einen neu synthetisierten Strang. Aus 1 Doppelhelix werden 2 Doppelhelices.'},
+  {cat:'genetik', q:'Was ist ein Primer?', a:'Primer = kurze RNA-Nukleotid-Sequenz, die als „Startmolekül" für die DNA-Polymerase dient. Ohne Primer kann die Replikation nicht starten.'},
+  {cat:'genetik', q:'Was ist die Transkription?', a:'Transkription = 1. Teilprozess der PBS, bei dem die Nukleotidsequenz eines Gens des codogenen Stranges der DNA in die Nukleotidsequenz der mRNA umgeschrieben wird. Ort: Zellkern. mRNA = Genkopie.'},
+  {cat:'genetik', q:'Was passiert beim Processing der mRNA?', a:'1. Anbau Cap-Sequenz an 5\'-Ende\n2. Anbau Poly-A-Schwanz an 3\'-Ende\n3. Spleißen = Herausschneiden der Introns\nErgebnis: fertige mRNA → verlässt Zellkern Richtung Ribosom\nNur bei Eukaryoten!'},
+  {cat:'genetik', q:'Was sind Exons und Introns?', a:'Exons = informative DNA-Abschnitte, enthalten die Information für das Protein → werden beibehalten.\nIntrons = nicht-informative DNA-Abschnitte → werden beim Spleißen herausgeschnitten.'},
+  {cat:'genetik', q:'Was ist Translation?', a:'Translation = 2. Teilprozess der PBS. Die Nukleotidsequenz der mRNA wird am Ribosom in die Aminosäuresequenz eines Proteins übersetzt. Ort: Ribosom (Cytoplasma).'},
+  {cat:'genetik', q:'Welche 3 RNA-Typen gibt es und was ist ihre Funktion?', a:'mRNA (messenger): Genkopie, trägt Bauanleitung vom Kern zum Ribosom.\ntRNA (transfer): Transportiert Aminosäuren zum Ribosom, besitzt Anticodon.\nrRNA (ribosomal): Strukturbestandteil der Ribosomen.'},
+  {cat:'genetik', q:'Wie sind Ribosomen aufgebaut?', a:'Eukaryoten: 80S aus großer + kleiner Untereinheit.\nKleine Untereinheit: mRNA-Bindungsstelle.\nGroße Untereinheit: 3 tRNA-Bindungsstellen: E (Exit) – P (Peptidyl) – A (Aminoacyl).'},
+  {cat:'genetik', q:'Was sind die 4 Strukturebenen eines Proteins?', a:'1. Primärstruktur: Aminosäuresequenz (Peptidbindungen)\n2. Sekundärstruktur: α-Helix oder β-Faltblatt (H-Brücken)\n3. Tertiärstruktur: räumliche Gesamtstruktur (Disulfidbrücken)\n4. Quartärstruktur: mehrere Polypeptidketten (Bsp: Hämoglobin)'},
+  {cat:'genetik', q:'Was sind Transkriptionsfaktoren?', a:'Transkriptionsfaktoren = Proteine, die an der Promotor-Region oder regulatorischen DNA-Sequenzen wirken und die Transkription beeinflussen.\nAllg. TF: wirken am Promotor/TATA-Box\nSpez. TF: Aktivatoren (beschleunigen) oder Repressoren (verlangsamen)'},
+  {cat:'genetik', q:'Was ist DNA-Methylierung und was bewirkt sie?', a:'Methylierung = enzymatisches Anhängen einer Methylgruppe (–CH₃) an Cytosin → Raumstruktur verändert → RNA-Polymerase blockiert → Gen stummgeschaltet.\nDemethylierung (durch Demethylase): Gen wird wieder aktiviert.\nKann an Nachkommen weitergegeben werden!'},
+  {cat:'genetik', q:'Was ist das Genom?', a:'Genom = die Gesamtheit der Erbinformation eines Individuums. Die Erbinformation liegt in Form von Chromosomen vor, die sich im Zellkern befinden.'},
+  {cat:'genetik', q:'Welche Base ersetzt Thymin in der RNA?', a:'In der RNA gibt es kein Thymin (T). Stattdessen: Uracil (U).\nBasenpaarung: A (DNA) → U (RNA)'},
+  {cat:'genetik', q:'Was ist die Proteinbiosynthese?', a:'PBS = molekularbiologischer Prozess, bei dem aus der Nukleotidsequenz eines Gens der DNA die Aminosäuresequenz eines Proteins gebildet wird. Über Polypeptide/Proteine werden Merkmale ausgebildet.'},
+  // Enzyme
+  {cat:'enzyme', q:'Was sind Enzyme?', a:'Enzyme = Funktionsproteine im Stoff- und Energiewechsel. Sie sind Biokatalysatoren = „Werkzeug" des Stoffwechsels. Sie beschleunigen chemische Reaktionen durch Herabsetzen der Aktivierungsenergie.'},
+  {cat:'enzyme', q:'Was ist das Schloss-Schlüssel-Prinzip bei Enzymen?', a:'Das Substrat (Schlüssel) passt genau ins aktive Zentrum des Enzyms (Schloss). Dadurch sind Enzyme substratspezifisch. Nur ein bestimmtes Substrat kann an ein bestimmtes Enzym binden.'},
+  {cat:'enzyme', q:'Was sagt die RGT-Regel?', a:'RGT-Regel: Eine Temperaturerhöhung um 10 K (Kelvin/°C) beschleunigt die Reaktion um das 2–3-fache. Gilt für 0°C–40°C. Über 40–50°C → Denaturierung des Enzyms!'},
+  {cat:'enzyme', q:'Was ist der Unterschied zwischen kompetitiver und nichtkompetitiver Hemmung?', a:'Kompetitiv: Inhibitor ist substratähnlich, blockiert aktives Zentrum, reversibel durch mehr Substrat.\nNichtkompetitiv: Inhibitor bindet am allosterischen Zentrum, verändert Form des aktiven Zentrums, NICHT reversibel durch mehr Substrat.'},
+  {cat:'enzyme', q:'Was ist Denaturierung?', a:'Denaturierung = irreversible Veränderung der Raumstruktur (Konformationsänderung) eines Proteins. Betrifft Sekundär- und Tertiärstruktur. Führt zum Verlust der biologischen Funktion. Ursachen: hohe Temperatur, extremer pH-Wert.'},
+  {cat:'enzyme', q:'Was ist das allosterische Zentrum?', a:'Das allosterische Zentrum ist eine Bindestelle außerhalb des aktiven Zentrums. Bindet ein Inhibitor dort (nichtkompetitive Hemmung), verändert sich die Konformation (Form) des aktiven Zentrums → Substrat kann zwar noch binden, aber keine Reaktion findet statt.'},
+  {cat:'enzyme', q:'Was sind Coenzyme und prosthetische Gruppen?', a:'Coenzyme = kleine organische Verbindungen, die locker am Apoenzym gebunden sind (z.B. NAD, FAD).\nProsthetische Gruppen = kleine organische Verbindungen, die fest am Apoenzym gebunden sind.\nBeide sind Cofaktoren: nicht-Protein-Anteile des Enzyms.'},
+  {cat:'enzyme', q:'Welchen Einfluss haben Enzyme auf die Reaktionswärme?', a:'Keinen! Enzyme haben keinen Einfluss auf den Energieumsatz (Reaktionswärme Q). Sie beschleunigen nur das Erreichen des Gleichgewichts – das Gleichgewicht selbst ändert sich nicht.'},
+  // Fotosynthese
+  {cat:'foto', q:'Definition Fotosynthese (auswendig!)', a:'Fotosynthese = Form der autotrophen Assimilation bei Pflanzen, bei der Kohlendioxid und Wasser mithilfe von Licht und Chlorophyll in körpereigene, energiereiche, organische Stoffe (Glucose) und Sauerstoff umgewandelt werden.'},
+  {cat:'foto', q:'Vereinfachte Gesamtgleichung der Fotosynthese', a:'6 CO₂ + 6 H₂O → C₆H₁₂O₆ + 6 O₂\n(mit Licht und Chlorophyll)\nQ = +2880 kJ/mol\n(Energie wird eingespeichert!)'},
+  {cat:'foto', q:'Wo findet die Fotosynthese statt?', a:'In den Chloroplasten – in Blättern (Palisaden- und Schwammgewebe) und grünen Sprossachsen.\nLichtreaktion: Thylakoidmembran (FS I + II)\nCalvin-Zyklus: Stroma'},
+  {cat:'foto', q:'Was ist der Unterschied zwischen Assimilation und Dissimilation?', a:'Assimilation (Aufbau): körperfremde Stoffe → körpereigene, energiereiche organische Stoffe.\nDissimilation (Abbau): energiereiche organische Stoffe → Energiegewinnung.\nFotosynthese = autotrophe Assimilation\nAtmung = Dissimilation'},
+];
+
+let currentCards = [];
+let currentIndex = 0;
+let knewCount = 0, didntCount = 0;
+let cardResults = {};
+
+function loadFlashcards() {
+  const filter = document.getElementById('fcFilter').value;
+  currentCards = filter === 'all' ? [...ALL_CARDS] : ALL_CARDS.filter(c => c.cat === filter);
+  currentIndex = 0;
+  knewCount = 0; didntCount = 0;
+  cardResults = {};
+  showCard();
+  updateFCStats();
+}
+
+function shuffleCards() {
+  for(let i = currentCards.length-1; i > 0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [currentCards[i],currentCards[j]] = [currentCards[j],currentCards[i]];
+  }
+  currentIndex = 0;
+  showCard();
+}
+
+function resetCards() {
+  knewCount = 0; didntCount = 0; cardResults = {};
+  currentIndex = 0;
+  showCard();
+  updateFCStats();
+}
+
+function showCard() {
+  if(!currentCards.length) return;
+  const card = currentCards[currentIndex];
+  document.getElementById('fcQ').textContent = card.q;
+  document.getElementById('fcA').innerHTML = card.a.replace(/\n/g,'<br>');
+  document.getElementById('fc').classList.remove('flipped');
+  document.getElementById('fcCounter').textContent = `${currentIndex+1} / ${currentCards.length}`;
+  document.getElementById('fcStat').textContent = `Karte ${currentIndex+1} von ${currentCards.length}`;
+  updateFCStats();
+}
+
+function flipCard() { document.getElementById('fc').classList.toggle('flipped'); }
+function prevCard() { if(currentIndex > 0){currentIndex--; showCard();} }
+function nextCard() { if(currentIndex < currentCards.length-1){currentIndex++; showCard();} }
+
+function markCard(knew) {
+  const id = currentIndex;
+  const was = cardResults[id];
+  if(was === true) knewCount--;
+  if(was === false) didntCount--;
+  cardResults[id] = knew;
+  if(knew) knewCount++; else didntCount++;
+  updateFCStats();
+  if(currentIndex < currentCards.length-1) { currentIndex++; showCard(); }
+}
+
+function updateFCStats() {
+  document.getElementById('fcKnew').textContent = knewCount;
+  document.getElementById('fcDidnt').textContent = didntCount;
+  document.getElementById('fcLeft').textContent = currentCards.length - knewCount - didntCount;
+  updateProgress();
+}
+
+// ======================== QUIZ ========================
+const QUIZ = [
+  // MC
+  {type:'mc', cat:'Genetik', q:'Welche Basenpaare kommen in der DNA vor?', opts:['A–U und G–C','A–T und G–C','A–T und G–U','A–C und G–T'], correct:1, exp:'In der DNA paaren sich immer Adenin–Thymin (2 H-Brücken) und Guanin–Cytosin (3 H-Brücken). Uracil gibt es nur in der RNA statt Thymin!'},
+  {type:'mc', cat:'Genetik', q:'Was bedeutet "semikonservativ" bei der DNA-Replikation?', opts:['Beide Stränge der neuen Helix sind neu synthetisiert','Jede neue Doppelhelix enthält einen alten und einen neuen Strang','Nur ein Strang wird verdoppelt','Die DNA wird vollständig abgebaut und neu aufgebaut'], correct:1, exp:'Semikonservativ = halb erhaltend. Jede Tochterdoppelhelix enthält einen konservierten (alten) Matrizenstrang + einen neu synthetisierten Strang.'},
+  {type:'mc', cat:'Genetik', q:'Welcher Prozess findet als ERSTES bei der Proteinbiosynthese statt?', opts:['Translation','Spleißen','Transkription','Replikation'], correct:2, exp:'Die Reihenfolge ist: Transkription (DNA→mRNA) → Processing (Spleißen, Cap, Poly-A) → Translation (mRNA→Protein).'},
+  {type:'mc', cat:'Genetik', q:'Was wird beim Spleißen (Processing) aus der prä-mRNA entfernt?', opts:['Exons','Introns','Codons','Anticodons'], correct:1, exp:'Introns = nicht-informative DNA-Abschnitte. Sie werden beim Spleißen herausgeschnitten. Die Exons (informative Abschnitte) werden zusammengefügt zur fertigen mRNA.'},
+  {type:'mc', cat:'Genetik', q:'Wo findet die Translation statt?', opts:['Im Zellkern','Im Nukleolus','Am Ribosom im Cytoplasma','In den Mitochondrien'], correct:2, exp:'Translation findet am Ribosom statt – entweder im Cytoplasma (freie Ribosomen) oder am Rauen Endoplasmatischen Retikulum (gebundene Ribosomen). Die Transkription findet im Zellkern statt!'},
+  {type:'mc', cat:'Genetik', q:'Was ist die Quartärstruktur eines Proteins?', opts:['Die lineare Abfolge der Aminosäuren','Die α-Helix oder β-Faltblatt-Struktur','Die räumliche Gesamtstruktur eines einzelnen Polypeptids','Die Gesamtstruktur aus 2 oder mehr Polypeptidketten'], correct:3, exp:'Quartärstruktur = Zusammenlagerung mehrerer Polypeptidketten zu einem funktionsfähigen Protein. Bsp: Hämoglobin = 4 Untereinheiten (α- und β-Ketten + Hämgruppen).'},
+  {type:'mc', cat:'Genetik', q:'Was ist DNA-Methylierung?', opts:['Das Herausschneiden von Introns','Das Anhängen einer Methylgruppe an Cytosin, das Gen wird abgeschaltet','Das Hinzufügen eines Poly-A-Schwanzes','Die Verdopplung der DNA'], correct:1, exp:'Methylierung = enzymatisches Anhängen von CH₃ an Cytosin → RNA-Polymerase kann nicht mehr binden → Gen stummgeschaltet. Demethylierung (Demethylase) schaltet das Gen wieder an.'},
+  {type:'mc', cat:'Genetik', q:'Welche Base findet sich in der RNA, aber NICHT in der DNA?', opts:['Adenin','Guanin','Thymin','Uracil'], correct:3, exp:'RNA enthält Uracil (U) statt Thymin (T). Bei der Transkription: A (DNA) → U (RNA). Alle anderen Basen (A, G, C) kommen in beiden vor.'},
+  // Enzyme MC
+  {type:'mc', cat:'Enzyme', q:'Was sagt die RGT-Regel?', opts:['pH-Erhöhung um 1 halbiert die Reaktionsgeschwindigkeit','Temperaturerhöhung um 10 K beschleunigt die Reaktion um das 2-3-fache','Enzymmenge verdoppelt die Reaktionsgeschwindigkeit','Substraterhöhung verlangsamt kompetitive Hemmung'], correct:1, exp:'RGT-Regel (Reaktionsgeschwindigkeit-Temperatur-Regel): +10 K → 2-3× schneller. Gilt für 0°C–40°C. Darüber → Denaturierung!'},
+  {type:'mc', cat:'Enzyme', q:'Wie unterscheidet sich die nichtkompetitive von der kompetitiven Hemmung?', opts:['Nichtkompetitiv: Inhibitor bindet am aktiven Zentrum; kompetitiv: am allosterischen Zentrum','Kompetitiv: am aktiven Zentrum, durch mehr Substrat aufhebbar; nichtkompetitiv: am allosterischen Zentrum, nicht durch Substrat aufhebbar','Beide binden am aktiven Zentrum, unterscheiden sich nur in der Reversibilität','Nichtkompetitiv ist immer irreversibel; kompetitiv ist immer irreversibel'], correct:1, exp:'Kompetitiv: Inhibitor konkurriert mit Substrat um aktives Zentrum → reversibel durch mehr Substrat. Nichtkompetitiv: Inhibitor bindet am allosterischen Zentrum → ändert Form des aktiven Zentrums → nicht durch Substrat aufhebbar.'},
+  {type:'mc', cat:'Enzyme', q:'Was ist Denaturierung?', opts:['Reversible Aktivierung eines Enzyms','Abbau des Substrats durch das Enzym','Irreversible Veränderung der Raumstruktur des Proteins → Funktionsverlust','Abspaltung des Coenzyms vom Apoenzym'], correct:2, exp:'Denaturierung = irreversible Konformationsänderung (Veränderung der Raumstruktur). Betrifft Sekundär- und Tertiärstruktur. Das Enzym verliert seine biologische Funktion. Ursachen: hohe Temperatur, extremer pH.'},
+  {type:'mc', cat:'Fotosynthese', q:'Wie lautet die vereinfachte Gesamtgleichung der Fotosynthese?', opts:['6 O₂ + 6 H₂O → C₆H₁₂O₆ + 6 CO₂','6 CO₂ + 6 H₂O → C₆H₁₂O₆ + 6 O₂','C₆H₁₂O₆ + 6 O₂ → 6 CO₂ + 6 H₂O','6 CO₂ + 12 H₂O → C₆H₁₂O₆ + 6 O₂ + 6 H₂O'], correct:1, exp:'Vereinfacht: 6 CO₂ + 6 H₂O → C₆H₁₂O₆ + 6 O₂ (mit Licht + Chlorophyll). Q = +2880 kJ/mol. Die vollständige Gleichung hat 12 H₂O und gibt auch 6 H₂O als Produkt ab.'},
+  {type:'mc', cat:'Fotosynthese', q:'Was ist Fotosynthese?', opts:['Eine Form der heterotrophen Assimilation','Eine Form der Dissimilation (Abbau)','Eine Form der autotrophen Assimilation bei Pflanzen','Ein Teil des Stickstoffkreislaufs'], correct:2, exp:'Fotosynthese = Form der autotrophen Assimilation. Autotroph = selbst ernährend (aus CO₂ und H₂O organische Stoffe aufbauen). Dissimilation wäre Abbau (Zellatmung).'},
+  // Lückentexte
+  {type:'fill', cat:'Genetik', q:'Ein Nukleotid besteht aus ___, ___ und einer Stickstoffbase.', blanks:['Phosphat','2-Desoxyribose'], exp:'Nukleotid = Phosphat + 2-Desoxyribose (Zucker) + Stickstoffbase. Das Nukleosid ist nur Zucker + Base (ohne Phosphat).'},
+  {type:'fill', cat:'Genetik', q:'Die DNA-Replikation verläuft ___konservativ, d.h. jede neue Doppelhelix enthält einen ___ und einen ___ Strang.', blanks:['semi','alten','neuen'], exp:'Semikonservativ (halb erhaltend): 1 alter Matrizenstrang + 1 neuer Strang in jeder Tochterdoppelhelix.'},
+  {type:'fill', cat:'Genetik', q:'Beim Processing wird an das 5\'-Ende eine ___ und an das 3\'-Ende ein ___ angehängt. Danach werden die ___ herausgeschnitten.', blanks:['Cap-Sequenz','Poly-A-Schwanz','Introns'], exp:'Processing (nur Eukaryoten): Cap (5\') + Poly-A-Schwanz (3\') schützen die mRNA. Beim Spleißen werden Introns entfernt, Exons zusammengefügt.'},
+  {type:'fill', cat:'Enzyme', q:'Enzyme sind ___, die chemische Reaktionen beschleunigen, indem sie die ___ herabsetzen.', blanks:['Biokatalysatoren','Aktivierungsenergie'], exp:'Enzyme = Biokatalysatoren. Sie senken die Aktivierungsenergie, die für den Start einer Reaktion nötig ist. Dabei werden sie selbst nicht verbraucht.'},
+  {type:'fill', cat:'Enzyme', q:'Bei der kompetitiven Hemmung bindet der Inhibitor am ___ Zentrum. Dies ist durch Erhöhung der ___ reversibel.', blanks:['aktiven','Substratkonzentration'], exp:'Kompetitiv: Inhibitor konkurriert mit dem Substrat um das aktive Zentrum. Mehr Substrat „verdrängt" den Inhibitor → reversibel.'},
+  {type:'fill', cat:'Fotosynthese', q:'Fotosynthese ist eine Form der ___ Assimilation, bei der Kohlendioxid und Wasser mithilfe von ___ und Chlorophyll in Glucose umgewandelt werden.', blanks:['autotrophen','Licht'], exp:'Definition! Autotroph = selbst ernährend. Licht und Chlorophyll sind die Energiequelle und der Fotorezeptor.'},
+  // Freitext
+  {type:'free', cat:'Genetik', q:'Erkläre den Unterschied zwischen Transkription und Translation in je einem Satz!', sample:'Transkription: Die Nukleotidsequenz eines Gens des codogenen DNA-Stranges wird im Zellkern in die Nukleotidsequenz der mRNA umgeschrieben.\nTranslation: Die Nukleotidsequenz der mRNA wird am Ribosom in die Aminosäuresequenz eines Proteins übersetzt.'},
+  {type:'free', cat:'Genetik', q:'Nenne und erkläre die 4 Strukturebenen eines Proteins!', sample:'1. Primärstruktur: Lineare Aminosäuresequenz (Peptidbindungen)\n2. Sekundärstruktur: α-Helix oder β-Faltblatt (Wasserstoffbrücken)\n3. Tertiärstruktur: Räumliche Gesamtform eines Polypeptids (Disulfidbrücken –S–S–)\n4. Quartärstruktur: Zusammenlagerung mehrerer Polypeptidketten (Bsp: Hämoglobin)'},
+  {type:'free', cat:'Genetik', q:'Erkläre, wie DNA-Methylierung die Genexpression reguliert!', sample:'Methylierung: Eine Methylgruppe (–CH₃) wird enzymatisch an Cytosin angehängt → Raumstruktur der DNA verändert → RNA-Polymerase wird blockiert → Gen stummgeschaltet (inaktiv).\nDemethylierung (Demethylase): Methylgruppe wird entfernt → Gen kann wieder abgelesen werden (aktiv).\nBesonderheit: Methylierungszustand kann an Tochterzellen und Nachkommen (über Keimzellen) weitergegeben werden.'},
+  {type:'free', cat:'Enzyme', q:'Erkläre den Ablauf einer enzymatischen Reaktion am Beispiel der Maltasespaltung!', sample:'Maltase (Enzym) + Maltose (Substrat) → Enzym-Substrat-Komplex bildet sich (Schloss-Schlüssel-Prinzip). Aktivierungsenergie wird gesenkt. Maltose + H₂O → 2× Glucose. Produkte werden freigesetzt. Enzym liegt unverändert vor und kann erneut reagieren.'},
+  {type:'free', cat:'Fotosynthese', q:'Definiere Fotosynthese und nenne die vereinfachte Gesamtgleichung!', sample:'Fotosynthese = Form der autotrophen Assimilation bei Pflanzen, bei der CO₂ und H₂O mithilfe von Licht und Chlorophyll in Glucose und O₂ umgewandelt werden.\nGleichung: 6 CO₂ + 6 H₂O → C₆H₁₂O₆ + 6 O₂ (Licht + Chlorophyll)\nQ = +2880 kJ/mol'},
+];
+
+let quizAnswers = {};
+let quizSubmitted = false;
+
+function buildQuiz() {
+  const cont = document.getElementById('quizContainer');
+  if(quizSubmitted) {
+    // Already done, show results
+    renderQuizResults();
+    return;
+  }
+  let html = `<div class="quiz-progress"><span id="qpLabel">0 / ${QUIZ.length} beantwortet</span><div class="qpfill-wrap"><div class="qpfill" id="qpFill" style="width:0%"></div></div></div>`;
+  QUIZ.forEach((q, i) => {
+    html += `<div class="qblock" id="qblock-${i}">`;
+    html += `<div class="qnumber"><span class="badge ${q.cat==='Genetik'?'b-blue':q.cat==='Enzyme'?'b-orange':'b-green'}">${q.cat}</span> · Frage ${i+1} von ${QUIZ.length} · ${q.type==='mc'?'Multiple Choice':q.type==='fill'?'Lückentext':'Freitext'}</div>`;
+    html += `<div class="qtext">${q.q}</div>`;
+    if(q.type === 'mc') {
+      html += `<div class="qopts">`;
+      q.opts.forEach((opt, oi) => {
+        html += `<div class="qopt" id="qopt-${i}-${oi}" onclick="selectMC(${i},${oi})">${opt}</div>`;
+      });
+      html += `</div>`;
+    } else if(q.type === 'fill') {
+      const parts = q.q.split('___');
+      html += `<div style="line-height:2.2;font-size:.9rem">`;
+      parts.forEach((part, pi) => {
+        if(pi < parts.length-1) {
+          html += `${part}<input class="fill-input" id="fill-${i}-${pi}" placeholder="..." style="width:140px;display:inline-block;margin:0 .3rem" oninput="updateQProgress()">`;
+        } else { html += part; }
+      });
+      html += `</div>`;
+    } else {
+      html += `<textarea class="free-textarea" id="free-${i}" placeholder="Schreibe deine Antwort hier..." oninput="updateQProgress()"></textarea>`;
+    }
+    html += `<div class="qfeedback" id="qfb-${i}" style="display:none"></div>`;
+    html += `</div>`;
+  });
+  html += `<div style="text-align:center;margin-top:1.5rem;display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap">`;
+  html += `<button class="btn btn-primary" onclick="submitQuiz()">Quiz auswerten ✓</button>`;
+  html += `<button class="btn btn-secondary" onclick="resetQuiz()">↺ Neu starten</button>`;
+  html += `</div>`;
+  cont.innerHTML = html;
+}
+
+function selectMC(qi, oi) {
+  document.querySelectorAll(`[id^="qopt-${qi}-"]`).forEach(el => el.classList.remove('selected'));
+  document.getElementById(`qopt-${qi}-${oi}`).classList.add('selected');
+  quizAnswers[qi] = oi;
+  updateQProgress();
+}
+
+function updateQProgress() {
+  let answered = 0;
+  QUIZ.forEach((q, i) => {
+    if(q.type==='mc' && quizAnswers[i] !== undefined) answered++;
+    else if(q.type==='fill') {
+      const all = q.blanks.every((_, bi) => {
+        const el = document.getElementById(`fill-${i}-${bi}`);
+        return el && el.value.trim().length > 0;
+      });
+      if(all) answered++;
+    } else if(q.type==='free') {
+      const el = document.getElementById(`free-${i}`);
+      if(el && el.value.trim().length > 20) answered++;
+    }
+  });
+  const pct = Math.round(answered/QUIZ.length*100);
+  const fill = document.getElementById('qpFill');
+  const label = document.getElementById('qpLabel');
+  if(fill) fill.style.width = pct+'%';
+  if(label) label.textContent = `${answered} / ${QUIZ.length} beantwortet`;
+}
+
+function submitQuiz() {
+  let correct = 0, total = 0;
+  QUIZ.forEach((q, i) => {
+    const block = document.getElementById(`qblock-${i}`);
+    const fb = document.getElementById(`qfb-${i}`);
+    if(q.type === 'mc') {
+      total++;
+      const chosen = quizAnswers[i];
+      document.querySelectorAll(`[id^="qopt-${i}-"]`).forEach(el => {
+        el.classList.add('disabled');
+        const oi = parseInt(el.id.split('-')[3]);
+        if(oi === q.correct) el.classList.add('correct-opt');
+        else if(oi === chosen && oi !== q.correct) el.classList.add('wrong-opt');
+      });
+      if(chosen === q.correct) {
+        correct++; block.classList.add('correct');
+        fb.innerHTML = `✓ Richtig! ${q.exp}`; fb.className='qfeedback ok'; fb.style.display='block';
+      } else {
+        block.classList.add('wrong');
+        fb.innerHTML = `✗ Leider falsch. ${q.exp}`; fb.className='qfeedback fail'; fb.style.display='block';
+      }
+    } else if(q.type === 'fill') {
+      total++;
+      let allOk = true;
+      q.blanks.forEach((blank, bi) => {
+        const inp = document.getElementById(`fill-${i}-${bi}`);
+        if(!inp) return;
+        const val = inp.value.trim().toLowerCase();
+        const exp = blank.toLowerCase();
+        const ok = val.includes(exp.split(' ')[0]) || exp.includes(val.split(' ')[0]);
+        if(ok) { inp.classList.add('correct-in'); }
+        else { inp.classList.add('wrong-in'); inp.value = blank; allOk = false; }
+        inp.disabled = true;
+      });
+      if(allOk) {
+        correct++; block.classList.add('correct');
+        fb.innerHTML = `✓ Richtig! ${q.exp}`; fb.className='qfeedback ok'; fb.style.display='block';
+      } else {
+        block.classList.add('wrong');
+        fb.innerHTML = `✗ Die richtigen Begriffe wurden eingetragen. ${q.exp}`; fb.className='qfeedback fail'; fb.style.display='block';
+      }
+    } else {
+      const ta = document.getElementById(`free-${i}`);
+      if(ta) ta.disabled = true;
+      fb.innerHTML = `<strong>Musterlösung:</strong><br>${q.sample.replace(/\n/g,'<br>')}`;
+      fb.className='qfeedback ok'; fb.style.display='block';
+    }
+  });
+  const mcFill = QUIZ.filter(q=>q.type!=='free').length;
+  const pct = Math.round(correct/mcFill*100);
+  const grade = pct>=95?15:pct>=85?13:pct>=75?11:pct>=65?9:pct>=55?7:pct>=45?5:pct>=35?3:1;
+  const resultHtml = `<div class="quiz-result"><div class="result-score">${correct}/${mcFill}</div><div class="result-grade">MC + Lückentext: ${pct}% → ca. ${grade} Notenpunkte</div><p style="color:var(--muted);font-size:.88rem;margin-bottom:1rem">Freitextfragen: Vergleiche selbst mit der Musterlösung oben.</p><button class="btn btn-secondary" onclick="resetQuiz()">↺ Quiz wiederholen</button></div>`;
+  document.getElementById('quizContainer').insertAdjacentHTML('beforeend', resultHtml);
+  document.querySelector('[onclick="submitQuiz()"]').disabled = true;
+  quizSubmitted = false;
+  updateProgress();
+}
+
+function resetQuiz() {
+  quizAnswers = {};
+  quizSubmitted = false;
+  buildQuiz();
+}
+
+// ======================== CHECKLIST ========================
+const CHECKLIST = [
+  {id:'c1', cat:'🧬 Genetik', text:'DNA-Aufbau erklären können (Nukleotid, Doppelhelix, Basenpaare)', detail:'Nukleotid = Phosphat + Desoxyribose + Base; A-T (2) und G-C (3) H-Brücken; antiparallel'},
+  {id:'c2', cat:'🧬 Genetik', text:'Basenpaare auswendig (A-T, G-C + H-Brücken)', detail:'A–T: 2 Wasserstoffbrücken | G–C: 3 Wasserstoffbrücken'},
+  {id:'c3', cat:'🧬 Genetik', text:'"Semikonservativ" erklären können', detail:'Jede neue Doppelhelix = 1 alter + 1 neuer Strang'},
+  {id:'c4', cat:'🧬 Genetik', text:'Transkription Schritt für Schritt erklären', detail:'RNA-Pol → Promotor → Öffnen → Basenpaarung 5\'→3\' → Terminator → mRNA'},
+  {id:'c5', cat:'🧬 Genetik', text:'Processing (Cap, Poly-A, Spleißen) erklären', detail:'5\'-Cap + 3\'-Poly-A + Introns raus + Exons zusammen → reife mRNA'},
+  {id:'c6', cat:'🧬 Genetik', text:'Exons vs. Introns unterscheiden', detail:'Exons = informativ (bleiben) | Introns = nicht informativ (raus)'},
+  {id:'c7', cat:'🧬 Genetik', text:'Translation: Ort und Ablauf kennen', detail:'Ort: Ribosom (80S bei Eukaryoten). mRNA → Aminosäuresequenz'},
+  {id:'c8', cat:'🧬 Genetik', text:'Die 3 RNA-Typen und ihre Funktion', detail:'mRNA (Genkopie), tRNA (Aminosäuretransport), rRNA (Ribosom)'},
+  {id:'c9', cat:'🧬 Genetik', text:'4 Proteinstrukturebenen benennen und erklären', detail:'Primär (AS-Sequenz) → Sekundär (α-Helix/β-Faltblatt) → Tertiär (3D) → Quartär (mehrere Ketten)'},
+  {id:'c10', cat:'🧬 Genetik', text:'Transkriptionsfaktoren + TATA-Box erklären', detail:'TF binden an Promotor/TATA-Box → ermöglichen RNA-Pol zu starten; Aktivatoren/Repressoren'},
+  {id:'c11', cat:'🧬 Genetik', text:'DNA-Methylierung: Wirkung und Bedeutung', detail:'CH₃ an Cytosin → Gen stummgeschaltet; Demethylase → Gen aktiv; vererbbar'},
+  {id:'c12', cat:'🧬 Genetik', text:'Uracil (U) kommt in RNA statt Thymin (T)', detail:'In RNA: A→U statt A→T bei Transkription'},
+  {id:'c13', cat:'⚗️ Enzyme', text:'Definition und Eigenschaften von Enzymen kennen', detail:'Biokatalysatoren, Proteine, substratspezifisch, nicht verbraucht, senken Aktivierungsenergie'},
+  {id:'c14', cat:'⚗️ Enzyme', text:'Schloss-Schlüssel-Prinzip erklären', detail:'Substrat passt genau ins aktive Zentrum; substratspezifisch'},
+  {id:'c15', cat:'⚗️ Enzyme', text:'RGT-Regel kennen (+10K → 2-3x schneller, 0-40°C)', detail:'+10 Kelvin = 2-3× schneller. Über 40°C: Denaturierung!'},
+  {id:'c16', cat:'⚗️ Enzyme', text:'Kompetitive vs. nichtkompetitive Hemmung unterscheiden', detail:'Kompetitiv: aktives Z., reversibel durch Substrat | Nichtkompetitiv: allosterisch, nicht durch Substrat'},
+  {id:'c17', cat:'⚗️ Enzyme', text:'Denaturierung erklären (irreversibel!)', detail:'Irreversible Konformationsänderung → Funktionsverlust. Ursachen: Hitze, extremer pH'},
+  {id:'c18', cat:'🌿 Fotosynthese', text:'DEFINITION Fotosynthese auswendig können!', detail:'Form der autotrophen Assimilation bei Pflanzen...'},
+  {id:'c19', cat:'🌿 Fotosynthese', text:'Vereinfachte Gesamtgleichung auswendig', detail:'6 CO₂ + 6 H₂O → C₆H₁₂O₆ + 6 O₂ (Licht + Chlorophyll)'},
+  {id:'c20', cat:'🌿 Fotosynthese', text:'Ort der Fotosynthese: Chloroplast (Thylakoid + Stroma)', detail:'Lichtreaktion: Thylakoidmembran | Calvin-Zyklus: Stroma'},
+];
+
+function buildChecklist() {
+  const stored = JSON.parse(localStorage.getItem('bio_checklist') || '{}');
+  let html = '';
+  let cats = [...new Set(CHECKLIST.map(c=>c.cat))];
+  cats.forEach(cat => {
+    html += `<div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:1.25rem 0 .5rem">${cat}</div>`;
+    CHECKLIST.filter(c=>c.cat===cat).forEach(item => {
+      const done = stored[item.id];
+      html += `<div class="checklist-item${done?' done':''}" id="ci-${item.id}" onclick="toggleCheck('${item.id}')">
+        <div class="ci-check">${done?'✓':''}</div>
+        <div class="ci-text"><strong>${item.text}</strong><span class="ci-cat">${item.detail}</span></div>
+      </div>`;
+    });
+  });
+  document.getElementById('checklistContainer').innerHTML = html;
+  updateCheckProgress();
+}
+
+function toggleCheck(id) {
+  const stored = JSON.parse(localStorage.getItem('bio_checklist') || '{}');
+  stored[id] = !stored[id];
+  localStorage.setItem('bio_checklist', JSON.stringify(stored));
+  buildChecklist();
+  updateProgress();
+}
+
+function resetChecklist() {
+  localStorage.removeItem('bio_checklist');
+  buildChecklist();
+  updateProgress();
+}
+
+function updateCheckProgress() {
+  const stored = JSON.parse(localStorage.getItem('bio_checklist') || '{}');
+  const done = CHECKLIST.filter(c => stored[c.id]).length;
+  const total = CHECKLIST.length;
+  const pct = Math.round(done/total*100);
+  document.getElementById('checkPfill').style.width = pct+'%';
+  document.getElementById('checkStat').textContent = `${done} von ${total} erledigt (${pct}%)`;
+}
+
+function updateProgress() {
+  const stored = JSON.parse(localStorage.getItem('bio_checklist') || '{}');
+  const done = CHECKLIST.filter(c => stored[c.id]).length;
+  const pct = Math.round(done/CHECKLIST.length*100);
+  document.getElementById('globalProgress').style.width = pct+'%';
+  document.getElementById('progressLabel').textContent = pct+'%';
+}
+
+// ======================== INIT ========================
+loadFlashcards();
+buildQuiz();
+buildChecklist();
+updateProgress();
+</script>
+</body>
+</html>
