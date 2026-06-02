@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geschichte Klasse 11 – Lernübersicht</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0e17;
+    --bg2: #161523;
+    --bg3: #1e1c2e;
+    --surface: #252338;
+    --surface2: #2e2b45;
+    --border: rgba(255,255,255,0.08);
+    --border2: rgba(255,255,255,0.15);
+    --text: #f0eeff;
+    --muted: #9b98b8;
+    --accent: #7c6df7;
+    --accent2: #a693ff;
+    --gold: #f5c842;
+    --gold2: #ffd96a;
+    --teal: #2dd4a0;
+    --teal2: #5eebc0;
+    --coral: #ff6b6b;
+    --coral2: #ff9090;
+    --blue: #4fa3e0;
+    --blue2: #7dc0f5;
+    --green: #6bcf7f;
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Instrument Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    height: 60px;
+  }
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    color: var(--accent2);
+    white-space: nowrap;
+    letter-spacing: -0.5px;
+  }
+  .logo span { color: var(--gold); }
+
+  /* NAV TABS */
+  .nav {
+    display: flex;
+    gap: 2px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    flex: 1;
+  }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav-btn {
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 13.5px;
+    font-weight: 500;
+    padding: 0 14px;
+    height: 60px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .nav-btn:hover { color: var(--text); }
+  .nav-btn.active {
+    color: var(--accent2);
+    border-bottom-color: var(--accent2);
+  }
+  .nav-btn .icon { margin-right: 5px; font-size: 14px; }
+
+  /* MAIN */
+  .main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  /* PAGE */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* SECTION TITLE */
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+  }
+  .section-title span { color: var(--accent2); }
+
+  /* BADGE */
+  .badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .badge-gold { background: rgba(245,200,66,0.15); color: var(--gold2); }
+  .badge-accent { background: rgba(124,109,247,0.2); color: var(--accent2); }
+  .badge-teal { background: rgba(45,212,160,0.15); color: var(--teal2); }
+  .badge-coral { background: rgba(255,107,107,0.15); color: var(--coral2); }
+  .badge-blue { background: rgba(79,163,224,0.15); color: var(--blue2); }
+
+  /* CARDS */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+  }
+  .card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-title .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* GRID */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+  .grid-auto { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; }
+
+  /* WICHTIG BANNER */
+  .wichtig {
+    background: linear-gradient(135deg, rgba(124,109,247,0.15), rgba(245,200,66,0.1));
+    border: 1px solid rgba(124,109,247,0.3);
+    border-radius: var(--radius);
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .wichtig strong { color: var(--accent2); }
+
+  /* DETAIL ROW */
+  .detail-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 6px;
+    font-size: 14px;
+  }
+  .detail-label {
+    color: var(--muted);
+    min-width: 120px;
+    font-size: 13px;
+  }
+  .detail-val { color: var(--text); }
+
+  /* TABLE */
+  .tbl {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+  }
+  .tbl th {
+    background: var(--surface2);
+    color: var(--muted);
+    font-weight: 600;
+    padding: 8px 12px;
+    text-align: left;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border);
+  }
+  .tbl td {
+    padding: 9px 12px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    vertical-align: top;
+  }
+  .tbl tr:last-child td { border-bottom: none; }
+  .tbl tr:hover td { background: rgba(255,255,255,0.02); }
+
+  /* PRINZIP CARD */
+  .prinzip {
+    border-left: 3px solid;
+    padding: 0.9rem 1rem;
+    background: var(--surface);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    margin-bottom: 0.75rem;
+  }
+  .prinzip-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+  .prinzip-text { font-size: 13.5px; color: var(--muted); line-height: 1.5; }
+
+  /* TIMELINE */
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 6px;
+    bottom: 6px;
+    width: 1px;
+    background: var(--border2);
+  }
+  .tl-item {
+    position: relative;
+    margin-bottom: 1.25rem;
+  }
+  .tl-dot {
+    position: absolute;
+    left: -26px;
+    top: 6px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid;
+    background: var(--bg);
+  }
+  .tl-date {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 3px;
+  }
+  .tl-event {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .tl-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+  /* CHECKLISTE */
+  .check-group { margin-bottom: 1.5rem; }
+  .check-group-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.75rem;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+    transition: background 0.15s;
+  }
+  .check-item:hover { background: rgba(255,255,255,0.03); padding-left: 6px; }
+  .check-box {
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid var(--border2);
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+  }
+  .check-item.done .check-box {
+    background: var(--teal);
+    border-color: var(--teal);
+    color: #0f0e17;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .check-text { font-size: 14px; color: var(--text); flex: 1; }
+  .check-item.done .check-text { color: var(--muted); text-decoration: line-through; }
+  .check-priority { font-size: 11px; }
+  .progress-bar-wrap {
+    background: var(--surface2);
+    border-radius: 20px;
+    height: 6px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+  }
+  .progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--teal), var(--accent2));
+    border-radius: 20px;
+    transition: width 0.4s ease;
+  }
+  .progress-text {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  /* KARTEIKARTEN */
+  .karte-container { perspective: 1000px; margin-bottom: 1.5rem; }
+  .karte {
+    width: 100%;
+    height: 200px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
+    cursor: pointer;
+  }
+  .karte.flipped { transform: rotateY(180deg); }
+  .karte-front, .karte-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: var(--radius);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    text-align: center;
+    border: 1px solid var(--border);
+  }
+  .karte-front {
+    background: var(--surface);
+  }
+  .karte-back {
+    background: var(--surface2);
+    transform: rotateY(180deg);
+  }
+  .karte-hint {
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .karte-q {
+    font-family: 'Syne', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .karte-a {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .karte-tag {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+  }
+  .karte-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  .karte-nav-btn {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 8px 20px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 13px;
+    transition: background 0.15s;
+  }
+  .karte-nav-btn:hover { background: var(--surface2); }
+  .karte-count { color: var(--muted); font-size: 13px; }
+
+  /* QUIZ */
+  .quiz-q {
+    font-family: 'Syne', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+  }
+  .quiz-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 1.5rem; }
+  .quiz-opt {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--text);
+    text-align: left;
+    transition: all 0.15s;
+    font-family: 'Instrument Sans', sans-serif;
+  }
+  .quiz-opt:hover:not(:disabled) { border-color: var(--accent); background: var(--surface2); }
+  .quiz-opt.correct { border-color: var(--teal) !important; background: rgba(45,212,160,0.12) !important; color: var(--teal2) !important; }
+  .quiz-opt.wrong { border-color: var(--coral) !important; background: rgba(255,107,107,0.12) !important; color: var(--coral2) !important; }
+  .quiz-opt:disabled { cursor: not-allowed; }
+  .quiz-feedback {
+    display: none;
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+  }
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.ok { background: rgba(45,212,160,0.12); border: 1px solid rgba(45,212,160,0.3); color: var(--teal2); }
+  .quiz-feedback.nok { background: rgba(255,107,107,0.12); border: 1px solid rgba(255,107,107,0.3); color: var(--coral2); }
+  .quiz-next {
+    background: var(--accent);
+    border: none;
+    color: white;
+    padding: 10px 24px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    display: none;
+    transition: background 0.15s;
+  }
+  .quiz-next:hover { background: var(--accent2); color: var(--bg); }
+  .quiz-next.show { display: inline-block; }
+  .quiz-score {
+    font-family: 'Syne', sans-serif;
+    font-size: 40px;
+    font-weight: 800;
+    color: var(--accent2);
+    text-align: center;
+    margin: 1rem 0 0.5rem;
+  }
+  .quiz-score-sub { text-align: center; color: var(--muted); font-size: 14px; }
+  .quiz-restart {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 10px 24px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    margin-top: 1.5rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .quiz-progress { color: var(--muted); font-size: 13px; margin-bottom: 1rem; }
+  .quiz-score-stars { text-align: center; font-size: 28px; margin: 0.5rem 0; }
+
+  /* GLOSSAR */
+  .glossar-search {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 10px 16px;
+    color: var(--text);
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 14px;
+    margin-bottom: 1.25rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .glossar-search:focus { border-color: var(--accent); }
+  .glossar-item {
+    border-bottom: 1px solid var(--border);
+    padding: 12px 0;
+  }
+  .glossar-item:last-child { border-bottom: none; }
+  .glossar-term {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 3px;
+  }
+  .glossar-date {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--gold2);
+    background: rgba(245,200,66,0.12);
+    padding: 1px 7px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 5px;
+  }
+  .glossar-def { font-size: 13.5px; color: var(--muted); line-height: 1.55; }
+
+  /* STRÖMUNGEN */
+  .stromung-card {
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    border: 1px solid;
+    margin-bottom: 0.75rem;
+  }
+  .stromung-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 17px;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+  .tag-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .tag {
+    font-size: 11.5px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 500;
+  }
+
+  /* HIGHLIGHT */
+  .highlight-box {
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+    margin-bottom: 1rem;
+    border-left: 3px solid;
+  }
+
+  ul.bullet { list-style: none; padding: 0; }
+  ul.bullet li {
+    padding: 3px 0 3px 16px;
+    font-size: 14px;
+    color: var(--muted);
+    position: relative;
+  }
+  ul.bullet li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--accent2);
+    font-weight: 700;
+  }
+
+  /* RESPONSIVE */
+  @media(max-width: 700px) {
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    .main { padding: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="logo">GK<span>11</span></div>
+    <nav class="nav">
+      <button class="nav-btn active" onclick="showPage('wk')">🏛 Wiener Kongress</button>
+      <button class="nav-btn" onclick="showPage('verlauf')">📜 Verlauf</button>
+      <button class="nav-btn" onclick="showPage('strukturen')">🔗 Bündnisse & Bund</button>
+      <button class="nav-btn" onclick="showPage('stroemungen')">⚡ Strömungen</button>
+      <button class="nav-btn" onclick="showPage('checkliste')">✅ Checkliste</button>
+      <button class="nav-btn" onclick="showPage('karten')">🃏 Karteikarten</button>
+      <button class="nav-btn" onclick="showPage('quiz')">🎯 Quiz</button>
+      <button class="nav-btn" onclick="showPage('glossar')">📖 Glossar</button>
+    </nav>
+  </div>
+</header>
+
+<main class="main">
+
+<!-- ===== WIENER KONGRESS ===== -->
+<div id="page-wk" class="page active">
+  <p class="section-title">🏛 Wiener Kongress <span>1814/15</span></p>
+
+  <div class="wichtig">
+    <span>⭐</span>
+    <div><strong>Prüfungsfokus:</strong> Die 5 Prinzipien, die Hauptteilnehmer und Hauptergebnisse (Pentarchie-Tabelle) sind dein wichtigstes Thema!</div>
+  </div>
+
+  <div class="card" style="margin-bottom:1rem;">
+    <div class="card-title"><div class="dot" style="background:var(--gold)"></div> Vorgeschichte & Rahmen</div>
+    <div class="grid-2" style="gap:1rem;">
+      <div>
+        <div class="detail-row"><span class="detail-label">Vorgeschichte</span><span class="detail-val">Napoleonische Kriege → 1813 Völkerschlacht Leipzig → Verbannung Napoleons</span></div>
+        <div class="detail-row"><span class="detail-label">Wann</span><span class="detail-val">1814–1815, Wien</span></div>
+        <div class="detail-row"><span class="detail-label">Teilnehmer</span><span class="detail-val">ca. 200 europäische Staaten vertreten</span></div>
+      </div>
+      <div>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:6px;">Die 5 Großmächte (Siegermächte):</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;">
+          <span class="badge badge-accent">🇦🇹 Österreich</span>
+          <span class="badge badge-blue">🇬🇧 England</span>
+          <span class="badge badge-coral">🇩🇪 Preußen</span>
+          <span class="badge badge-gold">🇷🇺 Russland</span>
+          <span class="badge badge-teal">🇫🇷 Frankreich (besiegt)</span>
+        </div>
+        <p style="font-size:12px;color:var(--muted);margin-top:8px;">Vertreter: Talleyrand (FR), Castlereagh (EN), Metternich (AT), Hardenberg (PR), Zar Alexander I. (RU)</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRINZIPIEN -->
+  <p style="font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin-bottom:1rem;">Die 5 Prinzipien des Kongresses</p>
+  <div class="grid-2" style="margin-bottom:1.5rem;">
+    <div>
+      <div class="prinzip" style="border-color:var(--accent)">
+        <div class="prinzip-name" style="color:var(--accent2)">⬡ Restauration</div>
+        <div class="prinzip-text">Wiederherstellung der politischen & gesellschaftlichen Zustände <em>vor</em> der Franz. Revolution. Wiedereinsetzung der ursprünglichen Herrschaftshäuser, Adel & Klerus erhalten alte Privilegien zurück.</div>
+      </div>
+      <div class="prinzip" style="border-color:var(--teal)">
+        <div class="prinzip-name" style="color:var(--teal2)">⬡ Solidarität</div>
+        <div class="prinzip-text">Abstimmung der Politik unter europäischen Monarchen & Gestaltung im Konsens → Erhaltung der alten Dynastien über europ. Ordnung.</div>
+      </div>
+      <div class="prinzip" style="border-color:var(--gold)">
+        <div class="prinzip-name" style="color:var(--gold2)">⬡ Fürstenherrschaft</div>
+        <div class="prinzip-text">Prinzip des Gottesgnaden­tums. Fürst als von Gott auserwählter & beauftragter weltlicher Oberherr über sein Reich.</div>
+      </div>
+    </div>
+    <div>
+      <div class="prinzip" style="border-color:var(--coral)">
+        <div class="prinzip-name" style="color:var(--coral2)">⬡ Stabilität</div>
+        <div class="prinzip-text">Neugestaltung der Grenzen Europas → zielt auf stabiles Gleichgewicht der 5 Großmächte (Pentarchie).</div>
+      </div>
+      <div class="prinzip" style="border-color:var(--blue)">
+        <div class="prinzip-name" style="color:var(--blue2)">⬡ Legitimität</div>
+        <div class="prinzip-text">Wiedereinsetzung der durch das Gottesgnadentum legitimierten Dynastien & Herrscher.</div>
+      </div>
+      <div class="card" style="margin-top:0.75rem;background:rgba(124,109,247,0.08);border-color:rgba(124,109,247,0.3);">
+        <p style="font-size:13px;color:var(--muted);">💡 <strong style="color:var(--accent2)">Merkhilfe:</strong> <strong>R</strong>estaurations <strong>S</strong>chiff <strong>F</strong>ährt <strong>S</strong>icher <strong>L</strong>angsam</p>
+        <p style="font-size:12px;color:var(--muted);margin-top:4px;">R=Restauration · S=Solidarität · F=Fürstenherrschaft · S=Stabilität · L=Legitimität</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ZIELE -->
+  <div class="grid-2" style="margin-bottom:1.5rem;">
+    <div class="card">
+      <div class="card-title"><div class="dot" style="background:var(--teal)"></div> Ziele / Absichten</div>
+      <ul class="bullet">
+        <li>Wiederherstellung der alten Ordnung</li>
+        <li>Gleichstellung der fünf Großmächte</li>
+        <li>Dauerhafte Friedenssicherung</li>
+        <li>Mächtegleichgewicht</li>
+        <li>Beseitigung bestehender Konflikte</li>
+        <li>Verhinderung neuer Konflikte</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title"><div class="dot" style="background:var(--coral)"></div> Was ist die Pentarchie?</div>
+      <p style="font-size:14px;color:var(--muted);margin-bottom:8px;">Die <strong style="color:var(--text)">fünf Großmächte</strong> versuchten ein <strong style="color:var(--coral2)">Gleichgewicht herzustellen</strong> – kein Staat sollte zu mächtig werden.</p>
+      <ul class="bullet">
+        <li>Frankreich: kein Verlust, bleibt dominierende Großmacht</li>
+        <li>England: führende See- & Wirtschaftsmacht</li>
+        <li>Russland: stärkste Landmacht</li>
+        <li>Österreich: Vorsitz im Deutschen Bund</li>
+        <li>Preußen: stärkste Macht im Deutschen Bund</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- HAUPTERGEBNISSE TABELLE -->
+  <p style="font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin-bottom:1rem;">Hauptergebnisse: Pentarchie-Tabelle <span style="color:var(--gold)">⭐ Lernfokus</span></p>
+  <div class="card" style="padding:0;overflow:hidden;margin-bottom:1.5rem;">
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th>Staat / Vertreter</th>
+          <th>Territorial</th>
+          <th>Politisch</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Frankreich</strong><br><span style="color:var(--muted);font-size:12px;">Talleyrand</span></td>
+          <td>Keine Verluste; Bestätigung der Grenzen von 1792</td>
+          <td>Dominierende Großmacht</td>
+        </tr>
+        <tr>
+          <td><strong>England</strong><br><span style="color:var(--muted);font-size:12px;">Castlereagh</span></td>
+          <td>Behält Malta; Zugewinn: Helgoland, Kapkolonie, Ceylon, Malakka</td>
+          <td>Führende See-, Handels- & Wirtschaftsmacht</td>
+        </tr>
+        <tr>
+          <td><strong>Russland</strong><br><span style="color:var(--muted);font-size:12px;">Zar Alexander I. & Nesselrode</span></td>
+          <td>Gewinne: Finnland; Gebiet durch Zerlegung <span style="color:var(--gold2)">Polens</span> deutlich erweitert</td>
+          <td>Stärkste Landmacht</td>
+        </tr>
+        <tr>
+          <td><strong>Österreich</strong><br><span style="color:var(--muted);font-size:12px;">Fürst Metternich</span></td>
+          <td>Gewinne: Venetien & Lombardei; Verzicht auf Belgien & Oberrhein</td>
+          <td>Verschiebung nach Südosten (Donaumonarchie); Vorsitz im Deutschen Bund</td>
+        </tr>
+        <tr>
+          <td><strong>Preußen</strong><br><span style="color:var(--muted);font-size:12px;">Freiherr von Hardenberg</span></td>
+          <td>Gewinne: Teile Sachsens, <span style="color:var(--gold2)">Polen</span>, <span style="color:var(--gold2)">Rheinlande</span></td>
+          <td>Stärkste Macht im Deutschen Bund</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ===== VERLAUF / VORMÄRZ ===== -->
+<div id="page-verlauf" class="page">
+  <p class="section-title">📜 Vormärz <span>1815–1848</span></p>
+  <div class="wichtig">
+    <span>⭐</span>
+    <div><strong>Prüfungsfokus:</strong> Wartburgfest, Karlsbader Beschlüsse, Hambacher Fest & deren Zusammenhänge. Kausalkette verstehen!</div>
+  </div>
+  <p style="font-size:13.5px;color:var(--muted);margin-bottom:1.5rem;">Zeitraum zwischen Wiener Kongress 1815 und Märzrevolution 1848. Kampf zwischen <strong style="color:var(--accent2)">Konservativen</strong> und <strong style="color:var(--teal2)">liberal-nationalen Kräften</strong>.</p>
+
+  <div class="grid-2" style="margin-bottom:1.5rem;">
+    <div class="card" style="border-color:rgba(124,109,247,0.3)">
+      <div class="card-title" style="color:var(--accent2)">⚔️ Konservative Kräfte</div>
+      <ul class="bullet">
+        <li>Heilige Allianz (RU, PR, AT)</li>
+        <li>Deutsche Fürsten</li>
+        <li>Fürst Metternich (Hauptakteur)</li>
+        <li>Ziel: Erhalt der alten Ordnung</li>
+      </ul>
+    </div>
+    <div class="card" style="border-color:rgba(45,212,160,0.3)">
+      <div class="card-title" style="color:var(--teal2)">🌿 Nationale & liberale Kräfte</div>
+      <ul class="bullet">
+        <li>Studenten & Professoren</li>
+        <li>Deutsche Burschenschaften</li>
+        <li>Bürgertum (Liberalismus & Nationalismus)</li>
+        <li>Ziel: Freiheit, Einheit Deutschlands</li>
+      </ul>
+    </div>
+  </div>
+
+  <p style="font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin-bottom:1rem;">Kausalkette der Ereignisse</p>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot" style="border-color:var(--teal);background:var(--teal)"></div>
+      <div class="tl-date">18. Oktober 1817</div>
+      <div class="tl-event">Wartburgfest</div>
+      <div class="tl-desc">500 Studenten auf der Wartburg. Anlass: 4. Jahrestag Völkerschlacht bei Jena + 300. Jubiläum Reformation. Politische Reden, Bücherverbrennungen (freiheitsfeindliche Autoren), Schwarz-Rot-Gold-Flaggen. <strong style="color:var(--teal2)">Ziele: politische Freiheit, Einheit Deutschlands.</strong> Anliegen des Bildungsbürgertums wurden beim WK ignoriert.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="border-color:var(--coral)"></div>
+      <div class="tl-date">23. März 1819</div>
+      <div class="tl-event">Politischer Mord an Kotzebue</div>
+      <div class="tl-desc">Mord durch Burschenschaftler Karl Sand. Kotzebue: konservativ, antiliberal, gegen Studenten gerichtet – galt als "Verräter des Vaterlandes". Karl Sand 1820 hingerichtet. → Angst der Herrschenden vor Umsturz steigt. <span class="badge badge-gold" style="font-size:11px;">Auslöser für Karlsbader Beschlüsse</span></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="border-color:var(--accent)"></div>
+      <div class="tl-date">20. September 1819</div>
+      <div class="tl-event">Karlsbader Beschlüsse <span class="badge badge-coral" style="font-size:11px;">Metternich</span></div>
+      <div class="tl-desc">
+        <strong style="color:var(--text);">Wer:</strong> Deutsche Fürsten (auf Initiative Metternichs)<br>
+        <strong style="color:var(--text);">Ziel:</strong> Unterdrückung der national-liberalen Bewegung<br>
+        <strong style="color:var(--text);">Maßnahmen:</strong>
+        <ul class="bullet" style="margin-top:6px;">
+          <li>Verbot der Burschenschaften</li>
+          <li>Entlassung liberaler Professoren</li>
+          <li>Zensur der Presse</li>
+          <li>Überwachung & Kontrolle der Vereine</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="border-color:var(--gold)"></div>
+      <div class="tl-date">1830</div>
+      <div class="tl-event">Julirevolution in Frankreich</div>
+      <div class="tl-desc">Inspiriert liberal-nationale Bewegungen in ganz Europa. Direkte Auswirkung auf Deutschland → Entstehung "Junges Deutschland".</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="border-color:var(--teal);background:var(--teal)"></div>
+      <div class="tl-date">27. Mai 1832</div>
+      <div class="tl-event">Hambacher Fest ⭐</div>
+      <div class="tl-desc">
+        Hambacher Schloss bei Neustadt an der Weinstraße. <strong style="color:var(--teal2);">30.000 Bürger, Arbeiter und Bauern!</strong><br><br>
+        <strong style="color:var(--text);">Forderungen:</strong>
+        <ul class="bullet" style="margin-top:4px;">
+          <li><strong>Nationale Einheit:</strong> grenzüberschreitende Hilfe, konföderiertes republikanisches Europa, Frieden</li>
+          <li><strong>Freiheit:</strong> Souveränität des Volkes, freie Wahlen, Versammlungs- und Redefreiheit, Gleichberechtigung Mann/Frau, freier Handel</li>
+          <li><strong>Demokratie</strong></li>
+        </ul>
+        <br>
+        <strong style="color:var(--text);">Verlauf:</strong> Musik, Hissen der dt. Flagge, Reden, Massendemo<br><br>
+        <div style="background:rgba(45,212,160,0.1);border:1px solid rgba(45,212,212,0.25);border-radius:8px;padding:10px;margin-top:8px;">
+          <strong style="color:var(--teal2);font-size:13px;">Bedeutung:</strong>
+          <ul class="bullet" style="margin-top:4px;">
+            <li>Politisches Bewusstsein entsteht → Massenkommunikation</li>
+            <li>Forderungen enden in Revolution 1848/49</li>
+            <li>Gilt als Symbol der deutschen Demokratie</li>
+            <li>Schwarz-Rot-Gold als Symbol der Einheit gewinnt an Bedeutung</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="border-color:var(--accent)"></div>
+      <div class="tl-date">1834</div>
+      <div class="tl-event">Wiener Ministerialkonferenz</div>
+      <div class="tl-desc">Reaktion auf Hambacher Fest. Weitere Unterdrückungsmaßnahmen → Emigration vieler Liberaler nach Frankreich.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="border-color:var(--coral)"></div>
+      <div class="tl-date">1837</div>
+      <div class="tl-event">Göttinger Sieben</div>
+      <div class="tl-desc">Nach Verfassungsbruch in Hannover (König Ernst August hebt 1833 gewährte Verfassung auf) protestieren 7 Professoren → werden entlassen.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="border-color:var(--gold);background:var(--gold)"></div>
+      <div class="tl-date">1848</div>
+      <div class="tl-event">Märzrevolution</div>
+      <div class="tl-desc">Alle aufgestauten liberal-nationalen Forderungen entladen sich in der Revolution. Beginn einer neuen Epoche.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== BÜNDNISSE & BUND ===== -->
+<div id="page-strukturen" class="page">
+  <p class="section-title">🔗 Heilige Allianz & <span>Deutscher Bund</span></p>
+
+  <div class="card" style="margin-bottom:1.25rem;border-color:rgba(245,200,66,0.3);">
+    <div class="card-title"><div class="dot" style="background:var(--gold)"></div> Heilige Allianz</div>
+    <p style="font-size:14px;color:var(--muted);margin-bottom:1rem;">Gemeinsames Bündnis zwischen <strong style="color:var(--text);">Russland, Preußen und Österreich</strong></p>
+    <div class="grid-2">
+      <div>
+        <div class="detail-row"><span class="detail-label">Gegründet</span><span class="detail-val">1815 (nach Wiener Kongress)</span></div>
+        <div class="detail-row"><span class="detail-label">Mitglieder</span><span class="detail-val">Russland, Preußen, Österreich</span></div>
+        <div class="detail-row"><span class="detail-label">Verpflichtung</span><span class="detail-val">Gegenseitiger Beistand bei revolutionären Erhebungen</span></div>
+      </div>
+      <div>
+        <div class="highlight-box" style="border-color:var(--gold);background:rgba(245,200,66,0.07);">
+          <p style="font-size:13.5px;color:var(--muted);"><strong style="color:var(--gold2);">Ziel:</strong> Sicherung des langfristigen Friedens nach den Grundsätzen des <strong style="color:var(--text);">Gottesgnaden­tums</strong>. Kein liberaler Umsturz soll geduldet werden.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:1.25rem;border-color:rgba(79,163,224,0.3);">
+    <div class="card-title"><div class="dot" style="background:var(--blue)"></div> Deutscher Bund</div>
+    <div class="grid-2" style="margin-bottom:1rem;">
+      <div>
+        <div class="detail-row"><span class="detail-label">Was</span><span class="detail-val">Loser Zusammenschluss von <strong>35 Fürstenstaaten</strong> und <strong>4 freien Städten</strong></span></div>
+        <div class="detail-row"><span class="detail-label">Gegründet</span><span class="detail-val">1815 (Wiener Kongress)</span></div>
+        <div class="detail-row"><span class="detail-label">Organ</span><span class="detail-val">Bundesversammlung in Frankfurt a.M.</span></div>
+        <div class="detail-row"><span class="detail-label">Vorsitz</span><span class="detail-val">Österreich</span></div>
+        <div class="detail-row"><span class="detail-label">AT & PR</span><span class="detail-val">Nur mit Teilen ihres Staatsgebietes vertreten</span></div>
+      </div>
+      <div>
+        <div class="highlight-box" style="border-color:var(--blue);background:rgba(79,163,224,0.07);">
+          <p style="font-size:13px;color:var(--muted);margin-bottom:6px;"><strong style="color:var(--blue2);">Zweck:</strong> Erhaltung der äußeren & inneren Sicherheit Deutschlands und der Unabhängigkeit & Unverletzbarkeit der einzelnen deutschen Staaten (= Erhaltung ihrer Souveränität)</p>
+        </div>
+      </div>
+    </div>
+    <div style="background:rgba(255,107,107,0.1);border:1px solid rgba(255,107,107,0.25);border-radius:8px;padding:12px;">
+      <p style="font-size:13.5px;color:var(--coral2);font-weight:600;margin-bottom:6px;">⚠️ Warum handlungsunfähig?</p>
+      <ul class="bullet">
+        <li>Kein Staatsoberhaupt</li>
+        <li>Keine Exekutive</li>
+        <li>Kein einheitliches Heer / keine einheitliche Verwaltung</li>
+        <li>Keine einheitlichen Maße / Gewichte / Finanzen</li>
+        <li>→ Erschwerte einheitliches Vorgehen → kaum handlungsfähiger Staatenbund</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Vergleich -->
+  <p style="font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin-bottom:1rem;">Vergleich auf einen Blick</p>
+  <div class="card" style="padding:0;overflow:hidden;">
+    <table class="tbl">
+      <thead><tr><th>Merkmal</th><th>Heilige Allianz</th><th>Deutscher Bund</th></tr></thead>
+      <tbody>
+        <tr><td>Mitglieder</td><td>RU, PR, AT</td><td>35 Fürstenstaaten + 4 Städte</td></tr>
+        <tr><td>Ziel</td><td>Unterdrückung Revolution, Gottesgnadentum</td><td>Sicherheit & Souveränität dt. Staaten</td></tr>
+        <tr><td>Charakter</td><td>Militärisch-reaktionär</td><td>Politisch-loser Staatenbund</td></tr>
+        <tr><td>Effektivität</td><td>Aktiv gegen Liberale</td><td>Handlungsunfähig</td></tr>
+        <tr><td>Vorsitz</td><td>Kein formaler</td><td>Österreich</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ===== STRÖMUNGEN ===== -->
+<div id="page-stroemungen" class="page">
+  <p class="section-title">⚡ Liberalismus & <span>Nationalismus</span></p>
+  <div class="wichtig">
+    <span>💡</span>
+    <div>Diese Strömungen entstehen im Bürgertum und sind der Motor des Vormärz. Nicht so stark gewichtet wie die Hauptthemen, aber wichtig als Kontext.</div>
+  </div>
+
+  <div class="grid-2" style="margin-bottom:1.5rem;">
+    <div class="stromung-card" style="border-color:rgba(45,212,160,0.4);background:rgba(45,212,160,0.05);">
+      <div class="stromung-title" style="color:var(--teal2)">Liberalismus</div>
+      <p style="font-size:13.5px;color:var(--muted);margin-bottom:10px;">Politische Bewegung, die auf individuelle Freiheit und Begrenzung staatlicher Macht setzt.</p>
+      <div class="tag-list">
+        <span class="tag" style="background:rgba(45,212,160,0.15);color:var(--teal2);">Presse- & Redefreiheit</span>
+        <span class="tag" style="background:rgba(45,212,160,0.15);color:var(--teal2);">Verfassung</span>
+        <span class="tag" style="background:rgba(45,212,160,0.15);color:var(--teal2);">Volkssouveränität</span>
+        <span class="tag" style="background:rgba(45,212,160,0.15);color:var(--teal2);">Gleichheit vor dem Gesetz</span>
+        <span class="tag" style="background:rgba(45,212,160,0.15);color:var(--teal2);">Freier Handel</span>
+        <span class="tag" style="background:rgba(45,212,160,0.15);color:var(--teal2);">Freie Wahlen</span>
+      </div>
+      <p style="font-size:12.5px;color:var(--muted);margin-top:10px;">Träger: <strong style="color:var(--text);">Bildungsbürgertum, Studenten, Professoren</strong></p>
+    </div>
+
+    <div class="stromung-card" style="border-color:rgba(124,109,247,0.4);background:rgba(124,109,247,0.05);">
+      <div class="stromung-title" style="color:var(--accent2)">Nationalismus</div>
+      <p style="font-size:13.5px;color:var(--muted);margin-bottom:10px;">Streben nach Einheit aller Deutschen in einem Nationalstaat. Gemeinsame Sprache, Kultur & Geschichte als Grundlage.</p>
+      <div class="tag-list">
+        <span class="tag" style="background:rgba(124,109,247,0.15);color:var(--accent2);">Einheit Deutschlands</span>
+        <span class="tag" style="background:rgba(124,109,247,0.15);color:var(--accent2);">Nationalstaat</span>
+        <span class="tag" style="background:rgba(124,109,247,0.15);color:var(--accent2);">Schwarz-Rot-Gold</span>
+        <span class="tag" style="background:rgba(124,109,247,0.15);color:var(--accent2);">Abschaffung Kleinstaaterei</span>
+        <span class="tag" style="background:rgba(124,109,247,0.15);color:var(--accent2);">Republikanismus</span>
+      </div>
+      <p style="font-size:12.5px;color:var(--muted);margin-top:10px;">Träger: <strong style="color:var(--text);">Bürgertum, Studenten, Burschenschaften</strong></p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:1rem;">
+    <div class="card-title"><div class="dot" style="background:var(--gold)"></div> Deutsche Burschenschaften</div>
+    <p style="font-size:14px;color:var(--muted);margin-bottom:8px;">Motto: <strong style="color:var(--gold2);">„Ehre – Freiheit – Vaterland"</strong></p>
+    <p style="font-size:13.5px;color:var(--muted);">Studentenverbindungen, die aktiv für Einheit und Freiheit kämpften. Beispiel: Jenaische Burschenschaft. Nach den Karlsbader Beschlüssen verboten, aber unterirdisch weiter aktiv.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><div class="dot" style="background:var(--coral)"></div> „Die Gedanken sind frei" – Bedeutung</div>
+    <p style="font-size:14px;color:var(--muted);">Jeder kann denken was er will – diese Gedanken muss er nicht äußern, und somit kann sie niemand erraten. <strong style="color:var(--text);">Symbol des passiven Widerstands</strong> gegen Zensur und Unterdrückung im Vormärz.</p>
+  </div>
+</div>
+
+<!-- ===== CHECKLISTE ===== -->
+<div id="page-checkliste" class="page">
+  <p class="section-title">✅ Prüfungs-<span>Checkliste</span></p>
+
+  <div class="progress-text" id="check-progress-text">0 von 0 erledigt</div>
+  <div class="progress-bar-wrap"><div class="progress-bar" id="check-progress-bar" style="width:0%"></div></div>
+
+  <div class="check-group">
+    <div class="check-group-title">⭐ Wiener Kongress (höchste Priorität)</div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-text">Ich kann die 5 Prinzipien nennen und erklären (R, S, F, S, L) <span class="badge badge-gold">Prüfungsfokus</span></div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-text">Ich kenne alle 5 Großmächte + Vertreter</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-text">Ich kann die Pentarchie-Tabelle (territorial + politisch) für alle 5 Mächte erklären <span class="badge badge-gold">Prüfungsfokus</span></div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-text">Ich kenne die Ziele des Kongresses (6 Ziele)</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-text">Ich kann erklären, was Restauration bedeutet</div>
+    </div>
+  </div>
+
+  <div class="check-group">
+    <div class="check-group-title">⭐ Verlauf / Vormärz (hohe Priorität)</div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-text">Ich kann das Wartburgfest 1817 erklären (Anlass, Ziele, Akteure)</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-text">Ich verstehe die Kausalkette: Wartburg → Kotzebue-Mord → Karlsbader Beschlüsse <span class="badge badge-gold">Prüfungsfokus</span></div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-text">Ich kenne die Karlsbader Beschlüsse (Wer, Wann, Ziel, Maßnahmen)</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-text">Ich kann das Hambacher Fest 1832 erklären (Wer, Wo, Forderungen, Bedeutung) <span class="badge badge-gold">Prüfungsfokus</span></div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-text">Ich kenne die Bedeutung von Schwarz-Rot-Gold</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-text">Ich kann die Rolle der Julirevolution 1830 einordnen</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-text">Ich kann konservative vs. liberal-nationale Kräfte gegenüberstellen</div>
+    </div>
+  </div>
+
+  <div class="check-group">
+    <div class="check-group-title">🔗 Bündnisse & Bund (mittlere Priorität)</div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-text">Ich kann die Heilige Allianz erklären (Wer, Ziel, Charakter)</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-text">Ich kann den Deutschen Bund erklären und seine Handlungsunfähigkeit begründen</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-text">Ich kann Heilige Allianz und Deutschen Bund unterscheiden</div>
+    </div>
+  </div>
+
+  <div class="check-group">
+    <div class="check-group-title">⚡ Strömungen (niedrigere Priorität)</div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-text">Ich kann Liberalismus und Nationalismus definieren und unterscheiden</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-text">Ich kenne die Rolle der Burschenschaften</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"></div>
+      <div class="check-text">Ich kenne den Begriff Vormärz und seinen Zeitraum</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== KARTEIKARTEN ===== -->
+<div id="page-karten" class="page">
+  <p class="section-title">🃏 <span>Karteikarten</span></p>
+  <p style="font-size:13.5px;color:var(--muted);margin-bottom:1.5rem;">Klicke auf eine Karte, um die Antwort zu sehen.</p>
+
+  <div class="karte-nav">
+    <button class="karte-nav-btn" onclick="prevKarte()">← Zurück</button>
+    <span class="karte-count" id="karte-count">1 / 16</span>
+    <button class="karte-nav-btn" onclick="nextKarte()">Weiter →</button>
+  </div>
+
+  <div class="karte-container">
+    <div class="karte" id="karte" onclick="flipKarte()">
+      <div class="karte-front">
+        <div class="karte-hint">Frage — zum Umdrehen klicken</div>
+        <div class="karte-q" id="karte-q">Frage...</div>
+        <span class="karte-tag" id="karte-tag-front"></span>
+      </div>
+      <div class="karte-back">
+        <div class="karte-hint">Antwort</div>
+        <div class="karte-a" id="karte-a">Antwort...</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:1rem;">
+    <button class="karte-nav-btn" onclick="filterKarten('all')" id="filter-all" style="background:var(--accent);color:white;border-color:var(--accent);">Alle</button>
+    <button class="karte-nav-btn" onclick="filterKarten('wk')" id="filter-wk">Wiener Kongress</button>
+    <button class="karte-nav-btn" onclick="filterKarten('vm')" id="filter-vm">Vormärz</button>
+    <button class="karte-nav-btn" onclick="filterKarten('bd')" id="filter-bd">Bündnisse/Bund</button>
+  </div>
+</div>
+
+<!-- ===== QUIZ ===== -->
+<div id="page-quiz" class="page">
+  <p class="section-title">🎯 <span>Quiz</span></p>
+
+  <div id="quiz-area">
+    <div class="quiz-progress" id="quiz-prog">Frage 1 von 12</div>
+    <div class="card">
+      <div class="quiz-q" id="quiz-q">Lade...</div>
+      <div class="quiz-options" id="quiz-opts"></div>
+      <div class="quiz-feedback" id="quiz-fb"></div>
+      <button class="quiz-next" id="quiz-next" onclick="nextQuiz()">Nächste Frage →</button>
+    </div>
+  </div>
+
+  <div id="quiz-result" style="display:none;text-align:center;padding:2rem 0;">
+    <div class="quiz-score-stars" id="quiz-stars"></div>
+    <div class="quiz-score" id="quiz-score-num"></div>
+    <div class="quiz-score-sub" id="quiz-score-sub"></div>
+    <button class="quiz-restart" onclick="restartQuiz()">Nochmal versuchen</button>
+  </div>
+</div>
+
+<!-- ===== GLOSSAR ===== -->
+<div id="page-glossar" class="page">
+  <p class="section-title">📖 Glossar & <span>Jahreszahlen</span></p>
+  <input class="glossar-search" type="text" placeholder="Begriff oder Jahr suchen..." oninput="filterGlossar(this.value)" id="glossar-search">
+  <div id="glossar-list"></div>
+</div>
+
+</main>
+
+<script>
+// NAV
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  event.target.closest('.nav-btn').classList.add('active');
+}
+
+// CHECKLISTE
+function toggleCheck(el) {
+  el.classList.toggle('done');
+  el.querySelector('.check-box').textContent = el.classList.contains('done') ? '✓' : '';
+  updateProgress();
+}
+function updateProgress() {
+  const all = document.querySelectorAll('.check-item');
+  const done = document.querySelectorAll('.check-item.done');
+  const pct = all.length ? Math.round(done.length / all.length * 100) : 0;
+  document.getElementById('check-progress-bar').style.width = pct + '%';
+  document.getElementById('check-progress-text').textContent = done.length + ' von ' + all.length + ' erledigt (' + pct + '%)';
+}
+updateProgress();
+
+// KARTEIKARTEN
+const allKarten = [
+  { q: 'Nenne die 5 Prinzipien des Wiener Kongresses!', a: 'Restauration · Solidarität · Fürstenherrschaft · Stabilität · Legitimität\n(Merkhilfe: R S F S L)', cat: 'wk' },
+  { q: 'Was bedeutet Restauration beim Wiener Kongress?', a: 'Wiederherstellung der politischen & gesellschaftlichen Zustände VOR der Französischen Revolution. Adel & Klerus erhalten alte Privilegien zurück.', cat: 'wk' },
+  { q: 'Was ist die Pentarchie?', a: 'Das Gleichgewicht der 5 Großmächte: England, Frankreich, Preußen, Russland, Österreich. Kein Staat soll zu mächtig werden.', cat: 'wk' },
+  { q: 'Was gewann Preußen beim Wiener Kongress?', a: 'Teile Sachsens, Teile Polens, die Rheinlande. → Stärkste Macht im Deutschen Bund.', cat: 'wk' },
+  { q: 'Was gewann England beim Wiener Kongress?', a: 'Malta, Helgoland, Kapkolonie, Ceylon, Malakka. → Führende See-, Handels- und Wirtschaftsmacht.', cat: 'wk' },
+  { q: 'Was gewann Österreich beim Wiener Kongress?', a: 'Venetien und Lombardei. Vorsitz im Deutschen Bund. Verliert Belgien und Gebiete am Oberrhein.', cat: 'wk' },
+  { q: 'Wann und wo war das Wartburgfest?', a: '18. Oktober 1817 auf der Wartburg. 500 Studenten. Politische Reden, Bücherverbrennung, Schwarz-Rot-Gold-Flaggen.', cat: 'vm' },
+  { q: 'Was war der Anlass des Wartburgfestes?', a: '4. Jahrestag der Völkerschlacht bei Jena + 300. Jubiläum der Reformation', cat: 'vm' },
+  { q: 'Was waren die Karlsbader Beschlüsse (1819)?', a: 'Reaktion auf Kotzebue-Mord. Maßnahmen: Verbot Burschenschaften, Entlassung liberaler Professoren, Zensur der Presse, Überwachung & Kontrolle der Vereine.', cat: 'vm' },
+  { q: 'Was war das Hambacher Fest (1832)?', a: '27.5.1832 am Hambacher Schloss. 30.000 Bürger, Arbeiter, Bauern. Forderungen: nationale Einheit, Freiheit, Demokratie. Gilt als Symbol der deutschen Demokratie.', cat: 'vm' },
+  { q: 'Was ist die Heilige Allianz?', a: 'Bündnis zwischen Russland, Preußen und Österreich (1815). Verpflichteten sich zu gegenseitigem Beistand bei revolutionären Erhebungen. Sicherung nach Grundsätzen des Gottesgnaden­tums.', cat: 'bd' },
+  { q: 'Was ist der Deutsche Bund?', a: 'Loser Zusammenschluss von 35 Fürstenstaaten + 4 freien Städten (1815). Bundesversammlung Frankfurt. Österreichischer Vorsitz. Handlungsunfähig: kein Staatsoberhaupt, keine Exekutive, kein einheitliches Heer.', cat: 'bd' },
+  { q: 'Warum war der Deutsche Bund handlungsunfähig?', a: 'Kein Staatsoberhaupt · keine Exekutive · kein einheitliches Heer/Verwaltung · keine einheitlichen Maße/Gewichte/Finanzen', cat: 'bd' },
+  { q: 'Was unterscheidet Liberalismus und Nationalismus?', a: 'Liberalismus: individuelle Freiheit, Verfassung, Volkssouveränität.\nNationalismus: Einheit aller Deutschen in einem Nationalstaat.', cat: 'bd' },
+  { q: 'Was sind die Ziele des Wiener Kongresses?', a: '1. Wiederherstellung alter Ordnung\n2. Gleichstellung der 5 Großmächte\n3. Dauerhafter Frieden\n4. Mächtegleichgewicht\n5. Beseitigung bestehender Konflikte\n6. Verhinderung neuer Konflikte', cat: 'wk' },
+  { q: 'Was ist die Bedeutung des Hambacher Festes?', a: 'Politisches Bewusstsein entsteht (Massenkommunikation). Forderungen enden in Revolution 1848/49. Symbol der deutschen Demokratie. Schwarz-Rot-Gold als Einheitssymbol gewinnt Bedeutung.', cat: 'vm' },
+];
+
+let currentKarten = [...allKarten];
+let karteIdx = 0;
+
+function renderKarte() {
+  const k = currentKarten[karteIdx];
+  document.getElementById('karte-q').textContent = k.q;
+  document.getElementById('karte-a').textContent = k.a;
+  const tags = { wk: 'Wiener Kongress', vm: 'Vormärz', bd: 'Bündnisse/Bund' };
+  const colors = { wk: 'badge-gold', vm: 'badge-teal', bd: 'badge-blue' };
+  document.getElementById('karte-tag-front').innerHTML = '<span class="badge ' + colors[k.cat] + '">' + tags[k.cat] + '</span>';
+  document.getElementById('karte-count').textContent = (karteIdx + 1) + ' / ' + currentKarten.length;
+  document.getElementById('karte').classList.remove('flipped');
+}
+
+function flipKarte() { document.getElementById('karte').classList.toggle('flipped'); }
+function nextKarte() { karteIdx = (karteIdx + 1) % currentKarten.length; renderKarte(); }
+function prevKarte() { karteIdx = (karteIdx - 1 + currentKarten.length) % currentKarten.length; renderKarte(); }
+function filterKarten(cat) {
+  currentKarten = cat === 'all' ? [...allKarten] : allKarten.filter(k => k.cat === cat);
+  karteIdx = 0;
+  renderKarte();
+  document.querySelectorAll('#page-karten .karte-nav-btn').forEach(b => { b.style.background = ''; b.style.color = ''; b.style.borderColor = ''; });
+  const btn = document.getElementById('filter-' + cat);
+  if (btn) { btn.style.background = 'var(--accent)'; btn.style.color = 'white'; btn.style.borderColor = 'var(--accent)'; }
+}
+renderKarte();
+
+// QUIZ
+const quizFragen = [
+  { q: 'Wie viele Prinzipien hat der Wiener Kongress?', opts: ['3', '4', '5', '6'], ans: 2, erkl: 'Es gibt genau 5 Prinzipien: Restauration, Solidarität, Fürstenherrschaft, Stabilität, Legitimität.' },
+  { q: 'Wann fand das Wartburgfest statt?', opts: ['1815', '1817', '1819', '1832'], ans: 1, erkl: 'Das Wartburgfest fand am 18. Oktober 1817 statt.' },
+  { q: 'Welches Land hatte den Vorsitz im Deutschen Bund?', opts: ['Preußen', 'Russland', 'Österreich', 'Bayern'], ans: 2, erkl: 'Österreich hatte den Vorsitz im Deutschen Bund in Frankfurt.' },
+  { q: 'Wie viele Menschen nahmen am Hambacher Fest teil?', opts: ['500', '5.000', '10.000', '30.000'], ans: 3, erkl: '30.000 Bürger, Arbeiter und Bauern nahmen am Hambacher Fest teil.' },
+  { q: 'Was waren die Karlsbader Beschlüsse (1819)?', opts: ['Friedensvertrag mit Frankreich', 'Unterdrückungsmaßnahmen gegen Liberale', 'Gründung des Deutschen Bundes', 'Verträge zur Handelspolitik'], ans: 1, erkl: 'Karlsbader Beschlüsse = Verbot Burschenschaften, Entlassung liberaler Professoren, Zensur der Presse.' },
+  { q: 'Welche Länder gehörten zur Heiligen Allianz?', opts: ['England, Frankreich, Preußen', 'Russland, Preußen, Österreich', 'England, Russland, Österreich', 'Alle 5 Großmächte'], ans: 1, erkl: 'Heilige Allianz = Russland, Preußen, Österreich (1815).' },
+  { q: 'Was bedeutet „Legitimität" beim Wiener Kongress?', opts: ['Stärke des Militärs', 'Wiedereinsetzung durch Gottesgnadentum legitimierter Dynastien', 'Neue Grenzen festlegen', 'Freihandel einführen'], ans: 1, erkl: 'Legitimität = Wiedereinsetzung der durch Gottesgnadentum legitimierten Dynastien und Herrscher.' },
+  { q: 'Was gewann Preußen beim Wiener Kongress?', opts: ['Malta und Ceylon', 'Finnland und Polen', 'Teile Sachsens, Polens, Rheinlande', 'Venetien und Lombardei'], ans: 2, erkl: 'Preußen gewann Teile Sachsens, Teile Polens und die Rheinlande → stärkste Macht im Deutschen Bund.' },
+  { q: 'Was ist die Pentarchie?', opts: ['Ein Bündnis gegen Frankreich', 'Das Gleichgewicht der 5 Großmächte', 'Ein deutsches Parlament', 'Der Vorgänger des Deutschen Bundes'], ans: 1, erkl: 'Pentarchie = Gleichgewicht der 5 Großmächte. Kein Staat soll zu mächtig werden.' },
+  { q: 'Welches Ereignis löste die Karlsbader Beschlüsse aus?', opts: ['Das Wartburgfest', 'Die Julirevolution', 'Der Mord an Kotzebue', 'Das Hambacher Fest'], ans: 2, erkl: 'Der Mord an Kotzebue durch Burschenschaftler Karl Sand (23.3.1819) löste die Karlsbader Beschlüsse aus.' },
+  { q: 'Welches Ziel hatte der Deutsche Bund NICHT?', opts: ['Sicherheit Deutschlands', 'Souveränität der Einzelstaaten', 'Einheitliches Heer', 'Erhaltung der Unabhängigkeit'], ans: 2, erkl: 'Gerade kein einheitliches Heer! Das war einer der Gründe für seine Handlungsunfähigkeit.' },
+  { q: 'Was symbolisieren Schwarz-Rot-Gold im Vormärz?', opts: ['Die Farben Preußens', 'Einheit und Freiheit Deutschlands', 'Die Heilige Allianz', 'Die Farben Österreichs'], ans: 1, erkl: 'Schwarz-Rot-Gold ist seit dem Hambacher Fest 1832 das Symbol für nationale Einheit und Freiheit.' },
+];
+
+let quizIdx = 0;
+let quizScore = 0;
+let quizAnswered = false;
+
+function renderQuiz() {
+  const q = quizFragen[quizIdx];
+  document.getElementById('quiz-prog').textContent = 'Frage ' + (quizIdx + 1) + ' von ' + quizFragen.length;
+  document.getElementById('quiz-q').textContent = q.q;
+  const optsEl = document.getElementById('quiz-opts');
+  optsEl.innerHTML = '';
+  q.opts.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-opt';
+    btn.textContent = opt;
+    btn.onclick = () => answerQuiz(i, btn);
+    optsEl.appendChild(btn);
+  });
+  document.getElementById('quiz-fb').className = 'quiz-feedback';
+  document.getElementById('quiz-fb').textContent = '';
+  document.getElementById('quiz-next').className = 'quiz-next';
+  quizAnswered = false;
+}
+
+function answerQuiz(i, btn) {
+  if (quizAnswered) return;
+  quizAnswered = true;
+  const q = quizFragen[quizIdx];
+  const allBtns = document.querySelectorAll('.quiz-opt');
+  allBtns.forEach(b => b.disabled = true);
+  const fb = document.getElementById('quiz-fb');
+  if (i === q.ans) {
+    btn.classList.add('correct');
+    fb.textContent = '✓ Richtig! ' + q.erkl;
+    fb.className = 'quiz-feedback ok show';
+    quizScore++;
+  } else {
+    btn.classList.add('wrong');
+    allBtns[q.ans].classList.add('correct');
+    fb.textContent = '✗ Leider falsch. ' + q.erkl;
+    fb.className = 'quiz-feedback nok show';
+  }
+  document.getElementById('quiz-next').className = 'quiz-next show';
+}
+
+function nextQuiz() {
+  quizIdx++;
+  if (quizIdx >= quizFragen.length) {
+    document.getElementById('quiz-area').style.display = 'none';
+    document.getElementById('quiz-result').style.display = 'block';
+    const pct = Math.round(quizScore / quizFragen.length * 100);
+    document.getElementById('quiz-score-num').textContent = quizScore + ' / ' + quizFragen.length;
+    const stars = pct >= 90 ? '🌟🌟🌟' : pct >= 70 ? '⭐⭐' : '⭐';
+    document.getElementById('quiz-stars').textContent = stars;
+    let msg = pct >= 90 ? '🎉 Ausgezeichnet! Du bist für die Prüfung bestens vorbereitet.' : pct >= 70 ? '👍 Gut! Noch ein bisschen üben und du schaffst die 11 NP.' : '📚 Nochmal durch die Karteikarten gehen!';
+    document.getElementById('quiz-score-sub').textContent = msg;
+  } else {
+    renderQuiz();
+  }
+}
+
+function restartQuiz() {
+  quizIdx = 0; quizScore = 0; quizAnswered = false;
+  document.getElementById('quiz-area').style.display = 'block';
+  document.getElementById('quiz-result').style.display = 'none';
+  renderQuiz();
+}
+
+renderQuiz();
+
+// GLOSSAR
+const glossarData = [
+  { term: 'Wiener Kongress', datum: '1814/15', def: 'Kongress in Wien nach den Napoleonischen Kriegen. 5 Großmächte gestalten Europa neu nach den Prinzipien Restauration, Solidarität, Fürstenherrschaft, Stabilität und Legitimität.' },
+  { term: 'Völkerschlacht bei Leipzig', datum: '1813', def: 'Entscheidungsschlacht der Befreiungskriege gegen Napoleon. Führte zu Napoleons Niederlage und späterer Verbannung.' },
+  { term: 'Restauration', datum: '1815', def: 'Prinzip des WK: Wiederherstellung der politischen & gesellschaftlichen Zustände vor der Franz. Revolution.' },
+  { term: 'Legitimität', datum: '1815', def: 'Prinzip des WK: Wiedereinsetzung der durch Gottesgnadentum legitimierten Dynastien.' },
+  { term: 'Pentarchie', datum: '1815', def: 'Gleichgewicht der 5 Großmächte (England, Frankreich, Preußen, Russland, Österreich). Kernziel des Wiener Kongresses.' },
+  { term: 'Heilige Allianz', datum: '1815', def: 'Bündnis zwischen Russland, Preußen und Österreich. Gegenseitiger Beistand bei revolutionären Erhebungen. Grundlage: Gottesgnadentum.' },
+  { term: 'Deutscher Bund', datum: '1815', def: 'Loser Zusammenschluss von 35 Fürstenstaaten + 4 freien Städten. Bundesversammlung Frankfurt. Österreichischer Vorsitz. Handlungsunfähig.' },
+  { term: 'Metternich', datum: '1815–1848', def: 'Österreichischer Staatsminister. Hauptarchitekt des Wiener Kongresses. Vorsitz im Deutschen Bund. Trieb Karlsbader Beschlüsse voran.' },
+  { term: 'Vormärz', datum: '1815–1848', def: 'Zeitraum zwischen Wiener Kongress 1815 und Märzrevolution 1848. Kampf zwischen Konservativen und liberal-nationalen Kräften.' },
+  { term: 'Wartburgfest', datum: '18.10.1817', def: '500 Studenten auf der Wartburg. Politische Reden, Bücherverbrennungen, Schwarz-Rot-Gold. Anlass: Völkerschlacht-Jahrestag + Reformation-Jubiläum. Ziel: Freiheit & Einheit.' },
+  { term: 'Burschenschaften', datum: 'ab 1815', def: 'Studentenverbindungen mit dem Motto "Ehre – Freiheit – Vaterland". Kämpften für Einheit und Freiheit. Nach Karlsbader Beschlüssen 1819 verboten.' },
+  { term: 'Kotzebue-Mord', datum: '23.3.1819', def: 'August von Kotzebue, konservativer Schriftsteller, von Burschenschaftler Karl Sand ermordet. Auslöser für die Karlsbader Beschlüsse.' },
+  { term: 'Karlsbader Beschlüsse', datum: '20.9.1819', def: 'Reaktion auf Kotzebue-Mord. Verbot Burschenschaften, Entlassung liberaler Professoren, Pressezensur, Überwachung der Vereine. Ziel: Unterdrückung der liberalen Bewegung.' },
+  { term: 'Liberalismus', datum: '19. Jh.', def: 'Politische Bewegung: individuelle Freiheit, Verfassung, Volkssouveränität, freie Wahlen, Pressefreiheit. Träger: Bildungsbürgertum.' },
+  { term: 'Nationalismus', datum: '19. Jh.', def: 'Streben nach Einheit aller Deutschen in einem Nationalstaat. Gemeinsame Sprache, Kultur und Geschichte als Grundlage.' },
+  { term: 'Julirevolution', datum: '1830', def: 'Revolution in Frankreich. Inspirierte liberal-nationale Bewegungen in Europa, u.a. die Entstehung von "Junges Deutschland".' },
+  { term: 'Hambacher Fest', datum: '27.5.1832', def: 'Hambacher Schloss bei Neustadt an der Weinstraße. 30.000 Teilnehmer. Forderungen: nationale Einheit, Freiheit, Demokratie. Symbol der deutschen Demokratie. Schwarz-Rot-Gold gewinnt Bedeutung.' },
+  { term: 'Wiener Ministerialkonferenz', datum: '1834', def: 'Reaktion auf das Hambacher Fest. Weitere Unterdrückungsmaßnahmen. Führte zur Emigration vieler Liberaler nach Frankreich.' },
+  { term: 'Göttinger Sieben', datum: '1837', def: '7 Professoren der Universität Göttingen protestierten gegen Verfassungsbruch durch König Ernst August von Hannover → wurden entlassen.' },
+  { term: 'Märzrevolution', datum: '1848', def: 'Aufstand in Deutschland. Ende des Vormärz. Alle aufgestauten liberal-nationalen Forderungen entladen sich.' },
+  { term: 'Schwarz-Rot-Gold', datum: 'ab 1817', def: 'Farben der deutschen Einheits- und Freiheitsbewegung. Beim Wartburgfest erstmals sichtbar, beim Hambacher Fest prominent. Heute Farben der Bundesrepublik Deutschland.' },
+  { term: 'Gottesgnadentum', datum: '1815', def: 'Prinzip: Herrscher sind von Gott eingesetzt und ihm allein verantwortlich. Basis für Fürstenherrschaft und Legitimität beim WK.' },
+];
+
+function renderGlossar(filter = '') {
+  const list = document.getElementById('glossar-list');
+  const filtered = filter ? glossarData.filter(g =>
+    g.term.toLowerCase().includes(filter.toLowerCase()) ||
+    g.def.toLowerCase().includes(filter.toLowerCase()) ||
+    g.datum.includes(filter)
+  ) : glossarData;
+  list.innerHTML = filtered.map(g => `
+    <div class="glossar-item">
+      <div class="glossar-term">${g.term}</div>
+      <span class="glossar-date">${g.datum}</span>
+      <div class="glossar-def">${g.def}</div>
+    </div>
+  `).join('');
+}
+function filterGlossar(v) { renderGlossar(v); }
+renderGlossar();
+</script>
+</body>
+</html>
