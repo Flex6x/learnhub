@@ -1123,20 +1123,45 @@
 </main>
 
 <script>
+// ===== LOCALSTORAGE HELPERS =====
+const LS = {
+  get: (key, fallback = null) => { try { const v = localStorage.getItem('gk11_' + key); return v !== null ? JSON.parse(v) : fallback; } catch(e) { return fallback; } },
+  set: (key, val) => { try { localStorage.setItem('gk11_' + key, JSON.stringify(val)); } catch(e) {} },
+};
+
 // NAV
 function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('page-' + id).classList.add('active');
   event.target.closest('.nav-btn').classList.add('active');
+  LS.set('activeTab', id);
 }
 
 // CHECKLISTE
 function toggleCheck(el) {
   el.classList.toggle('done');
   el.querySelector('.check-box').textContent = el.classList.contains('done') ? '✓' : '';
+  saveChecklist();
   updateProgress();
 }
+function saveChecklist() {
+  const items = document.querySelectorAll('.check-item');
+  const state = Array.from(items).map(el => el.classList.contains('done'));
+  LS.set('checklist', state);
+}
+function loadChecklist() {
+  const state = LS.get('checklist', []);
+  if (!state.length) return;
+  const items = document.querySelectorAll('.check-item');
+  items.forEach((el, i) => {
+    if (state[i]) {
+      el.classList.add('done');
+      el.querySelector('.check-box').textContent = '✓';
+    }
+  });
+}
+loadChecklist();
 function updateProgress() {
   const all = document.querySelectorAll('.check-item');
   const done = document.querySelectorAll('.check-item.done');
@@ -1167,10 +1192,12 @@ const allKarten = [
 ];
 
 let currentKarten = [...allKarten];
-let karteIdx = 0;
+let karteIdx = LS.get('karteIdx', 0);
+let karteFilter = LS.get('karteFilter', 'all');
 
 function renderKarte() {
-  const k = currentKarten[karteIdx];
+  const k = currentKarten[Math.min(karteIdx, currentKarten.length - 1)];
+  karteIdx = Math.min(karteIdx, currentKarten.length - 1);
   document.getElementById('karte-q').textContent = k.q;
   document.getElementById('karte-a').textContent = k.a;
   const tags = { wk: 'Wiener Kongress', vm: 'Vormärz', bd: 'Bündnisse/Bund' };
@@ -1181,15 +1208,26 @@ function renderKarte() {
 }
 
 function flipKarte() { document.getElementById('karte').classList.toggle('flipped'); }
-function nextKarte() { karteIdx = (karteIdx + 1) % currentKarten.length; renderKarte(); }
-function prevKarte() { karteIdx = (karteIdx - 1 + currentKarten.length) % currentKarten.length; renderKarte(); }
+function nextKarte() { karteIdx = (karteIdx + 1) % currentKarten.length; LS.set('karteIdx', karteIdx); renderKarte(); }
+function prevKarte() { karteIdx = (karteIdx - 1 + currentKarten.length) % currentKarten.length; LS.set('karteIdx', karteIdx); renderKarte(); }
 function filterKarten(cat) {
   currentKarten = cat === 'all' ? [...allKarten] : allKarten.filter(k => k.cat === cat);
   karteIdx = 0;
+  karteFilter = cat;
+  LS.set('karteFilter', cat);
+  LS.set('karteIdx', 0);
   renderKarte();
   document.querySelectorAll('#page-karten .karte-nav-btn').forEach(b => { b.style.background = ''; b.style.color = ''; b.style.borderColor = ''; });
   const btn = document.getElementById('filter-' + cat);
   if (btn) { btn.style.background = 'var(--accent)'; btn.style.color = 'white'; btn.style.borderColor = 'var(--accent)'; }
+}
+// restore filter state
+if (karteFilter !== 'all') {
+  currentKarten = allKarten.filter(k => k.cat === karteFilter);
+  const btn = document.getElementById('filter-' + karteFilter);
+  if (btn) { btn.style.background = 'var(--accent)'; btn.style.color = 'white'; btn.style.borderColor = 'var(--accent)'; }
+  const allBtn = document.getElementById('filter-all');
+  if (allBtn) { allBtn.style.background = ''; allBtn.style.color = ''; allBtn.style.borderColor = ''; }
 }
 renderKarte();
 
@@ -1212,6 +1250,7 @@ const quizFragen = [
 let quizIdx = 0;
 let quizScore = 0;
 let quizAnswered = false;
+let quizBestScore = LS.get('quizBestScore', null);
 
 function renderQuiz() {
   const q = quizFragen[quizIdx];
@@ -1230,6 +1269,15 @@ function renderQuiz() {
   document.getElementById('quiz-fb').textContent = '';
   document.getElementById('quiz-next').className = 'quiz-next';
   quizAnswered = false;
+  // show best score hint
+  let bestEl = document.getElementById('quiz-best-hint');
+  if (!bestEl) {
+    bestEl = document.createElement('div');
+    bestEl.id = 'quiz-best-hint';
+    bestEl.style.cssText = 'font-size:12px;color:var(--gold2);margin-bottom:8px;';
+    document.getElementById('quiz-prog').after(bestEl);
+  }
+  bestEl.textContent = quizBestScore !== null ? '🏆 Bestes Ergebnis: ' + quizBestScore + ' / ' + quizFragen.length : '';
 }
 
 function answerQuiz(i, btn) {
@@ -1256,6 +1304,11 @@ function answerQuiz(i, btn) {
 function nextQuiz() {
   quizIdx++;
   if (quizIdx >= quizFragen.length) {
+    // save best score
+    if (quizBestScore === null || quizScore > quizBestScore) {
+      quizBestScore = quizScore;
+      LS.set('quizBestScore', quizBestScore);
+    }
     document.getElementById('quiz-area').style.display = 'none';
     document.getElementById('quiz-result').style.display = 'block';
     const pct = Math.round(quizScore / quizFragen.length * 100);
@@ -1263,7 +1316,17 @@ function nextQuiz() {
     const stars = pct >= 90 ? '🌟🌟🌟' : pct >= 70 ? '⭐⭐' : '⭐';
     document.getElementById('quiz-stars').textContent = stars;
     let msg = pct >= 90 ? '🎉 Ausgezeichnet! Du bist für die Prüfung bestens vorbereitet.' : pct >= 70 ? '👍 Gut! Noch ein bisschen üben und du schaffst die 11 NP.' : '📚 Nochmal durch die Karteikarten gehen!';
+    if (quizScore === quizBestScore && quizScore > 0) msg += ' 🏆 Neuer Rekord!';
     document.getElementById('quiz-score-sub').textContent = msg;
+    // show all-time best
+    let bestFinalEl = document.getElementById('quiz-best-final');
+    if (!bestFinalEl) {
+      bestFinalEl = document.createElement('div');
+      bestFinalEl.id = 'quiz-best-final';
+      bestFinalEl.style.cssText = 'font-size:13px;color:var(--gold2);margin-top:10px;';
+      document.getElementById('quiz-score-sub').after(bestFinalEl);
+    }
+    bestFinalEl.textContent = '🏆 Bestes Ergebnis insgesamt: ' + quizBestScore + ' / ' + quizFragen.length;
   } else {
     renderQuiz();
   }
@@ -1321,6 +1384,20 @@ function renderGlossar(filter = '') {
 }
 function filterGlossar(v) { renderGlossar(v); }
 renderGlossar();
+
+// ===== RESTORE ACTIVE TAB ON LOAD =====
+(function() {
+  const savedTab = LS.get('activeTab', 'wk');
+  const tabMap = { wk: 0, verlauf: 1, strukturen: 2, stroemungen: 3, checkliste: 4, karten: 5, quiz: 6, glossar: 7 };
+  const idx = tabMap[savedTab];
+  if (idx !== undefined) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('page-' + savedTab).classList.add('active');
+    document.querySelectorAll('.nav-btn')[idx].classList.add('active');
+  }
+  updateProgress();
+})();
 </script>
 </body>
 </html>
