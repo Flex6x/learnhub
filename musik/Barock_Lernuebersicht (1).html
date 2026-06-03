@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎵 Barock Klausur – Lernübersicht</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0b14;
+    --surface: #16131f;
+    --surface2: #1e1a2e;
+    --border: #2e2a42;
+    --gold: #c9a84c;
+    --gold2: #e8c96a;
+    --cream: #f5eed8;
+    --accent: #7c5cbf;
+    --accent2: #a07de0;
+    --green: #4caf7d;
+    --red: #e05c6b;
+    --blue: #5c9ee0;
+    --text: #e8e4f0;
+    --text2: #9990b8;
+    --tab-h: 52px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, #1a1228 0%, #0d0b14 60%);
+    border-bottom: 1px solid var(--border);
+    padding: 28px 40px 0;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 4px 32px rgba(0,0,0,.6);
+  }
+  .header-top {
+    display: flex; align-items: center; gap: 16px; margin-bottom: 20px;
+  }
+  .header-icon { font-size: 2.2rem; }
+  .header-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.7rem; font-weight: 900;
+    background: linear-gradient(135deg, var(--gold), var(--gold2));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .header-sub { font-size: .8rem; color: var(--text2); margin-top: 2px; }
+
+  /* ── TABS ── */
+  .tabs {
+    display: flex; gap: 2px; overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    flex-shrink: 0;
+    background: none; border: none; cursor: pointer;
+    padding: 12px 18px; font-size: .82rem; font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text2); border-radius: 8px 8px 0 0;
+    border-bottom: 3px solid transparent;
+    transition: all .2s; white-space: nowrap;
+  }
+  .tab-btn:hover { color: var(--text); background: rgba(255,255,255,.04); }
+  .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); background: rgba(201,168,76,.07); }
+  .tab-icon { margin-right: 6px; }
+
+  /* ── CONTENT ── */
+  .content { display: none; padding: 36px 40px; max-width: 1100px; margin: 0 auto; }
+  .content.active { display: block; animation: fadeIn .3s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ── CARDS & SECTIONS ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px; padding: 24px 28px; margin-bottom: 20px;
+  }
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem; color: var(--gold); margin-bottom: 14px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .card-title span { font-size: 1.2rem; }
+  .section-head {
+    font-size: .65rem; font-weight: 600; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--accent2); margin-bottom: 8px;
+  }
+
+  ul.list { padding-left: 18px; line-height: 1.85; font-size: .9rem; color: var(--text2); }
+  ul.list li { margin-bottom: 4px; }
+  ul.list li strong { color: var(--text); }
+  ul.list li em { color: var(--gold); font-style: normal; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } .content { padding: 20px 16px; } header { padding: 18px 16px 0; } }
+
+  .tag {
+    display: inline-block; font-size: .72rem; padding: 3px 9px; border-radius: 20px;
+    margin: 3px 3px 3px 0; font-weight: 500;
+  }
+  .tag-gold { background: rgba(201,168,76,.18); color: var(--gold); border: 1px solid rgba(201,168,76,.3); }
+  .tag-acc { background: rgba(124,92,191,.2); color: var(--accent2); border: 1px solid rgba(124,92,191,.3); }
+  .tag-green { background: rgba(76,175,125,.18); color: var(--green); border: 1px solid rgba(76,175,125,.3); }
+
+  .highlight-box {
+    background: linear-gradient(135deg, rgba(201,168,76,.1), rgba(124,92,191,.08));
+    border: 1px solid rgba(201,168,76,.25); border-radius: 10px;
+    padding: 14px 18px; margin: 12px 0; font-size: .88rem; line-height: 1.7;
+  }
+  .highlight-box strong { color: var(--gold2); }
+
+  .timeline { position: relative; padding-left: 24px; }
+  .timeline::before { content: ''; position: absolute; left: 6px; top: 6px; bottom: 6px; width: 2px; background: var(--border); }
+  .tl-item { position: relative; margin-bottom: 16px; }
+  .tl-item::before { content: ''; position: absolute; left: -20px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--gold); border: 2px solid var(--bg); }
+  .tl-year { font-size: .72rem; color: var(--gold); font-weight: 600; }
+  .tl-text { font-size: .88rem; color: var(--text2); line-height: 1.5; }
+  .tl-text strong { color: var(--text); }
+
+  /* ── AUDIO PLAYER ── */
+  .audio-player {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 14px; overflow: hidden; transition: all .2s;
+  }
+  .audio-player.playing { border-color: var(--gold); box-shadow: 0 0 20px rgba(201,168,76,.15); }
+  .ap-top {
+    display: flex; align-items: center; gap: 14px; padding: 16px 18px;
+    cursor: pointer;
+  }
+  .ap-play-btn {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--accent));
+    border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; flex-shrink: 0; transition: transform .15s;
+  }
+  .ap-play-btn:hover { transform: scale(1.08); }
+  .ap-info { flex: 1; min-width: 0; }
+  .ap-title { font-size: .9rem; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ap-composer { font-size: .75rem; color: var(--text2); }
+  .ap-controls { padding: 0 18px 14px; }
+  .ap-progress-wrap { position: relative; height: 4px; background: var(--border); border-radius: 2px; cursor: pointer; margin-bottom: 8px; }
+  .ap-progress-fill { height: 100%; background: linear-gradient(90deg, var(--gold), var(--accent2)); border-radius: 2px; width: 0%; transition: width .3s; pointer-events: none; }
+  .ap-time { font-size: .72rem; color: var(--text2); display: flex; justify-content: space-between; }
+  .audio-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 700px) { .audio-grid { grid-template-columns: 1fr; } }
+
+  .shuffle-btn {
+    background: rgba(124,92,191,.2); border: 1px solid rgba(124,92,191,.4);
+    color: var(--accent2); padding: 9px 18px; border-radius: 8px;
+    cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: .85rem; font-weight: 500;
+    display: inline-flex; align-items: center; gap: 6px; margin-bottom: 20px;
+    transition: all .2s;
+  }
+  .shuffle-btn:hover { background: rgba(124,92,191,.35); }
+
+  /* ── TONLEITERN ── */
+  .scale-display {
+    display: flex; gap: 6px; flex-wrap: wrap; margin: 10px 0;
+  }
+  .note-box {
+    width: 46px; height: 46px; border-radius: 8px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    font-size: .82rem; font-weight: 600; flex-shrink: 0;
+  }
+  .note-box.natural { background: rgba(201,168,76,.18); color: var(--gold); border: 1px solid rgba(201,168,76,.3); }
+  .note-box.half { background: rgba(124,92,191,.25); color: var(--accent2); border: 1px solid rgba(124,92,191,.4); }
+  .note-box .step { font-size: .6rem; font-weight: 400; color: var(--text2); margin-top: 2px; }
+  .note-box.root { background: linear-gradient(135deg, var(--gold), rgba(201,168,76,.6)); color: #1a1228; border: none; }
+  .note-box.root .step { color: rgba(26,18,40,.7); }
+
+  .interval-badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 8px 12px; font-size: .82rem; margin: 4px;
+  }
+  .interval-badge .ib-name { color: var(--gold); font-weight: 600; }
+  .interval-badge .ib-steps { color: var(--text2); font-size: .75rem; }
+
+  /* ── CARDS FLIP ── */
+  .flashcard-scene {
+    perspective: 800px; width: 100%; max-width: 500px; height: 220px; margin: 0 auto 24px; cursor: pointer;
+  }
+  .flashcard {
+    width: 100%; height: 100%; position: relative;
+    transform-style: preserve-3d; transition: transform .5s ease;
+  }
+  .flashcard.flipped { transform: rotateY(180deg); }
+  .fc-face {
+    position: absolute; inset: 0; border-radius: 16px;
+    backface-visibility: hidden; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; padding: 28px; text-align: center;
+  }
+  .fc-front {
+    background: linear-gradient(135deg, var(--surface2), #221c38);
+    border: 2px solid var(--border);
+  }
+  .fc-back {
+    background: linear-gradient(135deg, #1c2a1c, #1a1228);
+    border: 2px solid rgba(76,175,125,.4);
+    transform: rotateY(180deg);
+  }
+  .fc-question { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--cream); }
+  .fc-answer { font-size: .9rem; color: var(--text); line-height: 1.6; }
+  .fc-hint { font-size: .72rem; color: var(--text2); margin-top: 8px; }
+  .fc-tag { font-size: .65rem; color: var(--accent2); font-weight: 600; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 10px; }
+
+  .card-nav { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 24px; }
+  .card-nav button {
+    background: var(--surface2); border: 1px solid var(--border); color: var(--text);
+    padding: 8px 20px; border-radius: 8px; cursor: pointer; font-family: 'DM Sans', sans-serif;
+    transition: all .2s;
+  }
+  .card-nav button:hover { border-color: var(--gold); color: var(--gold); }
+  .card-counter { font-size: .85rem; color: var(--text2); }
+
+  /* ── QUIZ ── */
+  .quiz-q { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--cream); margin-bottom: 20px; line-height: 1.5; }
+  .quiz-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  @media (max-width: 600px) { .quiz-opts { grid-template-columns: 1fr; } }
+  .quiz-opt {
+    background: var(--surface2); border: 1.5px solid var(--border);
+    padding: 13px 16px; border-radius: 10px; cursor: pointer; font-size: .88rem;
+    font-family: 'DM Sans', sans-serif; color: var(--text); text-align: left;
+    transition: all .2s;
+  }
+  .quiz-opt:hover { border-color: var(--accent2); }
+  .quiz-opt.correct { background: rgba(76,175,125,.2); border-color: var(--green); color: #b4f0d0; }
+  .quiz-opt.wrong { background: rgba(224,92,107,.15); border-color: var(--red); color: #f0b4bb; }
+  .quiz-feedback { margin-top: 16px; padding: 14px 18px; border-radius: 10px; font-size: .88rem; line-height: 1.5; display: none; }
+  .quiz-feedback.correct { background: rgba(76,175,125,.15); border: 1px solid rgba(76,175,125,.3); color: #b4f0d0; display: block; }
+  .quiz-feedback.wrong { background: rgba(224,92,107,.12); border: 1px solid rgba(224,92,107,.3); color: #f0c4c8; display: block; }
+  .quiz-next {
+    margin-top: 16px; background: linear-gradient(135deg, var(--gold), var(--accent));
+    border: none; padding: 11px 28px; border-radius: 8px; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-size: .9rem; font-weight: 600; color: #1a1228;
+    display: none; transition: transform .15s;
+  }
+  .quiz-next:hover { transform: scale(1.03); }
+  .quiz-score {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+    padding: 30px; text-align: center;
+  }
+  .quiz-score .big-num { font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--gold); }
+  .quiz-score p { color: var(--text2); margin-top: 8px; }
+  .quiz-restart {
+    margin-top: 18px; background: var(--surface2); border: 1px solid var(--border);
+    color: var(--text); padding: 10px 24px; border-radius: 8px; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; transition: all .2s;
+  }
+  .quiz-restart:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* ── CHECKLISTE ── */
+  .checklist-item {
+    display: flex; align-items: flex-start; gap: 12px; padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .checklist-item:last-child { border-bottom: none; }
+  .cl-check {
+    width: 22px; height: 22px; border-radius: 6px;
+    border: 2px solid var(--border); flex-shrink: 0; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; transition: all .2s;
+    margin-top: 1px;
+  }
+  .cl-check.done { background: var(--green); border-color: var(--green); }
+  .cl-check.done::after { content: '✓'; color: #fff; font-size: .85rem; font-weight: 700; }
+  .cl-text { font-size: .9rem; line-height: 1.5; }
+  .cl-text.done { color: var(--text2); text-decoration: line-through; }
+  .cl-badge { font-size: .7rem; color: var(--accent2); font-weight: 600; text-transform: uppercase; }
+  .progress-bar { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; margin: 16px 0; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--green), var(--gold)); border-radius: 3px; transition: width .4s ease; }
+  .progress-label { font-size: .8rem; color: var(--text2); display: flex; justify-content: space-between; margin-bottom: 6px; }
+
+  /* ── ACCORDION ── */
+  .acc-item { border: 1px solid var(--border); border-radius: 10px; margin-bottom: 8px; overflow: hidden; }
+  .acc-head {
+    padding: 14px 18px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+    font-size: .9rem; font-weight: 500; user-select: none; background: var(--surface2);
+  }
+  .acc-head:hover { background: rgba(255,255,255,.03); }
+  .acc-arrow { transition: transform .2s; font-size: .8rem; color: var(--text2); }
+  .acc-item.open .acc-arrow { transform: rotate(180deg); }
+  .acc-body { display: none; padding: 16px 18px; font-size: .88rem; line-height: 1.75; color: var(--text2); background: var(--surface); }
+  .acc-item.open .acc-body { display: block; }
+  .acc-body strong { color: var(--text); }
+
+  table { width: 100%; border-collapse: collapse; font-size: .85rem; }
+  th { background: var(--surface2); color: var(--gold); padding: 10px 14px; text-align: left; font-weight: 600; border-bottom: 2px solid var(--border); }
+  td { padding: 9px 14px; border-bottom: 1px solid var(--border); color: var(--text2); vertical-align: top; }
+  td strong { color: var(--text); }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,.02); }
+
+  .tip-box {
+    background: rgba(124,92,191,.1); border-left: 3px solid var(--accent2);
+    padding: 12px 16px; border-radius: 0 10px 10px 0; margin: 14px 0; font-size: .87rem; line-height: 1.6;
+  }
+  .tip-box strong { color: var(--accent2); }
+
+  .warn-box {
+    background: rgba(201,168,76,.1); border-left: 3px solid var(--gold);
+    padding: 12px 16px; border-radius: 0 10px 10px 0; margin: 14px 0; font-size: .87rem; line-height: 1.6;
+  }
+  .warn-box strong { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-top">
+    <div class="header-icon">🎼</div>
+    <div>
+      <div class="header-title">Barock Klausur – Lernübersicht</div>
+      <div class="header-sub">Musik GK 11 · Gymnasium Sachsen · Viel Erfolg morgen! 🏆</div>
+    </div>
+  </div>
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('barock')"><span class="tab-icon">⚜️</span>Barockzeitalter</button>
+    <button class="tab-btn" onclick="switchTab('verleugnung')"><span class="tab-icon">🎭</span>Verleugnungsszene</button>
+    <button class="tab-btn" onclick="switchTab('vokalmusiik')"><span class="tab-icon">🎤</span>Vokalmusik</button>
+    <button class="tab-btn" onclick="switchTab('bach')"><span class="tab-icon">🖊️</span>Bach & Händel</button>
+    <button class="tab-btn" onclick="switchTab('hoerbeispiele')"><span class="tab-icon">🎧</span>Hörbeispiele</button>
+    <button class="tab-btn" onclick="switchTab('tonleitern')"><span class="tab-icon">🎹</span>Dur & Moll</button>
+    <button class="tab-btn" onclick="switchTab('intervalle')"><span class="tab-icon">📐</span>Intervalle</button>
+    <button class="tab-btn" onclick="switchTab('checkliste')"><span class="tab-icon">✅</span>Checkliste</button>
+    <button class="tab-btn" onclick="switchTab('karten')"><span class="tab-icon">🃏</span>Karteikarten</button>
+    <button class="tab-btn" onclick="switchTab('quiz')"><span class="tab-icon">🧠</span>Quiz</button>
+  </div>
+</header>
+
+<!-- ============================================================ TAB: BAROCKZEITALTER -->
+<div id="tab-barock" class="content active">
+  <div class="card">
+    <div class="card-title"><span>⚜️</span> Das Barockzeitalter (1600–1750)</div>
+    <div class="highlight-box">
+      <strong>Historischer Hintergrund:</strong> Absolutismus · Dreißigjähriger Krieg (1618–1648) · Pest → Bewusstsein der Vergänglichkeit · <em>Carpe diem</em> (Nutze den Tag) · <em>Memento mori</em> (Denke daran, dass du sterben musst)
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title"><span>🎵</span> Charakteristika der Musik</div>
+      <ul class="list">
+        <li><strong>Strenge Ordnungen</strong> – strenge Formen, handwerkliche Kompositionslehren</li>
+        <li><strong>Kontrast-Prinzip</strong> – Polyphonie ↔ Homophonie; Concerto-Prinzip (Tutti ↔ Concertino)</li>
+        <li><strong>Generalbass</strong> – Akkordkurzschrift über der Basslinie (Orgel, Cembalo, Laute + Cello, Viola da gamba, Kontrabass)</li>
+        <li><strong>Basso continuo</strong> – durchgehende Begleitung</li>
+        <li><strong>Affektenlehre</strong> – Musik drückt Affekte (Emotionen) aus</li>
+        <li><strong>Terassendynamik</strong> – abrupte Lautstärke-Stufen (kein Crescendo)</li>
+        <li><strong>Musikalisch-rhetorische Figuren</strong></li>
+        <li><strong>Moderne Takteinteilung</strong></li>
+        <li><strong>Dur-Moll-Tonalität</strong> entwickelt sich</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title"><span>📅</span> Phasen & Vertreter</div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-year">Frühbarock 1580–1620</div>
+          <div class="tl-text">G. Gabrieli, <strong>C. Monteverdi</strong>, H. Schütz, J.H. Schein, S. Scheidt</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">Hochbarock 1620–1680</div>
+          <div class="tl-text">H. Schütz, J.B. Lully, D. Buxtehude, A. Corelli, A. Scarlatti, <strong>H. Purcell</strong></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">Spätbarock 1680–1750</div>
+          <div class="tl-text">D. Scarlatti, <strong>A. Vivaldi</strong>, G.Ph. Telemann, <strong>J.S. Bach</strong>, <strong>G.F. Händel</strong><br><em>→ stärkere Bedeutung deutscher Komponisten</em></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span>🎼</span> Wichtige Gattungen & Formen</div>
+    <table>
+      <tr><th>Gattung/Form</th><th>Definition</th></tr>
+      <tr><td><strong>Oper</strong></td><td>Neuschöpfung; erste dt. Oper: „Daphne" 1627 (H. Schütz) – mit Arie und Rezitativ</td></tr>
+      <tr><td><strong>Kantate</strong></td><td>„Singstück"; mehrsätzig, instrumental begleitet, für Solo und/oder Chor, geistliche oder weltliche Texte</td></tr>
+      <tr><td><strong>Oratorium</strong></td><td>Nichtszenisch, geistliches Gegenstück zur Oper; für Soli, Chor, Orchester</td></tr>
+      <tr><td><strong>Passion</strong></td><td>Oratorische Evangeliendarstellung der Leidensgeschichte Christi</td></tr>
+      <tr><td><strong>Choral</strong></td><td>Kirchengesang; im Oratorium: vierstimmig-homophone Kirchenlieder</td></tr>
+      <tr><td><strong>Messe</strong></td><td>Mehrstimmige zyklische Vokalmusik: Kyrie – Gloria – Credo – Sanctus/Benedictus – Agnus dei</td></tr>
+      <tr><td><strong>Motette</strong></td><td>Mehrstimmige, mehrsätzige, auch mehrtextige Vokalform</td></tr>
+      <tr><td><strong>Suite</strong></td><td>Folge kontrastierender Instrumentalsätze gleicher Tonart mit Tanzcharakter</td></tr>
+      <tr><td><strong>Concerto grosso</strong></td><td>Tutti (Ripieno) ↔ Solistengruppe (Concertino) – klanglich/dynamisch kontrastierend</td></tr>
+      <tr><td><strong>Fuge</strong></td><td>Kunstvolle polyphone Instrumentalform; ein oder mehrere Themen durchlaufen alle Stimmen</td></tr>
+      <tr><td><strong>Toccata</strong></td><td>Fantasieartiges Stück für Tasteninstr.; virtuose Passagen + polyphone & akkordische Abschnitte</td></tr>
+      <tr><td><strong>Präludium</strong></td><td>Einleitendes Instrumentalstück vor Fuge oder Suite</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span>🎭</span> Musikalische Rhetorik – Figuren</div>
+    <div class="section-head">Merke: Musik = Sprache der Affekte</div>
+    <div class="two-col">
+      <div>
+        <ul class="list">
+          <li><strong>Anabasis</strong> – Aufwärtsgang → Himmel, Erhebung, Freude</li>
+          <li><strong>Katabasis</strong> – Abwärtsgang → Tiefe, Leid, Tod</li>
+          <li><strong>Passus duriusculus</strong> – chromatischer Schritt → Schmerz, Leid</li>
+          <li><strong>Saltus duriusculus</strong> – schwieriger Sprung → Härte, Schuld</li>
+          <li><strong>Climax</strong> – stufenweise Steigerung</li>
+        </ul>
+      </div>
+      <div>
+        <ul class="list">
+          <li><strong>Tonrepetition</strong> – Wiederholung eines Tons → Beharrlichkeit</li>
+          <li><strong>Melismatik</strong> – viele Töne auf einer Silbe → Ausdruck, Verzierung</li>
+          <li><strong>Synkope</strong> – Betonungsverschiebung → Schluchzer, Unruhe</li>
+          <li><strong>Unisono</strong> – alle Stimmen gleich → Kraft, Einheit</li>
+        </ul>
+      </div>
+    </div>
+    <div class="highlight-box" style="margin-top:14px">
+      <strong>Affekte:</strong> Positiv (Freude): <em>Dur, Konsonanz, hohe Lage, schnelles Tempo</em><br>
+      Negativ (Trauer): <em>Moll, Dissonanz, tiefe Lage, langsames Tempo, Verschleifen der Intervalle</em>
+    </div>
+    <div class="tip-box" style="margin-top:12px">
+      <strong>Zahlenalphabet (Bach):</strong> A=1, B=2, ... → BACH = 2+1+3+8 = 14; J.S.BACH = 9+18+14 = 41.<br>
+      Auch 3 (Trinität), 4 (Elemente), 12 (Apostel) als symbolische Zahlen.
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ TAB: VERLEUGNUNGSSZENE -->
+<div id="tab-verleugnung" class="content">
+  <div class="card">
+    <div class="card-title"><span>🎭</span> Deutung der Verleugnungsszene – J.S. Bach: Johannes-Passion BWV 245</div>
+    <div class="highlight-box">
+      <strong>Kontext:</strong> Petrus verleugnet dreimal seine Jüngerschaft, bevor der Hahn kräht. Bach schildert dies musikalisch in Satztypen, Affiguren und Harmonik.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span>1️⃣</span> Lehrbuch S. 224 / Impuls 1 – Besetzung & Satztypen</div>
+    <table>
+      <tr><th>Partie</th><th>Besetzung</th><th>Satztyp</th><th>Bedeutung</th></tr>
+      <tr><td><strong>Evangelist</strong></td><td>Tenorsolo + Orgel/B.c.</td><td><em>Rezitativ</em></td><td>Erzähler, treibt Handlung voran</td></tr>
+      <tr><td><strong>Chor</strong></td><td>4-stimmig + Barockorchester</td><td><em>Chorsatz (Turba-Chor)</em></td><td>Schriftgelehrte / Hohepriester</td></tr>
+      <tr><td><strong>Petrus</strong></td><td>Basssolo + Orgel</td><td><em>Rezitativ</em></td><td>Petrus als Figur</td></tr>
+      <tr><td><strong>Diener</strong></td><td>Tenorsolo + Orgel/B.c.</td><td><em>Rezitativ</em></td><td>Diener des Hohepriesters</td></tr>
+      <tr><td><strong>Abschluss-Passage</strong></td><td>wie oben, aber sanglicher + melismatischer</td><td><em>Arioso (Adagio)</em></td><td>Affektschilderung: Verzweiflung des Petrus</td></tr>
+    </table>
+    <div class="tip-box">
+      <strong>Arioso</strong> = auch Accompagnato-Rezitativ: Satztyp <em>zwischen</em> Rezitativ und Arie – lyrisch, betrachtend, auskomponiiert, teils vom ganzen Orchester begleitet.
+    </div>
+    <div class="warn-box">
+      <strong>Satztyp-Übersicht ergänzen:</strong> Rezitativ · Arie · Choral · Freier Chorsatz · <strong>Arioso</strong> ← neu!
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span>2️⃣</span> Lehrbuch S. 224 / Impuls 2 – Rhetorische Figuren (Noten)</div>
+    <div class="section-head">Tonart: h-Moll → Schmerz, Trauer</div>
+    <table>
+      <tr><th>Takt</th><th>Figur</th><th>Beschreibung</th><th>Affekt</th></tr>
+      <tr><td>T33–T35</td><td><strong>Passus duriusculus ↑</strong></td><td>chromatischer Aufwärtsgang in der Bassstimme (gis)</td><td>Scham, Schmerz über eigenes Versagen</td></tr>
+      <tr><td>T35–T38</td><td><strong>Passus duriusculus ↓</strong></td><td>chromatischer Abwärtsgang in der Bassstimme (gis→c)</td><td>Schmerz, Zerrissenheit</td></tr>
+      <tr><td>T36 Auftakt</td><td><strong>Passus duriusculus</strong></td><td>Tenorstimme auf „Weinete"</td><td>Trauer, Verzweiflung, Beschämung</td></tr>
+      <tr><td>T33, T35, T36/37</td><td><strong>Saltus duriusculus</strong></td><td>schwierige Sprünge (e²-ais¹, h¹-f², ais¹-g²…)</td><td>Härte der Schuld – etwas passt nicht</td></tr>
+    </table>
+    <div class="highlight-box" style="margin-top:12px">
+      <strong>Weitere Auffälligkeiten in dieser Passage:</strong>
+      <ul class="list" style="margin-top:8px">
+        <li><strong>Viele leiterfremde Töne</strong> (Tonart h-Moll) → Bruch mit der Ordnung</li>
+        <li><strong>Viel Melismatik</strong> → fließende Tränen</li>
+        <li><strong>Synkopen</strong> → Schluchzer</li>
+        <li><strong>Tonumspielungen</strong> (T34–35 Ton h¹; T38 Ton a¹) → innere Bewegung und Zerrissenheit</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span>3️⃣</span> Lehrbuch S. 225 / Impuls 1 – Arie „Ach, mein Sinn"</div>
+    <div class="highlight-box"><strong>Affekt:</strong> Unruhe · Getriebenheit · Ausweglosigkeit · starkes Schuldgefühl</div>
+    <ul class="list">
+      <li><strong>Wiederholung</strong> rhetorischer Fragen → Ausweglosigkeit</li>
+      <li><strong>Hohes Tempo</strong> → Getriebenheit</li>
+      <li><strong>Punktierungen</strong> → Dringlichkeit</li>
+      <li><strong>Starke melodische Wellenbewegung</strong> („Berg und Tal") → innere Zerrissenheit</li>
+      <li><strong>Mehr Ruhe bei „bleib ich hier"</strong> – langer Notenwert auf „hier" → Sehnen nach Innehalten</li>
+      <li><strong>Sehr viele Tonsprünge (Saltus duriusculus)</strong></li>
+    </ul>
+    <div class="tip-box">
+      <strong>Wirkung:</strong> Durch die ausgiebige Schilderung des Empfindens von Petrus nimmt Bach den Hörer tief ins Geschehen hinein → Mitfühlen → quasi eine <em>Seelenreinigung</em> beim Hörer.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span>4️⃣</span> Lehrbuch S. 226 / Impuls 1 – Choral „Petrus, der nicht denkt zurück"</div>
+    <div class="section-head">Faktur = Machart des Choralsatzes</div>
+    <ul class="list">
+      <li><strong>Choral</strong> = schlichte Liedform</li>
+      <li><strong>Vierstimmigkeit SATB</strong>; Orchesterstimmen ergänzen die Gesangsstimmen (colla parte)</li>
+      <li><strong>Homophonie</strong>: gleiche Rhythmik, Melodieabschnitte (Fermaten = Zwischenschlüsse)</li>
+      <li><strong>Melodie im Sopran</strong></li>
+    </ul>
+    <div class="highlight-box" style="margin-top:12px">
+      <strong>Musikalische Bedeutung:</strong> Hier wird Abstand zum Geschehen genommen – <em>objektiver Außenblick</em> des gläubigen, wissenden Christen.<br>
+      Musikalisch = <em>Ruhe, Ordnung, Abgeklärtheit</em>.
+    </div>
+    <div class="highlight-box">
+      <strong>Inhaltliche Bedeutung (christliche Theologie):</strong> Petrus hat verleugnet → bereut aber → nach christlicher Botschaft: Einsehen von Fehlern = Voraussetzung für Gottes Vergebung → „Jesus blicke mich auch an" = Wendung zum Hörer selbst.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span>5️⃣</span> Lehrbuch S. 226 / Impuls 2 – Harmonische Deutung</div>
+    <div class="highlight-box">
+      <strong>Beispiel T13, Wort „Böses":</strong> Auffällige Dissonanz (fis²-a¹-c²-d) → Akkord fällt aus der harmonischen Ordnung → <em>Das Böse = das, was aus der guten Ordnung, der Harmonie fällt.</em>
+    </div>
+    <div class="tip-box">
+      <strong>Bachs Doppelrolle:</strong> Bach arbeitet gleichzeitig als Komponist <em>und</em> Theologe – er predigt durch Musik. Der Hörer wird in allen menschlichen Gefühlen angerührt, dann getröstet und gestärkt. → Darin liegt Bachs zeitlose Autorität, auch bei Nichtkonfessionellen.
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ TAB: VOKALMUSIK -->
+<div id="tab-vokalmusiik" class="content">
+  <div class="card">
+    <div class="card-title"><span>🎤</span> Barocke Vokalmusik – Satztypen (Übersicht)</div>
+    <table>
+      <tr><th>Satztyp</th><th>Definition</th><th>Merkmale</th></tr>
+      <tr><td><strong>Rezitativ</strong></td><td>Sprechgesang; treibt Handlung voran</td><td>Wenig Begleitung (Orgel/B.c.); syllabisch</td></tr>
+      <tr><td><strong>Arie</strong></td><td>Kunstvolles, gefühlsbetontes Sologesangsstück</td><td>Mit Orchesterbegleitung; melodisch-virtuos; da-capo-Form</td></tr>
+      <tr><td><strong>Arioso</strong></td><td>Zwischen Rezitativ und Arie</td><td>Lyrisch, betrachtend, teils Orchesterbegleitung</td></tr>
+      <tr><td><strong>Choral</strong></td><td>Vierstimmig-homophon gesetztes Kirchenlied</td><td>SATB + Orchester (colla parte); Melodie im Sopran</td></tr>
+      <tr><td><strong>Freier Chorsatz</strong></td><td>Stellt Personengruppen dar (z.B. Turba-Chor)</td><td>Polyphon oder homophon; dramatisch</td></tr>
+    </table>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title"><span>🎺</span> Händels Messias</div>
+      <ul class="list">
+        <li>Dreiteiliges <strong>Oratorium</strong> über christliche Heilsgeschichte</li>
+        <li>Originalsprache: <strong>Englisch</strong></li>
+        <li>Komponiert <strong>1741</strong> in 24 Tagen; Uraufführung 1742 Dublin</li>
+        <li><strong>Halleluja-Chor</strong> = bekanntestes Stück</li>
+      </ul>
+      <div class="highlight-box" style="margin-top:10px">
+        <strong>Halleluja-Chor Gestaltung:</strong><br>
+        – <em>D-Dur</em>: Fest- und Königstonart<br>
+        – <em>Fanfarenmotiv</em>: Quarte (halleluja)<br>
+        – <em>Unisono-Katabasis/Anabasis</em> bei „God omnipotent"<br>
+        – <em>Fugenthema</em> „he shall reign forever"<br>
+        – <em>Tonrepetition + Climax</em> auf „King of Kings"<br>
+        – <em>Tradition</em>: Publikum erhebt sich
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span>✝️</span> Bachs Johannes-Passion BWV 245</div>
+      <ul class="list">
+        <li><strong>Textgrundlagen:</strong> Bibeltexte + freie Dichtung + Choralstrophen</li>
+        <li><strong>Uraufführung:</strong> Karfreitagsvesper, Nikolaikirche Leipzig, 1724</li>
+        <li><strong>Zweiteilig</strong> – Predigt in der Mitte</li>
+      </ul>
+      <div class="warn-box" style="margin-top:10px">
+        <strong>Wichtige Gattungen/Satztypen in Oratorien:</strong><br>
+        Arie · Rezitativ · Arioso · Choral · freie Chorsätze
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ TAB: BACH & HÄNDEL -->
+<div id="tab-bach" class="content">
+  <div class="card">
+    <div class="card-title"><span>🖊️</span> J.S. Bach (1685–1750) – Lebensstationen</div>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-year">Eisenach 1685–1695</div><div class="tl-text">Geburt 21.3.1685; Vater = Stadtmusiker; früher Tod beider Eltern</div></div>
+      <div class="tl-item"><div class="tl-year">Ohrdruf 1695–1700</div><div class="tl-text">Zum älteren Bruder Johann Christoph; musikalische Erziehung</div></div>
+      <div class="tl-item"><div class="tl-year">Lüneburg 1700–1702</div><div class="tl-text">Michaelis-Klosterschule; lernt Orgelmusik; reist nach Hamburg</div></div>
+      <div class="tl-item"><div class="tl-year">Arnstadt/Mühlhausen 1703–1708</div><div class="tl-text">Organist; Heirat mit Cousine <strong>Maria Barbara</strong> 1707</div></div>
+      <div class="tl-item"><div class="tl-year">Weimar 1708–1717</div><div class="tl-text">Hoforganist → Konzertmeister; <em>3 Wochen Gefängnis</em>, weil er nicht kündigen durfte</div></div>
+      <div class="tl-item"><div class="tl-year">Köthen 1717–1723</div><div class="tl-text">Kapellmeister; Tod Maria Barbaras (1720); Heirat <strong>Anna Magdalena</strong> 1721</div></div>
+      <div class="tl-item"><div class="tl-year">Leipzig 1723–1750</div><div class="tl-text"><strong>Thomaskantor</strong>; große geistliche Werke: Passionen, 200+ Kantaten; Tod 28.7.1750</div></div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title"><span>📚</span> Wichtigste Werke Bachs</div>
+      <ul class="list">
+        <li><em>Geistlich:</em> <strong>Matthäus- und Johannes-Passion</strong>, Weihnachtsoratorium, h-Moll-Messe, ~200 Kantaten</li>
+        <li><em>Weltlich:</em> Brandenburgische Konzerte, Weltliche Kantaten</li>
+        <li><em>Tasten/Orgel:</em> <strong>Toccata & Fuge d-Moll</strong>, Wohltemperiertes Klavier, Goldberg-Variationen, Orgelchoräle</li>
+        <li><em>Spätwerk:</em> Musikalisches Opfer, Die Kunst der Fuge</li>
+      </ul>
+      <div class="tag tag-gold">Motto: „Soli Deo Gloria"</div>
+      <div class="tip-box" style="margin-top:10px">Merkmale: <strong>Kunstvolle Polyphonie (Kontrapunkt)</strong>, komplexe Harmonik, tiefer religiöser Ernst</div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span>🎺</span> G.F. Händel (1685–1759)</div>
+      <ul class="list">
+        <li>Ebenfalls 1685 geboren (wie Bach)</li>
+        <li>Deutscher Komponist, lebte hauptsächlich in <strong>London</strong></li>
+        <li>Schwerpunkt: <strong>Oper und Oratorium</strong></li>
+        <li>Wichtigstes Werk: <strong>Der Messias (1741)</strong></li>
+        <li>Weitere Werke: Feuerwerksmusik, Wassermusik</li>
+        <li>Starb 1759 in London</li>
+      </ul>
+      <div class="warn-box" style="margin-top:10px">
+        <strong>Bach vs. Händel:</strong> Bach blieb in Deutschland (religiöse, intime Musik). Händel reiste viel, schrieb für das Publikum (opernhafter Stil).
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ TAB: HÖRBEISPIELE -->
+<div id="tab-hoerbeispiele" class="content">
+  <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:20px;">
+    <div>
+      <h2 style="font-family:'Playfair Display',serif; color:var(--gold); font-size:1.4rem;">🎧 Hörbeispiele</h2>
+      <p style="color:var(--text2); font-size:.85rem; margin-top:4px;">Hör rein und erkenne das Stück – der Titel wird erst nach dem Stoppen aufgedeckt. 🎓</p>
+    </div>
+    <button class="shuffle-btn" onclick="shuffleTracks()">🔀 Reihenfolge mischen</button>
+  </div>
+  <div class="audio-grid" id="audioGrid"></div>
+  <div class="card" style="margin-top:24px;">
+    <div class="card-title"><span>📖</span> Wofür diese Stücke stehen (kurze Einordnung)</div>
+    <table>
+      <tr><th>Werk</th><th>Gattung</th><th>Merkmale für die Klausur</th></tr>
+      <tr><td><strong>Toccata & Fuge d-Moll</strong> – Bach</td><td>Toccata + Fuge (Orgel)</td><td>Polyphon, virtuos, Dur-Moll-Kontrast</td></tr>
+      <tr><td><strong>Goldberg-Variationen – Aria</strong> – Bach</td><td>Variationen (Cembalo)</td><td>Ruhig, ornamentiert, Cembalo-Klang</td></tr>
+      <tr><td><strong>Air (Suite Nr. 3 D-Dur)</strong> – Bach</td><td>Suite (Orchester)</td><td>Homophon, cantabel, D-Dur = Festlichkeit</td></tr>
+      <tr><td><strong>Halleluja-Chor</strong> – Händel</td><td>Oratorium</td><td>D-Dur, Fugenthema, Climax, Tutti</td></tr>
+      <tr><td><strong>Feuerwerksmusik</strong> – Händel</td><td>Orchestersuite</td><td>Festmusik, Bläserbesetzung, pompös</td></tr>
+      <tr><td><strong>Weihnachtsoratorium</strong> – Bach</td><td>Oratorium</td><td>Kantaten-Zyklus; Jauchzet = Freude, D-Dur</td></tr>
+      <tr><td><strong>Die vier Jahreszeiten</strong> – Vivaldi</td><td>Concerto grosso (Violinkonzert)</td><td>Programmusik, Tutti ↔ Soloist, Concerto-Prinzip</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ============================================================ TAB: DUR & MOLL -->
+<div id="tab-tonleitern" class="content">
+  <div class="card">
+    <div class="card-title"><span>🎹</span> Dur & Moll – Von Null erklärt</div>
+    <div class="highlight-box">
+      <strong>Was ist eine Tonleiter?</strong> Eine Folge von 8 Tönen (der 8. = Wiederholung des 1.). Das <em>Muster</em> der Ganz- und Halbtonschritte bestimmt, ob es Dur (hell, fröhlich) oder Moll (dunkel, traurig) klingt.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span>☀️</span> Dur-Tonleiter – Das Muster</div>
+    <div class="section-head">Ganzton = G · Halbton = H</div>
+    <div class="scale-display">
+      <div class="note-box root"><span>1</span><span class="step">Root</span></div>
+      <div class="note-box natural" style="width:32px;align-self:center;font-size:.6rem;border:none;background:none;color:var(--text2)">G</div>
+      <div class="note-box natural"><span>2</span><span class="step">G</span></div>
+      <div class="note-box natural" style="width:32px;align-self:center;font-size:.6rem;border:none;background:none;color:var(--text2)">G</div>
+      <div class="note-box natural"><span>3</span><span class="step">G</span></div>
+      <div class="note-box half" style="width:32px;align-self:center;font-size:.6rem;border:none;background:none;color:var(--accent2)">H</div>
+      <div class="note-box natural"><span>4</span><span class="step">H</span></div>
+      <div class="note-box natural" style="width:32px;align-self:center;font-size:.6rem;border:none;background:none;color:var(--text2)">G</div>
+      <div class="note-box natural"><span>5</span><span class="step">G</span></div>
+      <div class="note-box natural" style="width:32px;align-self:center;font-size:.6rem;border:none;background:none;color:var(--text2)">G</div>
+      <div class="note-box natural"><span>6</span><span class="step">G</span></div>
+      <div class="note-box natural" style="width:32px;align-self:center;font-size:.6rem;border:none;background:none;color:var(--text2)">G</div>
+      <div class="note-box natural"><span>7</span><span class="step">G</span></div>
+      <div class="note-box half" style="width:32px;align-self:center;font-size:.6rem;border:none;background:none;color:var(--accent2)">H</div>
+      <div class="note-box root"><span>8</span><span class="step">Root</span></div>
+    </div>
+    <div class="tip-box">
+      <strong>Merke-Formel Dur:</strong> <em>G – G – H – G – G – G – H</em><br>
+      (= 2 2 1 2 2 2 1 in Halbtonschritten)<br>
+      Halbtonschritte liegen zwischen <strong>Stufe 3–4</strong> und <strong>7–8</strong>
+    </div>
+    <div class="highlight-box">
+      <strong>C-Dur Beispiel:</strong> C – D – E – <em style="color:var(--accent2)">F</em> – G – A – H – <em style="color:var(--accent2)">C</em><br>
+      (H zwischen E–F und H–C: das sind die natürlichen Halbtonschritte auf dem Klavier – zwischen den weißen Tasten ohne schwarze dazwischen!)
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span>🌙</span> Moll-Tonleiter (natürlich)</div>
+    <div class="scale-display">
+      <div class="note-box root"><span>1</span><span class="step">Root</span></div>
+      <div class="note-box natural" style="width:32px;align-self:center;font-size:.6rem;border:none;background:none;color:var(--text2)">G</div>
+      <div class="note-box natural"><span>2</span><span class="step">G</span></div>
+      <div class="note-box half" style="width:32px;align-self:center;font-size:.6rem;border:none;background:none;color:var(--accent2)">H</div>
+      <div class="note-box natural"><span>3</span><span class="step">H</span></div>
+      <div class="note-box natural" style="width:32px;align-self:center;font-size:.6rem;border:none;background:none;color:var(--text2)">G</div>
+      <div class="note-box natural"><span>4</span><span class="step">G</span></div>
+      <div class="note-box natural" style="width:32px;align-self:center;font-size:.6rem;border:none;background:none;color:var(--text2)">G</div>
+      <div class="note-box natural"><span>5</span><span class="step">G</span></div>
+      <div class="note-box half" style="width:32px;align-self:center;font-size:.6rem;border:none;background:none;color:var(--accent2)">H</div>
+      <div class="note-box natural"><span>6</span><span class="step">H</span></div>
+      <div class="note-box natural" style="width:32px;align-self:center;font-size:.6rem;border:none;background:none;color:var(--text2)">G</div>
+      <div class="note-box natural"><span>7</span><span class="step">G</span></div>
+      <div class="note-box natural" style="width:32px;align-self:center;font-size:.6rem;border:none;background:none;color:var(--text2)">G</div>
+      <div class="note-box root"><span>8</span><span class="step">Root</span></div>
+    </div>
+    <div class="tip-box">
+      <strong>Merke-Formel Moll:</strong> <em>G – H – G – G – H – G – G</em><br>
+      Halbtonschritte liegen zwischen <strong>Stufe 2–3</strong> und <strong>5–6</strong>
+    </div>
+    <div class="highlight-box">
+      <strong>a-Moll Beispiel:</strong> A – H – <em style="color:var(--accent2)">C</em> – D – E – <em style="color:var(--accent2)">F</em> – G – A<br>
+      (Kein einziges Vorzeichen! = Parallele zu C-Dur)
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span>🔑</span> Der Trick: Parallele Dur- und Molltonarten</div>
+    <div class="highlight-box">
+      <strong>Goldene Regel:</strong> Jede Durtonart hat eine <em>Paralleltonart in Moll</em>, die <strong>genau die gleichen Töne</strong> (= gleiche Vorzeichen) verwendet – sie beginnt nur 3 Halbtonschritte tiefer (= kleine Terz unter dem Grundton).<br><br>
+      C-Dur ↔ a-Moll &nbsp;|&nbsp; G-Dur ↔ e-Moll &nbsp;|&nbsp; D-Dur ↔ h-Moll
+    </div>
+    <div class="tip-box">
+      <strong>Ableitung:</strong> Du kennst C-Dur (keine Vorzeichen). Gehe 3 Halbtonschritte runter (C→H→B→A) → a-Moll hat auch keine Vorzeichen!
+    </div>
+    <table style="margin-top:14px;">
+      <tr><th>Durtonart</th><th>Vorzeichen</th><th>Parallele Molltonart</th></tr>
+      <tr><td>C-Dur</td><td>keine</td><td>a-Moll</td></tr>
+      <tr><td>G-Dur</td><td>1♯ (fis)</td><td>e-Moll</td></tr>
+      <tr><td>D-Dur</td><td>2♯ (fis, cis)</td><td>h-Moll</td></tr>
+      <tr><td>F-Dur</td><td>1♭ (b)</td><td>d-Moll</td></tr>
+    </table>
+    <div class="warn-box" style="margin-top:12px">
+      <strong>Für die Klausur:</strong> h-Moll (Johannes-Passion) = 2 Kreuzchen (fis, cis). Tonart für Schmerz, Trauer. D-Dur (Halleluja-Chor) = 2 Kreuzchen, aber Dur → festlich, königlich.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span>🎯</span> Tonarten und ihre Affekte im Barock</div>
+    <table>
+      <tr><th>Tonart</th><th>Affekt (Barock)</th><th>Beispiel</th></tr>
+      <tr><td><strong>D-Dur</strong></td><td>Fest, königlich, triumphierend</td><td>Halleluja-Chor (Händel)</td></tr>
+      <tr><td><strong>h-Moll</strong></td><td>Schmerz, Trauer, Innerlichkeit</td><td>Johannes-Passion (Bach)</td></tr>
+      <tr><td><strong>d-Moll</strong></td><td>Ernst, dunkel, dramatisch</td><td>Toccata & Fuge d-Moll (Bach)</td></tr>
+      <tr><td><strong>C-Dur</strong></td><td>Neutral, klar, offen</td><td>Viele Präludien</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ============================================================ TAB: INTERVALLE -->
+<div id="tab-intervalle" class="content">
+  <div class="card">
+    <div class="card-title"><span>📐</span> Intervalle – Was ist das?</div>
+    <div class="highlight-box">
+      Ein <strong>Intervall</strong> = der Abstand zwischen zwei Tönen. Gemessen in <em>Halbtonschritten</em> oder in <em>Stufen</em> (Prime, Sekunde, Terz…).
+    </div>
+    <div class="tip-box">
+      <strong>Trick zum Zählen:</strong> Zähle beide Töne mit! C bis E = C(1)–D(2)–E(3) → <strong>Terz</strong>. Dann schaust du auf die Halbtonschritte, um groß/klein zu bestimmen.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span>📊</span> Intervall-Tabelle</div>
+    <table>
+      <tr><th>Name</th><th>Abk.</th><th>Halbton-schritte</th><th>Beispiel (von C)</th><th>Klang</th></tr>
+      <tr><td><strong>Prime</strong></td><td>1</td><td>0</td><td>C – C</td><td>gleicher Ton</td></tr>
+      <tr><td><strong>Kleine Sekunde</strong></td><td>k2</td><td>1</td><td>C – Des</td><td>sehr eng, scharf</td></tr>
+      <tr><td><strong>Große Sekunde</strong></td><td>gr2</td><td>2</td><td>C – D</td><td>Ganzton, offen</td></tr>
+      <tr><td><strong>Kleine Terz</strong></td><td>k3</td><td>3</td><td>C – Es</td><td>→ <em style="color:#a07de0">Moll-Klang</em></td></tr>
+      <tr><td><strong>Große Terz</strong></td><td>gr3</td><td>4</td><td>C – E</td><td>→ <em style="color:var(--gold)">Dur-Klang</em></td></tr>
+      <tr><td><strong>Quarte</strong></td><td>4</td><td>5</td><td>C – F</td><td>kraftvoll (Fanfare!)</td></tr>
+      <tr><td><strong>Tritonus</strong></td><td>TT</td><td>6</td><td>C – Fis</td><td>sehr dissonant (Teufel!)</td></tr>
+      <tr><td><strong>Quinte</strong></td><td>5</td><td>7</td><td>C – G</td><td>leer, rein, stark</td></tr>
+      <tr><td><strong>Kleine Sexte</strong></td><td>k6</td><td>8</td><td>C – As</td><td>dunkel, sehnsuchtsvoll</td></tr>
+      <tr><td><strong>Große Sexte</strong></td><td>gr6</td><td>9</td><td>C – A</td><td>weit, offen</td></tr>
+      <tr><td><strong>Kleine Septime</strong></td><td>k7</td><td>10</td><td>C – B</td><td>schwebend, spannungsvoll</td></tr>
+      <tr><td><strong>Große Septime</strong></td><td>gr7</td><td>11</td><td>C – H</td><td>sehr eng, Leitton</td></tr>
+      <tr><td><strong>Oktave</strong></td><td>8</td><td>12</td><td>C – C'</td><td>gleicher Ton, höher</td></tr>
+    </table>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title"><span>🎵</span> Konsonanz vs. Dissonanz</div>
+      <div class="highlight-box">
+        <strong>Konsonanz</strong> = wohlklingend, stabil:<br>
+        Prime, Oktave, Quinte, Quarte (rein)<br>
+        Große/kleine Terz und Sexte
+      </div>
+      <div class="highlight-box" style="border-color:rgba(224,92,107,.3);background:rgba(224,92,107,.08);">
+        <strong>Dissonanz</strong> = spannend, unruhig, auflösungsbedürftig:<br>
+        Sekunden, Septimen, Tritonus
+      </div>
+      <div class="tip-box">
+        <strong>Barock:</strong> Dissonanz = Affekt von Schmerz, Schuld, Zerrissenheit → Bach setzt sie gezielt ein (z.B. T13 „Böses" in der Passion).
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span>🧠</span> Merktricks für Intervalle</div>
+      <ul class="list">
+        <li><strong>Quarte</strong> → „Halleluja"-Motiv bei Händel (ha-LLE-lu-ja = Quarte)</li>
+        <li><strong>Große Terz</strong> → Dur-Dreiklang (C-E-G = C + große Terz + kleine Terz)</li>
+        <li><strong>Kleine Terz</strong> → Moll-Dreiklang (C-Es-G = C + kleine Terz + große Terz)</li>
+        <li><strong>Tritonus</strong> = genau in der Mitte der Oktave → klingt am dissonantesten, „Teufelston"</li>
+        <li><strong>Oktave</strong> = 12 Halbtonschritte = alle Töne auf der Klaviatur von C bis C'</li>
+      </ul>
+      <div class="warn-box" style="margin-top:10px">
+        <strong>Merke:</strong> Dur = große Terz unten + kleine Terz oben.<br>Moll = kleine Terz unten + große Terz oben.
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span>🔧</span> Intervalle in der Musikrhetorik (Klausurrelevant!)</div>
+    <table>
+      <tr><th>Begriff</th><th>Intervall</th><th>Bedeutung</th></tr>
+      <tr><td><strong>Passus duriusculus</strong></td><td>Chromatische Schritte (kl. Sekunde)</td><td>Schmerz, Leid, Scham</td></tr>
+      <tr><td><strong>Saltus duriusculus</strong></td><td>Schwieriger Sprung (z.B. Tritonus, gr. Septime)</td><td>Härte, Schuld, Zerrissenheit</td></tr>
+      <tr><td><strong>Fanfaren-Motiv</strong></td><td>Quarte aufwärts</td><td>Kraft, Herrschaft (Halleluja!)</td></tr>
+      <tr><td><strong>Anabasis</strong></td><td>Aufwärtsgang</td><td>Himmel, Erhebung, Freude</td></tr>
+      <tr><td><strong>Katabasis</strong></td><td>Abwärtsgang</td><td>Tiefe, Leid, Tod</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ============================================================ TAB: CHECKLISTE -->
+<div id="tab-checkliste" class="content">
+  <div class="card">
+    <div class="card-title"><span>✅</span> Klausur-Checkliste</div>
+    <div class="progress-label"><span>Fortschritt</span><span id="cl-progress-text">0 / 0</span></div>
+    <div class="progress-bar"><div class="progress-fill" id="cl-progress-fill" style="width:0%"></div></div>
+    <div id="checklist-container"></div>
+  </div>
+</div>
+
+<!-- ============================================================ TAB: KARTEIKARTEN -->
+<div id="tab-karten" class="content">
+  <div class="card">
+    <div class="card-title"><span>🃏</span> Karteikarten – klicken zum Umdrehen</div>
+  </div>
+  <div class="card-nav">
+    <button onclick="prevCard()">← Zurück</button>
+    <span class="card-counter" id="card-counter">1 / 1</span>
+    <button onclick="nextCard()">Weiter →</button>
+  </div>
+  <div class="flashcard-scene" onclick="flipCard()">
+    <div class="flashcard" id="flashcard">
+      <div class="fc-face fc-front">
+        <div class="fc-tag" id="fc-tag">Kategorie</div>
+        <div class="fc-question" id="fc-question">Frage wird geladen…</div>
+        <div class="fc-hint" style="margin-top:16px">👆 Klicken zum Aufdecken</div>
+      </div>
+      <div class="fc-face fc-back">
+        <div class="fc-tag" id="fc-tag-back">Antwort</div>
+        <div class="fc-answer" id="fc-answer">Antwort</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ TAB: QUIZ -->
+<div id="tab-quiz" class="content">
+  <div class="card" id="quiz-card">
+    <div class="card-title"><span>🧠</span> Quiz – Teste dich!</div>
+    <div style="margin-bottom:14px; font-size:.82rem; color:var(--text2);">Frage <span id="quiz-num">1</span> von <span id="quiz-total">?</span> &nbsp;|&nbsp; Punkte: <span id="quiz-score-live">0</span></div>
+    <div class="quiz-q" id="quiz-q">Lade...</div>
+    <div class="quiz-opts" id="quiz-opts"></div>
+    <div class="quiz-feedback" id="quiz-feedback"></div>
+    <button class="quiz-next" id="quiz-next" onclick="nextQuestion()">Nächste Frage →</button>
+  </div>
+  <div class="quiz-score" id="quiz-result" style="display:none">
+    <div class="big-num" id="result-num">0/0</div>
+    <p id="result-msg">Super!</p>
+    <button class="quiz-restart" onclick="restartQuiz()">🔄 Nochmal spielen</button>
+  </div>
+</div>
+
+<script>
+// ─── TAB SWITCHING ───────────────────────────────────────────
+function switchTab(id) {
+  document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+// ─── AUDIO PLAYER (Lernmodus: Titel erst nach Stop sichtbar) ──
+const tracks = [
+  { file: "Bach - Goldberg-Variationen -Aria.mp3",                        composer: "Johann Sebastian Bach" },
+  { file: "Bach - Suite Nr. 3 in D-Dur - Air.mp3",                        composer: "Johann Sebastian Bach" },
+  { file: "Bach - Weihnachtsoratorium - Herrscher des Himmels.mp3",       composer: "Johann Sebastian Bach" },
+  { file: "Bach - Weihnachtsoratorium - Jauchzet, frohlocket.mp3",        composer: "Johann Sebastian Bach" },
+  { file: "Bach -Toccata & Fuge D-Moll.mp3",                              composer: "Johann Sebastian Bach" },
+  { file: "Händel - Der Messias - Halleluja-Chor.mp3",                    composer: "Georg Friedrich Händel" },
+  { file: "Händel - Feuerwerksmusik - Ouvertüre.mp3",                     composer: "Georg Friedrich Händel" },
+  { file: "Vivaldi - Die Vier Jahreszeiten - Der Frühling - Allegro.mp3", composer: "Antonio Vivaldi" },
+  { file: "Vivaldi - Die Vier Jahreszeiten - Der Sommer - Presto.mp3",    composer: "Antonio Vivaldi" },
+  { file: "Vivaldi - Die Vier Jahreszeiten - Herbst - Allegro.mp3",       composer: "Antonio Vivaldi" },
+  { file: "Vivaldi - Die Vier Jahreszeiten - Winter - Allegro non molto.mp3", composer: "Antonio Vivaldi" }
+];
+
+// revealed[i] = true wenn Titel für Track i schon aufgedeckt wurde
+let revealed = new Array(tracks.length).fill(false);
+let currentOrder = tracks.map((_, i) => i);
+let activeAudio = null;
+let activePlayerIdx = null;
+
+function getTitle(file) { return file.replace('.mp3', ''); }
+
+function formatTime(s) {
+  if (!s || isNaN(s)) return '0:00';
+  return `${Math.floor(s/60)}:${Math.floor(s%60).toString().padStart(2,'0')}`;
+}
+
+function revealTitle(idx) {
+  revealed[idx] = true;
+  const track = tracks[currentOrder[idx]];
+  const titleEl  = document.getElementById(`ap-title-${idx}`);
+  const compEl   = document.getElementById(`ap-composer-${idx}`);
+  const revealEl = document.getElementById(`ap-reveal-${idx}`);
+  if (!titleEl) return;
+  titleEl.textContent  = getTitle(track.file);
+  titleEl.style.color  = 'var(--gold2)';
+  compEl.textContent   = track.composer;
+  if (revealEl) revealEl.style.display = 'none';
+}
+
+function renderAudioGrid() {
+  // Beim Neu-Rendern: altes Audio stoppen und revealed zurücksetzen
+  if (activeAudio) { activeAudio.pause(); activeAudio = null; activePlayerIdx = null; }
+  revealed = new Array(tracks.length).fill(false);
+
+  const grid = document.getElementById('audioGrid');
+  grid.innerHTML = '';
+  currentOrder.forEach((trackIdx, i) => {
+    const track = tracks[trackIdx];
+    const el = document.createElement('div');
+    el.className = 'audio-player';
+    el.id = `ap-${i}`;
+    el.innerHTML = `
+      <div class="ap-top" onclick="togglePlay(${i})">
+        <button class="ap-play-btn" id="ap-btn-${i}">▶</button>
+        <div class="ap-info">
+          <div class="ap-title" id="ap-title-${i}" style="color:var(--text2);letter-spacing:.04em;">? ? ?</div>
+          <div class="ap-composer" id="ap-composer-${i}" style="font-style:italic;color:var(--text2);opacity:.6;">Hör rein und erkenne das Stück</div>
+          <div id="ap-reveal-${i}" style="display:none; margin-top:4px;">
+            <span style="font-size:.72rem; color:var(--accent2); cursor:pointer; text-decoration:underline;"
+                  onclick="event.stopPropagation(); revealTitle(${i})">🔍 Titel aufdecken</span>
+          </div>
+        </div>
+      </div>
+      <div class="ap-controls" id="ap-ctrl-${i}" style="display:none">
+        <div class="ap-progress-wrap" onclick="seekAudio(event,${i})" id="ap-prog-wrap-${i}">
+          <div class="ap-progress-fill" id="ap-prog-${i}"></div>
+        </div>
+        <div class="ap-time"><span id="ap-cur-${i}">0:00</span><span id="ap-dur-${i}">--:--</span></div>
+      </div>
+    `;
+    grid.appendChild(el);
+  });
+}
+
+function stopActivePlayer(showReveal) {
+  if (activePlayerIdx === null) return;
+  const idx = activePlayerIdx;
+  if (activeAudio) { activeAudio.pause(); activeAudio = null; }
+  const btn      = document.getElementById(`ap-btn-${idx}`);
+  const playerEl = document.getElementById(`ap-${idx}`);
+  const ctrl     = document.getElementById(`ap-ctrl-${idx}`);
+  const revealEl = document.getElementById(`ap-reveal-${idx}`);
+  if (btn)      btn.textContent = '▶';
+  if (playerEl) playerEl.classList.remove('playing');
+  if (ctrl)     ctrl.style.display = 'none';
+  // Titel-Aufdecken anbieten, wenn noch nicht aufgedeckt
+  if (showReveal && revealEl && !revealed[idx]) {
+    revealEl.style.display = 'block';
+  }
+  activePlayerIdx = null;
+}
+
+function togglePlay(idx) {
+  const track    = tracks[currentOrder[idx]];
+  const btn      = document.getElementById(`ap-btn-${idx}`);
+  const playerEl = document.getElementById(`ap-${idx}`);
+  const ctrl     = document.getElementById(`ap-ctrl-${idx}`);
+
+  // Gleiches Stück: Pause/Resume
+  if (activeAudio && activePlayerIdx === idx) {
+    if (!activeAudio.paused) {
+      activeAudio.pause();
+      btn.textContent = '▶';
+      playerEl.classList.remove('playing');
+      // Titel-Aufdecken anbieten beim manuellen Stopp
+      const revealEl = document.getElementById(`ap-reveal-${idx}`);
+      if (revealEl && !revealed[idx]) revealEl.style.display = 'block';
+    } else {
+      const revealEl = document.getElementById(`ap-reveal-${idx}`);
+      if (revealEl) revealEl.style.display = 'none';
+      activeAudio.play();
+      btn.textContent = '⏸';
+      playerEl.classList.add('playing');
+    }
+    return;
+  }
+
+  // Anderes Stück war aktiv → stoppen + Titel anbieten
+  stopActivePlayer(true);
+
+  const audio = new Audio('media/' + track.file);
+  activeAudio      = audio;
+  activePlayerIdx  = idx;
+  ctrl.style.display = 'block';
+
+  audio.addEventListener('loadedmetadata', () => {
+    document.getElementById(`ap-dur-${idx}`).textContent = formatTime(audio.duration);
+  });
+  audio.addEventListener('timeupdate', () => {
+    const pct = (audio.currentTime / audio.duration * 100) || 0;
+    document.getElementById(`ap-prog-${idx}`).style.width = pct + '%';
+    document.getElementById(`ap-cur-${idx}`).textContent = formatTime(audio.currentTime);
+  });
+  audio.addEventListener('ended', () => {
+    btn.textContent = '▶';
+    playerEl.classList.remove('playing');
+    document.getElementById(`ap-prog-${idx}`).style.width = '0%';
+    activeAudio = null; activePlayerIdx = null;
+    // Am Ende automatisch Titel aufdecken
+    revealTitle(idx);
+  });
+  audio.play();
+  btn.textContent = '⏸';
+  playerEl.classList.add('playing');
+}
+
+function seekAudio(e, idx) {
+  if (!activeAudio || activePlayerIdx !== idx) return;
+  const wrap = document.getElementById(`ap-prog-wrap-${idx}`);
+  const rect = wrap.getBoundingClientRect();
+  activeAudio.currentTime = ((e.clientX - rect.left) / rect.width) * activeAudio.duration;
+}
+
+function shuffleTracks() {
+  stopActivePlayer(false);
+  for (let i = currentOrder.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [currentOrder[i], currentOrder[j]] = [currentOrder[j], currentOrder[i]];
+  }
+  renderAudioGrid();
+}
+
+renderAudioGrid();
+
+// ─── CHECKLISTE ───────────────────────────────────────────────
+const checklistItems = [
+  { cat: 'Barockzeitalter', text: 'Charakteristika der Barock-Musik (mind. 5) kennen', key: 'ch1' },
+  { cat: 'Barockzeitalter', text: 'Drei Phasen des Barock mit Jahreszahlen und Komponisten nennen können', key: 'ch2' },
+  { cat: 'Barockzeitalter', text: 'Alle wichtigen Gattungen und Formen definieren können', key: 'ch3' },
+  { cat: 'Barockzeitalter', text: 'Affektenlehre erklären + Beispiele für positive/negative Affekte', key: 'ch4' },
+  { cat: 'Barockzeitalter', text: 'Musikalische Rhetorik-Figuren (Anabasis, Katabasis, Passus/Saltus duriusculus, Melismatik, Synkope, Climax) erklären', key: 'ch5' },
+  { cat: 'Barockzeitalter', text: 'Terassendynamik vs. modernes Crescendo erklären', key: 'ch6' },
+  { cat: 'Verleugnungsszene', text: 'Satztypen der Verleugnungsszene: Rezitativ, Arie, Arioso, Choral, Turba-Chor unterscheiden', key: 'ch7' },
+  { cat: 'Verleugnungsszene', text: 'Arioso definieren (zwischen Rezitativ und Arie)', key: 'ch8' },
+  { cat: 'Verleugnungsszene', text: 'Passus duriusculus und Saltus duriusculus in der Szene benennen + deuten', key: 'ch9' },
+  { cat: 'Verleugnungsszene', text: 'Melismatik, Synkopen, leiterfremde Töne, Tonumspielungen als Affektschilderung deuten', key: 'ch10' },
+  { cat: 'Verleugnungsszene', text: 'Choral: Faktur erklären (Vierstimmigkeit SATB, Homophonie, colla parte, Melodie im Sopran)', key: 'ch11' },
+  { cat: 'Verleugnungsszene', text: 'Bedeutung des Choraltextes theologisch erklären können', key: 'ch12' },
+  { cat: 'Vokalmusik', text: 'Händels Messias: Entstehung, Inhalt, Gestaltung des Halleluja-Chors', key: 'ch13' },
+  { cat: 'Bach', text: 'Bachs Lebensstationen (Eisenach → Leipzig) grob kennen', key: 'ch14' },
+  { cat: 'Bach', text: 'Wichtigste Werke Bachs nennen können (4 geistliche, 2 Tasteninstrument-Werke)', key: 'ch15' },
+  { cat: 'Bach', text: 'Motto „Soli Deo Gloria" kennen', key: 'ch16' },
+  { cat: 'Tonleitern', text: 'Dur-Formel (G-G-H-G-G-G-H) und Moll-Formel (G-H-G-G-H-G-G) auswendig', key: 'ch17' },
+  { cat: 'Tonleitern', text: 'C-Dur und a-Moll-Tonleiter aufschreiben können', key: 'ch18' },
+  { cat: 'Tonleitern', text: 'Parallele Dur/Moll-Tonarten erklären (gleiche Töne, andere Grundton)', key: 'ch19' },
+  { cat: 'Intervalle', text: 'Intervalle von Prime bis Oktave mit Halbtonschritten kennen', key: 'ch20' },
+  { cat: 'Intervalle', text: 'Konsonanz vs. Dissonanz erklären können', key: 'ch21' },
+  { cat: 'Intervalle', text: 'Musikrhetorik-Intervalle (Passus/Saltus duriusculus, Fanfare=Quarte) kennen', key: 'ch22' },
+];
+
+function loadChecklist() {
+  const container = document.getElementById('checklist-container');
+  container.innerHTML = '';
+  const categories = [...new Set(checklistItems.map(i => i.cat))];
+  categories.forEach(cat => {
+    const head = document.createElement('div');
+    head.style.cssText = 'font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent2);margin:20px 0 8px;';
+    head.textContent = cat;
+    container.appendChild(head);
+    checklistItems.filter(i => i.cat === cat).forEach(item => {
+      const done = localStorage.getItem('cl_' + item.key) === '1';
+      const div = document.createElement('div');
+      div.className = 'checklist-item';
+      div.innerHTML = `
+        <div class="cl-check ${done ? 'done' : ''}" id="clc-${item.key}" onclick="toggleCheck('${item.key}')"></div>
+        <div class="cl-text ${done ? 'done' : ''}" id="clt-${item.key}">${item.text}</div>
+      `;
+      container.appendChild(div);
+    });
+  });
+  updateProgress();
+}
+
+function toggleCheck(key) {
+  const current = localStorage.getItem('cl_' + key) === '1';
+  localStorage.setItem('cl_' + key, current ? '0' : '1');
+  const check = document.getElementById('clc-' + key);
+  const text = document.getElementById('clt-' + key);
+  check.classList.toggle('done', !current);
+  text.classList.toggle('done', !current);
+  updateProgress();
+}
+
+function updateProgress() {
+  const total = checklistItems.length;
+  const done = checklistItems.filter(i => localStorage.getItem('cl_' + i.key) === '1').length;
+  document.getElementById('cl-progress-text').textContent = `${done} / ${total}`;
+  document.getElementById('cl-progress-fill').style.width = (done / total * 100) + '%';
+}
+
+loadChecklist();
+
+// ─── FLASHCARDS ───────────────────────────────────────────────
+const cards = [
+  { cat: 'Barock', q: 'Was ist der Generalbass?', a: 'Akkordkurzschrift über der Basslinie. Begleitung durch Akkordinstrumente (Orgel, Cembalo, Laute) + Bassinstrumente (Cello, Viola da gamba, Kontrabass).' },
+  { cat: 'Barock', q: 'Was bedeutet Terassendynamik?', a: 'Abrupte Lautstärke-Stufen im Barock – kein allmähliches Crescendo/Decrescendo, sondern plötzlicher Wechsel zwischen laut und leise.' },
+  { cat: 'Barock', q: 'Was ist das Concerto-Prinzip?', a: 'Wechsel zwischen Tutti (volles Orchester = Ripieno) und Solistengruppe (Concertino) – dynamisch und klanglich kontrastierend.' },
+  { cat: 'Rhetorik', q: 'Was ist Anabasis?', a: 'Aufwärtsgang in der Melodie → Bedeutung: Himmel, Erhebung, Freude.' },
+  { cat: 'Rhetorik', q: 'Was ist Katabasis?', a: 'Abwärtsgang in der Melodie → Bedeutung: Tiefe, Leid, Tod.' },
+  { cat: 'Rhetorik', q: 'Was ist Passus duriusculus?', a: 'Chromatischer Schritt (kleine Sekunde) → Affekt: Schmerz, Leid, Scham. Kommt z.B. in der Verleugnungsszene (Bassstimme T33–38) vor.' },
+  { cat: 'Rhetorik', q: 'Was ist Saltus duriusculus?', a: 'Schwieriger, harter Melodiesprung (z.B. Tritonus, gr. Septime) → Affekt: Härte, Schuld, Zerrissenheit.' },
+  { cat: 'Satztypen', q: 'Was ist ein Rezitativ?', a: 'Sprechgesang mit sparsamer Begleitung (Orgel/Basso continuo). Treibt die Handlung voran. Wird von Erzählern und handelnden Personen gesungen.' },
+  { cat: 'Satztypen', q: 'Was ist eine Arie?', a: 'Kunstvolles, gefühlsbetontes Sologesangsstück mit Orchesterbegleitung. Drückt einen Affekt aus. Meist in da-capo-Form (ABA).' },
+  { cat: 'Satztypen', q: 'Was ist ein Arioso?', a: 'Satztyp ZWISCHEN Rezitativ und Arie. Lyrisch, betrachtend, auskomponiiert. Teils vom ganzen Orchester begleitet. Beispiel: Schlusspassage der Verleugnungsszene.' },
+  { cat: 'Satztypen', q: 'Was ist ein Choral?', a: 'Vierstimmig (SATB) homophon gesetztes Kirchenlied mit Orchesterbegleitung (colla parte). Melodie im Sopran. Bedeutung: objektiver, gläubiger Außenblick → Ruhe, Ordnung.' },
+  { cat: 'Satztypen', q: 'Was ist ein Turba-Chor?', a: 'Freier Chorsatz, der eine Personengruppe darstellt (Turba = Menge). In der Johannes-Passion: Schriftgelehrte und Hohepriester.' },
+  { cat: 'Verleugnungsszene', q: 'Welche musikalischen Mittel schildern Petrus\' Verzweiflung im Arioso?', a: 'Passus duriusculus (auf-/abwärts), Saltus duriusculus, Melismatik (fließende Tränen), Synkopen (Schluchzer), Tonumspielungen, leiterfremde Töne, Adagio.' },
+  { cat: 'Verleugnungsszene', q: 'Was bedeutet Homophonie im Choral?', a: 'Alle Stimmen bewegen sich im gleichen Rhythmus – gleichzeitige Töne. Gegenteil: Polyphonie (Stimmen unabhängig). Erkennbar an Fermaten = Zwischenschlüsse.' },
+  { cat: 'Händel', q: 'Wann und wo entstand der Messias?', a: '1741 in 24 Tagen komponiert; Uraufführung 1742 in Dublin. Dreiteiliges Oratorium auf Englisch über die christliche Heilsgeschichte.' },
+  { cat: 'Händel', q: 'Wie ist der Halleluja-Chor gestaltet?', a: 'D-Dur (Fest/Königstonart), Fanfarenmotiv (Quarte), Unisono-Passagen, Fugenthema „he shall reign forever", Tonrepetition + Climax auf „King of Kings".' },
+  { cat: 'Bach', q: 'Wo verbrachte Bach die produktivste Zeit seines Lebens?', a: 'Leipzig (1723–1750) als Thomaskantor: Johannes-Passion, Matthäus-Passion, Weihnachtsoratorium, h-Moll-Messe, über 200 Kantaten.' },
+  { cat: 'Bach', q: 'Was bedeutet „Soli Deo Gloria"?', a: '„Gott allein die Ehre" – Bachs Motto, das er unter viele seiner Werke schrieb.' },
+  { cat: 'Tonleitern', q: 'Wie lautet die Dur-Formel?', a: 'G – G – H – G – G – G – H (Ganz-Ganz-Halb-Ganz-Ganz-Ganz-Halb). Halbtonschritte zwischen Stufe 3–4 und 7–8.' },
+  { cat: 'Tonleitern', q: 'Wie lautet die Moll-Formel (natürlich)?', a: 'G – H – G – G – H – G – G. Halbtonschritte zwischen Stufe 2–3 und 5–6.' },
+  { cat: 'Tonleitern', q: 'Was ist eine Paralleltonart?', a: 'Dur- und Molltonart mit denselben Tönen (= gleiche Vorzeichen), aber unterschiedlichem Grundton. C-Dur ↔ a-Moll. Moll liegt 3 Halbtonschritte unter dem Dur-Grundton.' },
+  { cat: 'Intervalle', q: 'Wie viele Halbtonschritte hat eine reine Quinte?', a: '7 Halbtonschritte. Beispiel: C – G. Klingt leer und rein – häufig als Grundgerüst.' },
+  { cat: 'Intervalle', q: 'Was unterscheidet große und kleine Terz?', a: 'Große Terz = 4 Halbtonschritte → Dur-Klang (hell). Kleine Terz = 3 Halbtonschritte → Moll-Klang (dunkel).' },
+];
+
+let currentCard = 0;
+let isFlipped = false;
+
+function showCard(idx) {
+  const c = cards[idx];
+  document.getElementById('fc-tag').textContent = c.cat;
+  document.getElementById('fc-question').textContent = c.q;
+  document.getElementById('fc-tag-back').textContent = c.cat + ' – Antwort';
+  document.getElementById('fc-answer').textContent = c.a;
+  document.getElementById('card-counter').textContent = `${idx + 1} / ${cards.length}`;
+  const fc = document.getElementById('flashcard');
+  fc.classList.remove('flipped');
+  isFlipped = false;
+}
+
+function flipCard() {
+  const fc = document.getElementById('flashcard');
+  isFlipped = !isFlipped;
+  fc.classList.toggle('flipped', isFlipped);
+}
+
+function nextCard() {
+  currentCard = (currentCard + 1) % cards.length;
+  showCard(currentCard);
+}
+
+function prevCard() {
+  currentCard = (currentCard - 1 + cards.length) % cards.length;
+  showCard(currentCard);
+}
+
+showCard(0);
+
+// ─── QUIZ ─────────────────────────────────────────────────────
+const quizData = [
+  { q: 'Was ist Terassendynamik?', opts: ['Allmähliches Crescendo/Decrescendo', 'Abrupte Lautstärke-Stufen ohne Übergang', 'Wechsel von Dur und Moll', 'Polyphoner Stimmverlauf'], ans: 1, exp: 'Terassendynamik = abrupter Stufenwechsel zwischen laut und leise. Kein Crescendo wie in der Klassik/Romantik!' },
+  { q: 'Was bedeutet Passus duriusculus?', opts: ['Fanfarenmotiv aus Quarten', 'Schwieriger Melodiesprung', 'Chromatischer Schrittgang', 'Wiederholung eines einzelnen Tons'], ans: 2, exp: 'Passus duriusculus = chromatischer Schritt (kleine Sekunde) → Affekt von Schmerz, Leid, Scham.' },
+  { q: 'Was ist die korrekte Dur-Formel?', opts: ['G-H-G-G-H-G-G', 'G-G-H-G-G-G-H', 'H-G-G-H-G-G-G', 'G-G-G-H-G-G-H'], ans: 1, exp: 'Dur: G–G–H–G–G–G–H. Halbtonschritte zwischen Stufe 3–4 und 7–8.' },
+  { q: 'Welcher Satztyp steht zwischen Rezitativ und Arie?', opts: ['Choral', 'Fugate', 'Arioso', 'Turba-Chor'], ans: 2, exp: 'Das Arioso (auch Accompagnato-Rezitativ) liegt zwischen dem schlichten Rezitativ und der ausdrucksvollen Arie.' },
+  { q: 'Was ist das Concerto-Prinzip?', opts: ['Klanglich gleiche Wiederholung', 'Wechsel von Tutti und Solistengruppe', 'Polyphoner Fugenstil', 'Homophoner Choralsatz'], ans: 1, exp: 'Concerto-Prinzip: Tutti (Ripieno = volles Orchester) ↔ Concertino (Solistengruppe) wechseln sich ab.' },
+  { q: 'In welcher Tonart steht der Halleluja-Chor von Händel?', opts: ['h-Moll', 'a-Moll', 'D-Dur', 'G-Dur'], ans: 2, exp: 'D-Dur = Fest- und Königstonart. Passt perfekt zur triumphalen Botschaft des Halleluja-Chors.' },
+  { q: 'Was bedeutet Melismatik?', opts: ['Staccato-Spiel auf Saiteninstrumenten', 'Viele Töne auf einer Silbe', 'Chromatische Abwärtsbewegung', 'Terrassenförmige Dynamik'], ans: 1, exp: 'Melismatik = viele Töne auf einer einzelnen Textsilbe. Im Barock als Affektschilderung, z.B. für fließende Tränen.' },
+  { q: 'Welcher Satztyp schildert in der Johannes-Passion den objektiven Außenblick des Christen?', opts: ['Arie', 'Rezitativ', 'Choral', 'Arioso'], ans: 2, exp: 'Der Choral mit SATB-Homophonie = Ruhe, Ordnung, Abgeklärtheit. Der Hörer (gläubiger Christ) schaut von außen auf das Geschehen.' },
+  { q: 'Wie viele Halbtonschritte hat eine große Terz?', opts: ['2', '3', '4', '5'], ans: 2, exp: 'Große Terz = 4 Halbtonschritte → Dur-Klang. Kleine Terz = 3 → Moll-Klang. Merke: groß=Dur, klein=Moll.' },
+  { q: 'Wo ist Bachs Todesjahr und -ort?', opts: ['1750 in Leipzig', '1759 in London', '1720 in Köthen', '1750 in Weimar'], ans: 0, exp: 'Bach starb am 28. Juli 1750 in Leipzig im Alter von 65 Jahren.' },
+  { q: 'Was ist die Parallele Molltonart zu D-Dur?', opts: ['g-Moll', 'e-Moll', 'h-Moll', 'a-Moll'], ans: 2, exp: 'D-Dur ↔ h-Moll. Die Parallele liegt 3 Halbtonschritte tiefer: D→Cis→C→H = h-Moll. Beide teilen 2 Kreuze.' },
+  { q: 'Was ist colla parte beim Choral?', opts: ['Alle singen im Unisono', 'Die Orchesterstimmen ergänzen die Gesangsstimmen', 'Das Cembalo improvisiert über dem Bass', 'Der Solist singt ohne Begleitung'], ans: 1, exp: 'Colla parte = das Orchester verdoppelt die Gesangsstimmen. Beim Choral: Streicher/Bläser stützen die vier Gesangsstimmen.' },
+  { q: 'Welche Gattung beschreibt das Concerto grosso?', opts: ['Mehrstimmige Motette', 'Mehrsätziges Instrumentalwerk mit Tutti und Solistengruppe', 'Einstimmiger Choralgesang', 'Kammersonaten-Form'], ans: 1, exp: 'Concerto grosso: Mehrsätziges Instrumentalwerk, in dem Tutti (Ripieno) und Solistengruppe (Concertino) klanglich und dynamisch „doppelchörig" kontrastieren.' },
+  { q: 'In welchem Jahr wurde Händels Messias uraufgeführt?', opts: ['1724', '1750', '1742', '1727'], ans: 2, exp: '1742 in Dublin – obwohl Händel den Messias schon 1741 in nur 24 Tagen schrieb.' },
+  { q: 'Was ist Homophonie?', opts: ['Alle Stimmen bewegen sich unabhängig voneinander', 'Alle Stimmen bewegen sich im gleichen Rhythmus', 'Nur eine Stimme mit Continuo-Begleitung', 'Wechsel von Solo und Chor'], ans: 1, exp: 'Homophonie = alle Stimmen im gleichen Rhythmus. Erkennbar an Fermaten als Zwischenschlüsse. Gegenteil: Polyphonie.' },
+];
+
+let qIdx = 0, score = 0, answered = false;
+let shuffledQuiz = [...quizData];
+
+function startQuiz() {
+  shuffledQuiz = [...quizData].sort(() => Math.random() - 0.5);
+  qIdx = 0; score = 0; answered = false;
+  document.getElementById('quiz-total').textContent = shuffledQuiz.length;
+  document.getElementById('quiz-result').style.display = 'none';
+  document.getElementById('quiz-card').style.display = 'block';
+  showQuestion();
+}
+
+function showQuestion() {
+  const q = shuffledQuiz[qIdx];
+  document.getElementById('quiz-num').textContent = qIdx + 1;
+  document.getElementById('quiz-score-live').textContent = score;
+  document.getElementById('quiz-q').textContent = q.q;
+  document.getElementById('quiz-feedback').className = 'quiz-feedback';
+  document.getElementById('quiz-next').style.display = 'none';
+  answered = false;
+  const opts = document.getElementById('quiz-opts');
+  opts.innerHTML = '';
+  q.opts.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-opt';
+    btn.textContent = opt;
+    btn.onclick = () => answer(i);
+    opts.appendChild(btn);
+  });
+}
+
+function answer(chosen) {
+  if (answered) return;
+  answered = true;
+  const q = shuffledQuiz[qIdx];
+  const opts = document.querySelectorAll('.quiz-opt');
+  opts[q.ans].classList.add('correct');
+  const fb = document.getElementById('quiz-feedback');
+  if (chosen === q.ans) {
+    score++;
+    opts[chosen].classList.add('correct');
+    fb.className = 'quiz-feedback correct';
+    fb.textContent = '✅ Richtig! ' + q.exp;
+  } else {
+    opts[chosen].classList.add('wrong');
+    fb.className = 'quiz-feedback wrong';
+    fb.textContent = '❌ Leider falsch. ' + q.exp;
+  }
+  document.getElementById('quiz-score-live').textContent = score;
+  document.getElementById('quiz-next').style.display = 'inline-block';
+}
+
+function nextQuestion() {
+  qIdx++;
+  if (qIdx >= shuffledQuiz.length) {
+    document.getElementById('quiz-card').style.display = 'none';
+    const res = document.getElementById('quiz-result');
+    res.style.display = 'block';
+    document.getElementById('result-num').textContent = `${score} / ${shuffledQuiz.length}`;
+    const pct = score / shuffledQuiz.length;
+    let msg = pct >= 0.9 ? '🏆 Ausgezeichnet! Du bist bereit!' : pct >= 0.7 ? '👍 Gut gemacht! Noch ein bisschen üben.' : '📚 Wiederhol noch mal die schwachen Themen.';
+    document.getElementById('result-msg').textContent = msg;
+  } else {
+    showQuestion();
+  }
+}
+
+function restartQuiz() {
+  startQuiz();
+}
+
+startQuiz();
+</script>
+</body>
+</html>
