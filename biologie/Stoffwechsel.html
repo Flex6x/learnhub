@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stoffwechsel – Lernübersicht Bio GK 11</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0e1a;
+  --surface: #111827;
+  --surface2: #1a2234;
+  --border: #1f2d47;
+  --accent1: #00e5ff;
+  --accent2: #7c3aed;
+  --accent3: #10b981;
+  --accent4: #f59e0b;
+  --accent5: #f43f5e;
+  --text: #e2e8f0;
+  --text2: #94a3b8;
+  --text3: #64748b;
+  --assimil: #00e5ff;
+  --dissimil: #f43f5e;
+  --photo: #10b981;
+  --calvin: #7c3aed;
+  --cell: #f59e0b;
+  --glyko: #f97316;
+  --citrat: #ec4899;
+  --atm: #22d3ee;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* BG */
+body::before {
+  content: '';
+  position: fixed;
+  top: -50%;
+  left: -20%;
+  width: 60%;
+  height: 80%;
+  background: radial-gradient(ellipse, rgba(0,229,255,0.04) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+body::after {
+  content: '';
+  position: fixed;
+  bottom: -30%;
+  right: -10%;
+  width: 50%;
+  height: 70%;
+  background: radial-gradient(ellipse, rgba(124,58,237,0.05) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.app { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 0 16px 80px; }
+
+/* HEADER */
+header {
+  padding: 40px 0 32px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 32px;
+}
+.header-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0,229,255,0.08);
+  border: 1px solid rgba(0,229,255,0.2);
+  color: var(--accent1);
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 16px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.pulse { width: 6px; height: 6px; border-radius: 50%; background: var(--accent1); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.7)} }
+header h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(26px, 5vw, 42px);
+  color: var(--text);
+  line-height: 1.1;
+}
+header h1 span { color: var(--accent1); }
+header p { color: var(--text2); margin-top: 8px; font-size: 14px; }
+
+/* TABS */
+.tabs-wrapper { display: flex; overflow-x: auto; gap: 6px; margin-bottom: 28px; padding-bottom: 4px; scrollbar-width: none; }
+.tabs-wrapper::-webkit-scrollbar { display: none; }
+.tab-btn {
+  flex-shrink: 0;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text2);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all .2s;
+  white-space: nowrap;
+}
+.tab-btn:hover { border-color: var(--accent1); color: var(--accent1); }
+.tab-btn.active {
+  background: rgba(0,229,255,0.1);
+  border-color: var(--accent1);
+  color: var(--accent1);
+}
+.tab-btn .tb-icon { margin-right: 6px; }
+
+/* PANELS */
+.panel { display: none; animation: fadeIn .3s ease; }
+.panel.active { display: block; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+
+/* CARDS */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 20px;
+  transition: border-color .2s;
+}
+.card:hover { border-color: rgba(0,229,255,0.15); }
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.tag {
+  display: inline-block;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-weight: 700;
+}
+.tag-assimil { background: rgba(0,229,255,.12); color: var(--assimil); border: 1px solid rgba(0,229,255,.25); }
+.tag-dissimil { background: rgba(244,63,94,.12); color: var(--dissimil); border: 1px solid rgba(244,63,94,.25); }
+.tag-photo { background: rgba(16,185,129,.12); color: var(--photo); border: 1px solid rgba(16,185,129,.25); }
+.tag-calvin { background: rgba(124,58,237,.15); color: #a78bfa; border: 1px solid rgba(124,58,237,.3); }
+.tag-cell { background: rgba(245,158,11,.12); color: var(--cell); border: 1px solid rgba(245,158,11,.25); }
+.tag-glyko { background: rgba(249,115,22,.12); color: var(--glyko); border: 1px solid rgba(249,115,22,.25); }
+.tag-citrat { background: rgba(236,72,153,.12); color: var(--citrat); border: 1px solid rgba(236,72,153,.25); }
+.tag-atm { background: rgba(34,211,238,.12); color: var(--atm); border: 1px solid rgba(34,211,238,.25); }
+
+.card h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 20px;
+  color: var(--text);
+}
+.card h3 { font-size: 14px; font-weight: 600; color: var(--text); margin: 14px 0 8px; }
+.card p, .card li { font-size: 14px; color: var(--text2); line-height: 1.7; }
+.card ul { padding-left: 18px; }
+.card li { margin-bottom: 4px; }
+.card strong { color: var(--text); font-weight: 600; }
+
+/* Formula box */
+.formula {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent1);
+  border-radius: 8px;
+  padding: 14px 16px;
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  color: var(--accent1);
+  margin: 12px 0;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.formula.green { border-left-color: var(--accent3); color: var(--accent3); }
+.formula.purple { border-left-color: #a78bfa; color: #a78bfa; }
+.formula.orange { border-left-color: var(--glyko); color: var(--glyko); }
+.formula.pink { border-left-color: var(--citrat); color: var(--citrat); }
+.formula.cyan { border-left-color: var(--atm); color: var(--atm); }
+
+/* Two col grid */
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media(max-width:600px){ .grid2 { grid-template-columns: 1fr; } }
+.mini-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px;
+}
+.mini-card h4 { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+
+/* Flow steps */
+.flow { display: flex; flex-direction: column; gap: 4px; margin: 12px 0; }
+.flow-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 14px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--text2);
+}
+.flow-step .num {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(0,229,255,.15);
+  color: var(--accent1);
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.flow-arrow {
+  text-align: center;
+  color: var(--text3);
+  font-size: 16px;
+  line-height: 1;
+}
+
+/* OVERVIEW TABLE */
+.overview-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.overview-table th {
+  background: var(--surface2);
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 11px;
+  font-family: 'Space Mono', monospace;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  border-bottom: 1px solid var(--border);
+}
+.overview-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text2);
+  vertical-align: top;
+}
+.overview-table tr:last-child td { border-bottom: none; }
+.overview-table tr:hover td { background: rgba(255,255,255,.02); }
+
+/* FLASHCARDS */
+.fc-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.fc-counter { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--text3); }
+.btn {
+  padding: 8px 20px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all .2s;
+}
+.btn:hover { border-color: var(--accent1); color: var(--accent1); }
+.btn-primary {
+  background: rgba(0,229,255,.1);
+  border-color: var(--accent1);
+  color: var(--accent1);
+}
+.btn-success { background: rgba(16,185,129,.1); border-color: var(--accent3); color: var(--accent3); }
+.btn-danger { background: rgba(244,63,94,.1); border-color: var(--accent5); color: var(--accent5); }
+
+.flashcard-area { perspective: 1000px; margin-bottom: 20px; }
+.flashcard {
+  width: 100%;
+  height: 220px;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform .5s ease;
+  position: relative;
+}
+.flashcard.flipped { transform: rotateY(180deg); }
+.fc-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+}
+.fc-front { background: var(--surface); }
+.fc-back { background: var(--surface2); transform: rotateY(180deg); border-color: var(--accent1); }
+.fc-front p { font-size: 18px; font-weight: 600; color: var(--text); line-height: 1.4; }
+.fc-back p { font-size: 14px; color: var(--text2); line-height: 1.7; }
+.fc-hint { font-size: 11px; color: var(--text3); margin-top: 12px; font-family: 'Space Mono', monospace; }
+.fc-cat { font-size: 10px; margin-bottom: 10px; }
+.fc-progress { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 16px; }
+.fc-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); transition: background .3s; }
+.fc-dot.known { background: var(--accent3); }
+.fc-dot.unknown { background: var(--accent5); }
+
+/* QUIZ */
+.quiz-progress-bar {
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+.quiz-progress-fill {
+  height: 100%;
+  background: var(--accent1);
+  border-radius: 2px;
+  transition: width .4s ease;
+}
+.quiz-q {
+  font-family: 'DM Serif Display', serif;
+  font-size: 20px;
+  color: var(--text);
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+.quiz-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+.quiz-option {
+  padding: 14px 18px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text2);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all .2s;
+  text-align: left;
+}
+.quiz-option:hover:not(.disabled) { border-color: var(--accent1); color: var(--text); }
+.quiz-option.correct { border-color: var(--accent3); background: rgba(16,185,129,.1); color: var(--accent3); }
+.quiz-option.wrong { border-color: var(--accent5); background: rgba(244,63,94,.1); color: var(--accent5); }
+.quiz-option.disabled { cursor: not-allowed; }
+.quiz-feedback {
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin-bottom: 16px;
+  display: none;
+}
+.quiz-feedback.show { display: block; }
+.quiz-feedback.ok { background: rgba(16,185,129,.1); border: 1px solid rgba(16,185,129,.3); color: var(--accent3); }
+.quiz-feedback.fail { background: rgba(244,63,94,.1); border: 1px solid rgba(244,63,94,.3); color: #fda4af; }
+.quiz-score {
+  text-align: center;
+  padding: 40px 20px;
+}
+.quiz-score-num { font-family: 'DM Serif Display', serif; font-size: 64px; color: var(--accent1); }
+.quiz-score p { color: var(--text2); font-size: 15px; margin-top: 8px; }
+
+/* GLOSSARY */
+.gloss-search {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  margin-bottom: 20px;
+  outline: none;
+  transition: border-color .2s;
+}
+.gloss-search:focus { border-color: var(--accent1); }
+.gloss-search::placeholder { color: var(--text3); }
+.gloss-item {
+  border-bottom: 1px solid var(--border);
+  padding: 14px 4px;
+}
+.gloss-item:last-child { border-bottom: none; }
+.gloss-term { font-weight: 700; color: var(--text); font-size: 14px; margin-bottom: 4px; }
+.gloss-def { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+/* CHECKLIST */
+.check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: all .2s;
+}
+.check-item:hover { border-color: rgba(255,255,255,.1); }
+.check-item.done { opacity: .5; }
+.check-item.done .check-text { text-decoration: line-through; }
+.check-box {
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  border: 2px solid var(--border);
+  flex-shrink: 0;
+  margin-top: 1px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .2s;
+}
+.check-item.done .check-box { background: var(--accent3); border-color: var(--accent3); }
+.check-text { font-size: 14px; color: var(--text2); line-height: 1.5; }
+.check-category {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  margin: 20px 0 8px;
+}
+
+/* TIPS */
+.tip-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent4);
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+.tip-card h4 { font-size: 14px; font-weight: 700; color: var(--accent4); margin-bottom: 6px; }
+.tip-card p, .tip-card li { font-size: 13px; color: var(--text2); line-height: 1.6; }
+.tip-card ul { padding-left: 16px; }
+.tip-card.blue { border-left-color: var(--accent1); }
+.tip-card.blue h4 { color: var(--accent1); }
+.tip-card.green { border-left-color: var(--accent3); }
+.tip-card.green h4 { color: var(--accent3); }
+.tip-card.purple { border-left-color: #a78bfa; }
+.tip-card.purple h4 { color: #a78bfa; }
+.tip-card.red { border-left-color: var(--accent5); }
+.tip-card.red h4 { color: var(--accent5); }
+
+/* DIVIDER */
+.section-divider {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--text3);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 24px 0 16px;
+}
+.section-divider::before, .section-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* OVERVIEW MIND MAP style */
+.overview-node {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  margin: 4px;
+}
+.tree { text-align: center; }
+.tree-root {
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: 10px;
+  background: rgba(0,229,255,.1);
+  border: 1px solid var(--accent1);
+  color: var(--accent1);
+  font-family: 'DM Serif Display', serif;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+.tree-row {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+.tree-connector {
+  text-align: center;
+  color: var(--text3);
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+<header>
+  <div class="header-badge"><span class="pulse"></span> Bio GK · Klasse 11 · Sachsen</div>
+  <h1>Stoff- & <span>Energiewechsel</span></h1>
+  <p>Deine Lernübersicht für die Kontrolle · Ziel: 10 Notenpunkte 🎯</p>
+</header>
+
+<div class="tabs-wrapper">
+  <button class="tab-btn active" onclick="showTab('uebersicht')"><span class="tb-icon">🗺</span>Überblick</button>
+  <button class="tab-btn" onclick="showTab('foto')"><span class="tb-icon">☀️</span>Lichtreaktion</button>
+  <button class="tab-btn" onclick="showTab('calvin')"><span class="tb-icon">🔄</span>Calvin-Zyklus</button>
+  <button class="tab-btn" onclick="showTab('zellatmung')"><span class="tb-icon">⚡</span>Zellatmung</button>
+  <button class="tab-btn" onclick="showTab('faktoren')"><span class="tb-icon">🌡</span>Faktoren & Mehr</button>
+  <button class="tab-btn" onclick="showTab('karten')"><span class="tb-icon">🃏</span>Karteikarten</button>
+  <button class="tab-btn" onclick="showTab('quiz')"><span class="tb-icon">🧠</span>Quiz</button>
+  <button class="tab-btn" onclick="showTab('glossar')"><span class="tb-icon">📖</span>Glossar</button>
+  <button class="tab-btn" onclick="showTab('tipps')"><span class="tb-icon">💡</span>Lerntipps</button>
+  <button class="tab-btn" onclick="showTab('check')"><span class="tb-icon">✅</span>Checkliste</button>
+</div>
+
+<!-- ===================== ÜBERBLICK ===================== -->
+<div id="panel-uebersicht" class="panel active">
+  <div class="card">
+    <div class="card-header"><h2>🗺 Gesamtüberblick: Stoff- und Energiewechsel</h2></div>
+    <div class="tree">
+      <div class="tree-root">Stoff- und Energiewechsel der Organismen</div>
+      <div class="tree-connector">▼&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▼</div>
+      <div class="tree-row">
+        <div style="text-align:center">
+          <div class="overview-node" style="background:rgba(0,229,255,.1);border:1px solid var(--assimil);color:var(--assimil)">Assimilation (Aufbau)</div>
+          <div style="font-size:12px;color:var(--text3);margin:4px 0">körperfremde → körpereigene org. Stoffe</div>
+          <div class="tree-row" style="margin-top:8px">
+            <div style="text-align:center">
+              <div class="overview-node" style="background:rgba(16,185,129,.1);border:1px solid var(--photo);color:var(--photo);font-size:12px">Autotrophe A.</div>
+              <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;justify-content:center">
+                <span class="tag tag-photo">Fotosynthese</span>
+                <span style="font-size:11px;color:var(--text3);padding:3px 8px;border:1px solid var(--border);border-radius:20px">Chemosynthese</span>
+              </div>
+            </div>
+            <div style="text-align:center">
+              <div class="overview-node" style="background:rgba(124,58,237,.1);border:1px solid #a78bfa;color:#a78bfa;font-size:12px">Heterotrophe A.</div>
+              <div style="margin-top:6px;font-size:11px;color:var(--text3)">Tiere, Pilze, Menschen</div>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center">
+          <div class="overview-node" style="background:rgba(244,63,94,.1);border:1px solid var(--dissimil);color:var(--dissimil)">Dissimilation (Abbau)</div>
+          <div style="font-size:12px;color:var(--text3);margin:4px 0">energiereiche org. Stoffe → Energie</div>
+          <div class="tree-row" style="margin-top:8px">
+            <div style="text-align:center">
+              <span class="tag tag-cell" style="font-size:12px;padding:5px 12px">Atmung (aerob)</span>
+              <div style="margin-top:6px;font-size:11px;color:var(--text3)">CO₂ + H₂O + viel ATP</div>
+            </div>
+            <div style="text-align:center">
+              <span style="font-size:12px;padding:5px 12px;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:20px;color:var(--text2)">Gärung (anaerob)</span>
+              <div style="margin-top:6px;font-size:11px;color:var(--text3)">unvollständig, wenig ATP</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-header"><span class="tag tag-assimil">Assimilation</span></div>
+      <h2 style="font-size:17px">Definition</h2>
+      <p style="margin-top:10px">Form des Stoff- und Energiewechsels, bei der <strong>körperfremde Stoffe</strong> in <strong>körpereigene, energiereiche, organische Stoffe</strong> umgewandelt werden.</p>
+      <h3>Autotrophe Assimilation</h3>
+      <p>Ausgangsstoffe sind <strong>anorganische, energiearme</strong> Stoffe → werden in energiereiche organische Stoffe umgewandelt.<br><em>Beispiel: Fotosynthese (Pflanzen)</em></p>
+      <h3>Heterotrophe Assimilation</h3>
+      <p>Ausgangsstoffe sind bereits <strong>organische, energiereiche</strong> körperfremde Stoffe.<br><em>Beispiel: Tiere, Menschen</em></p>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="tag tag-dissimil">Dissimilation</span></div>
+      <h2 style="font-size:17px">Definition</h2>
+      <p style="margin-top:10px">Form des Stoff- und Energiewechsels, bei der <strong>energiereiche organische Stoffe zur Energiegewinnung</strong> in energieärmere Stoffe abgebaut werden.</p>
+      <h3>Atmung (aerob)</h3>
+      <p>Körpereigene organische Stoffe werden mit <strong>Sauerstoff</strong> vollständig zu CO₂ und Wasser abgebaut → <strong>viel ATP</strong></p>
+      <h3>Gärung (anaerob)</h3>
+      <p>Energiereiche organische Stoffe werden <strong>unvollständig</strong> zu energieärmeren organischen Stoffen abgebaut → <strong>wenig ATP</strong></p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><h2>⚡ Vergleich: Fotosynthese vs. Zellatmung</h2></div>
+    <div style="overflow-x:auto">
+    <table class="overview-table">
+      <thead><tr><th>Kriterium</th><th style="color:var(--photo)">Fotosynthese</th><th style="color:var(--cell)">Zellatmung</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Typ</strong></td><td>Assimilation</td><td>Dissimilation</td></tr>
+        <tr><td><strong>Richtung</strong></td><td>Aufbau (anaboler Prozess)</td><td>Abbau (kataboler Prozess)</td></tr>
+        <tr><td><strong>Ort</strong></td><td>Chloroplast</td><td>Mitochondrium + Cytoplasma</td></tr>
+        <tr><td><strong>Edukte</strong></td><td>6 CO₂ + 6 H₂O + Licht</td><td>C₆H₁₂O₆ + 6 O₂</td></tr>
+        <tr><td><strong>Produkte</strong></td><td>C₆H₁₂O₆ + 6 O₂</td><td>6 CO₂ + H₂O + 32 ATP</td></tr>
+        <tr><td><strong>Energie</strong></td><td>Lichtenergie → chem. Energie (endergon)</td><td>chem. Energie → ATP (exergon)</td></tr>
+        <tr><td><strong>Wer?</strong></td><td>Pflanzen, Algen, Cyanobakterien</td><td>Alle aeroben Organismen</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== LICHTREAKTION ===================== -->
+<div id="panel-foto" class="panel">
+  <div class="card">
+    <div class="card-header"><span class="tag tag-assimil">Assimilation → Autotroph</span><span class="tag tag-photo" style="margin-left:4px">Fotosynthese</span></div>
+    <h2>☀️ Fotosynthese – Gesamtüberblick</h2>
+    <h3>Gesamtbilanz</h3>
+    <div class="formula green">6 CO₂ + 6 H₂O  ──[Licht + Chlorophyll]──▶  C₆H₁₂O₆ + 6 O₂   |   Q = +2880 kJ/mol</div>
+    <h3>Ort</h3>
+    <p><strong>Chloroplast</strong> in Blättern (Palisaden- + Schwammgewebe) und grünen Sprossachsen.</p>
+    <h3>Ziele der Fotosynthese</h3>
+    <ul>
+      <li>Aufbau der Zellen</li>
+      <li>Entwicklungsprozesse (Wachstum, Blütenbildung)</li>
+      <li>Grundlage für Zellatmung (aufgebaute Stoffe → Energiequelle)</li>
+      <li>Herstellung von Speicherstoffen</li>
+      <li>O₂-Freisetzung für Zellatmung; Bildung der Ozonschicht</li>
+    </ul>
+    <h3>Biologische Bedeutung</h3>
+    <ul>
+      <li>🌿 <strong>Nahrungsgrundlage</strong>: Basis aller Nahrungsketten</li>
+      <li>💨 <strong>Sauerstoffquelle</strong>: O₂ für Zellatmung</li>
+      <li>🛡 <strong>UV-Schutz</strong>: Ozonschicht ermöglicht Landbesiedlung</li>
+      <li>🌍 <strong>Klimaregulation</strong>: CO₂-Bindung aus Atmosphäre</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="tag tag-photo">Fotosysteme</span></div>
+    <h2>🔬 Fotosysteme I & II</h2>
+    <div style="overflow-x:auto">
+    <table class="overview-table">
+      <thead><tr><th>Kriterium</th><th>Fotosystem II</th><th>Fotosystem I</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Vorkommen</strong></td><td>Thylakoidmembran</td><td>Thylakoidmembran</td></tr>
+        <tr><td><strong>Reaktionszentrum</strong></td><td>Chlorophyll-a-Paar</td><td>Chlorophyll-a-Paar</td></tr>
+        <tr><td><strong>Wellenlänge</strong></td><td>680 nm (P680)</td><td>700 nm (P700)</td></tr>
+        <tr><td><strong>Antennenkomplex</strong></td><td>LHC vorhanden</td><td>LHC vorhanden</td></tr>
+        <tr><td><strong>Wasserspaltend</strong></td><td>✅ OEC / Mn-Cluster</td><td>❌ nicht vorhanden</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="margin-top:12px">Beide Fotosysteme liegen <strong>nebeneinander</strong> in der Thylakoidmembran und arbeiten zusammen (Z-Schema / Elektronentransportkette).</p>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="tag tag-photo">Lichtabhängige Primärreaktion</span></div>
+    <h2>⚡ Ablauf der Lichtabhängigen Primärreaktion</h2>
+    <p style="margin-bottom:14px">Ort: <strong>Thylakoidmembran</strong> | Aufgabe: <strong>Energieumwandlung + NADPH+H⁺-Bereitstellung</strong></p>
+    
+    <div class="section-divider">Lichtreaktion II (FS II – P680)</div>
+    <div class="flow">
+      <div class="flow-step"><span class="num">1</span><span>Licht trifft Antennenkomplex (Chlorophylle, Carotinoide) → Energie wird zum <strong>Reaktionszentrum P680</strong> übertragen</span></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step"><span class="num">2</span><span>Pro Chlorophyll-a-Molekülpaar werden <strong>2 Elektronen</strong> auf ein höheres Energieniveau angehoben → auf <strong>Akzeptor II</strong> übertragen</span></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step"><span class="num">3</span><span><strong>Elektronenlücke entsteht</strong> in P680* → wird durch Fotolyse des Wassers geschlossen</span></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step"><span class="num">4</span><span>Elektronen durchlaufen <strong>Redoxkette II</strong>: Plastochinon → Cytochrom-Komplex → Plastocyanin → P700 (FS I)</span></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step"><span class="num">5</span><span>Elektronen werden <strong>energieärmer</strong> → Energie treibt Protonenpumpe (Cytochrom-Komplex) → <strong>Protonengradient für ATP-Bildung</strong></span></div>
+    </div>
+
+    <div class="section-divider">Fotolyse des Wassers (FS II – OEC)</div>
+    <div class="formula green">H₂O ─[Licht]─▶ ½ O₂ + 2 e⁻ + 2 H⁺</div>
+    <p>Ort: <strong>Thylakoid-Innenraum</strong> | Elektronen schließen Lücke in P680* | H⁺ für Protonengradient | O₂ wird freigesetzt</p>
+
+    <div class="section-divider">Lichtreaktion I (FS I – P700)</div>
+    <div class="flow">
+      <div class="flow-step"><span class="num">1</span><span>Licht → P700 → Elektronen angeregt → auf <strong>Akzeptor I</strong> übertragen</span></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step"><span class="num">2</span><span>Redoxkette I: Ferredoxin → Flavoprotein</span></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step"><span class="num">3</span><span><strong>NADP⁺ + 2H⁺ + 2e⁻ → NADPH+H⁺</strong> (wichtigstes Reduktionsmittel für Calvin-Zyklus)</span></div>
+    </div>
+
+    <div class="section-divider">Chemiosmotische ATP-Bildung</div>
+    <div class="grid2">
+      <div class="mini-card">
+        <h4 style="color:var(--accent1)">Protonengradient entsteht durch:</h4>
+        <ul style="font-size:13px;color:var(--text2);padding-left:16px">
+          <li>H⁺-Bildung bei Fotolyse (Innenraum)</li>
+          <li>Cytochrom-Komplex: pumpt H⁺ aktiv in Innenraum</li>
+          <li>Thylakoid-Innenraum: pH 5 | Stroma: pH 8</li>
+        </ul>
+      </div>
+      <div class="mini-card">
+        <h4 style="color:var(--accent3)">ATP-Bildung:</h4>
+        <div class="formula" style="font-size:11px;white-space:normal;margin:8px 0">H⁺ fließt durch ATP-Synthase<br>ADP + P → ATP</div>
+        <p style="font-size:13px;color:var(--text2)">ATP = Voraussetzung für Calvin-Zyklus</p>
+      </div>
+    </div>
+    <div class="formula green" style="margin-top:12px">Ergebnis Primärreaktion: ATP + NADPH+H⁺ (+ O₂ als Nebenprodukt)</div>
+  </div>
+</div>
+
+<!-- ===================== CALVIN-ZYKLUS ===================== -->
+<div id="panel-calvin" class="panel">
+  <div class="card">
+    <div class="card-header"><span class="tag tag-assimil">Assimilation → Autotroph</span><span class="tag tag-calvin" style="margin-left:4px">Lichtunabhängig</span></div>
+    <h2>🔄 Lichtunabhängige Sekundärreaktion – Calvin-Zyklus</h2>
+    <div class="grid2" style="margin:12px 0">
+      <div class="mini-card"><h4 style="color:#a78bfa">Ort</h4><p style="font-size:13px;color:var(--text2)">Stroma der Chloroplasten</p></div>
+      <div class="mini-card"><h4 style="color:#a78bfa">Aufgabe</h4><p style="font-size:13px;color:var(--text2)">Stoffumwandlung: CO₂ → Glucose (Ziel der Assimilation)</p></div>
+    </div>
+    <h3>Voraussetzungen</h3>
+    <p>18 mol <strong>ATP</strong> (aus Primärreaktion) + 12 mol <strong>NADPH+H⁺</strong> (aus Primärreaktion)</p>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="tag tag-calvin">Phase 1</span></div>
+    <h2 style="font-size:18px">1️⃣ Carboxylierende Phase (CO₂-Fixierung)</h2>
+    <h3>Aufgabe</h3>
+    <p>Anorganisches CO₂ organisch binden.</p>
+    <div class="flow" style="margin-top:12px">
+      <div class="flow-step"><span class="num">1</span><span>CO₂ wird an den <strong>C₅-Körper Ribulose-1,5-bisphosphat (RubP)</strong> gebunden (durch RuBisCO-Enzym)</span></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step"><span class="num">2</span><span>Instabiler <strong>C₆-Körper</strong> entsteht → zerfällt sofort in <strong>2× C₃-Körper (3-Phosphoglycerat, PGS)</strong></span></div>
+    </div>
+    <div class="formula purple">6 CO₂ + 6 RubP → 12× 3-Phosphoglycerat (PGS)</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="tag tag-calvin">Phase 2</span></div>
+    <h2 style="font-size:18px">2️⃣ Reduzierende Phase (Reduktion & Glucosebildung)</h2>
+    <h3>Aufgabe</h3>
+    <p>Energiezufuhr und Herstellung von Glucose.</p>
+    <div class="flow" style="margin-top:12px">
+      <div class="flow-step"><span class="num">1</span><span><strong>3-Phosphoglycerat (PGS)</strong> wird unter Verbrauch von <strong>ATP und NADPH+H⁺</strong> zu <strong>3-Phosphoglycerinaldehyd (PGA/Triose)</strong> reduziert</span></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step"><span class="num">2</span><span>Zwei Triose-Moleküle vereinigen sich → <strong>Glucose (C₆H₁₂O₆)</strong> + H₂O</span></div>
+    </div>
+    <div class="formula purple">12× PGS + 12 ATP + 12 NADPH+H⁺ → 12× PGA (Triose)</div>
+    <div class="formula purple">2× PGA → C₆H₁₂O₆ (Glucose) + H₂O</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="tag tag-calvin">Phase 3</span></div>
+    <h2 style="font-size:18px">3️⃣ Regenerierende Phase (Rückbildung des CO₂-Akzeptors)</h2>
+    <h3>Aufgabe</h3>
+    <p>Den CO₂-Akzeptor (Ribulose-1,5-bisphosphat) für einen kontinuierlichen Ablauf wiederherstellen.</p>
+    <div class="flow" style="margin-top:12px">
+      <div class="flow-step"><span class="num">1</span><span>Die restlichen <strong>10 Triose-Moleküle</strong> (PGA) werden unter <strong>ATP-Verbrauch</strong> umgebaut</span></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step"><span class="num">2</span><span>Es entstehen wieder <strong>6 Moleküle Ribulose-1,5-bisphosphat (C₅)</strong></span></div>
+    </div>
+    <div class="formula purple">10× PGA + 6 ATP → 6× Ribulose-1,5-bisphosphat (RubP)</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><h2>📊 Calvin-Zyklus auf einen Blick</h2></div>
+    <div style="overflow-x:auto">
+    <table class="overview-table">
+      <thead><tr><th>Phase</th><th>Schlüsselstoff ein</th><th>Schlüsselstoff aus</th><th>Verbrauch</th></tr></thead>
+      <tbody>
+        <tr><td><strong>1. Fixierung</strong></td><td>CO₂ + RubP (C₅)</td><td>3-PGS (C₃) ×2</td><td>—</td></tr>
+        <tr><td><strong>2. Reduktion</strong></td><td>3-PGS (C₃)</td><td>PGA/Triose (C₃)</td><td>12 ATP, 12 NADPH+H⁺</td></tr>
+        <tr><td><strong>3. Regeneration</strong></td><td>10× PGA (C₃)</td><td>6× RubP (C₅)</td><td>6 ATP</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <h3 style="margin-top:16px">Weiterverarbeitung der Glucose</h3>
+    <p>Aus der Glucose entstehen alle organischen Stoffe der Pflanze: <strong>Stärke, Cellulose, Fructose, Saccharose, Eiweiße, Fette</strong></p>
+  </div>
+</div>
+
+<!-- ===================== ZELLATMUNG ===================== -->
+<div id="panel-zellatmung" class="panel">
+  <div class="card">
+    <div class="card-header"><span class="tag tag-dissimil">Dissimilation → Atmung</span><span class="tag tag-cell" style="margin-left:4px">Zellatmung</span></div>
+    <h2>⚡ Zellatmung – Gesamtüberblick</h2>
+    <p style="margin:10px 0 6px"><strong>Definition:</strong> Aerober (sauerstoffabhängiger) Stoffwechselprozess, bei dem organische Stoffe (z.B. Glucose) schrittweise abgebaut werden, um <strong>Energie in Form von ATP</strong> zu gewinnen.</p>
+    <p><strong>Ziel:</strong> Bereitstellung von universell nutzbarer Energie (ATP) für alle lebensnotwendigen Prozesse der Zelle.</p>
+    <div class="formula orange">C₆H₁₂O₆ + 6 O₂ + 6 H₂O → 6 CO₂ + 12 H₂O + 32 ATP</div>
+    <p><strong>Ort:</strong> Cytoplasma (Glykolyse) + Mitochondrium (Rest)</p>
+    <div class="grid2" style="margin-top:14px">
+      <div class="mini-card"><h4 style="color:var(--glyko)">Teilprozesse</h4>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-top:6px">
+          <span style="font-size:13px;color:var(--text2)">1. 🔵 Glykolyse (Cytoplasma)</span>
+          <span style="font-size:13px;color:var(--text2)">2. 🟣 Zwischenschritt + Citratzyklus (Matrix)</span>
+          <span style="font-size:13px;color:var(--text2)">3. 🔵 Atmungskette (Cristae)</span>
+        </div>
+      </div>
+      <div class="mini-card"><h4 style="color:var(--cell)">ATP-Ausbeute gesamt</h4>
+        <div style="font-size:26px;font-family:'DM Serif Display',serif;color:var(--cell);margin:6px 0">~32 ATP</div>
+        <p style="font-size:12px;color:var(--text3)">Glykolyse: 2 | Citratzyklus: 2 | Atmungskette: 28</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="tag tag-glyko">Teilprozess 1</span></div>
+    <h2>🔵 Glykolyse</h2>
+    <div class="grid2" style="margin:12px 0">
+      <div class="mini-card"><h4 style="color:var(--glyko)">Ort</h4><p style="font-size:13px;color:var(--text2)">Cytoplasma der Zelle</p></div>
+      <div class="mini-card"><h4 style="color:var(--glyko)">Aufgabe</h4><p style="font-size:13px;color:var(--text2)">Spaltung Glucose (C₆) → 2× Pyruvat (C₃) + ATP + NADH+H⁺</p></div>
+    </div>
+    <h3>Verlauf (Fließschema)</h3>
+    <div class="flow">
+      <div class="flow-step"><span class="num">1</span><span><strong>Glucose (C₆)</strong> + 2 ATP → Aktivierung</span></div>
+      <div class="flow-arrow">↓ [–2 ATP]</div>
+      <div class="flow-step"><span class="num">2</span><span><strong>Fructose-1,6-bisphosphat (C₆)</strong> → Spaltung</span></div>
+      <div class="flow-arrow">↓ [Spaltung]</div>
+      <div class="flow-step"><span class="num">3</span><span><strong>2× Glyceral-3-phosphat (C₃)</strong> → Oxidation: + 2 NAD⁺ → 2 NADH+H⁺</span></div>
+      <div class="flow-arrow">↓ [+2 NADH+H⁺]</div>
+      <div class="flow-step"><span class="num">4</span><span><strong>2× 1,3-Bisphosphoglycerat (C₃)</strong> → Energieerzeugung: + 4 ADP → 4 ATP</span></div>
+      <div class="flow-arrow">↓ [+4 ATP]</div>
+      <div class="flow-step"><span class="num">5</span><span><strong>2× Pyruvat (C₃)</strong> – Endprodukt der Glykolyse</span></div>
+    </div>
+    <div class="formula orange">C₆H₁₂O₆ + 2 NAD⁺ + 2 ADP + 2P → 2 Pyruvat + 2 NADH+H⁺ + 2 ATP</div>
+    <div class="grid2" style="margin-top:10px">
+      <div class="mini-card"><h4 style="color:var(--glyko)">Ausgangsstoffe</h4><p style="font-size:13px;color:var(--text2)">C₆H₁₂O₆ + 2 NAD⁺ + 2 ADP + 2P</p></div>
+      <div class="mini-card"><h4 style="color:var(--glyko)">Produkte</h4><p style="font-size:13px;color:var(--text2)">2 Pyruvat (C₃CO–COOH) + 2 NADH+H⁺ + 2 ATP</p></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="tag tag-citrat">Teilprozess 2</span></div>
+    <h2>🟣 Zwischenschritt & Citratzyklus</h2>
+    <div class="grid2" style="margin:12px 0">
+      <div class="mini-card"><h4 style="color:var(--citrat)">Ort</h4><p style="font-size:13px;color:var(--text2)">Matrix der Mitochondrien</p></div>
+      <div class="mini-card"><h4 style="color:var(--citrat)">Aufgabe</h4><p style="font-size:13px;color:var(--text2)">Oxidative Decarboxylierung: CO₂-Abspaltung + Wasserstoff an Coenzyme binden</p></div>
+    </div>
+    <h3>Zwischenschritt (Pyruvat-Decarboxylierung)</h3>
+    <div class="flow">
+      <div class="flow-step"><span class="num">1</span><span>2× Pyruvat + CoA → 2× <strong>Acetyl-CoA (C₂)</strong> + 2 CO₂ + 2 NADH+H⁺</span></div>
+    </div>
+    <h3>Citratzyklus (Krebszyklus)</h3>
+    <div class="flow">
+      <div class="flow-step"><span class="num">1</span><span>Acetyl-CoA (C₂) + Oxalacetat (C₄) → <strong>Citrat (C₆)</strong></span></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step"><span class="num">2</span><span>Schrittweise Oxidation → CO₂ abgespalten, H an NAD⁺ und FAD gebunden</span></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step"><span class="num">3</span><span>Oxalacetat (C₄) wird regeneriert → neuer Zyklus möglich</span></div>
+    </div>
+    <div class="formula pink">2 Pyruvat + 8 NAD⁺ + 2 FAD + 2 GDP + 2Pi + 6 H₂O → 6 CO₂ + 8 NADH+H⁺ + 2 FADH₂ + 2 GTP (≈ 2 ATP)</div>
+    <div class="grid2" style="margin-top:10px">
+      <div class="mini-card"><h4 style="color:var(--citrat)">Ausgangsstoffe</h4><p style="font-size:13px;color:var(--text2)">2 Pyruvat + 8 NAD⁺ + 2 FAD + 6 H₂O</p></div>
+      <div class="mini-card"><h4 style="color:var(--citrat)">Produkte</h4><p style="font-size:13px;color:var(--text2)">6 CO₂ + 8 NADH+H⁺ + 2 FADH₂ + 2 GTP (≈2 ATP)</p></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><span class="tag tag-atm">Teilprozess 3</span></div>
+    <h2>⚡ Atmungskette</h2>
+    <div class="grid2" style="margin:12px 0">
+      <div class="mini-card"><h4 style="color:var(--atm)">Ort</h4><p style="font-size:13px;color:var(--text2)">Cristae (innere Mitochondrienmembran)</p></div>
+      <div class="mini-card"><h4 style="color:var(--atm)">Aufgabe</h4><p style="font-size:13px;color:var(--text2)">Energieerzeugung durch <strong>Wasserstoffoxidation</strong> → hohe ATP-Ausbeute</p></div>
+    </div>
+    <h3>Verlauf</h3>
+    <div class="flow">
+      <div class="flow-step"><span class="num">1</span><span><strong>NADH+H⁺ und FADH₂</strong> geben Elektronen und H⁺ an Enzymkomplexe I–IV ab</span></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step"><span class="num">2</span><span>Elektronen fließen durch Enzymkomplexe → Energie pumpt H⁺ in Membranraum (<strong>Protonengradient</strong>)</span></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step"><span class="num">3</span><span>H⁺ fließt durch <strong>ATP-Synthase</strong> zurück → <strong>ADP + P → ATP</strong> (chemiosmotisch)</span></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step"><span class="num">4</span><span>Elektronen + H⁺ + ½ O₂ → <strong>H₂O</strong> (O₂ = terminaler Elektronenakzeptor)</span></div>
+    </div>
+    <div class="formula cyan">10 NADH+H⁺ + 2 FADH₂ + 6 O₂ → 12 H₂O + 10 NAD⁺ + 2 FAD + 28 ATP</div>
+    <div class="grid2" style="margin-top:10px">
+      <div class="mini-card"><h4 style="color:var(--atm)">Ausgangsstoffe</h4><p style="font-size:13px;color:var(--text2)">10 NADH+H⁺ + 2 FADH₂ + 6 O₂</p></div>
+      <div class="mini-card"><h4 style="color:var(--atm)">Produkte</h4><p style="font-size:13px;color:var(--text2)">12 H₂O + 10 NAD⁺ + 2 FAD + <strong>28 ATP</strong></p></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><h2>📊 Zellatmung – Alle Teilprozesse im Vergleich</h2></div>
+    <div style="overflow-x:auto">
+    <table class="overview-table">
+      <thead><tr><th>Kriterium</th><th style="color:var(--glyko)">Glykolyse</th><th style="color:var(--citrat)">Zwisch. + Citratzyklus</th><th style="color:var(--atm)">Atmungskette</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Ort</strong></td><td>Cytoplasma</td><td>Matrix (Mitoch.)</td><td>Cristae</td></tr>
+        <tr><td><strong>Aufgabe</strong></td><td>Glukose → Pyruvat</td><td>Wasserstoffbindung, oxidative Decarboxylierung</td><td>Wasserstoffoxidation → ATP</td></tr>
+        <tr><td><strong>Ausgangsstoff</strong></td><td>C₆H₁₂O₆, 2 NAD⁺</td><td>2 Pyruvat, 8 NAD⁺, 2 FAD</td><td>10 NADH+H⁺, 2 FADH₂, 6 O₂</td></tr>
+        <tr><td><strong>Produkte</strong></td><td>2 Pyruvat, 2 NADH+H⁺</td><td>6 CO₂, 8 NADH+H⁺, 2 FADH₂</td><td>12 H₂O</td></tr>
+        <tr><td><strong>ATP-Bilanz</strong></td><td>2 ATP</td><td>2 GTP ≈ 2 ATP</td><td>28 ATP</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== FAKTOREN & MEHR ===================== -->
+<div id="panel-faktoren" class="panel">
+  <div class="card">
+    <div class="card-header"><h2>🌡 Faktoren der Fotosyntheseleistung</h2></div>
+    <div style="overflow-x:auto">
+    <table class="overview-table">
+      <thead><tr><th>Faktor</th><th>Einfluss</th><th>Erklärung</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>CO₂</strong></td>
+          <td>↑ CO₂ → ↑ O₂-Entwicklung + ↑ Stärke (proportional)</td>
+          <td>CO₂ = Edukt im Calvin-Zyklus; mehr CO₂ → schnellerer Zyklus</td>
+        </tr>
+        <tr>
+          <td><strong>Licht</strong></td>
+          <td>↑ Licht → ↑ O₂ + ↑ Stärke; <em>Lichtsättigungspunkt</em> (artspezifisch)</td>
+          <td>Mehr Energie für Primärreaktion; mehr NADPH+H⁺ für Calvin-Zyklus</td>
+        </tr>
+        <tr>
+          <td><strong>Chlorophyll</strong></td>
+          <td>Vorhanden = FS findet statt; nicht vorhanden = keine FS</td>
+          <td>Voraussetzung für Lichtabsorption</td>
+        </tr>
+        <tr>
+          <td><strong>Wasser</strong></td>
+          <td>Direkter Einfluss (Edukt FS) + Indirekter Einfluss</td>
+          <td>Wassermangel → Spaltöffnungen schließen → kein CO₂ mehr</td>
+        </tr>
+        <tr>
+          <td><strong>Temperatur</strong></td>
+          <td>Artspezifische Toleranzkurve; allg. 0–40°C; direkt proportional</td>
+          <td>RGT-Regel (Van't Hoff): +10°C → Reaktionsrate verdoppelt sich</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <h3 style="margin-top:14px">Wichtige Begriffe</h3>
+    <div class="grid2">
+      <div class="mini-card"><h4 style="color:var(--accent1)">Lichtsättigungspunkt</h4><p style="font-size:13px;color:var(--text2)">Spezifische Lichtintensität, bei der die maximale Fotosyntheseleistung erreicht wird. Darüber: keine weitere Steigerung möglich.</p></div>
+      <div class="mini-card"><h4 style="color:var(--accent1)">RGT-Regel</h4><p style="font-size:13px;color:var(--text2)">Van't-Hoff-Regel: Bei Temperaturerhöhung um 10°C verdoppelt sich die Reaktionsgeschwindigkeit (gilt bis Enzymdenaturierung ~40°C).</p></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><h2>🔬 Chloroplast – Aufbau</h2></div>
+    <div style="overflow-x:auto">
+    <table class="overview-table">
+      <thead><tr><th>#</th><th>Struktur</th><th>Funktion</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Äußere Membran</td><td>Hülle (mit 2+3)</td></tr>
+        <tr><td>2</td><td>Intermembranraum</td><td>Hülle (mit 1+3)</td></tr>
+        <tr><td>3</td><td>Innere Membran</td><td>Hülle (mit 1+2)</td></tr>
+        <tr><td>4</td><td>Stroma</td><td>Ort des Calvin-Zyklus</td></tr>
+        <tr><td>5</td><td>Thylakoidlumen</td><td>Innenraum der Thylakoide; Ort der Fotolyse, H⁺-Ansammlung</td></tr>
+        <tr><td>6</td><td>Thylakoidmembran</td><td>Ort der Fotosysteme + Elektronentransportkette</td></tr>
+        <tr><td>7</td><td>Granum</td><td>Stapel aus Thylakoiden</td></tr>
+        <tr><td>8</td><td>Thylakoid</td><td>Membransäckchen; Ort der Lichtreaktion</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><h2>🔋 Mitochondrium – Aufbau</h2></div>
+    <div style="overflow-x:auto">
+    <table class="overview-table">
+      <thead><tr><th>#</th><th>Struktur</th><th>Funktion</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Äußere Mitochondrienmembran</td><td>Schutz, Abgrenzung</td></tr>
+        <tr><td>2</td><td>70S-Ribosom</td><td>Proteinsynthese</td></tr>
+        <tr><td>3</td><td>DNA</td><td>Eigenes Erbgut (Endosymbiontenhypothese)</td></tr>
+        <tr><td>4</td><td>Innere Membran</td><td>Ort der Atmungskette; bildet Cristae</td></tr>
+        <tr><td>5</td><td>Intermembranraum</td><td>H⁺-Ansammlung → Protonengradient</td></tr>
+        <tr><td>6</td><td>Cristae</td><td>Einstülpungen der inneren Membran → Ort der Atmungskette + ATP-Synthase</td></tr>
+        <tr><td>7</td><td>Matrix</td><td>Ort von Citratzyklus + Zwischenschritt</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><h2>🧬 Chemosynthese (Kurzinfo)</h2></div>
+    <p>Form der autotrophen Assimilation. Bei der aus körperfremden, <strong>energiearmen anorganischen Stoffen</strong> mittels chemischer Energie (aus Oxidation anorganischer Stoffe) körpereigene energiereiche organische Stoffe entstehen.</p>
+    <p style="margin-top:8px;font-size:13px;color:var(--text3)">Beispiel: Nitrifizierende Bakterien oxidieren NH₃ → NO₂⁻ → nutzen diese Energie zur CO₂-Fixierung. <em>(Kein Licht notwendig!)</em></p>
+  </div>
+</div>
+
+<!-- ===================== KARTEIKARTEN ===================== -->
+<div id="panel-karten" class="panel">
+  <div class="card">
+    <div class="card-header"><h2>🃏 Karteikarten – Klick zum Umdrehen</h2></div>
+    <div class="fc-controls">
+      <button class="btn btn-primary" onclick="prevCard()">← Zurück</button>
+      <span class="fc-counter" id="fcCounter">1 / 20</span>
+      <button class="btn btn-primary" onclick="nextCard()">Weiter →</button>
+      <button class="btn" onclick="shuffleCards()">🔀 Mischen</button>
+      <button class="btn" onclick="resetCards()">↺ Reset</button>
+    </div>
+    <div class="fc-progress" id="fcProgress"></div>
+    <div class="flashcard-area">
+      <div class="flashcard" id="flashcard" onclick="flipCard()">
+        <div class="fc-face fc-front">
+          <div class="fc-cat" id="fcCat"></div>
+          <p id="fcFront"></p>
+          <span class="fc-hint">Klicken zum Umdrehen</span>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-cat" id="fcCatB"></div>
+          <p id="fcBack"></p>
+          <span class="fc-hint">Klicken zum Zurückdrehen</span>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;justify-content:center">
+      <button class="btn btn-success" onclick="markKnown()">✓ Weiß ich</button>
+      <button class="btn btn-danger" onclick="markUnknown()">✗ Nochmal</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== QUIZ ===================== -->
+<div id="panel-quiz" class="panel">
+  <div class="card">
+    <div class="card-header"><h2>🧠 Wissens-Quiz</h2></div>
+    <div id="quizContainer">
+      <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="quizProgress" style="width:0%"></div></div>
+      <p style="font-size:12px;color:var(--text3);margin-bottom:12px;font-family:'Space Mono',monospace" id="quizNum">Frage 1 / 15</p>
+      <div class="quiz-q" id="quizQuestion"></div>
+      <div class="quiz-options" id="quizOptions"></div>
+      <div class="quiz-feedback" id="quizFeedback"></div>
+      <button class="btn btn-primary" id="quizNext" onclick="nextQuestion()" style="display:none">Nächste Frage →</button>
+    </div>
+    <div id="quizScore" class="quiz-score" style="display:none">
+      <div class="quiz-score-num" id="scoreNum"></div>
+      <p id="scoreMsg"></p>
+      <button class="btn btn-primary" style="margin-top:20px" onclick="restartQuiz()">↺ Nochmal spielen</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== GLOSSAR ===================== -->
+<div id="panel-glossar" class="panel">
+  <div class="card">
+    <div class="card-header"><h2>📖 Fachbegriff-Glossar</h2></div>
+    <input class="gloss-search" type="text" placeholder="Begriff suchen…" oninput="filterGloss(this.value)" id="glossSearch">
+    <div id="glossList"></div>
+  </div>
+</div>
+
+<!-- ===================== LERNTIPPS ===================== -->
+<div id="panel-tipps" class="panel">
+  <div class="card">
+    <div class="card-header"><h2>💡 Lerntipps – So holst du die 10 NP</h2></div>
+    
+    <div class="tip-card blue">
+      <h4>📝 Lernstrategie: Heute & Morgen</h4>
+      <ul>
+        <li><strong>Heute:</strong> Diese Übersicht 1× komplett durchgehen, dann Karteikarten bis du alle kannst, dann Quiz bis 12+/15.</li>
+        <li><strong>Morgen früh:</strong> Alle Gleichungen aus dem Kopf aufschreiben (Fotosynthesegesamtgleichung, Glykolyse, Citratzyklus, Atmungskette) – dann kontrollieren.</li>
+        <li><strong>Morgen Abend:</strong> Einmal alles in eigenen Worten erklären (als würdest du es einem Freund erklären). Was hakt → Karte nochmal lesen.</li>
+      </ul>
+    </div>
+
+    <div class="tip-card green">
+      <h4>🧠 Wenn du einen Schritt nicht verstehst…</h4>
+      <ul>
+        <li><strong>Calvin-Zyklus:</strong> Zeichne ihn selbst auf Papier! Nur der Fluss (CO₂ rein → C₃ → Glucose + RubP wieder raus) muss sitzen.</li>
+        <li><strong>Atmungskette:</strong> Stell dir eine Turbine vor: NADH liefert Elektronen, die durch Komplexe fließen → pumpen H⁺ → H⁺ dreht ATP-Synthase-Turbine → ATP raus.</li>
+        <li><strong>Lichtreaktion:</strong> Merkhilfe: FS II zuerst (obwohl die Zahl größer ist). FS II spaltet Wasser, FS I macht NADPH.</li>
+      </ul>
+    </div>
+
+    <div class="tip-card">
+      <h4>📚 Außerhalb dieser Übersicht: Das musst du noch tun</h4>
+      <ul>
+        <li><strong>Zeichnungen lernen:</strong> Chloroplast- und Mitochondriumaufbau (Nummern + Bezeichnungen). Dein Lehrer fragt das gern als Beschriftungsaufgabe.</li>
+        <li><strong>Z-Schema skizzieren:</strong> Den Elektronenfluss FS II → Redoxkette → FS I → NADPH als eigene Zeichnung mal selbst aufmalen.</li>
+        <li><strong>Calvin-Zyklus-Schema:</strong> Einmal selbst zeichnen: 3 Pfeile (Fixierung → Reduktion → Regeneration) mit Stoffen dran.</li>
+        <li><strong>Alte Klausuren/Aufgaben:</strong> Falls dein Lehrer welche hat – mindestens 1 komplett durchmachen. Gerade Auswertungsfragen zu Diagrammen (Licht, CO₂, Temperatur) üben!</li>
+        <li><strong>Gleichungen aus dem Kopf:</strong> Gesamtbilanz Fotosynthese + Zellatmung auswendig können – inkl. Zahlen!</li>
+      </ul>
+    </div>
+
+    <div class="tip-card purple">
+      <h4>🎯 Häufige Prüfungsfragen (Sachsen GK)</h4>
+      <ul>
+        <li>„Erklären Sie den Verlauf der lichtabhängigen Primärreaktion" → Schritt für Schritt: Lichtabsorption, Elektronenübertragung, Fotolyse, ATP-Bildung, NADPH.</li>
+        <li>„Wozu braucht der Calvin-Zyklus ATP und NADPH+H⁺?" → ATP für Reduktion (Phase 2) und Regeneration (Phase 3); NADPH für Reduktion (Phase 2).</li>
+        <li>„Wie beeinflusst Licht die Fotosyntheseleistung?" → Mit Diagramm-Bezug, Lichtsättigungspunkt erwähnen!</li>
+        <li>„Vergleichen Sie Fotosynthese und Zellatmung" → Tabelle: Ort, Edukte, Produkte, Energieform.</li>
+        <li>Aufbau Chloroplast / Mitochondrium beschriften.</li>
+      </ul>
+    </div>
+
+    <div class="tip-card red">
+      <h4>⚠️ Häufige Fehler vermeiden</h4>
+      <ul>
+        <li>FS II ≠ FS I verwechseln: FS II hat Wasserspaltung (OEC), P680; FS I hat P700, macht NADPH.</li>
+        <li>Calvin-Zyklus braucht <em>kein</em> Licht direkt – aber die Produkte der Lichtreaktion (ATP + NADPH).</li>
+        <li>Glykolyse passiert im Cytoplasma, NICHT im Mitochondrium.</li>
+        <li>Citratzyklus ist in der Matrix, Atmungskette an den Cristae (innere Membran).</li>
+        <li>O₂ bei Fotosynthese kommt aus Wasser (Fotolyse), NICHT aus CO₂!</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== CHECKLISTE ===================== -->
+<div id="panel-check" class="panel">
+  <div class="card">
+    <div class="card-header"><h2>✅ Lerncheckliste – Abhaken was du kannst</h2></div>
+    <p style="font-size:13px;color:var(--text2);margin-bottom:16px">Klicke auf eine Aufgabe um sie abzuhaken. Ziel: alles grün vor der Kontrolle!</p>
+    
+    <div class="check-category">Grundlagen & Überblick</div>
+    <div id="checkList"></div>
+  </div>
+</div>
+
+</div><!-- /app -->
+
+<script>
+// ======== TABS ========
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+// ======== FLASHCARDS ========
+const cards = [
+  { cat: 'Überblick', q: 'Was ist Assimilation?', a: 'Form des Stoff- und Energiewechsels, bei der körperfremde Stoffe in körpereigene, energiereiche organische Stoffe umgewandelt werden.' },
+  { cat: 'Überblick', q: 'Was ist Dissimilation?', a: 'Form des Stoff- und Energiewechsels, bei der energiereiche organische Stoffe zur Energiegewinnung in energieärmere Stoffe abgebaut werden.' },
+  { cat: 'Überblick', q: 'Unterschied autotroph / heterotroph?', a: 'Autotroph: Ausgangsstoffe sind anorganische, energiearme Stoffe (z.B. Pflanzen). Heterotroph: Ausgangsstoffe sind bereits organische Stoffe (z.B. Tiere, Menschen).' },
+  { cat: 'Fotosynthese', q: 'Gesamtgleichung der Fotosynthese?', a: '6 CO₂ + 6 H₂O ─[Licht + Chlorophyll]→ C₆H₁₂O₆ + 6 O₂ | Q = +2880 kJ/mol' },
+  { cat: 'Fotosynthese', q: 'Was unterscheidet Fotosystem I von Fotosystem II?', a: 'FS II: P680, spaltet Wasser (OEC/Mn-Cluster), startet Elektronentransport. FS I: P700, hat keinen wasserspaltenden Komplex, bildet NADPH+H⁺.' },
+  { cat: 'Lichtreaktion', q: 'Was passiert bei der Fotolyse des Wassers?', a: 'H₂O → ½ O₂ + 2 e⁻ + 2 H⁺ | Elektronen füllen Lücke in P680*, H⁺ für Protonengradient, O₂ wird freigesetzt. Ort: Thylakoid-Innenraum.' },
+  { cat: 'Lichtreaktion', q: 'Wie entsteht ATP bei der Lichtreaktion?', a: 'Chemiosmotisch: H⁺ fließt durch ATP-Synthase von Innenraum (pH 5) ins Stroma (pH 8) → ADP + P → ATP. Protonengradient entsteht durch Fotolyse + Cytochrom-Komplex.' },
+  { cat: 'Lichtreaktion', q: 'Was sind die Produkte der lichtabhängigen Primärreaktion?', a: 'ATP + NADPH+H⁺ (für Calvin-Zyklus) + O₂ (Nebenprodukt aus Fotolyse).' },
+  { cat: 'Calvin-Zyklus', q: 'Welche 3 Phasen hat der Calvin-Zyklus?', a: '1. Carboxylierende Phase (CO₂-Fixierung) 2. Reduzierende Phase (Glucosebildung) 3. Regenerierende Phase (RubP-Rückbildung)' },
+  { cat: 'Calvin-Zyklus', q: 'Was passiert in der carboxylierenden Phase?', a: 'CO₂ + Ribulose-1,5-bisphosphat (C₅) → instabiler C₆ → sofort 2× 3-Phosphoglycerat (C₃, PGS). Enzym: RuBisCO.' },
+  { cat: 'Calvin-Zyklus', q: 'Wozu braucht der Calvin-Zyklus ATP und NADPH+H⁺?', a: 'ATP: für Reduktion (Phase 2) + Regeneration des RubP (Phase 3). NADPH+H⁺: für Reduktion von 3-PGS zu Triose (Phase 2).' },
+  { cat: 'Zellatmung', q: 'Gesamtgleichung der Zellatmung?', a: 'C₆H₁₂O₆ + 6 O₂ + 6 H₂O → 6 CO₂ + 12 H₂O + 32 ATP' },
+  { cat: 'Glykolyse', q: 'Was passiert bei der Glykolyse? Wo findet sie statt?', a: 'Ort: Cytoplasma. Glucose (C₆) → 2× Pyruvat (C₃) + 2 ATP + 2 NADH+H⁺. Aktivierung kostet 2 ATP, Gewinn 4 ATP → Netto 2 ATP.' },
+  { cat: 'Citratzyklus', q: 'Was ist die Aufgabe des Citratzyklus?', a: 'Oxidative Decarboxylierung: Pyruvat schrittweise abbauen, CO₂ abspalten, Wasserstoff an NAD⁺ und FAD binden. Ort: Matrix der Mitochondrien.' },
+  { cat: 'Atmungskette', q: 'Wo findet die Atmungskette statt und was ist ihr Ergebnis?', a: 'Ort: Cristae (innere Mitochondrienmembran). Wasserstoffoxidation: NADH+H⁺ + FADH₂ + O₂ → H₂O + 28 ATP (chemiosmotisch über ATP-Synthase).' },
+  { cat: 'Atmungskette', q: 'Welche Rolle spielt O₂ in der Atmungskette?', a: 'O₂ ist der terminale Elektronenakzeptor. Am Ende der Elektronentransportkette reagiert O₂ mit H⁺ und e⁻ zu H₂O.' },
+  { cat: 'Faktoren', q: 'Was ist der Lichtsättigungspunkt?', a: 'Artspezifische Lichtintensität, bei der die maximale Fotosyntheseleistung erreicht wird. Darüber: keine weitere Steigerung.' },
+  { cat: 'Faktoren', q: 'Warum führt Wassermangel zu weniger Fotosynthese?', a: 'Direkt: Wasser = Edukt der Fotosynthese. Indirekt: Wassermangel → Spaltöffnungen schließen sich → kein CO₂ mehr aufgenommen → Calvin-Zyklus stoppt.' },
+  { cat: 'Faktoren', q: 'Was besagt die RGT-Regel in Bezug auf Fotosynthese?', a: 'Van\'t-Hoff-Regel: Bei Temperaturerhöhung um 10°C verdoppelt sich die Reaktionsgeschwindigkeit. Gilt bis ~40°C (dann Enzymdenaturierung).' },
+  { cat: 'Fehler vermeiden', q: 'Woher stammt der O₂ bei der Fotosynthese?', a: 'Aus dem Wasser (Fotolyse), NICHT aus CO₂! H₂O → ½ O₂ + 2 e⁻ + 2 H⁺' },
+];
+
+let currentCard = 0;
+let cardOrder = [...Array(cards.length).keys()];
+let cardStatus = new Array(cards.length).fill(null);
+let isFlipped = false;
+
+function renderCard() {
+  const idx = cardOrder[currentCard];
+  const card = cards[idx];
+  document.getElementById('fcFront').textContent = card.q;
+  document.getElementById('fcBack').textContent = card.a;
+  document.getElementById('fcCat').innerHTML = `<span class="tag" style="background:rgba(0,229,255,.1);color:var(--accent1);border:1px solid rgba(0,229,255,.2)">${card.cat}</span>`;
+  document.getElementById('fcCatB').innerHTML = `<span class="tag" style="background:rgba(16,185,129,.1);color:var(--accent3);border:1px solid rgba(16,185,129,.2)">Antwort</span>`;
+  document.getElementById('fcCounter').textContent = `${currentCard + 1} / ${cards.length}`;
+  isFlipped = false;
+  document.getElementById('flashcard').classList.remove('flipped');
+  renderProgress();
+}
+
+function renderProgress() {
+  const prog = document.getElementById('fcProgress');
+  prog.innerHTML = cardOrder.map((idx, i) => {
+    let cls = 'fc-dot';
+    if (cardStatus[idx] === true) cls += ' known';
+    else if (cardStatus[idx] === false) cls += ' unknown';
+    return `<div class="${cls}" title="${cards[idx].q}"></div>`;
+  }).join('');
+}
+
+function flipCard() {
+  isFlipped = !isFlipped;
+  document.getElementById('flashcard').classList.toggle('flipped', isFlipped);
+}
+
+function nextCard() {
+  currentCard = (currentCard + 1) % cards.length;
+  renderCard();
+}
+
+function prevCard() {
+  currentCard = (currentCard - 1 + cards.length) % cards.length;
+  renderCard();
+}
+
+function shuffleCards() {
+  for (let i = cardOrder.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [cardOrder[i], cardOrder[j]] = [cardOrder[j], cardOrder[i]];
+  }
+  currentCard = 0;
+  renderCard();
+}
+
+function resetCards() {
+  cardOrder = [...Array(cards.length).keys()];
+  cardStatus = new Array(cards.length).fill(null);
+  currentCard = 0;
+  renderCard();
+}
+
+function markKnown() {
+  cardStatus[cardOrder[currentCard]] = true;
+  nextCard();
+}
+
+function markUnknown() {
+  cardStatus[cardOrder[currentCard]] = false;
+  nextCard();
+}
+
+renderCard();
+
+// ======== QUIZ ========
+const quizData = [
+  { q: 'Wo findet die Glykolyse statt?', opts: ['Matrix der Mitochondrien', 'Cytoplasma der Zelle', 'Cristae', 'Stroma des Chloroplasten'], ans: 1, exp: 'Die Glykolyse findet im Cytoplasma statt. Sie ist der erste Schritt der Zellatmung und benötigt kein Mitochondrium.' },
+  { q: 'Was ist das Produkt der Fotolyse des Wassers?', opts: ['CO₂ + H⁺', 'O₂ + 2e⁻ + 2H⁺', 'NADPH + H⁺', 'ATP + H₂O'], ans: 1, exp: 'H₂O → ½ O₂ + 2 e⁻ + 2 H⁺. Die Elektronen füllen die Lücke in P680*, der Sauerstoff wird freigesetzt.' },
+  { q: 'In welchem Teilorgan des Chloroplasten findet der Calvin-Zyklus statt?', opts: ['Thylakoidmembran', 'Thylakoidlumen', 'Stroma', 'Grana'], ans: 2, exp: 'Der Calvin-Zyklus findet im Stroma des Chloroplasten statt, nicht in den Thylakoiden (die sind für die Lichtreaktion).' },
+  { q: 'Wie viel ATP liefert die Atmungskette (netto)?', opts: ['2 ATP', '8 ATP', '28 ATP', '32 ATP'], ans: 2, exp: 'Die Atmungskette produziert ca. 28 ATP. Glykolyse: 2, Citratzyklus: 2, Atmungskette: 28 → Gesamt ca. 32.' },
+  { q: 'Was ist der CO₂-Akzeptor im Calvin-Zyklus?', opts: ['3-Phosphoglycerat', 'Ribulose-1,5-bisphosphat (RubP)', 'Acetyl-CoA', 'Pyruvat'], ans: 1, exp: 'RubP (Ribulose-1,5-bisphosphat, C₅) ist der CO₂-Akzeptor. CO₂ + RubP → instabiler C₆ → 2× 3-Phosphoglycerat.' },
+  { q: 'Was charakterisiert das Fotosystem II gegenüber Fotosystem I?', opts: ['Absorptionswellenlänge 700 nm', 'Bildet NADPH+H⁺', 'Hat einen wasserspaltenden Enzymkomplex (OEC)', 'Liegt nur im Stroma vor'], ans: 2, exp: 'FS II hat den OEC (oxygen-evolving complex / Mn-Cluster), der Wasser spaltet. FS I bildet NADPH+H⁺ und absorbiert bei 700 nm.' },
+  { q: 'Was ist die Aufgabe der Atmungskette?', opts: ['CO₂ abspalten', 'Glucose spalten', 'Wasserstoffoxidation → ATP-Bildung', 'O₂ aus Wasser freisetzen'], ans: 2, exp: 'Die Atmungskette oxidiert NADH+H⁺ und FADH₂ (Wasserstoffoxidation) und gewinnt dabei über den Protonengradient ATP (chemiosmotisch).' },
+  { q: 'Woher stammt der bei der Fotosynthese freigesetzte Sauerstoff?', opts: ['Aus CO₂', 'Aus dem Wasser (Fotolyse)', 'Aus NADPH', 'Aus ATP'], ans: 1, exp: 'O₂ kommt aus der Fotolyse des Wassers (H₂O → ½ O₂ + 2 e⁻ + 2 H⁺) – NICHT aus CO₂!' },
+  { q: 'Was ist ein Lichtsättigungspunkt?', opts: ['Temperatur bei maximaler Fotosynthese', 'Lichtintensität bei maximaler Fotosyntheseleistung', 'Menge Chlorophyll bei optimaler Reaktion', 'CO₂-Konzentration bei Sättigung'], ans: 1, exp: 'Der Lichtsättigungspunkt ist die artspezifische Lichtintensität, ab der keine weitere Steigerung der Fotosyntheseleistung mehr möglich ist.' },
+  { q: 'Welche Gleichung beschreibt die Glykolyse (Bilanz)?', opts: ['C₆H₁₂O₆ + 6 O₂ → 6 CO₂ + 6 H₂O', 'C₆H₁₂O₆ + 2 NAD⁺ + 2 ADP → 2 Pyruvat + 2 NADH+H⁺ + 2 ATP', '2 Pyruvat + 8 NAD⁺ → 6 CO₂ + 8 NADH+H⁺', 'CO₂ + H₂O → Glucose + O₂'], ans: 1, exp: 'Glykolyse: C₆H₁₂O₆ + 2 NAD⁺ + 2 ADP + 2P → 2 Pyruvat + 2 NADH+H⁺ + 2 ATP (Netto 2 ATP, da 2 verbraucht + 4 gewonnen).' },
+  { q: 'Welche Rolle spielt die ATP-Synthase in der Atmungskette?', opts: ['Spaltet Glucose', 'Oxidiert NADH', 'Wandelt den Protonenfluss in ATP um (chemiosmotisch)', 'Überträgt Elektronen auf O₂'], ans: 2, exp: 'Die ATP-Synthase nutzt den H⁺-Gradienten: H⁺ fließt durch sie hindurch → ADP + P → ATP. Das nennt man chemiosmotische ATP-Bildung.' },
+  { q: 'Warum lässt sich der Calvin-Zyklus als „lichtunabhängig" bezeichnen?', opts: ['Er verläuft nur nachts', 'Er benötigt kein Licht direkt, nur die Produkte der Lichtreaktion (ATP + NADPH)', 'Er findet ohne Chlorophyll statt', 'Er produziert kein O₂'], ans: 1, exp: 'Lichtunabhängig heißt: Kein Licht direkt nötig. Aber er braucht ATP und NADPH+H⁺, die bei der Lichtreaktion gebildet werden → indirekte Lichtabhängigkeit.' },
+  { q: 'Was ist Chemosynthese?', opts: ['Fotosynthese ohne Licht', 'Autotrophe Assimilation mittels chemischer Energie aus der Oxidation anorganischer Stoffe', 'Abbau von Glucose durch Bakterien', 'Heterotrophe Assimilation'], ans: 1, exp: 'Chemosynthese ist autotrophe Assimilation: anorganische Stoffe werden mit chemischer Energie (Oxidation anorg. Stoffe, z.B. NH₃) zu org. Stoffen aufgebaut. Kein Licht nötig.' },
+  { q: 'Was passiert in der regenerierenden Phase des Calvin-Zyklus?', opts: ['CO₂ wird gebunden', 'Glucose wird gebildet', '10 Triosen → 6 RubP unter ATP-Verbrauch', 'NADPH wird oxidiert'], ans: 2, exp: 'In Phase 3 werden 10 Triosen (PGA) unter Verbrauch von 6 ATP zum CO₂-Akzeptor Ribulose-1,5-bisphosphat (RubP, C₅) regeneriert.' },
+  { q: 'Was ist das Endprodukt der Elektronentransportkette in der Atmungskette?', opts: ['CO₂', 'NADPH', 'H₂O (Wasser)', 'Pyruvat'], ans: 2, exp: 'Am Ende der Atmungskette reagieren Elektronen + H⁺ + ½ O₂ → H₂O. O₂ ist der terminale Elektronenakzeptor.' },
+];
+
+let quizIdx = 0, quizScore_ = 0, quizAnswered = false;
+
+function loadQuestion() {
+  if (quizIdx >= quizData.length) { showScore(); return; }
+  const q = quizData[quizIdx];
+  document.getElementById('quizQuestion').textContent = q.q;
+  document.getElementById('quizNum').textContent = `Frage ${quizIdx + 1} / ${quizData.length}`;
+  document.getElementById('quizProgress').style.width = `${(quizIdx / quizData.length) * 100}%`;
+  const optsEl = document.getElementById('quizOptions');
+  optsEl.innerHTML = q.opts.map((o, i) => `<button class="quiz-option" onclick="answerQuiz(${i})">${o}</button>`).join('');
+  document.getElementById('quizFeedback').className = 'quiz-feedback';
+  document.getElementById('quizFeedback').textContent = '';
+  document.getElementById('quizNext').style.display = 'none';
+  quizAnswered = false;
+}
+
+function answerQuiz(i) {
+  if (quizAnswered) return;
+  quizAnswered = true;
+  const q = quizData[quizIdx];
+  const opts = document.querySelectorAll('.quiz-option');
+  opts.forEach((o, idx) => {
+    o.classList.add('disabled');
+    if (idx === q.ans) o.classList.add('correct');
+    else if (idx === i && i !== q.ans) o.classList.add('wrong');
+  });
+  const fb = document.getElementById('quizFeedback');
+  fb.classList.add('show');
+  if (i === q.ans) {
+    quizScore_++;
+    fb.classList.add('ok');
+    fb.textContent = '✓ Richtig! ' + q.exp;
+  } else {
+    fb.classList.add('fail');
+    fb.textContent = '✗ Falsch. ' + q.exp;
+  }
+  document.getElementById('quizNext').style.display = 'inline-block';
+}
+
+function nextQuestion() {
+  quizIdx++;
+  loadQuestion();
+}
+
+function showScore() {
+  document.getElementById('quizContainer').style.display = 'none';
+  document.getElementById('quizScore').style.display = 'block';
+  const pct = Math.round((quizScore_ / quizData.length) * 100);
+  document.getElementById('scoreNum').textContent = `${quizScore_} / ${quizData.length}`;
+  let msg = '';
+  if (pct >= 93) msg = '🏆 Ausgezeichnet! Du bist bereit für die 10 NP!';
+  else if (pct >= 80) msg = '💪 Sehr gut! Nochmal die schwachen Karten wiederholen.';
+  else if (pct >= 60) msg = '📚 Gut – aber nochmal alle Lernabschnitte durchlesen.';
+  else msg = '🔄 Noch Übungsbedarf – geh nochmal durch die Inhalte!';
+  document.getElementById('scoreMsg').textContent = msg;
+}
+
+function restartQuiz() {
+  quizIdx = 0; quizScore_ = 0;
+  document.getElementById('quizContainer').style.display = 'block';
+  document.getElementById('quizScore').style.display = 'none';
+  loadQuestion();
+}
+
+loadQuestion();
+
+// ======== GLOSSARY ========
+const glossary = [
+  { t: 'Assimilation', d: 'Aufbaustofffwechsel: körperfremde → körpereigene, energiereiche organische Stoffe.' },
+  { t: 'Dissimilation', d: 'Abbaustoffwechsel: energiereiche organische Stoffe → Energie (ATP) + energieärmere Stoffe.' },
+  { t: 'Autotroph', d: 'Organismen, die anorganische, energiearme Stoffe zur Synthese organischer Moleküle nutzen (z.B. Pflanzen).' },
+  { t: 'Heterotroph', d: 'Organismen, die bereits vorhandene organische Stoffe verwerten (z.B. Tiere, Menschen).' },
+  { t: 'Fotosynthese', d: 'Autotrophe Assimilation bei Pflanzen: CO₂ + H₂O + Licht + Chlorophyll → Glucose + O₂.' },
+  { t: 'Chloroplast', d: 'Organell der Pflanzenzellen, in dem Fotosynthese stattfindet. Enthält Thylakoide, Grana und Stroma.' },
+  { t: 'Thylakoid', d: 'Membransäckchen im Chloroplast; Ort der Lichtreaktion. Gestapelte Thylakoide bilden Grana.' },
+  { t: 'Stroma', d: 'Flüssigkeit im Chloroplast um die Thylakoide; Ort des Calvin-Zyklus.' },
+  { t: 'Fotosystem I (FS I)', d: 'Proteinkomplex in Thylakoidmembran; P700; reduziert NADP⁺ zu NADPH+H⁺; kein Wasserspalter.' },
+  { t: 'Fotosystem II (FS II)', d: 'Proteinkomplex in Thylakoidmembran; P680; spaltet Wasser (Fotolyse), startet Elektronentransport.' },
+  { t: 'Fotolyse', d: 'Lichtgetriebene Spaltung des Wassers: H₂O → ½ O₂ + 2e⁻ + 2H⁺. Ort: Thylakoid-Innenraum (FS II).' },
+  { t: 'NADPH+H⁺', d: 'Reduziertes Coenzym; wichtigstes Reduktionsmittel für den Calvin-Zyklus. Gebildet in FS I.' },
+  { t: 'ATP', d: 'Adenosintriphosphat; universelle Energiewährung der Zelle. Gebildet durch chemiosmotische Phosphorylierung.' },
+  { t: 'Chemiosmose', d: 'Energiegewinnung durch Protonengradient: H⁺ fließt durch ATP-Synthase → ADP + P → ATP.' },
+  { t: 'Calvin-Zyklus', d: 'Lichtunabhängige Sekundärreaktion im Stroma: CO₂ → Glucose. 3 Phasen: Fixierung, Reduktion, Regeneration.' },
+  { t: 'Ribulose-1,5-bisphosphat (RubP)', d: 'C₅-Körper; CO₂-Akzeptor im Calvin-Zyklus. Wird in Phase 3 regeneriert.' },
+  { t: '3-Phosphoglycerat (PGS)', d: 'C₃-Körper; Produkt der CO₂-Fixierung im Calvin-Zyklus. Wird in Phase 2 zur Triose reduziert.' },
+  { t: 'Triose / PGA', d: '3-Phosphoglycerinaldehyd (C₃); Zwischenprodukt Calvin-Zyklus. 2 Triosen → 1 Glucose (C₆).' },
+  { t: 'RuBisCO', d: 'Enzym der CO₂-Fixierung im Calvin-Zyklus. Verbindet CO₂ mit RubP. Häufigstes Enzym der Erde.' },
+  { t: 'Zellatmung', d: 'Aerober Abbau von Glucose: C₆H₁₂O₆ + 6O₂ → 6CO₂ + H₂O + 32 ATP. Ort: Cytoplasma + Mitochondrium.' },
+  { t: 'Mitochondrium', d: 'Organell; „Kraftwerk der Zelle". Ort von Citratzyklus (Matrix) und Atmungskette (Cristae).' },
+  { t: 'Glykolyse', d: 'Erste Stufe der Zellatmung im Cytoplasma: Glucose (C₆) → 2 Pyruvat (C₃) + 2 ATP + 2 NADH+H⁺.' },
+  { t: 'Pyruvat', d: 'Endprodukt der Glykolyse (C₃); Ausgangsstoff für den Citratzyklus (nach Decarboxylierung zu Acetyl-CoA).' },
+  { t: 'Citratzyklus (Krebszyklus)', d: 'Zweite Stufe Zellatmung in der Mitochondrienmatrix. Pyruvat → CO₂ + NADH+H⁺ + FADH₂ + 2 GTP.' },
+  { t: 'Acetyl-CoA', d: 'C₂-Körper; Verbindung zwischen Zwischenschritt und Citratzyklus. Entsteht aus Pyruvat durch Decarboxylierung.' },
+  { t: 'Atmungskette', d: 'Dritte Stufe der Zellatmung an den Cristae. NADH+H⁺ + FADH₂ + O₂ → H₂O + 28 ATP (chemiosmotisch).' },
+  { t: 'Oxidative Phosphorylierung', d: 'ATP-Synthese in der Atmungskette durch Oxidation von NADH+H⁺ / FADH₂ und Chemiosmose.' },
+  { t: 'Lichtsättigungspunkt', d: 'Lichtintensität, ab der die Fotosyntheseleistung einer Pflanze ihr Maximum erreicht (artspezifisch).' },
+  { t: 'RGT-Regel (Van\'t Hoff)', d: 'Bei Temperaturerhöhung um 10°C verdoppelt sich die Reaktionsgeschwindigkeit (bis Enzymdenaturierung).' },
+  { t: 'Protonengradient', d: 'H⁺-Konzentrationsgefälle zwischen Thylakoid-Innenraum (pH 5) und Stroma (pH 8) bzw. Intermembranraum / Matrix; treibt ATP-Synthese an.' },
+  { t: 'Antennenkomplex', d: 'Pigmentkomplex (Chlorophylle, Carotinoide) der Fotosysteme; absorbiert Licht und leitet Energie zum Reaktionszentrum.' },
+  { t: 'Reaktionszentrum', d: 'Chlorophyll-a-Molekülpaar (P680 in FS II, P700 in FS I); Ort der Elektronenabgabe nach Lichtanregung.' },
+];
+
+function renderGloss(filter='') {
+  const f = filter.toLowerCase();
+  const filtered = glossary.filter(g => g.t.toLowerCase().includes(f) || g.d.toLowerCase().includes(f));
+  document.getElementById('glossList').innerHTML = filtered.map(g =>
+    `<div class="gloss-item"><div class="gloss-term">${g.t}</div><div class="gloss-def">${g.d}</div></div>`
+  ).join('') || '<p style="color:var(--text3);font-size:13px;padding:20px 0">Kein Begriff gefunden.</p>';
+}
+function filterGloss(v) { renderGloss(v); }
+renderGloss();
+
+// ======== CHECKLIST ========
+const checks = [
+  { cat: 'Grundlagen & Überblick', items: [
+    'Ich kann Assimilation und Dissimilation definieren und unterscheiden.',
+    'Ich kenne den Unterschied zwischen autotroph und heterotroph.',
+    'Ich kann Fotosynthese und Zellatmung vergleichen (Tabelle: Ort, Edukte, Produkte, Energie).',
+  ]},
+  { cat: 'Fotosynthese – Lichtreaktion', items: [
+    'Ich kann die Gesamtgleichung der Fotosynthese aufschreiben.',
+    'Ich kenne den Aufbau des Chloroplasten (Strukturen 1–8 benennen).',
+    'Ich kann FS I und FS II unterscheiden (P680/P700, Aufgaben, Wasserspaltung).',
+    'Ich kann den Verlauf der lichtabhängigen Primärreaktion Schritt für Schritt erklären.',
+    'Ich kann die Fotolyse des Wassers erklären (Gleichung + Bedeutung).',
+    'Ich verstehe, wie ATP chemiosmotisch gebildet wird (Protonengradient + ATP-Synthase).',
+    'Ich weiß, dass die Produkte der Lichtreaktion ATP + NADPH+H⁺ + O₂ sind.',
+  ]},
+  { cat: 'Fotosynthese – Calvin-Zyklus', items: [
+    'Ich kann die 3 Phasen des Calvin-Zyklus nennen und erklären.',
+    'Ich weiß, was RubP (CO₂-Akzeptor) und 3-PGS sind.',
+    'Ich kann erklären, wofür ATP und NADPH+H⁺ im Calvin-Zyklus gebraucht werden.',
+    'Ich kann den Calvin-Zyklus als Schema selbst aufzeichnen.',
+  ]},
+  { cat: 'Zellatmung', items: [
+    'Ich kann die Gesamtgleichung der Zellatmung aufschreiben.',
+    'Ich kenne den Aufbau des Mitochondriums (Cristae, Matrix, Membranräume).',
+    'Ich kann die Glykolyse erklären (Ort, Edukte, Produkte, ATP-Bilanz).',
+    'Ich kann den Citratzyklus inkl. Zwischenschritt erklären (Ort, Aufgabe, Produkte).',
+    'Ich kann die Atmungskette erklären (Ort, Wasserstoffoxidation, Protonengradient, ATP).',
+    'Ich kenne die ATP-Ausbeute aller drei Teilprozesse (2 + 2 + 28 = 32).',
+  ]},
+  { cat: 'Faktoren & Abschluss', items: [
+    'Ich kann den Einfluss von Licht, CO₂, Temperatur, Wasser und Chlorophyll auf die FS erklären.',
+    'Ich weiß, was der Lichtsättigungspunkt ist.',
+    'Ich kenne die RGT-Regel und kann sie auf die Fotosynthese anwenden.',
+    'Ich habe alle Formeln aus dem Kopf aufgeschrieben und überprüft.',
+    'Ich habe das Quiz mit mindestens 12/15 bestanden.',
+  ]},
+];
+
+let checkState = {};
+function renderChecklist() {
+  const el = document.getElementById('checkList');
+  el.innerHTML = checks.map((section, si) => `
+    <div class="check-category">${section.cat}</div>
+    ${section.items.map((item, ii) => {
+      const key = `${si}-${ii}`;
+      const done = checkState[key] || false;
+      return `<div class="check-item ${done ? 'done' : ''}" onclick="toggleCheck('${key}', this)">
+        <div class="check-box">${done ? '✓' : ''}</div>
+        <span class="check-text">${item}</span>
+      </div>`;
+    }).join('')}
+  `).join('');
+}
+
+function toggleCheck(key, el) {
+  checkState[key] = !checkState[key];
+  el.classList.toggle('done', checkState[key]);
+  const box = el.querySelector('.check-box');
+  box.textContent = checkState[key] ? '✓' : '';
+}
+
+renderChecklist();
+</script>
+</body>
+</html>
