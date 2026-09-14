@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medien &amp; Politik — Dossier zur GRW-Klausur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#101114;
+    --paper-alt:#24262E;
+    --ink:#ECEEF2;
+    --ink-soft:#9A9FAC;
+    --rule:#2C2F37;
+    --rule-strong:#40444E;
+    --accent:#FF6259;
+    --accent-ink:#FF9089;
+    --accent-soft:rgba(255,98,89,0.15);
+    --wire:#3FC5FF;
+    --wire-soft:rgba(63,197,255,0.14);
+    --ok:#4ADE80;
+    --ok-soft:rgba(74,222,128,0.14);
+    --bad:#FF6259;
+    --white:#1B1D23;
+    --radius:3px;
+    --serif:'Fraunces', Georgia, serif;
+    --sans:'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+ 
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--accent-soft);}
+  a{color:var(--accent-ink);}
+ 
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+ 
+  button{font-family:inherit;}
+  button:focus-visible, input:focus-visible, [tabindex]:focus-visible{
+    outline:2px solid var(--wire);
+    outline-offset:2px;
+  }
+ 
+  /* ---------- Masthead ---------- */
+  .masthead{
+    border-bottom:3px double var(--ink);
+    padding:22px 20px 14px;
+    max-width:980px;
+    margin:0 auto;
+  }
+  .masthead-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    font-size:12px;
+    color:var(--ink-soft);
+    letter-spacing:.02em;
+    margin-bottom:10px;
+  }
+  .masthead h1{
+    font-family:var(--serif);
+    font-weight:700;
+    font-size:clamp(32px,7vw,52px);
+    letter-spacing:.01em;
+    margin:0;
+    text-align:center;
+    font-variant-numeric:oldstyle-nums;
+  }
+  .masthead h1 span{color:var(--accent);}
+  .masthead .sub{
+    text-align:center;
+    font-family:var(--serif);
+    font-style:italic;
+    color:var(--ink-soft);
+    font-size:15px;
+    margin-top:4px;
+  }
+ 
+  .progress-strip{
+    max-width:980px;
+    margin:0 auto;
+    padding:8px 20px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    border-bottom:1px solid var(--rule);
+  }
+  .progress-track{
+    flex:1;
+    height:5px;
+    background:var(--paper-alt);
+    border-radius:3px;
+    overflow:hidden;
+  }
+  .progress-fill{
+    height:100%;
+    background:var(--accent);
+    width:0%;
+    transition:width .4s ease;
+  }
+  .progress-label{white-space:nowrap;}
+ 
+  /* ---------- Tabs ---------- */
+  .tabbar{
+    max-width:980px;
+    margin:0 auto;
+    display:flex;
+    gap:2px;
+    overflow-x:auto;
+    padding:10px 16px 0;
+    scrollbar-width:thin;
+  }
+  .tabbar::-webkit-scrollbar{height:5px;}
+  .tabbar::-webkit-scrollbar-thumb{background:var(--rule-strong); border-radius:3px;}
+ 
+  .tab-group-label{
+    font-size:10.5px;
+    color:var(--ink-soft);
+    padding:6px 8px 6px 2px;
+    white-space:nowrap;
+    align-self:center;
+  }
+ 
+  .tab-btn{
+    background:none;
+    border:1px solid transparent;
+    border-bottom:none;
+    padding:9px 14px;
+    font-size:13.5px;
+    color:var(--ink-soft);
+    cursor:pointer;
+    white-space:nowrap;
+    border-radius:var(--radius) var(--radius) 0 0;
+    position:relative;
+    top:1px;
+  }
+  .tab-btn:hover{color:var(--ink); background:var(--paper-alt);}
+  .tab-btn[aria-selected="true"]{
+    color:var(--ink);
+    background:var(--white);
+    border-color:var(--rule);
+    font-weight:600;
+  }
+  .tab-btn[aria-selected="true"]::after{
+    content:"";
+    position:absolute;
+    left:0; right:0; bottom:-1px;
+    height:2px;
+    background:var(--accent);
+  }
+  .tab-btn.tool[aria-selected="true"]::after{background:var(--wire);}
+  .tab-divider{
+    width:1px;
+    background:var(--rule-strong);
+    margin:8px 6px;
+    align-self:stretch;
+  }
+ 
+  /* ---------- Layout ---------- */
+  main{
+    max-width:980px;
+    margin:0 auto;
+    background:var(--white);
+    border-left:1px solid var(--rule);
+    border-right:1px solid var(--rule);
+    border-bottom:1px solid var(--rule);
+    min-height:60vh;
+  }
+  .panel{padding:34px 30px 60px;}
+  .panel[hidden]{display:none;}
+ 
+  .panel h2{
+    font-family:var(--serif);
+    font-size:28px;
+    font-weight:600;
+    margin:0 0 4px;
+  }
+  .panel .kicker{
+    font-family:var(--serif);
+    font-style:italic;
+    color:var(--ink-soft);
+    font-size:14.5px;
+    margin:0 0 22px;
+  }
+  .panel h3{
+    font-family:var(--serif);
+    font-size:19px;
+    font-weight:600;
+    margin:30px 0 10px;
+    padding-bottom:6px;
+    border-bottom:1px solid var(--rule);
+  }
+  .panel p{max-width:66ch; color:var(--ink);}
+  .panel ul, .panel ol{max-width:66ch; padding-left:20px;}
+  .panel li{margin-bottom:6px;}
+ 
+  .lead{
+    font-size:16px;
+    max-width:66ch;
+    color:var(--ink);
+  }
+ 
+  .callout{
+    border-left:3px solid var(--accent);
+    background:var(--accent-soft);
+    padding:12px 16px;
+    margin:14px 0;
+    border-radius:0 var(--radius) var(--radius) 0;
+    max-width:64ch;
+  }
+  .callout p{margin:0; color:var(--ink);}
+  .callout.wire{border-left-color:var(--wire); background:var(--wire-soft);}
+  .callout .tag{
+    display:block;
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    margin-bottom:4px;
+  }
+ 
+  .example{
+    font-size:14.5px;
+    border-top:1px dotted var(--rule-strong);
+    margin-top:10px;
+    padding-top:8px;
+    max-width:64ch;
+    color:var(--ink-soft);
+  }
+  .example b{color:var(--ink);}
+ 
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+    margin:16px 0;
+  }
+  @media (max-width:680px){ .grid{grid-template-columns:1fr;} }
+ 
+  .card{
+    border:1px solid var(--rule);
+    padding:14px 16px;
+    border-radius:var(--radius);
+    background:var(--paper);
+  }
+  .card .num{
+    font-family:var(--serif);
+    font-size:13px;
+    color:var(--accent);
+    font-weight:600;
+  }
+  .card h4{
+    font-family:var(--serif);
+    font-size:16px;
+    margin:4px 0 6px;
+  }
+  .card p{font-size:13.8px; margin:0; color:var(--ink-soft);}
+ 
+  table.compare{
+    width:100%;
+    border-collapse:collapse;
+    margin:14px 0;
+    font-size:14px;
+    max-width:68ch;
+  }
+  table.compare th, table.compare td{
+    border:1px solid var(--rule);
+    padding:9px 12px;
+    text-align:left;
+    vertical-align:top;
+  }
+  table.compare th{
+    background:var(--paper-alt);
+    font-family:var(--serif);
+    font-weight:600;
+  }
+ 
+  .theory{
+    border:1px solid var(--rule);
+    border-radius:var(--radius);
+    padding:14px 18px;
+    margin:12px 0;
+    max-width:66ch;
+  }
+  .theory h4{
+    font-family:var(--serif);
+    font-size:16.5px;
+    margin:0 0 6px;
+    display:flex;
+    align-items:baseline;
+    gap:8px;
+  }
+  .theory h4 .who{
+    font-size:12px;
+    font-weight:400;
+    color:var(--ink-soft);
+    font-style:italic;
+  }
+  .theory p{margin:0; font-size:14px;}
+ 
+  /* diagram */
+  .cycle{
+    display:grid;
+    grid-template-columns:1fr 1.15fr 1fr;
+    gap:0;
+    align-items:stretch;
+    margin:22px 0 8px;
+    max-width:74ch;
+  }
+  .cycle .col{
+    border:1px solid var(--rule);
+    padding:14px;
+    font-size:13px;
+  }
+  .cycle .col h5{
+    font-family:var(--serif);
+    margin:0 0 8px;
+    font-size:14.5px;
+    text-align:center;
+  }
+  .cycle .col ul{padding-left:16px; margin:0;}
+  .cycle .col li{margin-bottom:5px; color:var(--ink-soft);}
+  .cycle .mid{background:var(--wire-soft); border-color:var(--wire);}
+  .cycle .mid h5{color:var(--wire);}
+  .cycle-arrows{
+    display:grid;
+    grid-template-columns:1fr 1.15fr 1fr;
+    max-width:74ch;
+    font-size:11.5px;
+    color:var(--ink-soft);
+    text-align:center;
+    margin-bottom:4px;
+  }
+  .cycle-arrows div{padding:2px 6px;}
+  .cycle-gg{
+    max-width:74ch;
+    border:1px dashed var(--rule-strong);
+    padding:10px 14px;
+    font-size:12.5px;
+    font-style:italic;
+    color:var(--ink-soft);
+    margin-top:10px;
+  }
+ 
+  /* ---------- Textanalyse tutorial ---------- */
+  .steps{counter-reset:step; max-width:68ch;}
+  .step{
+    display:grid;
+    grid-template-columns:34px 1fr;
+    gap:12px;
+    margin-bottom:18px;
+  }
+  .step .marker{
+    counter-increment:step;
+    font-family:var(--serif);
+    font-weight:600;
+    font-size:15px;
+    color:var(--white);
+    background:var(--wire);
+    width:30px; height:30px;
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .step .marker::before{content: counter(step);}
+  .step h4{margin:2px 0 6px; font-family:var(--serif); font-size:16.5px;}
+  .step p{margin:0 0 6px; font-size:14px;}
+  .step ul{margin:6px 0 0; padding-left:18px; font-size:13.8px;}
+ 
+  .chip-row{display:flex; flex-wrap:wrap; gap:6px; margin-top:6px;}
+  .chip{
+    font-size:12px;
+    border:1px solid var(--rule-strong);
+    padding:3px 9px;
+    border-radius:20px;
+    color:var(--ink-soft);
+    background:var(--paper);
+  }
+ 
+  /* ---------- Glossar ---------- */
+  .glossar-search{
+    width:100%;
+    max-width:360px;
+    padding:9px 12px;
+    border:1px solid var(--rule-strong);
+    border-radius:var(--radius);
+    font-size:14px;
+    margin-bottom:18px;
+    background:var(--paper);
+    color:var(--ink);
+  }
+  .glossar-search::placeholder{color:var(--ink-soft);}
+  .glossar-item{
+    border-bottom:1px solid var(--rule);
+    padding:12px 0;
+  }
+  .glossar-item dt{
+    font-family:var(--serif);
+    font-weight:600;
+    font-size:16px;
+  }
+  .glossar-item dd{
+    margin:4px 0 0;
+    font-size:14px;
+    color:var(--ink-soft);
+    max-width:62ch;
+  }
+ 
+  /* ---------- Karteikarten ---------- */
+  .fc-toolbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:18px;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+  .fc-toolbar select{
+    font-family:inherit;
+    font-size:13px;
+    padding:5px 8px;
+    border:1px solid var(--rule-strong);
+    border-radius:var(--radius);
+    background:var(--paper);
+    color:var(--ink);
+  }
+  .fc-stage{
+    max-width:520px;
+    margin:0 auto;
+  }
+  .flashcard{
+    perspective:1400px;
+    height:230px;
+    cursor:pointer;
+  }
+  .flashcard-inner{
+    position:relative;
+    width:100%; height:100%;
+    transform-style:preserve-3d;
+    transition:transform .5s cubic-bezier(.2,.8,.2,1);
+  }
+  .flashcard.flipped .flashcard-inner{transform:rotateY(180deg);}
+  .fc-face{
+    position:absolute; inset:0;
+    backface-visibility:hidden;
+    border:1px solid var(--rule);
+    border-radius:6px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:26px;
+    background:var(--paper);
+  }
+  .fc-face .eyebrow{
+    font-size:11.5px;
+    color:var(--ink-soft);
+    margin-bottom:10px;
+  }
+  .fc-face p{
+    font-family:var(--serif);
+    font-size:18px;
+    margin:0;
+    color:var(--ink);
+  }
+  .fc-back{
+    transform:rotateY(180deg);
+    background:var(--wire-soft);
+    border-color:var(--wire);
+  }
+  .fc-back p{font-family:var(--sans); font-size:14.5px; text-align:left; font-weight:500;}
+  .fc-nav{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-top:18px;
+    flex-wrap:wrap;
+  }
+  .btn{
+    font-size:13.5px;
+    padding:9px 16px;
+    border-radius:var(--radius);
+    border:1px solid var(--ink);
+    background:var(--white);
+    color:var(--ink);
+    cursor:pointer;
+  }
+  .btn:hover{background:var(--paper-alt);}
+  .btn.primary{background:var(--ink); color:var(--white);}
+  .btn.primary:hover{opacity:.82;}
+  .btn.ok{border-color:var(--ok); color:var(--ok);}
+  .btn.ok:hover{background:var(--ok-soft);}
+  .btn.bad{border-color:var(--bad); color:var(--bad);}
+  .btn.bad:hover{background:var(--accent-soft);}
+  .fc-counter{text-align:center; font-size:12.5px; color:var(--ink-soft); margin-top:10px;}
+ 
+  /* ---------- Quiz ---------- */
+  .quiz-box{max-width:600px; margin:0 auto;}
+  .quiz-progress{
+    font-size:12.5px;
+    color:var(--ink-soft);
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:10px;
+  }
+  .quiz-q{
+    font-family:var(--serif);
+    font-size:19px;
+    margin:0 0 16px;
+  }
+  .quiz-opt{
+    display:block;
+    width:100%;
+    text-align:left;
+    padding:12px 14px;
+    margin-bottom:9px;
+    border:1px solid var(--rule-strong);
+    border-radius:var(--radius);
+    background:var(--white);
+    font-size:14.5px;
+    cursor:pointer;
+    color:var(--ink);
+  }
+  .quiz-opt:hover:not(:disabled){border-color:var(--wire); background:var(--wire-soft);}
+  .quiz-opt.correct{border-color:var(--ok); background:var(--ok-soft); font-weight:600;}
+  .quiz-opt.wrong{border-color:var(--bad); background:var(--accent-soft); font-weight:600;}
+  .quiz-opt:disabled{cursor:default;}
+  .quiz-explain{
+    font-size:13.8px;
+    background:var(--paper-alt);
+    border-radius:var(--radius);
+    padding:10px 14px;
+    margin:10px 0 16px;
+    display:none;
+  }
+  .quiz-explain.show{display:block;}
+  .quiz-footer{display:flex; justify-content:space-between; align-items:center;}
+  .quiz-result{text-align:center; padding:20px 0;}
+  .quiz-result .score{
+    font-family:var(--serif);
+    font-size:46px;
+    font-weight:600;
+    color:var(--accent);
+  }
+  .quiz-best{font-size:12.5px; color:var(--ink-soft); margin-top:6px;}
+ 
+  /* ---------- Checkliste ---------- */
+  .check-group{margin-bottom:24px;}
+  .check-group-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    border-bottom:1px solid var(--rule);
+    padding-bottom:6px;
+    margin-bottom:8px;
+  }
+  .check-group-head h4{
+    font-family:var(--serif);
+    font-size:16.5px;
+    margin:0;
+  }
+  .check-group-head span{font-size:12px; color:var(--ink-soft);}
+  .check-item{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    padding:6px 0;
+    font-size:14.2px;
+    cursor:pointer;
+  }
+  .check-item input{
+    margin-top:3px;
+    width:16px; height:16px;
+    accent-color:var(--ok);
+    flex-shrink:0;
+  }
+  .check-item.done span{color:var(--ink-soft); text-decoration:line-through;}
+  .reset-row{
+    margin-top:20px;
+    padding-top:14px;
+    border-top:1px dashed var(--rule-strong);
+    font-size:12.5px;
+    color:var(--ink-soft);
+  }
+ 
+  footer{
+    max-width:980px;
+    margin:0 auto;
+    padding:20px;
+    font-size:12px;
+    color:var(--ink-soft);
+    text-align:center;
+  }
+</style>
+</head>
+<body>
+ 
+<div class="masthead">
+  <div class="masthead-top">
+    <span>GRW · Leistungskurs</span>
+    <span id="dateline"></span>
+  </div>
+  <h1>MEDIEN <span>&amp;</span> POLITIK</h1>
+  <div class="sub">Ein Dossier zur Klausurvorbereitung</div>
+</div>
+ 
+<div class="progress-strip">
+  <span class="progress-label">Lernfortschritt</span>
+  <div class="progress-track"><div class="progress-fill" id="global-progress-fill"></div></div>
+  <span class="progress-label" id="global-progress-label">0 %</span>
+</div>
+ 
+<nav class="tabbar" role="tablist" aria-label="Themenbereiche">
+  <button class="tab-btn" role="tab" data-tab="start" aria-selected="true">Start</button>
+  <button class="tab-btn" role="tab" data-tab="medienlandschaft" aria-selected="false">Medienlandschaft</button>
+  <button class="tab-btn" role="tab" data-tab="funktionen" aria-selected="false">Aufgaben &amp; Funktionen</button>
+  <button class="tab-btn" role="tab" data-tab="verhaeltnis" aria-selected="false">Medien &amp; Politik</button>
+  <button class="tab-btn" role="tab" data-tab="luegenpresse" aria-selected="false">Lügenpresse-Debatte</button>
+  <button class="tab-btn" role="tab" data-tab="parteien" aria-selected="false">Parteien</button>
+  <button class="tab-btn" role="tab" data-tab="textanalyse" aria-selected="false">Textanalyse-Tutorial</button>
+  <div class="tab-divider"></div>
+  <span class="tab-group-label">Üben:</span>
+  <button class="tab-btn tool" role="tab" data-tab="glossar" aria-selected="false">Glossar</button>
+  <button class="tab-btn tool" role="tab" data-tab="karteikarten" aria-selected="false">Karteikarten</button>
+  <button class="tab-btn tool" role="tab" data-tab="quiz" aria-selected="false">Quiz</button>
+  <button class="tab-btn tool" role="tab" data-tab="checkliste" aria-selected="false">Checkliste</button>
+</nav>
+ 
+<main>
+ 
+  <!-- START -->
+  <section class="panel" data-panel="start" id="panel-start">
+    <p class="kicker">Leitartikel</p>
+    <h2>So holst du morgen 15 Punkte</h2>
+    <p class="lead">Dieses Dossier fasst deinen gesamten Stoff zu „Medien und Politik“ zusammen und trainiert ihn. In der GRW-Klausur zählt selten jedes Detail — entscheidend ist, dass du <b>Fachbegriffe korrekt benennst</b>, sie an <b>Beispielen</b> festmachst und in der Textanalyse mit deinem Fachwissen argumentierst.</p>
+ 
+    <h3>Aufbau des Dossiers</h3>
+    <div class="grid">
+      <div class="card"><span class="num">01</span><h4>Medienlandschaft</h4><p>Alte vs. neue Medien, Finanzierung von Rundfunk.</p></div>
+      <div class="card"><span class="num">02</span><h4>Aufgaben &amp; Funktionen</h4><p>Art. 5 GG, Pressekodex, die 4 Medienfunktionen.</p></div>
+      <div class="card"><span class="num">03</span><h4>Medien &amp; Politik</h4><p>Gewaltenteilung, vier Theorien des Verhältnisses.</p></div>
+      <div class="card"><span class="num">04</span><h4>Lügenpresse-Debatte</h4><p>Der Vorwurf und seine Mechanismen.</p></div>
+      <div class="card"><span class="num">05</span><h4>Parteien in der BRD</h4><p>Definition, Aufgaben, sechs Funktionen.</p></div>
+      <div class="card"><span class="num">06</span><h4>Textanalyse-Tutorial</h4><p>Schritt für Schritt zur Material-Aufgabe.</p></div>
+    </div>
+ 
+    <h3>Strategie für die Punktzahl</h3>
+    <div class="callout">
+      <span class="tag">Merksatz</span>
+      <p>Begriff nennen → Definition in eigenen Worten → Beispiel aus dem Unterricht oder der Aufgabe. Diese Dreierkette bringt in GRW fast immer die volle Punktzahl pro Aspekt.</p>
+    </div>
+    <ul>
+      <li>Nutze bei Theorien immer den <b>Fachbegriff</b> (z. B. „Interdependenzansatz“) statt nur die Idee zu umschreiben.</li>
+      <li>Verknüpfe bei der Textanalyse das Material mit den vier Medienfunktionen oder den Theorien — das zeigt Transferleistung.</li>
+      <li>Bei Aufgaben zu Parteien: prüfe jede der sechs Funktionen einzeln und belege „erfüllt“ / „teils erfüllt“ mit einem Argument.</li>
+      <li>Arbeite dich unten durch <b>Glossar → Karteikarten → Quiz</b> und hake dann in der <b>Checkliste</b> ab, was sitzt.</li>
+    </ul>
+ 
+    <div class="callout wire">
+      <span class="tag">Zum Weiterarbeiten</span>
+      <p>Dein Fortschritt in Checkliste, Karteikarten und Quiz wird automatisch im Browser gespeichert — du kannst die Seite jederzeit schließen und später genau dort weitermachen.</p>
+    </div>
+  </section>
+ 
+  <!-- MEDIENLANDSCHAFT -->
+  <section class="panel" data-panel="medienlandschaft" id="panel-medienlandschaft" hidden>
+    <p class="kicker">Kapitel 01</p>
+    <h2>Medienlandschaft der BRD</h2>
+    <p class="lead">Medien lassen sich grob in zwei Generationen einteilen — das ist die Grundlage für alle weiteren Kapitel.</p>
+ 
+    <h3>„Alte Medien“</h3>
+    <table class="compare">
+      <tr><th>Printmedien</th><td>
+        <b>Zeitungen</b> — überregional (z. B. „Welt“, „Die Zeit“), regional (z. B. „FP“, Freie Presse)<br>
+        <b>Zeitschriften</b> — z. B. „Spiegel“, „Focus“
+      </td></tr>
+      <tr><th>Rundfunk</th><td>
+        Fernsehen und Radio, unterteilt in zwei Finanzierungsmodelle (siehe unten)
+      </td></tr>
+    </table>
+ 
+    <table class="compare">
+      <tr><th></th><th>Öffentlich-rechtlich</th><th>Privat</th></tr>
+      <tr><td>Finanzierung</td><td>gebührenfinanziert (Rundfunkbeitrag)</td><td>werbefinanziert</td></tr>
+      <tr><td>Auftrag</td><td>gesetzlicher Auftrag</td><td>Unterhaltung, Gewinnerzielung</td></tr>
+      <tr><td>Beispiele</td><td>ZDF, ARD, MDR</td><td>RTL, ProSieben</td></tr>
+    </table>
+ 
+    <h3>„Neue Medien“</h3>
+    <p>Voraussetzung ist das Internet. Dazu zählen:</p>
+    <ul>
+      <li><b>Meta</b>-Plattformen: Instagram, WhatsApp, Facebook</li>
+      <li>Spotify</li>
+      <li>Streaming-Dienste</li>
+      <li>TikTok</li>
+    </ul>
+    <div class="example"><b>Klausur-Tipp:</b> Wird nach dem Wandel der Medienlandschaft gefragt, argumentiere über Reichweite, Geschwindigkeit und Interaktivität — genau die Punkte, die auch bei den sozialen Medien im Parteien-Kapitel wieder auftauchen.</div>
+  </section>
+ 
+  <!-- FUNKTIONEN -->
+  <section class="panel" data-panel="funktionen" id="panel-funktionen" hidden>
+    <p class="kicker">Kapitel 02</p>
+    <h2>Aufgaben und Rechte von Medien</h2>
+ 
+    <h3>Rechtliche Grundlagen</h3>
+    <div class="callout">
+      <span class="tag">Art. 5 Grundgesetz</span>
+      <p>Garantiert Meinungsfreiheit und Freiheit der Medien, verbietet Zensur. Die Freiheit ist begrenzt, wenn dadurch Rechte anderer Personen verletzt werden.</p>
+    </div>
+    <ul>
+      <li><b>Pressegesetze der Länder</b> — sichern die Informationsbeschaffung der Presse bei Behörden.</li>
+      <li><b>Pressekodex</b> — eine Selbstverpflichtung (kein Gesetz!) des Deutschen Presserats auf ethische Grundsätze.</li>
+    </ul>
+ 
+    <h3>Die vier Funktionen der Medien</h3>
+    <div class="grid">
+      <div class="card">
+        <span class="num">1</span><h4>Informationsfunktion</h4>
+        <p>Medien liefern sachliche Informationen, damit Bürger am politischen und gesellschaftlichen Leben teilnehmen können.</p>
+        <div class="example"><b>Beispiel:</b> Eine Tagesschau-Meldung fasst neue Beschlüsse der Bundesregierung zum Klimaschutz zusammen.</div>
+      </div>
+      <div class="card">
+        <span class="num">2</span><h4>Meinungsbildungsfunktion</h4>
+        <p>Medien bieten Raum für unterschiedliche Perspektiven und Debatten, wodurch sich Bürger eine eigene Meinung bilden können.</p>
+        <div class="example"><b>Beispiel:</b> Eine Talkshow wie „Hart aber fair“, in der Politiker verschiedener Parteien Pro- und Kontra-Argumente austauschen.</div>
+      </div>
+      <div class="card">
+        <span class="num">3</span><h4>Kontrollfunktion</h4>
+        <p>Medien agieren als „vierte Gewalt“ im Staat. Sie decken Fehler, Skandale oder Missstände in Politik und Wirtschaft auf.</p>
+        <div class="example"><b>Beispiel:</b> Investigative Journalisten decken eine Spendenaffäre oder illegale Arbeitsbedingungen auf.</div>
+      </div>
+      <div class="card">
+        <span class="num">4</span><h4>Agenda-Setting</h4>
+        <p>Medien entscheiden durch ihre Auswahl, welche Themen überhaupt in die Öffentlichkeit gelangen und worüber diskutiert wird.</p>
+        <div class="example"><b>Beispiel:</b> Berichten alle großen Zeitungen tagelang über eine Schulreform, wird sie automatisch zum Hauptgesprächsstoff.</div>
+      </div>
+    </div>
+    <div class="callout wire">
+      <span class="tag">Klausur-Tipp</span>
+      <p>Wenn eine Aufgabe fragt „Welche Funktion erfüllt Medium X in Material Y?“, nenne den Fachbegriff, zitiere kurz die Textstelle und erkläre in einem Satz, warum genau diese Funktion zutrifft.</p>
+    </div>
+  </section>
+ 
+  <!-- VERHÄLTNIS MEDIEN & POLITIK -->
+  <section class="panel" data-panel="verhaeltnis" id="panel-verhaeltnis" hidden>
+    <p class="kicker">Kapitel 03</p>
+    <h2>Sind Medien die vierte Gewalt?</h2>
+    <p class="lead">Das Verhältnis von Medien und Politik lässt sich über die Gewaltenteilung und über vier konkurrierende Theorien beschreiben.</p>
+ 
+    <h3>Fünf Ebenen der Gewaltenteilung</h3>
+    <ol>
+      <li>Horizontale Gewaltenteilung</li>
+      <li>Vertikale Gewaltenteilung</li>
+      <li>Zeitliche Gewaltenteilung</li>
+      <li>Konstitutionelle Gewaltenteilung</li>
+      <li>Dezisive (soziale) Gewaltenteilung</li>
+    </ol>
+    <div class="example">Zur horizontalen/vertikalen Ebene aus dem Unterricht: <b>Bundestag/Bundesrat — Bundesregierung — Bundesverfassungsgericht</b> (horizontal, Bundesebene) sowie <b>Landtage — Landesregierungen — Landesgerichte</b> (vertikal, Länderebene).</div>
+ 
+    <h3>Vier Theorien zum Verhältnis Medien–Politik</h3>
+    <div class="theory">
+      <h4>Gewaltenteilungsparadigma <span class="who">Trennungsmodell</span></h4>
+      <p>Politik und Medien sind streng getrennt. Medien gelten als vierte Gewalt und Kontrollinstanz gegenüber der Politik.</p>
+    </div>
+    <div class="theory">
+      <h4>Instrumentalisierungsansatz <span class="who">Politik → Medien</span></h4>
+      <p>Medien erhalten Aufträge aus der Politik und betreiben damit z. B. aktiv Wahlkampf für sie.</p>
+    </div>
+    <div class="theory">
+      <h4>Dependenzansatz <span class="who">Medien → Politik</span></h4>
+      <p>Medien bestimmen selbst, über welche Themen sie berichten, und nehmen dadurch Einfluss auf die Politik.</p>
+    </div>
+    <div class="theory">
+      <h4>Interdependenzansatz <span class="who">wechselseitig</span></h4>
+      <p>Politik braucht Medien zur Verbreitung von Nachrichten, Medien brauchen Politik als Inhalt — beide sind aufeinander angewiesen.</p>
+    </div>
+ 
+    <h3>Kreislaufmodell: Bürger — Medien — Staat</h3>
+    <p style="font-size:13.5px; color:var(--ink-soft); max-width:66ch;">Nach der Grafik der Bundeszentrale für politische Bildung vermitteln Medien in beide Richtungen zwischen Bürgern und Staat:</p>
+    <div class="cycle-arrows">
+      <div>↑ Interessenvermittlung ↑</div><div></div><div></div>
+    </div>
+    <div class="cycle">
+      <div class="col">
+        <h5>Bürger</h5>
+        <ul>
+          <li>Öffentliche Meinung</li>
+          <li>Aktivierung</li>
+          <li>Herstellung von Öffentlichkeit</li>
+          <li>Themensetzung &amp; Filterung</li>
+        </ul>
+      </div>
+      <div class="col mid">
+        <h5>Medien</h5>
+        <ul>
+          <li>Print</li>
+          <li>Online-Medien</li>
+          <li>Fernsehen</li>
+          <li>Radio</li>
+        </ul>
+      </div>
+      <div class="col">
+        <h5>Staat</h5>
+        <ul>
+          <li>Thematisierung eigener Informationen</li>
+          <li>Kritik &amp; Kontrolle</li>
+          <li>Meinungsartikulation</li>
+          <li>Themensetzung &amp; Filterung</li>
+        </ul>
+      </div>
+    </div>
+    <div class="cycle-arrows">
+      <div>↓ Entscheidungsvermittlung ↓</div><div></div><div></div>
+    </div>
+    <div class="cycle-gg">Art. 5 GG (im Zentrum der Grafik): Jeder hat das Recht, seine Meinung frei zu äußern und sich aus allgemein zugänglichen Quellen zu unterrichten. Pressefreiheit und Rundfunkfreiheit sind gewährleistet, Zensur findet nicht statt.</div>
+  </section>
+ 
+  <!-- LÜGENPRESSE -->
+  <section class="panel" data-panel="luegenpresse" id="panel-luegenpresse" hidden>
+    <p class="kicker">Kapitel 04</p>
+    <h2>Die „Lügenpresse“-Debatte</h2>
+    <p class="lead">Ein häufiger Diskussionspunkt in Materialaufgaben: der Vorwurf, die Presse sei nicht neutral.</p>
+ 
+    <div class="callout">
+      <span class="tag">Der Vorwurf</span>
+      <p>Die Presse wirkt gleichgeschaltet und dem Leser gegenüber nicht neutral.</p>
+    </div>
+ 
+    <h3>Wie entsteht dieser Eindruck laut den Notizen?</h3>
+    <p><b>Nicht</b> durch ein Propagandaministerium mit Vorzensur — sondern durch mehrere strukturelle Mechanismen:</p>
+    <ul>
+      <li>Journalisten hinterfragen Grundsätze seltener, weil <b>Zeitdruck</b>, <b>PR-Abhängigkeit</b> und <b>Stellenstreichungen</b> den Redaktionsalltag prägen.</li>
+      <li>Der journalistische Nachwuchs stammt eher aus einer <b>westlich-sozialisierten Oberschicht</b> mit guten Kontakten in die USA — eine gewisse Einheitlichkeit an Perspektiven.</li>
+      <li>Die großen Parteien haben sich in ihren Positionen angeglichen → das führt zu einer <b>Verengung des medialen Diskurses</b>.</li>
+      <li>Eine wachsende Kluft zwischen dem Handeln der Elite und der Meinung der Bevölkerung führt zu <b>Vertrauensverlust</b>, sobald Medien als elitennah wahrgenommen werden.</li>
+    </ul>
+ 
+    <div class="callout wire">
+      <span class="tag">Klausur-Tipp</span>
+      <p>Diese Debatte lässt sich hervorragend mit dem Dependenz- und dem Interdependenzansatz verknüpfen: Wenn Medien und Politik sich in ihrem Diskurs annähern, wird die Trennung des Gewaltenteilungsparadigmas fragwürdig.</p>
+    </div>
+  </section>
+ 
+  <!-- PARTEIEN -->
+  <section class="panel" data-panel="parteien" id="panel-parteien" hidden>
+    <p class="kicker">Kapitel 05</p>
+    <h2>Die politischen Parteien in der BRD</h2>
+ 
+    <div class="callout">
+      <span class="tag">Definition</span>
+      <p>Parteien sind ein verfassungsrechtlich notwendiger Bestandteil der freiheitlich-demokratischen Grundordnung.</p>
+    </div>
+ 
+    <h3>Aufgaben und rechtliche Stellung</h3>
+    <ul>
+      <li>Freie, dauernde politische Willensbildung des Volkes</li>
+      <li>Einfluss auf die Gestaltung der öffentlichen Meinung</li>
+      <li>Förderung der Teilnahme von Bürgern am politischen Leben</li>
+      <li>Ständige Verbindung zwischen Volk und Staatsorganen</li>
+      <li>Parteien legen ihre Ziele in politischen Programmen nieder</li>
+    </ul>
+ 
+    <h3>Die sechs Funktionen der Parteien</h3>
+    <div class="grid">
+      <div class="card"><span class="num">1</span><h4>Personalbeschaffung</h4><p>Parteien wählen Personen aus und präsentieren sie bei Wahlen zur Besetzung politischer Ämter.</p></div>
+      <div class="card"><span class="num">2</span><h4>Programmfunktion</h4><p>Parteien integrieren unterschiedliche Interessen in ein politisches Programm, um Zustimmung und Mehrheiten zu werben.</p></div>
+      <div class="card"><span class="num">3</span><h4>Informationsfunktion</h4><p>Parteien vermitteln Informationen über aktuell bedeutsame Sachverhalte.</p></div>
+      <div class="card"><span class="num">4</span><h4>Interessenartikulation</h4><p>Parteien formulieren öffentliche Erwartungen und Forderungen gesellschaftlicher Gruppen an das politische System.</p></div>
+      <div class="card"><span class="num">5</span><h4>Partizipationsfunktion</h4><p>Parteien stellen eine Verbindung zwischen Bürgern und politischen Institutionen her und ermöglichen politische Beteiligung.</p></div>
+      <div class="card"><span class="num">6</span><h4>Legitimationsfunktion</h4><p>Indem Parteien die Verbindung zwischen Bürgern, Gruppen und Institutionen herstellen, verankern sie die politische Ordnung im Bewusstsein der Menschen.</p></div>
+    </div>
+ 
+    <h3>So wird die Funktionsprüfung in der Klausur bewertet</h3>
+    <p style="font-size:13.5px; color:var(--ink-soft);">Aus den Notizen — Bewertung am Beispiel einer Partei. Diese Argumentationsform ist das Muster für jede ähnliche Aufgabe:</p>
+    <table class="compare">
+      <tr><th>Funktion</th><th>Bewertung</th><th>Begründung</th></tr>
+      <tr><td>Personalbeschaffung</td><td>erfüllt</td><td>stellt Kandidaten für Wahlen und besetzt Ämter in Regierung/Parlament</td></tr>
+      <tr><td>Programmfunktion</td><td>erfüllt</td><td>Grundsatzprogramm und Parteitagsbeschlüsse bündeln die politische Ausrichtung</td></tr>
+      <tr><td>Informationsfunktion</td><td>erfüllt</td><td>Parteitagsdebatten und Öffentlichkeitsarbeit informieren über aktuelle Themen</td></tr>
+      <tr><td>Interessenartikulation</td><td>teils erfüllt</td><td>Werte werden gebündelt, aber Kompromisse schwächen manche Forderungen</td></tr>
+      <tr><td>Partizipationsfunktion</td><td>teils erfüllt</td><td>ermöglicht Mitwirkung, Parteitagsentscheidungen bremsen teils Basisinitiativen</td></tr>
+      <tr><td>Legitimationsfunktion</td><td>erfüllt</td><td>Anerkennung demokratischer Wahlen verankert das System im Bewusstsein der Bürger</td></tr>
+    </table>
+ 
+    <h3>Wirkung sozialer Medien auf Parteien</h3>
+    <ul>
+      <li>Breiteres Publikum</li>
+      <li>Schnellere Kommunikation</li>
+      <li>Schnellere Aktivierung der Öffentlichkeit</li>
+      <li>Aktive Teilnahme</li>
+    </ul>
+  </section>
+ 
+  <!-- TEXTANALYSE TUTORIAL -->
+  <section class="panel" data-panel="textanalyse" id="panel-textanalyse" hidden>
+    <p class="kicker">Werkzeug</p>
+    <h2>Tutorial: Textanalyse in GRW</h2>
+    <p class="lead">Vermutlich bekommst du morgen ein Material (Kommentar, Rede oder Artikel) zu Medien und Politik. Dieses Schema führt dich sicher durch die Aufgabe.</p>
+ 
+    <div class="steps">
+      <div class="step">
+        <div class="marker"></div>
+        <div>
+          <h4>Einleitung (Basissatz)</h4>
+          <p>Nenne in einem Satz: Autor, Titel/Quelle, Textsorte, Erscheinungsdatum und -ort sowie das Thema.</p>
+          <div class="chip-row">
+            <span class="chip">Kommentar</span><span class="chip">Bericht</span><span class="chip">Leitartikel</span><span class="chip">Rede</span><span class="chip">Karikatur</span>
+          </div>
+        </div>
+      </div>
+ 
+      <div class="step">
+        <div class="marker"></div>
+        <div>
+          <h4>Kurze Inhaltsangabe</h4>
+          <p>Fasse die zentrale These und den groben Aufbau in 2–3 Sätzen zusammen — keine Nacherzählung im Detail, nur die Argumentationslinie.</p>
+        </div>
+      </div>
+ 
+      <div class="step">
+        <div class="marker"></div>
+        <div>
+          <h4>Sprachlich-rhetorische Mittel</h4>
+          <p>Suche gezielt nach Stilmitteln und benenne ihre Wirkung — nicht nur auflisten, sondern immer mit „...dadurch wirkt die Aussage...“ verknüpfen.</p>
+          <ul>
+            <li>Rhetorische Fragen, Wiederholungen, Übertreibungen</li>
+            <li>Wertende Adjektive, Suggestivformulierungen</li>
+            <li>Metaphern und Bilder</li>
+            <li>Ironie oder Sarkasmus</li>
+          </ul>
+        </div>
+      </div>
+ 
+      <div class="step">
+        <div class="marker"></div>
+        <div>
+          <h4>Argumentationsstruktur</h4>
+          <p>Bestimme These, Argumente, Belege und Schlussfolgerung. Prüfe außerdem:</p>
+          <ul>
+            <li>Einseitig oder ausgewogen dargestellt?</li>
+            <li>Deduktiv (vom Allgemeinen zum Einzelfall) oder induktiv?</li>
+            <li>Wird eine Gegenposition überhaupt erwähnt?</li>
+          </ul>
+        </div>
+      </div>
+ 
+      <div class="step">
+        <div class="marker"></div>
+        <div>
+          <h4>Textsorte &amp; Standort des Autors</h4>
+          <p>Ordne ein: Ist der Text sachlich-informativ (Bericht) oder wertend-meinungsbildend (Kommentar/Leitartikel)? Was verrät das Medium über die politische Ausrichtung oder Zielgruppe?</p>
+        </div>
+      </div>
+ 
+      <div class="step">
+        <div class="marker"></div>
+        <div>
+          <h4>Intention des Autors</h4>
+          <p>Was will der Autor bei den Leser:innen erreichen — informieren, überzeugen, aufrütteln, Kritik üben? Wen adressiert der Text konkret?</p>
+        </div>
+      </div>
+ 
+      <div class="step">
+        <div class="marker"></div>
+        <div>
+          <h4>Stellungnahme mit Fachwissen</h4>
+          <p>Hier punktest du am meisten: Verknüpfe das Material aktiv mit deinem Fachwissen aus den anderen Kapiteln.</p>
+          <ul>
+            <li>Welche der vier Medienfunktionen erfüllt der Text?</li>
+            <li>Passt der Text eher zum Gewaltenteilungsparadigma, dem Instrumentalisierungs-, Dependenz- oder Interdependenzansatz?</li>
+            <li>Berührt der Text die Lügenpresse-Debatte oder Art. 5 GG?</li>
+            <li>Formuliere am Ende eine eigene, begründete Position.</li>
+          </ul>
+        </div>
+      </div>
+ 
+      <div class="step">
+        <div class="marker"></div>
+        <div>
+          <h4>Fazit</h4>
+          <p>Fasse in 1–2 Sätzen zusammen, wie der Text zu bewerten ist und was er über das Verhältnis von Medien und Politik aussagt.</p>
+        </div>
+      </div>
+    </div>
+ 
+    <h3>Falls stattdessen eine Karikatur drankommt</h3>
+    <ol>
+      <li>Bildbeschreibung: Wer/was ist abgebildet, ohne zu deuten.</li>
+      <li>Symbole und Übertreibungen (Verzerrung) benennen.</li>
+      <li>Bildunterschrift/Sprechblasen einbeziehen.</li>
+      <li>Kernaussage formulieren und mit Fachwissen (Funktionen, Theorien) verknüpfen.</li>
+    </ol>
+ 
+    <div class="callout wire">
+      <span class="tag">Merksatz</span>
+      <p>Analyse beschreibt <i>was da ist</i> und <i>wie es wirkt</i>. Stellungnahme sagt, <i>was du daraus mit deinem Wissen machst</i>. Beides sauber trennen bringt Struktur- und Fachpunkte gleichzeitig.</p>
+    </div>
+  </section>
+ 
+  <!-- GLOSSAR -->
+  <section class="panel" data-panel="glossar" id="panel-glossar" hidden>
+    <p class="kicker">Nachschlagen</p>
+    <h2>Glossar der wichtigsten Begriffe</h2>
+    <input type="text" class="glossar-search" id="glossar-search" placeholder="Begriff suchen …">
+    <dl id="glossar-list"></dl>
+  </section>
+ 
+  <!-- KARTEIKARTEN -->
+  <section class="panel" data-panel="karteikarten" id="panel-karteikarten" hidden>
+    <p class="kicker">Aktives Abfragen</p>
+    <h2>Karteikarten</h2>
+    <div class="fc-toolbar">
+      <span id="fc-known-count">Gelernt: 0 / 0</span>
+      <label>Ansicht:
+        <select id="fc-filter">
+          <option value="all">Alle Karten</option>
+          <option value="unknown">Nur unbekannte</option>
+        </select>
+      </label>
+    </div>
+    <div class="fc-stage">
+      <div class="flashcard" id="flashcard">
+        <div class="flashcard-inner">
+          <div class="fc-face fc-front">
+            <span class="eyebrow">Frage</span>
+            <p id="fc-question"></p>
+          </div>
+          <div class="fc-face fc-back">
+            <span class="eyebrow">Antwort</span>
+            <p id="fc-answer"></p>
+          </div>
+        </div>
+      </div>
+      <div class="fc-counter" id="fc-counter"></div>
+      <div class="fc-nav">
+        <button class="btn" id="fc-prev">← Zurück</button>
+        <button class="btn bad" id="fc-unknown">↻ Nochmal üben</button>
+        <button class="btn ok" id="fc-known">✓ Kann ich</button>
+        <button class="btn" id="fc-next">Weiter →</button>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- QUIZ -->
+  <section class="panel" data-panel="quiz" id="panel-quiz" hidden>
+    <p class="kicker">Selbsttest</p>
+    <h2>Quiz</h2>
+    <div class="quiz-box" id="quiz-box"></div>
+  </section>
+ 
+  <!-- CHECKLISTE -->
+  <section class="panel" data-panel="checkliste" id="panel-checkliste" hidden>
+    <p class="kicker">Überblick behalten</p>
+    <h2>Checkliste</h2>
+    <p class="lead">Hake ab, was du wirklich sicher beherrschst. Der Fortschritt oben auf der Seite richtet sich nach dieser Liste.</p>
+    <div id="checklist-container"></div>
+    <div class="reset-row">
+      <button class="btn" id="checklist-reset">Checkliste zurücksetzen</button>
+    </div>
+  </section>
+ 
+</main>
+ 
+<footer>Dossier zur Vorbereitung — erstellt aus deinen Unterrichtsnotizen. Fortschritt wird lokal in diesem Browser gespeichert.</footer>
+ 
+<script>
+(function(){
+  "use strict";
+ 
+  document.getElementById('dateline').textContent = new Date().toLocaleDateString('de-DE', {weekday:'long', day:'2-digit', month:'long', year:'numeric'});
+ 
+  /* ---------------- Tabs ---------------- */
+  var tabBtns = Array.prototype.slice.call(document.querySelectorAll('.tab-btn'));
+  var panels = Array.prototype.slice.call(document.querySelectorAll('.panel'));
+ 
+  function activateTab(name, persist){
+    tabBtns.forEach(function(b){ b.setAttribute('aria-selected', b.getAttribute('data-tab') === name ? 'true':'false'); });
+    panels.forEach(function(p){ p.hidden = p.getAttribute('data-panel') !== name; });
+    if(persist !== false){
+      try{ localStorage.setItem('grwmp_active_tab', name); }catch(e){}
+    }
+    window.scrollTo({top:0, behavior:'auto'});
+  }
+ 
+  tabBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){ activateTab(btn.getAttribute('data-tab')); });
+  });
+ 
+  try{
+    var savedTab = localStorage.getItem('grwmp_active_tab');
+    if(savedTab && document.querySelector('[data-panel="'+savedTab+'"]')){ activateTab(savedTab, false); }
+  }catch(e){}
+ 
+  /* ---------------- Glossar ---------------- */
+  var glossary = [
+    ["Agenda-Setting","Medien entscheiden durch die Auswahl ihrer Themen, worüber die Gesellschaft überhaupt diskutiert."],
+    ["Dependenzansatz","Theorie, nach der Medien selbst über Themen entscheiden und dadurch die Politik beeinflussen."],
+    ["Dezisive (soziale) Gewaltenteilung","Eine der fünf Ebenen der Gewaltenteilung neben horizontaler, vertikaler, zeitlicher und konstitutioneller Teilung."],
+    ["Gewaltenteilungsparadigma","Sichtweise, dass Politik und Medien streng getrennt sind und Medien als vierte Gewalt/Kontrollinstanz wirken."],
+    ["Horizontale Gewaltenteilung","Trennung der Staatsgewalt auf einer Ebene, z. B. zwischen Bundestag/Bundesrat, Bundesregierung und Bundesverfassungsgericht."],
+    ["Informationsfunktion","Medien liefern sachliche Informationen, damit Bürger am politischen Leben teilnehmen können."],
+    ["Instrumentalisierungsansatz","Theorie, nach der Medien Aufträge aus der Politik erhalten und z. B. Wahlkampf für sie betreiben."],
+    ["Interdependenzansatz","Theorie einer wechselseitigen Abhängigkeit: Politik braucht Medien zur Verbreitung, Medien brauchen Politik als Inhalt."],
+    ["Interessenartikulation","Funktion von Parteien: öffentliche Erwartungen und Forderungen gesellschaftlicher Gruppen formulieren."],
+    ["Kontrollfunktion / „Vierte Gewalt“","Medien decken Fehler, Skandale und Missstände in Politik und Wirtschaft auf."],
+    ["Konstitutionelle Gewaltenteilung","Bindung der Staatsgewalt an die Verfassung als eigene Ebene der Gewaltenteilung."],
+    ["Legitimationsfunktion","Parteien verankern durch die Anerkennung demokratischer Wahlen die politische Ordnung im Bewusstsein der Bürger."],
+    ["Lügenpresse","Vorwurf, die Presse sei gleichgeschaltet und nicht neutral — laut den Notizen Folge struktureller Mechanismen, nicht staatlicher Zensur."],
+    ["Meinungsbildungsfunktion","Medien bieten Raum für unterschiedliche Perspektiven und Debatten."],
+    ["Öffentlich-rechtlicher Rundfunk","Gebührenfinanzierter Rundfunk mit gesetzlichem Auftrag, z. B. ARD, ZDF, MDR."],
+    ["Partizipationsfunktion","Parteien verbinden Bürger und politische Institutionen und ermöglichen politische Beteiligung."],
+    ["Personalbeschaffung","Parteien wählen Kandidat:innen aus und stellen sie zur Besetzung politischer Ämter auf."],
+    ["Pressegesetze der Länder","Landesgesetze, die u. a. die Informationsbeschaffung der Presse bei Behörden regeln."],
+    ["Pressekodex","Selbstverpflichtung des Deutschen Presserats auf ethische Grundsätze journalistischer Arbeit — kein Gesetz."],
+    ["Privater Rundfunk","Werbefinanzierter Rundfunk mit Fokus auf Unterhaltung und Gewinnerzielung, z. B. RTL."],
+    ["Programmfunktion","Parteien bündeln unterschiedliche Interessen in einem politischen Programm und werben um Zustimmung."],
+    ["Vertikale Gewaltenteilung","Aufteilung der Staatsgewalt zwischen Bund und Ländern, z. B. Landtage und Landesregierungen."],
+    ["Zeitliche Gewaltenteilung","Begrenzung von Macht auf Zeit, z. B. durch Wahlperioden und Amtszeiten."],
+    ["Zensurverbot (Art. 5 GG)","Grundgesetzliche Garantie, dass staatliche Vorzensur von Medieninhalten nicht stattfindet."]
+  ];
+ 
+  var glossarList = document.getElementById('glossar-list');
+  function renderGlossary(filter){
+    glossarList.innerHTML = '';
+    var f = (filter||'').toLowerCase();
+    glossary.forEach(function(entry){
+      if(f && entry[0].toLowerCase().indexOf(f) === -1 && entry[1].toLowerCase().indexOf(f) === -1) return;
+      var item = document.createElement('div');
+      item.className = 'glossar-item';
+      var dt = document.createElement('dt'); dt.textContent = entry[0];
+      var dd = document.createElement('dd'); dd.textContent = entry[1];
+      item.appendChild(dt); item.appendChild(dd);
+      glossarList.appendChild(item);
+    });
+  }
+  renderGlossary();
+  document.getElementById('glossar-search').addEventListener('input', function(e){ renderGlossary(e.target.value); });
+ 
+  /* ---------------- Karteikarten ---------------- */
+  var flashcards = [
+    ["Was schützt Art. 5 GG?","Meinungsfreiheit, Medien-/Pressefreiheit und das Verbot der Zensur — mit Schranken bei Verletzung von Rechten anderer Personen."],
+    ["Was regeln die Pressegesetze der Länder?","Sie sichern u. a. den Auskunftsanspruch der Presse gegenüber Behörden (Informationsbeschaffung)."],
+    ["Was ist der Pressekodex?","Eine Selbstverpflichtung des Deutschen Presserats auf ethische Grundsätze — kein Gesetz."],
+    ["Nenne die vier Funktionen der Medien.","Informationsfunktion, Meinungsbildungsfunktion, Kontrollfunktion, Agenda-Setting."],
+    ["Was bedeutet Informationsfunktion?","Medien liefern sachliche Informationen, damit Bürger am politischen Leben teilnehmen können (z. B. Tagesschau)."],
+    ["Was bedeutet Meinungsbildungsfunktion?","Medien bieten Raum für unterschiedliche Perspektiven und Debatten, z. B. Talkshows."],
+    ["Was bedeutet Kontrollfunktion?","Medien agieren als „vierte Gewalt“ und decken Skandale oder Missstände auf."],
+    ["Was bedeutet Agenda-Setting?","Medien bestimmen durch ihre Themenauswahl, worüber die Gesellschaft überhaupt diskutiert."],
+    ["Was ist der Vorwurf „Lügenpresse“?","Die Presse wirke gleichgeschaltet/nicht neutral — laut Notizen nicht durch Zensur, sondern durch Zeitdruck, PR-Abhängigkeit und Stellenabbau."],
+    ["Warum hinterfragen Journalisten laut der These bestehende Sichtweisen seltener?","Zeitdruck, PR-Abhängigkeit und Stellenstreichungen; zudem stammt der Nachwuchs oft aus einer westlich-sozialisierten Oberschicht mit guten USA-Kontakten."],
+    ["Was meint „Verengung des Mediendiskurses“?","Weil sich Parteien in ihren Positionen angeglichen haben, wird auch die Bandbreite medial diskutierter Positionen enger."],
+    ["Nenne die fünf Ebenen der Gewaltenteilung.","Horizontale, vertikale, zeitliche, konstitutionelle und dezisive (soziale) Gewaltenteilung."],
+    ["Was besagt das Gewaltenteilungsparadigma?","Politik und Medien sind streng getrennt; Medien gelten als vierte Gewalt und Kontrollinstanz."],
+    ["Was besagt der Instrumentalisierungsansatz?","Medien erhalten Aufträge aus der Politik und betreiben z. B. Wahlkampf für sie."],
+    ["Was besagt der Dependenzansatz?","Medien entscheiden selbst über ihre Themen und beeinflussen dadurch die Politik."],
+    ["Was besagt der Interdependenzansatz?","Wechselseitige Abhängigkeit — Politik braucht Medien zur Verbreitung, Medien brauchen Politik als Inhalt."],
+    ["Was sind „alte Medien“?","Printmedien (Zeitungen, Zeitschriften) und Rundfunk (Fernsehen/Radio, öffentlich-rechtlich oder privat)."],
+    ["Unterschied öffentlich-rechtlicher vs. privater Rundfunk?","Öffentlich-rechtlich: gebührenfinanziert, gesetzlicher Auftrag (ARD, ZDF, MDR). Privat: werbefinanziert, Fokus auf Unterhaltung/Gewinn (RTL)."],
+    ["Was sind „neue Medien“?","Internetbasierte Medien wie Meta-Plattformen, Spotify, Streaming-Dienste und TikTok."],
+    ["Wie sind Parteien laut den Notizen definiert?","Ein verfassungsrechtlich notwendiger Bestandteil der freiheitlich-demokratischen Grundordnung."],
+    ["Nenne die sechs Funktionen von Parteien.","Personalbeschaffung, Programmfunktion, Informationsfunktion, Interessenartikulation, Partizipationsfunktion, Legitimationsfunktion."],
+    ["Was ist Personalbeschaffung (Parteien)?","Parteien wählen Kandidat:innen aus und stellen sie zur Wahl für politische Ämter auf."],
+    ["Was ist die Legitimationsfunktion?","Parteien verankern durch die Anerkennung demokratischer Wahlen die politische Ordnung im Bewusstsein der Bürger."],
+    ["Welche Wirkung haben soziale Medien laut den Notizen?","Breiteres Publikum, schnellere Kommunikation, schnellere Aktivierung der Öffentlichkeit, aktive Teilnahme."],
+    ["Was zeigt der Bürger–Medien–Staat-Kreislauf?","Bürger liefern Medien u. a. öffentliche Meinung (Interessenvermittlung); Medien liefern dem Staat Kritik/Kontrolle, der Staat liefert Bürgern Informationen (Entscheidungsvermittlung)."]
+  ].map(function(pair, i){ return {id:'fc'+i, q:pair[0], a:pair[1]}; });
+ 
+  var fcKnown = {};
+  try{ fcKnown = JSON.parse(localStorage.getItem('grwmp_fc_known')) || {}; }catch(e){ fcKnown = {}; }
+  var fcFilter = 'all';
+  var fcIndex = 0;
+ 
+  function fcCurrentSet(){
+    return fcFilter === 'unknown' ? flashcards.filter(function(c){ return !fcKnown[c.id]; }) : flashcards;
+  }
+ 
+  function saveFcKnown(){ try{ localStorage.setItem('grwmp_fc_known', JSON.stringify(fcKnown)); }catch(e){} }
+ 
+  function renderFlashcard(){
+    var set = fcCurrentSet();
+    var el = document.getElementById('flashcard');
+    el.classList.remove('flipped');
+    if(set.length === 0){
+      document.getElementById('fc-question').textContent = 'Alle Karten in dieser Ansicht sind als „gekonnt“ markiert.';
+      document.getElementById('fc-answer').textContent = 'Wechsle die Ansicht auf „Alle Karten“ oder setze deinen Fortschritt zurück.';
+      document.getElementById('fc-counter').textContent = '';
+      return;
+    }
+    if(fcIndex >= set.length) fcIndex = 0;
+    if(fcIndex < 0) fcIndex = set.length - 1;
+    var card = set[fcIndex];
+    document.getElementById('fc-question').textContent = card.q;
+    document.getElementById('fc-answer').textContent = card.a;
+    document.getElementById('fc-counter').textContent = 'Karte ' + (fcIndex+1) + ' / ' + set.length;
+    var knownCount = flashcards.filter(function(c){ return fcKnown[c.id]; }).length;
+    document.getElementById('fc-known-count').textContent = 'Gelernt: ' + knownCount + ' / ' + flashcards.length;
+  }
+ 
+  document.getElementById('flashcard').addEventListener('click', function(){ this.classList.toggle('flipped'); });
+  document.getElementById('fc-next').addEventListener('click', function(){ fcIndex++; renderFlashcard(); });
+  document.getElementById('fc-prev').addEventListener('click', function(){ fcIndex--; renderFlashcard(); });
+  document.getElementById('fc-known').addEventListener('click', function(){
+    var set = fcCurrentSet();
+    if(set[fcIndex]){ fcKnown[set[fcIndex].id] = true; saveFcKnown(); }
+    fcIndex++; renderFlashcard();
+  });
+  document.getElementById('fc-unknown').addEventListener('click', function(){
+    var set = fcCurrentSet();
+    if(set[fcIndex]){ fcKnown[set[fcIndex].id] = false; saveFcKnown(); }
+    fcIndex++; renderFlashcard();
+  });
+  document.getElementById('fc-filter').addEventListener('change', function(e){
+    fcFilter = e.target.value; fcIndex = 0; renderFlashcard();
+  });
+  renderFlashcard();
+ 
+  /* ---------------- Quiz ---------------- */
+  var quizData = [
+    {q:"Welcher Artikel des Grundgesetzes schützt Meinungs- und Pressefreiheit?", o:["Art. 5 GG","Art. 20 GG","Art. 21 GG","Art. 8 GG"], c:0, e:"Art. 5 GG garantiert Meinungs- und Medienfreiheit und verbietet Zensur."},
+    {q:"Wie werden öffentlich-rechtliche Sender wie ARD und ZDF finanziert?", o:["Über Werbung","Über den Rundfunkbeitrag (Gebühren)","Direkt aus dem Bundeshaushalt","Über Abo-Gebühren"], c:1, e:"Öffentlich-rechtliche Sender sind gebührenfinanziert und haben einen gesetzlichen Auftrag."},
+    {q:"Eine Tagesschau-Meldung fasst sachlich neue Regierungsbeschlüsse zusammen. Welche Funktion ist das?", o:["Agenda-Setting","Kontrollfunktion","Informationsfunktion","Meinungsbildungsfunktion"], c:2, e:"Sachliche Information zur politischen Teilhabe ist die Informationsfunktion."},
+    {q:"Wie nennt man es, wenn Medien durch ihre Themenauswahl bestimmen, worüber die Gesellschaft diskutiert?", o:["Agenda-Setting","Interdependenzansatz","Legitimationsfunktion","Dependenzansatz"], c:0, e:"Agenda-Setting beschreibt genau diesen Auswahleffekt der Medien."},
+    {q:"Welche Medienfunktion wird auch als „vierte Gewalt“ bezeichnet?", o:["Meinungsbildungsfunktion","Kontrollfunktion","Informationsfunktion","Agenda-Setting"], c:1, e:"Die Kontrollfunktion deckt Skandale und Missstände auf — daher „vierte Gewalt“."},
+    {q:"Eine Talkshow, in der Politiker verschiedener Parteien Pro- und Kontra-Argumente austauschen, erfüllt vor allem welche Funktion?", o:["Kontrollfunktion","Agenda-Setting","Meinungsbildungsfunktion","Informationsfunktion"], c:2, e:"Raum für unterschiedliche Perspektiven zu bieten ist die Meinungsbildungsfunktion."},
+    {q:"Wer verpflichtet Journalisten auf ethische Grundsätze, ohne dass es sich um ein Gesetz handelt?", o:["Das Pressegesetz","Der Pressekodex","Art. 5 GG","Das Rundfunkstaatsgesetz"], c:1, e:"Der Pressekodex ist eine Selbstverpflichtung des Deutschen Presserats — kein Gesetz."},
+    {q:"Was regeln die Pressegesetze der Länder unter anderem?", o:["Die Parteienfinanzierung","Die Informationsbeschaffung der Presse bei Behörden","Die Rundfunkgebühren","Die Wahlperioden"], c:1, e:"Sie sichern u. a. den Auskunftsanspruch der Presse gegenüber Behörden."},
+    {q:"Welche Theorie besagt: Politik und Medien sind streng getrennt, Medien wirken als Kontrollinstanz?", o:["Instrumentalisierungsansatz","Dependenzansatz","Gewaltenteilungsparadigma","Interdependenzansatz"], c:2, e:"Das Gewaltenteilungsparadigma beschreibt die strikte Trennung mit Medien als vierter Gewalt."},
+    {q:"Welche Theorie besagt: Medien erhalten Aufträge aus der Politik, z. B. für Wahlkampf?", o:["Gewaltenteilungsparadigma","Instrumentalisierungsansatz","Dependenzansatz","Interdependenzansatz"], c:1, e:"Der Instrumentalisierungsansatz beschreibt Medien als Werkzeug der Politik."},
+    {q:"Welche Theorie besagt: Medien entscheiden selbst über Themen und beeinflussen dadurch die Politik?", o:["Interdependenzansatz","Instrumentalisierungsansatz","Dependenzansatz","Gewaltenteilungsparadigma"], c:2, e:"Der Dependenzansatz macht die Politik von den Themensetzungen der Medien abhängig."},
+    {q:"Welche Theorie beschreibt eine wechselseitige Abhängigkeit zwischen Medien und Politik?", o:["Dependenzansatz","Interdependenzansatz","Gewaltenteilungsparadigma","Instrumentalisierungsansatz"], c:1, e:"Beim Interdependenzansatz brauchen sich beide Seiten gegenseitig."},
+    {q:"Wie viele klassische Ebenen der Gewaltenteilung werden in den Notizen unterschieden?", o:["3","4","5","6"], c:2, e:"Horizontal, vertikal, zeitlich, konstitutionell und dezisiv (sozial) — insgesamt fünf."},
+    {q:"Was besagt der Vorwurf „Lügenpresse“ laut den Notizen?", o:["Die Presse werde direkt vom Staat zensiert","Die Presse wirke gleichgeschaltet und nicht neutral, u. a. wegen Zeitdruck und PR-Abhängigkeit","Die Presse berichte zu wenig über Politik","Die Presse sei komplett unabhängig von der Politik"], c:1, e:"Laut den Notizen entsteht der Eindruck durch strukturelle Mechanismen, nicht durch ein Zensurministerium."},
+    {q:"Welche Funktion der Parteien beschreibt die Auswahl von Kandidat:innen für Wahlen?", o:["Legitimationsfunktion","Programmfunktion","Personalbeschaffung","Partizipationsfunktion"], c:2, e:"Personalbeschaffung meint das Auswählen und Aufstellen von Kandidat:innen."},
+    {q:"Welche Funktion verankert demokratische Wahlen im Bewusstsein der Bürger?", o:["Interessenartikulation","Legitimationsfunktion","Informationsfunktion","Programmfunktion"], c:1, e:"Die Legitimationsfunktion sorgt für die Verankerung der politischen Ordnung."},
+    {q:"Welche Funktion bündelt gesellschaftliche Interessen in einem politischen Programm?", o:["Programmfunktion","Interessenartikulation","Personalbeschaffung","Partizipationsfunktion"], c:0, e:"Die Programmfunktion integriert Interessen in eine politische Gesamtvorstellung."},
+    {q:"Welche Wirkung sozialer Medien wird in den Notizen NICHT genannt?", o:["Breiteres Publikum","Schnellere Kommunikation","Höhere Werbeeinnahmen für Parteien","Aktive Teilnahme"], c:2, e:"Genannt werden breiteres Publikum, schnellere Kommunikation, schnellere Aktivierung und aktive Teilnahme — Werbeeinnahmen stehen nicht in den Notizen."},
+    {q:"Welche Zeitung zählt laut den Notizen zu den überregionalen Zeitungen?", o:["Spiegel","FP","Die Zeit","RTL"], c:2, e:"„Die Zeit“ ist als überregionale Zeitung genannt; „FP“ ist regional, „Spiegel“ eine Zeitschrift."},
+    {q:"Wofür steht „FP“ in den Notizen als Beispiel?", o:["Eine überregionale Zeitung","Eine regionale Zeitung","Eine Zeitschrift","Einen Streaming-Dienst"], c:1, e:"„FP“ (Freie Presse) ist als Beispiel für eine regionale Zeitung genannt."}
+  ];
+ 
+  var quizOrder = quizData.map(function(_, i){ return i; });
+  var quizPos = 0;
+  var quizScore = 0;
+  var quizAnswered = false;
+ 
+  function shuffle(arr){
+    for(var i=arr.length-1;i>0;i--){
+      var j = Math.floor(Math.random()*(i+1));
+      var t=arr[i]; arr[i]=arr[j]; arr[j]=t;
+    }
+    return arr;
+  }
+ 
+  function startQuiz(){
+    quizOrder = shuffle(quizData.map(function(_, i){ return i; }));
+    quizPos = 0; quizScore = 0; quizAnswered = false;
+    renderQuizQuestion();
+  }
+ 
+  function bestScore(){
+    try{ return parseInt(localStorage.getItem('grwmp_quiz_best') || '0', 10); }catch(e){ return 0; }
+  }
+  function saveBestScore(s){
+    try{
+      if(s > bestScore()) localStorage.setItem('grwmp_quiz_best', String(s));
+    }catch(e){}
+  }
+ 
+  function renderQuizQuestion(){
+    var box = document.getElementById('quiz-box');
+    var qi = quizOrder[quizPos];
+    var item = quizData[qi];
+    quizAnswered = false;
+ 
+    var html = '';
+    html += '<div class="quiz-progress"><span>Frage ' + (quizPos+1) + ' / ' + quizData.length + '</span><span>Punkte: ' + quizScore + '</span></div>';
+    html += '<p class="quiz-q">' + item.q + '</p>';
+    html += '<div id="quiz-options">';
+    item.o.forEach(function(opt, idx){
+      html += '<button class="quiz-opt" data-idx="' + idx + '">' + opt + '</button>';
+    });
+    html += '</div>';
+    html += '<div class="quiz-explain" id="quiz-explain">' + item.e + '</div>';
+    html += '<div class="quiz-footer"><span></span><button class="btn primary" id="quiz-next" disabled>' + (quizPos === quizData.length-1 ? 'Ergebnis anzeigen' : 'Weiter') + '</button></div>';
+    box.innerHTML = html;
+ 
+    Array.prototype.forEach.call(box.querySelectorAll('.quiz-opt'), function(btn){
+      btn.addEventListener('click', function(){
+        if(quizAnswered) return;
+        quizAnswered = true;
+        var idx = parseInt(btn.getAttribute('data-idx'), 10);
+        Array.prototype.forEach.call(box.querySelectorAll('.quiz-opt'), function(b, bi){
+          b.disabled = true;
+          if(bi === item.c) b.classList.add('correct');
+          else if(bi === idx) b.classList.add('wrong');
+        });
+        if(idx === item.c) quizScore++;
+        document.getElementById('quiz-explain').classList.add('show');
+        document.getElementById('quiz-next').disabled = false;
+        document.querySelector('.quiz-progress span:last-child').textContent = 'Punkte: ' + quizScore;
+      });
+    });
+ 
+    document.getElementById('quiz-next').addEventListener('click', function(){
+      if(quizPos < quizData.length - 1){
+        quizPos++;
+        renderQuizQuestion();
+      }else{
+        renderQuizResult();
+      }
+    });
+  }
+ 
+  function renderQuizResult(){
+    saveBestScore(quizScore);
+    var box = document.getElementById('quiz-box');
+    var pct = Math.round((quizScore / quizData.length) * 100);
+    var msg;
+    if(pct >= 90) msg = "Sehr sicher — das reicht locker für eine starke Punktzahl.";
+    else if(pct >= 70) msg = "Solide Basis — geh die offenen Fragen nochmal per Karteikarten durch.";
+    else if(pct >= 50) msg = "Grundgerüst sitzt — konzentriere dich auf die Theorien und Funktionen.";
+    else msg = "Noch Luft nach oben — arbeite die Kapitel und Karteikarten in Ruhe durch.";
+ 
+    box.innerHTML =
+      '<div class="quiz-result">' +
+      '<div class="score">' + quizScore + ' / ' + quizData.length + '</div>' +
+      '<p>' + msg + '</p>' +
+      '<div class="quiz-best">Bestes Ergebnis in diesem Browser: ' + bestScore() + ' / ' + quizData.length + '</div>' +
+      '<button class="btn primary" id="quiz-restart" style="margin-top:16px;">Nochmal starten</button>' +
+      '</div>';
+    document.getElementById('quiz-restart').addEventListener('click', startQuiz);
+  }
+ 
+  startQuiz();
+ 
+  /* ---------------- Checkliste ---------------- */
+  var checklistData = [
+    {group:"Medienlandschaft", items:[
+      {id:"ml1", label:"Alte Medien: Print (Zeitungen/Zeitschriften) unterscheiden können"},
+      {id:"ml2", label:"Alte Medien: öffentlich-rechtlich vs. privat erklären können"},
+      {id:"ml3", label:"Neue Medien mit Beispielen benennen können"}
+    ]},
+    {group:"Aufgaben & Funktionen", items:[
+      {id:"af1", label:"Art. 5 GG inhaltlich wiedergeben können"},
+      {id:"af2", label:"Pressegesetze und Pressekodex unterscheiden können"},
+      {id:"af3", label:"Alle vier Medienfunktionen mit Beispiel nennen können"}
+    ]},
+    {group:"Medien & Politik", items:[
+      {id:"mp1", label:"Fünf Ebenen der Gewaltenteilung aufzählen können"},
+      {id:"mp2", label:"Gewaltenteilungsparadigma erklären können"},
+      {id:"mp3", label:"Instrumentalisierungs- und Dependenzansatz unterscheiden können"},
+      {id:"mp4", label:"Interdependenzansatz erklären können"},
+      {id:"mp5", label:"Kreislaufmodell Bürger–Medien–Staat skizzieren können"}
+    ]},
+    {group:"Lügenpresse-Debatte", items:[
+      {id:"lp1", label:"Den Kernvorwurf in eigenen Worten erklären können"},
+      {id:"lp2", label:"Die strukturellen Mechanismen (Zeitdruck, PR, Stellenabbau) nennen können"},
+      {id:"lp3", label:"Verengung des Mediendiskurses begründen können"}
+    ]},
+    {group:"Parteien in der BRD", items:[
+      {id:"pa1", label:"Definition und verfassungsrechtliche Stellung wiedergeben können"},
+      {id:"pa2", label:"Fünf Aufgaben der Parteien nennen können"},
+      {id:"pa3", label:"Alle sechs Funktionen mit eigenen Worten erklären können"},
+      {id:"pa4", label:"Eine Funktionsprüfung selbst durchführen können (erfüllt/teils erfüllt)"},
+      {id:"pa5", label:"Wirkung sozialer Medien auf Parteien benennen können"}
+    ]},
+    {group:"Textanalyse", items:[
+      {id:"ta1", label:"Aufbau (Einleitung – Analyse – Stellungnahme) sicher im Kopf haben"},
+      {id:"ta2", label:"Sprachliche Mittel in einem Text erkennen können"},
+      {id:"ta3", label:"Fachbegriffe aktiv in die Stellungnahme einbauen können"}
+    ]}
+  ];
+ 
+  var checklistState = {};
+  try{ checklistState = JSON.parse(localStorage.getItem('grwmp_checklist')) || {}; }catch(e){ checklistState = {}; }
+ 
+  function saveChecklist(){ try{ localStorage.setItem('grwmp_checklist', JSON.stringify(checklistState)); }catch(e){} }
+ 
+  var totalItems = checklistData.reduce(function(sum, g){ return sum + g.items.length; }, 0);
+ 
+  function updateGlobalProgress(){
+    var done = 0;
+    checklistData.forEach(function(g){ g.items.forEach(function(it){ if(checklistState[it.id]) done++; }); });
+    var pct = totalItems ? Math.round((done/totalItems)*100) : 0;
+    document.getElementById('global-progress-fill').style.width = pct + '%';
+    document.getElementById('global-progress-label').textContent = done + ' / ' + totalItems + ' · ' + pct + ' %';
+  }
+ 
+  function renderChecklist(){
+    var container = document.getElementById('checklist-container');
+    container.innerHTML = '';
+    checklistData.forEach(function(g){
+      var groupDiv = document.createElement('div');
+      groupDiv.className = 'check-group';
+ 
+      var head = document.createElement('div');
+      head.className = 'check-group-head';
+      var h4 = document.createElement('h4'); h4.textContent = g.group;
+      var span = document.createElement('span');
+      groupDiv.appendChild(head);
+      head.appendChild(h4); head.appendChild(span);
+ 
+      g.items.forEach(function(it){
+        var label = document.createElement('label');
+        label.className = 'check-item' + (checklistState[it.id] ? ' done' : '');
+        var input = document.createElement('input');
+        input.type = 'checkbox';
+        input.checked = !!checklistState[it.id];
+        input.addEventListener('change', function(){
+          checklistState[it.id] = input.checked;
+          label.classList.toggle('done', input.checked);
+          saveChecklist();
+          updateGroupCount(g, span);
+          updateGlobalProgress();
+        });
+        var textSpan = document.createElement('span');
+        textSpan.textContent = it.label;
+        label.appendChild(input);
+        label.appendChild(textSpan);
+        groupDiv.appendChild(label);
+      });
+ 
+      updateGroupCount(g, span);
+      container.appendChild(groupDiv);
+    });
+  }
+ 
+  function updateGroupCount(g, span){
+    var done = g.items.filter(function(it){ return checklistState[it.id]; }).length;
+    span.textContent = done + ' / ' + g.items.length;
+  }
+ 
+  renderChecklist();
+  updateGlobalProgress();
+ 
+  document.getElementById('checklist-reset').addEventListener('click', function(){
+    if(!confirm('Wirklich die gesamte Checkliste zurücksetzen?')) return;
+    checklistState = {};
+    saveChecklist();
+    renderChecklist();
+    updateGlobalProgress();
+  });
+ 
+})();
+</script>
+</body>
+</html>
