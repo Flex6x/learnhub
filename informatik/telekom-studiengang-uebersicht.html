@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bachelor Informatik · Telekom — Curriculum</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EDEAE2;
+    --paper-2:#F6F4EE;
+    --ink:#1B1A17;
+    --ink-soft:#5A574D;
+    --ink-faint:#8C887C;
+    --line: rgba(27,26,23,0.15);
+    --line-strong: rgba(27,26,23,0.32);
+    --kern:#1F5C52;
+    --quer:#8A6D1D;
+    --vertiefung:#9C2B5E;
+    --abschluss:#3A3F63;
+    --white:#FBFAF6;
+    --shadow: 0 12px 40px rgba(27,26,23,0.18);
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ animation-duration:0.001ms !important; transition-duration:0.001ms !important; }
+  }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{ color:inherit; }
+
+  .mono{ font-family:'IBM Plex Mono', monospace; }
+
+  /* ---------- Header ---------- */
+  header.masthead{
+    max-width:1180px;
+    margin:0 auto;
+    padding:56px 32px 28px;
+  }
+  .kicker{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:0.02em;
+    color:var(--ink-faint);
+    margin:0 0 10px;
+  }
+  h1.title{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:clamp(32px, 5vw, 52px);
+    line-height:1.05;
+    margin:0 0 14px;
+    max-width:16ch;
+  }
+  h1.title em{
+    font-style:italic;
+    font-weight:400;
+    color:var(--vertiefung);
+  }
+  .lede{
+    max-width:56ch;
+    color:var(--ink-soft);
+    font-size:16px;
+    margin:0 0 22px;
+  }
+  .stat-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:28px;
+    border-top:1px solid var(--line);
+    padding-top:18px;
+  }
+  .stat{
+    font-family:'IBM Plex Mono', monospace;
+  }
+  .stat .num{
+    font-size:22px;
+    font-weight:600;
+    display:block;
+  }
+  .stat .lbl{
+    font-size:11.5px;
+    color:var(--ink-faint);
+    text-transform:none;
+  }
+
+  /* ---------- Sticky semester nav ---------- */
+  nav.semnav{
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:rgba(237,234,226,0.92);
+    backdrop-filter: blur(6px);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
+  .semnav-inner{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 32px;
+    display:flex;
+    gap:2px;
+    overflow-x:auto;
+  }
+  .semnav-inner a{
+    position:relative;
+    text-decoration:none;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    color:var(--ink-soft);
+    padding:14px 16px 12px;
+    white-space:nowrap;
+    border-bottom:2px solid transparent;
+    transition:color .15s ease, border-color .15s ease;
+  }
+  .semnav-inner a:hover{ color:var(--ink); }
+  .semnav-inner a.active{
+    color:var(--ink);
+    border-bottom-color:var(--vertiefung);
+  }
+  .semnav-inner a .n{
+    font-weight:600;
+    color:var(--ink);
+    margin-right:4px;
+  }
+
+  /* ---------- Main / semester sections ---------- */
+  main{
+    max-width:1180px;
+    margin:0 auto;
+    padding:8px 32px 120px;
+  }
+  section.semester{
+    padding-top:52px;
+    scroll-margin-top:56px;
+  }
+  .sem-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px 24px;
+    border-bottom:1px solid var(--line-strong);
+    padding-bottom:14px;
+    margin-bottom:22px;
+  }
+  .sem-head h2{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:28px;
+    margin:0;
+  }
+  .sem-head h2 .no{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:16px;
+    color:var(--ink-faint);
+    font-weight:500;
+    margin-right:10px;
+  }
+  .sem-meta{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    color:var(--ink-faint);
+  }
+
+  .elective-note{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    color:var(--vertiefung);
+    text-transform:none;
+    grid-column:1 / -1;
+    padding:2px 0 4px;
+    border-top:1px dashed var(--line-strong);
+    margin-top:6px;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+
+  .card{
+    background:var(--paper-2);
+    padding:18px 18px 16px;
+    text-align:left;
+    border:none;
+    border-left:3px solid var(--cat-color, var(--kern));
+    cursor:pointer;
+    font-family:inherit;
+    color:inherit;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    min-height:150px;
+    transition:border-left-width .15s ease, background .15s ease;
+  }
+  .card:hover, .card:focus-visible{
+    border-left-width:7px;
+    background:var(--white);
+    outline:none;
+  }
+  .card:focus-visible{
+    box-shadow: inset 0 0 0 1px var(--ink);
+  }
+  .card .code{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--ink-faint);
+    letter-spacing:0.02em;
+  }
+  .card .name{
+    font-family:'Fraunces', serif;
+    font-size:17.5px;
+    font-weight:500;
+    line-height:1.28;
+    flex-grow:1;
+  }
+  .card .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    align-items:center;
+  }
+  .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    padding:3px 7px;
+    border:1px solid var(--line-strong);
+    color:var(--ink-soft);
+  }
+  .tag.wab{
+    border-color:var(--vertiefung);
+    color:var(--vertiefung);
+  }
+  .tag.ai{
+    border-color:var(--kern);
+    color:var(--kern);
+  }
+
+  /* ---------- Drawer ---------- */
+  .scrim{
+    position:fixed; inset:0;
+    background:rgba(27,26,23,0.35);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .22s ease;
+    z-index:40;
+  }
+  .scrim.open{ opacity:1; pointer-events:auto; }
+
+  .drawer{
+    position:fixed;
+    top:0; right:0;
+    height:100%;
+    width:min(460px, 100%);
+    background:var(--white);
+    box-shadow:var(--shadow);
+    transform:translateX(100%);
+    transition:transform .28s cubic-bezier(.2,.8,.2,1);
+    z-index:41;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+  }
+  .drawer.open{ transform:translateX(0); }
+
+  .drawer-scroll{
+    overflow-y:auto;
+    padding:32px 30px 60px;
+  }
+  .drawer-close{
+    position:absolute;
+    top:20px; right:20px;
+    width:34px; height:34px;
+    border:1px solid var(--line-strong);
+    background:transparent;
+    cursor:pointer;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:16px;
+    color:var(--ink-soft);
+    display:flex; align-items:center; justify-content:center;
+    transition:background .15s ease, color .15s ease;
+  }
+  .drawer-close:hover{ background:var(--ink); color:var(--white); }
+
+  .drawer .d-code{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--ink-faint);
+    margin-bottom:8px;
+  }
+  .drawer h3{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:27px;
+    line-height:1.15;
+    margin:0 0 14px;
+    padding-right:40px;
+  }
+  .drawer .tags{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:26px; }
+
+  .d-section{
+    margin-bottom:26px;
+  }
+  .d-section h4{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.04em;
+    color:var(--ink-faint);
+    margin:0 0 10px;
+    text-transform:uppercase;
+  }
+  .d-section p{
+    margin:0;
+    font-size:14.5px;
+    color:var(--ink);
+    line-height:1.6;
+  }
+  .d-section ul{
+    margin:0;
+    padding-left:18px;
+    font-size:14.5px;
+    line-height:1.55;
+  }
+  .d-section li{ margin-bottom:6px; }
+
+  .workload-total{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    margin-bottom:12px;
+  }
+  .workload-total .big{
+    font-family:'Fraunces', serif;
+    font-size:26px;
+  }
+  .workload-total .small{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--ink-faint);
+  }
+  .wbar{
+    display:flex;
+    height:26px;
+    width:100%;
+    border:1px solid var(--line-strong);
+    overflow:hidden;
+    margin-bottom:10px;
+  }
+  .wbar span{ display:block; height:100%; }
+  .wbar .pres{ background:var(--kern); }
+  .wbar .vc{ background:var(--quer); }
+  .wbar .self{ background:var(--ink-faint); }
+  .wlegend{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    color:var(--ink-soft);
+  }
+  .wlegend .dot{
+    display:inline-block;
+    width:9px; height:9px;
+    margin-right:5px;
+    vertical-align:middle;
+  }
+
+  .pruefung-box{
+    border-left:3px solid var(--vertiefung);
+    padding:4px 0 4px 14px;
+  }
+
+  footer{
+    max-width:1180px;
+    margin:0 auto;
+    padding:36px 32px 60px;
+    color:var(--ink-faint);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    border-top:1px solid var(--line);
+  }
+
+  @media (max-width:640px){
+    header.masthead{ padding:36px 20px 20px; }
+    main{ padding:8px 20px 100px; }
+    .drawer{ width:100%; top:auto; bottom:0; height:88vh; transform:translateY(100%); }
+    .drawer.open{ transform:translateY(0); }
+    .scrim{ }
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <p class="kicker">CURRICULUM · BACHELOR OF SCIENCE INFORMATIK · KOOPERATION MIT DER DEUTSCHEN TELEKOM AG</p>
+  <h1 class="title">Studienverlauf <em>im Überblick</em></h1>
+  <p class="lede">Alle sechs Semester, alle Module — Workload, ECTS, Sprache und Inhalte auf einen Blick. Modul anklicken für Details.</p>
+  <div class="stat-row">
+    <div class="stat"><span class="num">6</span><span class="lbl">Semester</span></div>
+    <div class="stat"><span class="num">34</span><span class="lbl">Module</span></div>
+    <div class="stat"><span class="num">180</span><span class="lbl">ECTS gesamt</span></div>
+    <div class="stat"><span class="num">25%</span><span class="lbl">engl. Vorlesungsanteil</span></div>
+    <div class="stat"><span class="num">5×</span><span class="lbl">WAB-Praxisberichte</span></div>
+  </div>
+</header>
+
+<nav class="semnav">
+  <div class="semnav-inner" id="semnav"></div>
+</nav>
+
+<main id="main"></main>
+
+<footer>
+  Quelle: Modulhandbuch Bachelor Informatik Telekom, Provadis School of International Management and Technology · gültig ab Wintersemester 2025, Version 2.2 · Persönliche Vorbereitungs-Übersicht, kein offizielles Dokument.
+</footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-hidden="true">
+  <button class="drawer-close" id="drawerClose" aria-label="Schließen">×</button>
+  <div class="drawer-scroll" id="drawerContent"></div>
+</aside>
+
+<script id="module-data" type="application/json">
+[{"kind": "Modul", "name": "Mathematik 1", "code": "MATHE1-IWi", "semester": 1, "workload": "125 h", "credits": "5 ECTS", "language": "deutsch", "wab": "Nein", "angebot": "jedes", "hours": {"praesenz_h": "34,5", "vc_h": "16,875", "selbststudium_h": "75,5", "gruppengroesse": "35"}, "lernergebnisse": "Die Studierenden erlangen grundlegende Fähigkeiten in höherer Mathematik, wie Sie für ein Studium der Informatik und Wirtschaftsinformatik notwendig sind. Sie sind in der Lage, mathematische Sachverhalte in der gebotenen Präzision zu formulieren und Problemstellungen mittels streng logischer Schlussfolgerungen zu analysieren und zu lösen. Die Studierenden lernen außerdem, Bezüge zwischen der Mathematik und Ihren Anwendungen in Informatik und Wirtschaftsinformatik herzustellen und mathematische Methoden in diesen Disziplinen anzuwenden.", "inhalte": ["Mengen, Relationen und Abbildungen", "Teilbarkeitslehre (Teilbarkeitsrelation, modulares Rechnen, größter gemeinsamer Teiler, Euklidischer Algorithmus)", "Logik und Beweisverfahren (direkter und indirekter Beweis, vollständige Induktion)", "Zahlensysteme (natürliche, ganze, rationale, reelle und komplexe Zahlen, Binärzahlen, Hexadezimalzahlen)", "Algebraische Strukturen (Gruppen, Ringe, Körper)", "Grundlagen der linearen Algebra (Vektorräume, Basis und Dimension, lineare Abbildungen und Matrizen, lineare Gleichungssysteme, Determinanten)"], "lehrformen": "Interaktive Vorlesung mit hohem Übungsanteil. Zur Vorlesung werden regelmäßig Hausübungen angeboten, die von den Studierenden zu bearbeiten sind. Zusätzlich werden freiwillige Tutorien angeboten, in welchen Übungsaufgaben gemeinsam unter Aufsicht gelöst und Hausübungen besprochen werden. Heterogene Vorkenntnisse werden zu Beginn des Semesters in 16 Unterrichtseinheiten nivelliert.", "virtual_classroom": "Inhaltlich vertiefen die jeweiligen Virtual Classroom-Lektionen den in der Vorlesung erarbeiteten Stoff. Außerdem ergänzen angeleitete Übungslektionen das Präsenzstudium. Die Studierenden sollen jeweils die Bearbeitung von analytischen Aufgabenstellungen trainieren und den Umgang mit Lösungsverfahren des Stoffgebiets beherrschen lernen. Die durch den Dozenten bereitgestellten Übungslektionen sind durch die Studierenden unter Anleitung des Dozenten zu lösen.", "pruefung": "90-minütige Klausur oder mündliche Gruppenprüfung. Für die Zulassung zur Prüfung ist das Erreichen von 50% der Punkte der Hausaufgaben erforderlich. Werden diese 50% nicht erreicht, erlischt die Prüfungszulassung; es verfällt dadurch kein Prüfungsversuch. Eine erworbene Prüfungszulassung ist auch für Nachklausuren gültig. Andere Prüfungsformen sind nach Maßgabe der Dozierenden möglich, sofern sie das Lernergebnis gleichermaßen unterstützen; jegliche Änderung muss vor Beginn des Semesters durch die Studiengangleitung genehmigt werden. Die genehmigte Änderung muss nachweislich zu Beginn des Semesters an die Studierenden und das Prüfungsamt kommuniziert werden. Spätere Änderungen sind immer durch den Studien- und Prüfungsausschuss zu genehmigen.", "category": "kern", "aiRelevant": false, "ects_num": 5.0}, {"kind": "Modul", "name": "Lerntechniken & wissenschaftliches Arbeiten", "code": "LTWA-IWi", "semester": 1, "workload": "125 h", "credits": "5 ECTS", "language": "deutsch/englisch", "wab": "Nein", "angebot": "jedes", "hours": {"praesenz_h": "22,5", "vc_h": "7,5", "selbststudium_h": "95", "gruppengroesse": "35"}, "lernergebnisse": "Die Studierenden erlernen zu Studienbeginn zwei essenzielle Fähigkeitenkomplexe: Lerntechniken für eine wissenschaftliches Studium, insb. in Bezug auf komplexe, theoretische Zusammenhänge sowie die Grundlagen wissenschaftlichen Arbeitens und Dokumentierens. Lerntechniken: Nach erfolgreichem Besuch dieser Veranstaltung und entsprechendem Selbststudium sind die Studierenden in der Lage, • zentrale Lerntechniken für unterschiedliche Arten von Lernfeldern zu verstehen und anzuwenden • die Herausforderungen der Selbstmanagements zu benennen, • erlernte Techniken für ein erfolgreiches Selbstmanagement richtig einzusetzen, • eigene Schwächen und Stärken zu erkennen und zu nutzen sowie • die Relevanz von Interaktionen in der Gruppe zu erkennen. Wissenschaftliches Arbeiten: Nach Abschluss dieses Teils sind die Studierenden in der Lage, • die Inhalte und Vorgehensweisen des wissenschaftlichen Arbeitens zu verstehen und selbst umzusetzen • den Prozess der wissenschaftlichen Erkenntnisgewinnung und des Forschens sowie der Dokumentation und Diskussion von Ergebnissen und Erkenntnissen zu erkennen, umzusetzen und kritisch zu hinterfragen • die Besonderheiten der wissenschaftlichen Recherche in Online- und Offline Bibliotheken zu verstehen, fachspezifische Literatur zu erfassen, zu verwerten und aufzubereiten sowie für die eigenständige Erstellung wissenschaftlicher Arbeiten zu verwenden • mithilfe des „akademischen Handwerkszeugs“ Referate / Präsentationen, Hausarbeiten und die Bachelorthesis zu erstellen • sich kritisch mit vorhandener Literatur auseinanderzusetzen sowie • ein akademisches Verständnis zur Lösung von Problemen und komplexen Fragestellungen zu entwickeln.", "inhalte": ["Lerntechniken für ein wissenschaftliches Studium, insb. Informatik und/oder Wirtschaftsinformatik", "Wissenschaftliche Methode und Qualitätssicherung in der Wissenschaft a. Fragen und Hypothesen b. Literaturarbeit c. Methoden der empirischen Forschung d. Aufbau und Stil wissenschaftlicher Arbeiten, e. Formale Anforderungen für Haus- und Bachelorarbeiten an der Provadis Hochschule. f. Bewertung der Qualität wissenschaftlicher Arbeiten"], "lehrformen": "Interaktive Vorlesung auf Basis theoretischer und praktischer Beispiele", "virtual_classroom": "Inhaltlich vertiefen die jeweiligen Virtual Classroom-Lektionen den in der Vorlesung erarbeiteten Stoff. Außerdem ergänzen angeleitete Übungslektionen das Präsenzstudium. Die Studierenden sollen jeweils die Bearbeitung von analytischen Aufgabenstellungen trainieren und den Umgang mit Lösungsverfahren des Stoffgebiets beherrschen lernen. Die durch den Dozenten bereitgestellten Übungslektionen sind durch die Studierenden unter Anleitung des Dozenten zu lösen.", "pruefung": "Die Prüfung teilt sich in zwei Teilleistungen: eine Klausur (Gewicht für die Endnote: 70%) wissenschaftliches Arbeiten sowie eine Gruppenpräsentationsprüfung zum Themenfeld „Lerntechniken“ (Gewicht 30%). Andere Prüfungsformen sind nach Maßgabe der Dozierenden möglich, sofern sie das Lernergebnis gleichermaßen unterstützen; jegliche Änderung muss vor Beginn des Semesters durch die Studiengangleitung genehmigt werden. Die genehmigte Änderung muss nachweislich zu Beginn des Semesters an die Studierenden und das Prüfungsamt kommuniziert werden. Spätere Änderungen sind immer durch den Studien- und Prüfungsausschuss zu genehmigen.", "category": "quer", "aiRelevant": false, "ects_num": 5.0}, {"kind": "Modul", "name": "Grundlagen der Informatik", "code": "GLI-IWi", "semester": 1, "workload": "125 h", "credits": "5 ECTS", "language": "deutsch", "wab": "Nein", "angebot": "jedes", "hours": {"praesenz_h": "22,5", "vc_h": "15", "selbststudium_h": "87,5", "gruppengroesse": "35"}, "lernergebnisse": "Ziel der Veranstaltung ist die Vermittlung von Grundprinzipien der Informatik, insbesondere des Programmierens. Es wird das Verständnis, warum Programmieren funktioniert und wie Programmieren in modernen Hochsprachen funktioniert, vermittelt. Dazu gehört auch die Fähigkeit, Prozessideen zu strukturieren und Abstraktion zu betreiben. Diese Vorlesung ermöglicht es den Studierenden, ohne Vorwissen programmieren zu erlernen – nicht die Reproduktion von Beispielen, sondern durch Verständnis und Kombination von Grundprinzipien, die durch moderne Programmiersprachen zur Verfügung gestellt werden. Üblicherweise teilt sich die Vorlesung in einen funktionalen Teil (z.B. in der Programmiersprache Racket), um das Funktionieren von modernen Hochsprachen zu erlernen und in einen imperativen Teil (z.B. in der Programmiersprache Python), um zusätzlich die Anwendung von Kontrollstrukturen und zeitlichen Einflüssen zu erlernen. Ziel ist es, dass die Studierenden am Ende der Vorlesung in der Lage sind, jede Programmiersprache zu erlernen, weil Konzepte und Prinzipien vermittelt wurden.", "inhalte": ["Grundelemente der Programmierung: Primitive, Kombinationsmittel, Abstraktionsmittel", "Datenrepräsentation, insb. Zahlen und Zahlensysteme, Binärarithmetik und Zeichenkodierung", "Strukturierte Datentypen und Datenabstraktion, Programmorganisation anhand von Datenstrukturen", "Rekursive Datentypen und strukturelle RekursionLexikalisches Scoping und Auswertungsreihenfolge", "Lexikalisches Scoping und Auswertungsreihenfolge", "Abstraktion: Funktionen als Werte, Abstraktion entwerfen, higher order functions, Lambda-Funktionen, Programmorganisation anhand von Verarbeitungsschritten: Pipes-and-Filters", "Python-’Crashkurs’"], "lehrformen": "Interaktive Vorlesung mit Übungsanteil. Die Veranstaltung ermöglicht es den Studierenden, Programmieren ohne Vorwissen strukturiert und prozess- und lösungsorientiert zu erlernen. Ziel ist es, dass die Studierenden am Ende der Vorlesung in der Lage sind, jede Programmiersprache zu erlernen, weil Konzepte und Prinzipien vermittelt wurden.", "virtual_classroom": "Inhaltlich vertiefen die jeweiligen Virtual Classroom-Lektionen den in der Vorlesung erarbeiteten Stoff. Außerdem ergänzen angeleitete Übungslektionen das Präsenzstudium. Die Studierenden sollen jeweils die Bearbeitung von analytischen Aufgabenstellungen trainieren und den Umgang mit Lösungsverfahren des Stoffgebiets beherrschen lernen. Die durch den Dozenten bereitgestellten Übungslektionen sind durch die Studierenden unter Anleitung des Dozenten zu lösen.", "pruefung": "60-minütige Abschlussklausur.", "category": "kern", "aiRelevant": false, "ects_num": 5.0}, {"kind": "Modul", "name": "Programmierung 1", "code": "PROG1-IWi", "semester": 1, "workload": "250 h", "credits": "10 ECTS", "language": "deutsch", "wab": "Ja", "angebot": "jedes", "hours": {"praesenz_h": "22,5", "vc_h": "15", "selbststudium_h": "87,5", "gruppengroesse": "35"}, "lernergebnisse": "Die Studierenden werden befähigt, die grundlegenden Java-Programmiersprachenkonstrukte, wie Variablen, Kontrollstrukturen, Methoden, Klassen, Objekte und Felder zum Lösen einfacher Probleme anzuwenden. Die Hörer der Vorlesung erlernen Programmier- und Dokumentationskonventionen, um Java-Programme lesbar zu schreiben sowie mit Modultests anhand von JUnit zu testen. Sie eignen sich die Grundelemente der Unified Modeling Language an und modellieren mit objektorientierter Analyse und Design kleinere Programme. Die Studierenden erkennen rekursive Problemstrukturen und lösen sie mit rekursiven Algorithmen. Sie benutzen eine integrierte Java-Entwicklungsumgebung, um damit Programme zu erstellen, zu testen und zu ändern. In den darauffolgenden Übungen programmieren die Studierenden einfache Berechnungen mit Java unter Verwendung von Variablen, Ausdrücken und Kontrollstrukturen. Später entwickeln die Studierenden einfache objekt-orientierte Programme am Rechner. Am Ende lösen sie rekursive Probleme und implementieren teilweise aus der Vorlesung bekannte Such- und Sortierverfahren.", "inhalte": ["Systematische Entwicklung kleinerer bis mittlerer Programme unter Verwendung geeigneter Programmier- und Softwaretechniken: Definition geeigneter Datentypen (auch solche mit verketteten Strukturen), Spezifikation der Schnittstelle, schrittweise Verfeinerung, Konzeption und Umsetzung abstrakter Datentypen", "Testen, validieren und bewerten von Programmen, insbesondere unter Nutzung einer Entwicklungsumgebung", "Dokumentation einfacher Softwarestrukturen mit Hilfe von UML und unter Nutzung von Entwicklungswerkzeugen", "Verstehen und umsetzen einfacher Analyse- und Entwurfsdokumente", "Übersicht verschiedener Programmierparadigmen", "Objektorientierte Programmierung einschl. Objekte, Referenzen, Vererbung, Polymorphie, Schnittstellen, und Generics"], "lehrformen": "Der Natur eines integrierten Programmier- und Softwaretechnik-Kurses entsprechend, können alle besprochenen theoretischen Konzepte direkt anhand praktischer Beispiele eingeübt und vertieft werden. Im Kontext des Moduls ist eine wissenschaftlich angeleitete berufspraktische Phase zu absolvieren. Die Integration von Theorie und Praxis wird durch die WAB und durch aktuelle und relevante Fallbeispiele aus dem betrieblichen Umfeld erreicht.", "virtual_classroom": "Inhaltlich vertiefen die jeweiligen Virtual Classroom-Lektionen den in der Vorlesung erarbeiteten Stoff. Außerdem ergänzen angeleitete Übungslektionen das Präsenzstudium. Die Studierenden sollen jeweils die Bearbeitung von analytischen Aufgabenstellungen trainieren und den Umgang mit Lösungsverfahren des Stoffgebiets beherrschen lernen. Die durch den Dozenten bereitgestellten Übungslektionen sind durch die Studierenden unter Anleitung des Dozenten zu lösen.", "pruefung": "90-minütige Abschlussklausur sowie WAB (siehe Abschnitt Wissenschaftlich angeleitete Berufspraxis (WAB).", "category": "kern", "aiRelevant": false, "ects_num": 10.0}, {"kind": "Modul", "name": "Business English", "code": "ENG-IWi", "semester": 1, "workload": "125 h", "credits": "5 ECTS", "language": "englisch", "wab": "nein", "angebot": "jedes", "hours": {"praesenz_h": "15", "vc_h": "7,5", "selbststudium_h": "102,5", "gruppengroesse": "35"}, "lernergebnisse": "The students will acquire business and professional language and communication skills. This will enable them to take part in discussions, hold presentations and produce written work.", "inhalte": ["Topics of current interest", "Corporate social responsibility"], "lehrformen": "Am Arbeitsplatz wird Englisch als Kommunikations- und Dokumentationsform benutzt. Es wird darauf geachtet, dass Lehrbeispiele dem betrieblichen Alltag entnommen werden.", "virtual_classroom": "Präsentationen im synchronen Virtual Classroom und asynchronen Lerneinheiten mit Übungen", "pruefung": "Schreiben eines Berichts + Präsentation im Virtual Classroom (20 min).", "category": "quer", "aiRelevant": false, "ects_num": 5.0}, {"kind": "Modul", "name": "Mathematik 2", "code": "MATHE2-IWi", "semester": 2, "workload": "125 h", "credits": "5 ECTS", "language": "deutsch", "wab": "Nein", "angebot": "jedes", "hours": {"praesenz_h": "22,5", "vc_h": "15", "selbststudium_h": "87,5", "gruppengroesse": "35"}, "lernergebnisse": "In Mathematik 2 festigen wir das Fundament der Mathematik. Schwerpunkt der Vorlesung ist das Themengebiet der Analysis. Nach der Vorlesung sind die Studierenden in der Lage, Problemstellungen im Zusammenhang mit abzählbaren und überabzählbaren Mengen zu analysieren und zu lösen, grundlegende Fragestellungen der Kombinatorik zu beantworten und verschiedene Arten von Konvergenzuntersuchungen durchzuführen. Ferner sind die Studierenden mit Anwendungsmöglichkeiten der zentralen Begriffe der mathematischen Analysis in der Informatik vertraut und können, beispielsweise, Terminierungsprobleme für Algorithmen anhand des Konvergenzbegriffs beurteilen. Weiter können sie einfache Iterationsverfahren, beispielsweise das Bisektionsverfahren, implementieren und deren Aufwände analysieren.", "inhalte": ["Elementare Kombinatorik (Zählprobleme, Binomialkoeffizienten, Permutationen, abzählbare und überabzählbare Mengen)", "Analysis: a. Eigenschaften reeller Zahlen b. Konvergenz von Folgen und Reihen c. wichtige Funktionen (Polynome und rationale Funktionen, Exponentialfunktion und Logarithmus, trigonometrische Funktionen) d. Stetigkeit e. Differenzialrechnung in einer reellen Variablen (Ableitung, Extremwertbestimmung, Stammfunktionen) f. Integralrechnung (Hauptsatz der Differenzial- und Integralrechnung, partielle Integration, Substitutionsregel, uneigentliche Integrale) g. Differentialrechnung mehrerer Variablen"], "lehrformen": "Zur Vor- und Nachbearbeitung des Stoffes sind angeleitete Übungen von den Studierenden zu bearbeiten. Inhaltlich vertiefen und festigen die Aufgaben den in der Vorlesung erarbeiteten Stoff. Darüber hinaus dienen Turboübungen mit vorgegebener Bearbeitungszeit als Vorbereitung auf die Klausur. Zusätzlich werden freiwillige Tutorien angeboten, in welchen Übungsaufgaben gemeinsam unter Aufsicht gelöst und Hausübungen besprochen werden.", "virtual_classroom": "Inhaltlich vertiefen die jeweiligen Virtual Classroom-Lektionen den in der Vorlesung erarbeiteten Stoff. Außerdem ergänzen angeleitete Übungslektionen das Präsenzstudium. Die Studierenden sollen jeweils die Bearbeitung von analytischen Aufgabenstellungen trainieren und den Umgang mit Lösungsverfahren des Stoffgebiets beherrschen lernen. Die durch den Dozenten bereitgestellten Übungslektionen sind durch die Studierenden unter Anleitung des Dozenten zu lösen.", "pruefung": "90-minütige Klausur oder mündliche Gruppenprüfung. Für die Zulassung zur Prüfung ist das Erreichen von 50% der Punkte der Hausaufgaben erforderlich. Werden diese 50% nicht erreicht, erlischt die Prüfungszulassung; es verfällt dadurch kein Prüfungsversuch. Eine erworbene Prüfungszulassung ist auch für Nachklausuren gültig. Andere Prüfungsformen sind nach Maßgabe der Dozierenden möglich, sofern sie das Lernergebnis gleichermaßen unterstützen; jegliche Änderung muss vor Beginn des Semesters durch die Studiengangleitung genehmigt werden. Die genehmigte Änderung muss nachweislich zu Beginn des Semesters an die Studierenden und das Prüfungsamt kommuniziert werden. Spätere Änderungen sind immer durch den Studien- und Prüfungsausschuss zu genehmigen.", "category": "kern", "aiRelevant": false, "ects_num": 5.0}, {"kind": "Modul", "name": "Theoretische Informatik", "code": "THEO-IWi", "semester": 2, "workload": "125 h", "credits": "5 ECTS", "language": "deutsch", "wab": "Nein", "angebot": "jedes", "hours": {"praesenz_h": "22,5", "vc_h": "15", "selbststudium_h": "87,5", "gruppengroesse": "35"}, "lernergebnisse": "Die Vorlesung vermittelt das notwendige theoretische Grundlagenwissen der Informatik, insbesondere die Theorie formaler Sprachen und Algorithmik endlicher Automaten, kontextfreier und kontextabhängiger Grammatiken sowie Grundlagen der Berechenbarkeit und Petri-Netze. Kennenlernen, Einordnung und Trennung der Chomskyschen Sprachklassen sowie Grundwissen zu formaler Modellierung und Verifikation.", "inhalte": ["• Grundbegriffe: Alphabete, Worte, Sprachen, Entscheidbarkeit • Automatentheorie o DFA: Komplement, Produkt, ‘Summe’ von regulären Sprachen, Minimalautomat, Trennbarkeit o NFA: Äquivalenz zu DFA, Potenzmengenkonstruktion o PDA: kontextfreie Grammatiken, NPDAs, Konstruktion von NPDAs aus Grammatiken o kontextabhängige Grammatiken o TM: allgemeine Grammatiken, Turing- und Registermaschinen (RAM) sowie Turing-Post- Programme • Berechenbarkeit o Begriffe und Konzepte o Komplexität, P=NP o Einfluss von Quantencomputern • Petri-Netze o Begriffe o Erreichbarkeit o Inzidenzmatrix"], "lehrformen": "Interaktive Vorlesung; Übungsmaterialien zur selbstständigen Bearbeitung dienen der Vor- und Nachbereitung und fließen inhaltlich mit in die Abschlussklausur ein.", "virtual_classroom": "Inhaltlich vertiefen die jeweiligen Virtual Classroom-Lektionen den in der Vorlesung erarbeiteten Stoff. Außerdem ergänzen angeleitete Übungslektionen das Präsenzstudium. Die Studierenden sollen jeweils die Bearbeitung von analytischen Aufgabenstellungen trainieren und den Umgang mit Lösungsverfahren des Stoffgebiets beherrschen lernen. Die durch den Dozenten bereitgestellten Übungslektionen sind durch die Studierenden unter Anleitung des Dozenten zu lösen.", "pruefung": "60minütige Abschlussklausur.", "category": "kern", "aiRelevant": false, "ects_num": 5.0}, {"kind": "Modul", "name": "Algorithmen & Datenstrukturen", "code": "AD-IWi", "semester": 2, "workload": "250 h", "credits": "10 ECTS", "language": "deutsch/englisch", "wab": "Ja", "angebot": "jedes", "hours": {"praesenz_h": "30", "vc_h": "15", "selbststudium_h": "87,5", "gruppengroesse": "35"}, "lernergebnisse": "Die Studierenden kennen Standard-Algorithmen und -Datenstrukturen in den Bereichen Datenverwaltung und Sortierung, können die Leistungsfähigkeit dieser Verfahren und Strukturen beurteilen und Varianten bedarfsgerecht entwerfen und implementieren. Ferner können die Studierenden selbstständig entsprechende Algorithmen erklären und deren Einsatz vermitteln.", "inhalte": ["1. Sortieren und Suchen 2. Aufwandsanalyse und Komplexität 3. Rekursion 4. Graphen und Graphenalgorithmen 5. Bäume und zugehörige Algorithmen 6. Hashing 7. Ausgewählte Ergänzungen"], "lehrformen": "Die Vorlesung vermittelt ein grundlegendes Verständnis algorithmischer Problemstellungen und erweitert die Vorstellung von Datenstrukturen hinsichtlich ihrer Implementation. Die Studierenden erfahren hierdurch auch, was programmiertechnisch machbar und gut verstanden ist. Durch Präsenz- und Gruppenübungen lernen die Studierenden, Algorithmen anzuwenden und deren Laufzeit zu analysieren. Im Kontext des Moduls ist eine wissenschaftlich angeleitete berufspraktische Phase zu absolvieren. Die Integration von Theorie und Praxis wird durch die WAB und durch aktuelle und relevante Fallbeispiele aus dem betrieblichen Umfeld erreicht.", "virtual_classroom": "Inhaltlich vertiefen die jeweiligen Virtual Classroom-Lektionen den in der Vorlesung erarbeiteten Stoff. Außerdem ergänzen angeleitete Übungslektionen das Präsenzstudium. Die Studierenden sollen jeweils die Bearbeitung von analytischen Aufgabenstellungen trainieren und den Umgang mit Lösungsverfahren des Stoffgebiets beherrschen lernen. Die durch den Dozenten bereitgestellten Übungslektionen sind durch die Studierenden unter Anleitung des Dozenten zu lösen.", "pruefung": "60-minütige Abschlussklausur sowie WAB (siehe Wissenschaftlich angeleitete Berufspraxis (WAB)).", "category": "kern", "aiRelevant": false, "ects_num": 10.0}, {"kind": "Modul", "name": "Programmierung 2", "code": "PROG2-IWi", "semester": 2, "workload": "125 h", "credits": "5 ECTS", "language": "deutsch/englisch", "wab": "Nein", "angebot": "jedes", "hours": {"praesenz_h": "22,5", "vc_h": "15", "selbststudium_h": "87,5", "gruppengroesse": "35"}, "lernergebnisse": "In dieser Lehrveranstaltung werden die Programmiertechniken und implementierungsnahe Softwaretechniken fortgesetzt. Die objektorientierte Programmierung wird erweitert. Ergänzend zu den Programmiersprachen aus den ersten Semestern (Racket, Python, Java/Kotlin) sind die Studierenden auch mit den Grundzügen der Programmiersprache C vertraut (hier wahlweise mit C++, Rust oder Go vertieft). Programmiertechnisch verstehenden die Studierenden die Grundlagen der nebenläufigen Programmierung (Threads, Coroutinen) sowie aufbauend auf dem Modul: Grundlagen der Informatik auch fortgeschrittene Techniken der funktionalen Programmierung einschließlich Lambda-Ausdrücke und die Verarbeitung von Datenströmen. Aufbauend auf dem Unit-Testing aus dem Modul: Programmierung 1 sind die Studierenden auch mit weiteren Teststrategien (bspw. integration testing, system testing, coverage testing, regression testing) vertraut und können die passende Strategieauswählen und einsetzen.", "inhalte": ["Fortgeschrittene Konzepte objektorientierter Sprachen: o Reflections, Nebenläufigkeit/Concurrency (Futures), Serialisierung", "Funktionale Techniken und Web-Programmierung: o Lambda-Funktionen, Streaming, JavaScript/TypeScript, Node.js", "Systemnahe Programmierung: o Grundlagen in C/C++, ggf. Go, Rust", "Software-Tests:", "Überblick der Testverfahren, Einführung in ausgewählte Testverfahren"], "lehrformen": "Übungsmaterialien zur selbstständigen Bearbeitung dienen der Vor- und Nachbereitung und fließen inhaltlich mit in die Abschlussklausur ein.", "virtual_classroom": "Inhaltlich vertiefen die jeweiligen Virtual Classroom-Lektionen den in der Vorlesung erarbeiteten Stoff. Außerdem ergänzen angeleitete Übungslektionen das Präsenzstudium. Die Studierenden sollen jeweils die Bearbeitung von analytischen Aufgabenstellungen trainieren und den Umgang mit Lösungsverfahren des Stoffgebiets beherrschen lernen. Die durch den Dozenten bereitgestellten Übungslektionen sind durch die Studierenden unter Anleitung des Dozenten zu lösen.", "pruefung": "60-minütige Abschlussklausur.", "category": "kern", "aiRelevant": false, "ects_num": 5.0}, {"kind": "Modul", "name": "Kommunikationskompetenz", "code": "KOMM-PHS", "semester": 2, "workload": "125 h", "credits": "5 ECTS", "language": "deutsch/englisch", "wab": "Nein", "angebot": "jedes", "hours": {"praesenz_h": "15", "vc_h": "7,5", "selbststudium_h": "102,5", "gruppengroesse": "35"}, "lernergebnisse": "Die Studierenden erstellen auf der Basis der schriftlichen Ausarbeitung des Seminars Präsentationsunterlagen (Folien, Videosequenzen, programmierte Beispiele). Sie präsentieren individuell ihre Ausarbeitungen im Rahmen eines Vortrages mit anschließender Diskussion. Die Studierenden lernen in der Vorlesung, sich in Rede und Diskussion frei von störenden Hemmungen und weitgehend unabhängig von einem Text sicher, treffend und erfolgreich zu äußern.", "inhalte": ["• Situationsangemessene Verwendung kommunikativer Mittel und die Kenntnis ihrer Wirkung • Psychologische Wahrnehmungsfehler und Zuhörtechniken • Grundlagen der kooperativen Konfliktlösung in Verhandlungen und schwierigen Gesprächen • Moderationstechnik zur Leitung von Gesprächen und Lösung von Problemen in Arbeitsgruppen. • Präsentationstechniken"], "lehrformen": "Dieses Modul wird als Seminar durchgeführt. Übungsmaterialien zur selbstständigen Bearbeitung dienen der Vor- und Nachbereitung und fließen inhaltlich mit in die Abschlussklausur ein.", "virtual_classroom": "Inhaltlich vertiefen die jeweiligen Virtual Classroom-Lektionen den in der Vorlesung erarbeiteten Stoff. Außerdem ergänzen angeleitete Übungslektionen das Präsenzstudium. Die Studierenden sollen jeweils die Bearbeitung von analytischen Aufgabenstellungen trainieren und den Umgang mit Lösungsverfahren des Stoffgebiets beherrschen lernen. Die durch den Dozenten bereitgestellten Übungslektionen sind durch die Studierenden unter Anleitung des Dozenten zu lösen.", "pruefung": "Schriftliche Ausarbeitung und Präsentation. Bewertung zu gleichen Teilen. Bei der Bewertung der studentischen Leistung wird auf folgende Kriterien geachtet: Einhaltung zeitlicher Vorgaben beim Vortrag; didaktisch geschickte Präsentation; Diskussionsfestigkeit.", "category": "quer", "aiRelevant": false, "ects_num": 5.0}, {"kind": "Modul", "name": "Informationssicherheit", "code": "INFS-IWi", "semester": 3, "workload": "125 h", "credits": "5 ECTS", "language": "deutsch/englisch", "wab": "Nein", "angebot": "jedes", "hours": {"praesenz_h": "22,5", "vc_h": "15", "selbststudium_h": "87,5", "gruppengroesse": "35"}, "lernergebnisse": "Die Studierenden sind mit wichtigen Grundlagen der organisatorischen, technischen, also auch der sozialen und psychologischen Informationssicherheit vertraut. Sie können Ziele, Herausforderungen und Lösungsansätze in Beziehung setzen, verfügen über ein Verständnis der grundlegenden Funktionsweisen der Lösungsansätze und können diese anwenden. Die Studierenden verfügen über die ‚Awareness‘, um Informationssicherheit bei alltäglichen Arbeitsaufgaben zu berücksichtigen.", "inhalte": ["Die Inhalte umfassen Ziele der Informationssicherheit (CIA + Zusatzziele), Bedrohungen (einschl. ‚Social Engineering‘) dieser Ziele, sowie grundlegende Schutzmaßnahmen. Vertieft werden Grundlagen der Kryptografie (symmetrisch/asymmetrische Kryptografie, Verschlüsslung und Signaturen, Schlüsselaustausch), Passwortsicherheit und Netzwerksicherheit (IPSec, TLS, VPNs, Firewalls). Darüber hinaus werden aktuelle Entwicklungen bei Herausforderungen (etwa IoT, Industrie 4.0) sowie Lösungsansätzen (etwa ZeroTrust) besprochen."], "lehrformen": "Übungsmaterialien zur selbstständigen Bearbeitung dienen der Vor- und Nachbereitung und fließen inhaltlich mit in die Abschlussklausur ein.", "virtual_classroom": "Inhaltlich vertiefen die jeweiligen Virtual Classroom-Lektionen den in der Vorlesung erarbeiteten Stoff. Außerdem ergänzen angeleitete Übungslektionen das Präsenzstudium. Die Studierenden sollen jeweils die Bearbeitung von analytischen Aufgabenstellungen trainieren und den Umgang mit Lösungsverfahren des Stoffgebiets beherrschen lernen. Die durch den Dozenten bereitgestellten Übungslektionen sind durch die Studierenden unter Anleitung des Dozenten zu lösen.", "pruefung": "90-minütige Abschlussklausur.", "category": "kern", "aiRelevant": false, "ects_num": 5.0}, {"kind": "Modul", "name": "Datenmodellierung & Datenbanken", "code": "DMDB-IWi", "semester": 3, "workload": "250 h", "credits": "10 ECTS", "language": "deutsch/englisch", "wab": "Ja", "angebot": "jedes", "hours": {"praesenz_h": "30", "vc_h": "15", "selbststudium_h": "87,5", "gruppengroesse": "35"}, "lernergebnisse": "Diese Lehrveranstaltung stellt Aufgaben, Einsatz und technische Grundkonzepte von Datenbanksystemen vor. Die Studierenden werden dadurch in die Lage versetzt, praktische Problemstellungen auf ihre Eignung zur Umsetzung in eine Datenbank basierte Lösung zu analysieren, Alternativen der Umsetzung zu erörtern und eine geeignete Lösung zu realisieren. Die Studierenden sind im praktischen Umgang mit einem gängigen Datenbanksystem vertraut und können Datenbankzugriffe programmieren. Durch die Vermittlung der relationalen Algebra sowie des relationalen Datenmodells sind die Studierenden in der Lage, von dem in der Vorlesung behandelten beispielhaften Datenbankmanagementsystem zu abstrahieren und die dort gemachten Beobachtungen auf andere relationale Datenbanken zu übertragen. Die theoretischen Themen relationaler Datenbanken werden vertieft und mit dem Konzept der Transaktionsverarbeitung auch Fragen des Mehrbenutzerbetriebs von Datenbanksystemen behandelt. Hierbei wird der Schwerpunkt auf die Vermittlung der grundlegenden Konzepte der Transaktionsverarbeitung gelegt, die auch einen Transfer auf andere Problemstellungen aus dem Bereich Scheduling erlauben.", "inhalte": ["Motivation für Datenbanken, Komponenten eines DB-Systems.", "Datenmodellierungssprachen: Entity-Relationship-Modell (ERM), Unified Modelling Language (UML), Unterschied Schema – Instanz", "Relationales Datenmodell: Relationen Schema – Relation, Integritätsbedingungen (Schlüsselbegriff), Transformation eERM -> Relationales Modell", "Relationale Algebra, Anfragebäume, Optimierung relationaler Ausdrücke", "Datenbanksprachen: Datendefinitionssprache (DDL), DDL in DB-Systemen, Datenmanipulationssprache (DML), Structured Query Language (SQL), Anwendung in einem System", "Normalisierung von Relationen Schemata: Anomalien (Insert-A., Update-A., Delete-A.), Ursache der Anomalien, Funktionale Abhängigkeit, 1., 2., 3. Normalform von Relationen Schemata, Systematisches Normalisieren von anomalen Relationen Schemata", "Datenschutz- und Datensicherheitskonzepte: Transaktion und Recovery, ACID-Eigenschaften, Concurrency und Sperrkonzepte, Vergabe und Rücknahme von Rechten", "Methoden der Transaktionsverarbeitung, Scheduling-Konzepte, Two-Phase-Locking, Timestamp- Ordering"], "lehrformen": "Die Vorlesung vermittelt zunächst ein grundlegendes Verständnis der Datenmodellierung, der relationalen Algebra und der gebräuchlichen Normalformen. Dieses Verständnis wird durch umfangreiche Übungen und Praxisbeispiele gefestigt. Anschließend werden Datenbanksprachen in der Vorlesung vermittelt und geübt. Mit der Übung anhand von Fallbeispielen werden die Inhalte der Lehrveranstaltung zusammengefasst. Im Kontext des Moduls ist eine wissenschaftlich angeleitete berufspraktische Phase zu absolvieren. Die Integration von Theorie und Praxis wird durch die WAB und durch aktuelle und relevante Fallbeispiele aus dem betrieblichen Umfeld erreicht.", "virtual_classroom": "Inhaltlich vertiefen die jeweiligen Virtual Classroom-Lektionen den in der Vorlesung erarbeiteten Stoff. Außerdem ergänzen angeleitete Übungslektionen das Präsenzstudium. Die Studierenden sollen jeweils die Bearbeitung von analytischen Aufgabenstellungen trainieren und den Umgang mit Lösungsverfahren des Stoffgebiets beherrschen lernen. Die durch den Dozenten bereitgestellten Übungslektionen sind durch die Studierenden unter Anleitung des Dozenten zu lösen.", "pruefung": "90-minütige Abschlussklausur sowie WAB (siehe Abschnitt Wissenschaftlich angeleitete Berufspraxis (WAB).", "category": "kern", "aiRelevant": false, "ects_num": 10.0}, {"kind": "Modul", "name": "Netze & Verteilte Systeme", "code": "NVS-IWi", "semester": 3, "workload": "125 h", "credits": "5 ECTS", "language": "deutsch/englisch", "wab": "Nein", "angebot": "jedes", "hours": {"praesenz_h": "22,5", "vc_h": "15", "selbststudium_h": "87,5", "gruppengroesse": "35"}, "lernergebnisse": "Ausgehend von aktuellen (Anwendungs-) Protokollen wie RESTful Web-Services und MQTT führt diese Lehrveranstaltung die Studierenden in die Welt der verteilten Systeme ein und bringt die Grundlagen von Computernetzwerken näher. • Die Lehrveranstaltung befähigt die Studierenden, das Prinzip der Schichtung als Hierarchie zur Strukturierung von Problemen und ihrer Lösungen einzusetzen. • Die Studierenden sind in der Lage, (zukünftige) Protokolle und deren zugrundeliegende Standards zu verstehen, die Chancen und Grenzen von Protokollen einzuschätzen, und neue Protokolle zu entwerfen. • Die Studierenden sind in der Lage, normale Vorgänge und Probleme in Computernetzwerken und verteilten Anwendungen nachzuvollziehen und mittels diagnostischer Werkzeuge zu analysieren. • Die Studierenden sind in der Lage, neue verteilte Systeme zu entwerfen und dabei passenden Protokolle, Lösungsmuster und Technologien einzusetzen.", "inhalte": ["Schicht-Modelle und Abstraktion", "Design von Protokollen und wiederkehrende Muster (Flusskontrolle, Handshakes)", "Formen der Adressierung und Nachrichtenverteilung (Unicast, Anycast, Broadcast, Multicast)", "Protokolle der Anwendungsschicht (E-Mail, MQE-MailMail, DASH, CDNs)", "Protokolle der Transportschicht (UDP, TCP, QUIC)", "Protokolle der Vermittlungsschicht (iPv6 und IPv4, Tunneling, DNS), Hilfsprotokolle (NDP, SLAAC, ARP)", "Grundlagen des Routings (statisch, Distanzvektor, Link-State, Hierarchisch) und des Software Defined Networkings (SDN)", "Protokolle der Sicherungsschicht einschl. Konzepten der MAC bei LAN (CSMA/CD) und Wi-Fi (CSMA/CA), logische Partitionierung (VLAN, MPLS), sowie Verfahren der Fluss- und Staukontrolle", "Verfahren der Bitübertragungsschicht einschl. physikalischer Grundlagen (Shannon, Fourier), Codierungsverfahren, Multiplexing, und Fehlerkontrolle (CRC, „Internet“-Checksummen)"], "lehrformen": "Übungsmaterialien zur selbstständigen Bearbeitung dienen der Vor- und Nachbereitung und fließen inhaltlich mit in die Abschlussklausur ein.", "virtual_classroom": "Inhaltlich vertiefen die jeweiligen Virtual Classroom-Lektionen den in der Vorlesung erarbeiteten Stoff. Außerdem ergänzen angeleitete Übungslektionen das Präsenzstudium. Die Studierenden sollen jeweils die Bearbeitung von analytischen Aufgabenstellungen trainieren und den Umgang mit Lösungsverfahren des Stoffgebiets beherrschen lernen. Die durch den Dozenten bereitgestellten Übungslektionen sind durch die Studierenden unter Anleitung des Dozenten zu lösen.", "pruefung": "60-minütige Abschlussklausur.", "category": "kern", "aiRelevant": false, "ects_num": 5.0}, {"kind": "Modul", "name": "Betriebssysteme", "code": "BS-IWi", "semester": 3, "workload": "125 h", "credits": "5 ECTS", "language": "deutsch/englisch", "wab": "Nein", "angebot": "jedes", "hours": {"praesenz_h": "22,5", "vc_h": "7,5", "selbststudium_h": "95", "gruppengroesse": "35"}, "lernergebnisse": "Im Rahmen der Lehrveranstaltung Betriebssysteme werden den Studierenden nicht nur die grundlegenden Aufgaben und Arbeitsweisen moderner Betriebssysteme vermittelt, sondern die Studierenden erlernen auch, diese Techniken selbständig und strukturiert im Team zur Lösung typischer systemnaher Entwicklungsaufgaben einzusetzen.", "inhalte": ["Die Vorlesung selbst gliedert sich u in fünf Teile: 1) Grundlagen 2) Prozesse, Threads und deren Synchronisation 3) Speicherverwaltung 4) Dateiverwaltung 5) I/O-Verwaltung Während im ersten Teil die Verbindung zwischen Rechnerarchitektur und Betriebssystem geschaffen und ein prinzipielles Verständnis für die Aufgaben eines Betriebssystems entwickelt wird, stehen in den darauffolgenden Abschnitten die Vermittlung der spezifischen Probleme, das Verstehen der typischen Lösungsstrategien und das Anwenden dieser Strategien im entsprechenden Kontext im Vordergrund. Insbesondere werden folgende Punkte behandelt: Systemaufrufe, Prozesse, Threads, Semaphore, Scheduling-Algorithmen, Free-Space-Management, Paging. Hinzu kommen die zentralen Konzepte von Dateisystemen, deren Aufbau und Realisierung, bis zur Behandlung von RAID-Konzepten und dem Umgang mit modernen SSDs."], "lehrformen": "Interaktive Vorlesung; Übungsmaterialien zur selbstständigen Bearbeitung dienen der Vor- und Nachbereitung und fließen inhaltlich mit in die Abschlussklausur ein.", "virtual_classroom": "Inhaltlich vertiefen die jeweiligen Virtual Classroom-Lektionen den in der Vorlesung erarbeiteten Stoff. Außerdem ergänzen angeleitete Übungslektionen das Präsenzstudium. Die Studierenden sollen jeweils die Bearbeitung von analytischen Aufgabenstellungen trainieren und den Umgang mit Lösungsverfahren des Stoffgebiets beherrschen lernen. Die durch den Dozenten bereitgestellten Übungslektionen sind durch die Studierenden unter Anleitung des Dozenten zu lösen.", "pruefung": "60-minütige Abschlussklausur.", "category": "kern", "aiRelevant": false, "ects_num": 5.0}, {"kind": "Modul", "name": "Projektmanagement", "code": "PM-IWi", "semester": 3, "workload": "125 h", "credits": "5 ECTS", "language": "deutsch/englisch", "wab": "Nein", "angebot": "jedes", "hours": {"praesenz_h": "15", "vc_h": "7,5", "selbststudium_h": "102,5", "gruppengroesse": "35"}, "lernergebnisse": "Nach erfolgreichem Besuch der Veranstaltung sind die Teilnehmer in der Lage: • Projektmanagement im betrieblichen Umfeld richtig einzuordnen • wichtigste Vorgehensweisen, Methoden und Werkzeuge einzusetzen • gruppendynamische Prozesse und soziale Konflikte zu beherrschen die eigene zukünftige Rolle innerhalb eines Projektteams einzuschätzen.", "inhalte": ["• Grundlagen (Projektdefinition und -klassifikation, Definition Projektmanagement und -organisation, Zusammenhang zu definierten Aufgaben, Historie) • Projekt-Aufbauorganisation (Einordnung in die Unternehmensstruktur, Instanzen und Verantwortungsbereiche) • Projekt-Ablaufstruktur (Multi- und Einzelprojektmanagement, Phasen des Projektablaufs (Initiierung, Definition, Planung, Ablauf, Ende) • Methoden des Projektmanagements • Projektstrategien, Problemfeldanalyse, Wirtschaftlichkeit, Zieldefinition, Änderungsverfahren, Aufwandschätzung (COCOMO, Function-Point), Projektpläne, Projektverfolgung, Erfahrungssicherung, Kommunikation, Konfliktbeseitigung • Werkzeuge des Projektmanagements • Funktionalität und Handhabung von MS Project oder Project Libre."], "lehrformen": "Zur Vor- und Nachbearbeitung des Stoffes sind angeleitete Übungen von den Studierenden zu bearbeiten. Inhaltlich vertiefen und festigen die Aufgaben den in der Vorlesung erarbeiteten Stoff. Darüber hinaus dienen Turboübungen mit vorgegebener Bearbeitungszeit als Vorbereitung auf die Klausur.", "virtual_classroom": "Inhaltlich vertiefen die jeweiligen Virtual Classroom-Lektionen den in der Vorlesung erarbeiteten Stoff. Außerdem ergänzen angeleitete Übungslektionen das Präsenzstudium. Die Studierenden sollen jeweils die Bearbeitung von analytischen Aufgabenstellungen trainieren und den Umgang mit Lösungsverfahren des Stoffgebiets beherrschen lernen. Die durch den Dozenten bereitgestellten Übungslektionen sind durch die Studierenden unter Anleitung des Dozenten zu lösen.", "pruefung": "Entweder: • 60-minütige Abschlussklausur oder • Gruppenpräsentation (45 min) (Thema nach Vorgabe des Dozenten) mit der Zugangsvoraussetzung von mind. 50% der Kontrollfragen korrekt beantwortet Die gewählte Prüfungsform muss nachweislich zu Beginn des Semesters an die Studierenden und das Prüfungsamt kommuniziert werden. Spätere Änderungen sind immer durch den Studien- und Prüfungsausschuss zu genehmigen.", "category": "kern", "aiRelevant": false, "ects_num": 5.0}, {"kind": "Modul", "name": "Agiles Software-Engineering & Softwaretechnik", "code": "ASES-IWi", "semester": 4, "workload": "250 h", "credits": "10 ECTS", "language": "deutsch/englisch", "wab": "Ja", "angebot": "jedes", "hours": {"praesenz_h": "13", "vc_h": "15", "selbststudium_h": "87,5", "gruppengroesse": "35"}, "lernergebnisse": "Diese Lehrveranstaltung behandelt den Softwareprozess. Sie vertieft, erweitert und festigt die Kenntnisse und Fertigkeiten in Analyse und Entwurf, die in den vorausgesetzten Lehrveranstaltungen behandelt wurden. Entlang von Softwareentwicklungsprozessen werden Methoden der Anforderungsanalyse und des Entwurfs beschrieben. Softwarearchitekturen werden als Strukturierungskonzept großer Softwaresysteme eingeführt. Hierbei werden Sprachen der UML zur Beschreibung verwendet. Verifikation und Validierung werden als Methoden zur Bewertung von Software verstanden. Schließlich sind aber auch nicht-technische Themen Gegenstand der Vorlesung. Sie umfassen das Management von Softwareprojekten sowie empirische Erkenntnisse zur Bewertung von Softwareentwicklungsmethoden, insb. agilem Vorgehen. Die Vorlesung beinhaltet das Kennenlernen von Softwarewerkzeugen, die für den gesamte Lebenszyklus von Software – von der Projektplanung über die Systemanalyse, die Kostenschätzung, den Entwurf und die Implementierung, die Validation und Verifikation, bis hin zur Wartung von Software – geeignet ist. Das sind zum Beispiel Eclipse, Ant, Maven, GIT, Jenkins, Nexus und andere.", "inhalte": ["Prozessmodelle zur Softwareentwicklung", "Agile Methoden, SCRUM und Large Scale Scrum (LeSS)", "Methoden der Anforderungsanalyse", "Entwurf, Softwarearchitekturen und Implementierung", "Softwarequalitätssicherung und Software-Ergonomie", "Betrieb und Wartung", "Einsatz von UML", "Verifikation und Validierung", "Management von Softwareprojekten", "Wiederverwendbarkeit von Software", "DevOps und gängige Werkzeuge für DevOps, z.B. Git, Maven, Jenkins, Chef, SonarQube", "Empirische Erkenntnisse zum Software Engineering"], "lehrformen": "Die Vorlesung vermittelt ein grundlegendes Verständnis von Software Engineering und Softwaretechnik. Im Kontext des Moduls ist eine Wissenschaftlich angeleitete Berufspraxis (WAB) zu absolvieren. Die Integration von Theorie und Praxis wird durch die WAB und durch aktuelle und relevante Fallbeispiele aus dem betrieblichen Umfeld erreicht.", "virtual_classroom": "Inhaltlich vertiefen die jeweiligen Virtual Classroom-Lektionen den in der Vorlesung erarbeiteten Stoff. Außerdem ergänzen angeleitete Übungslektionen das Präsenzstudium. Die Studierenden sollen jeweils die Bearbeitung von analytischen Aufgabenstellungen trainieren und den Umgang mit Lösungsverfahren des Stoffgebiets beherrschen lernen. Die durch den Dozenten bereitgestellten Übungslektionen sind durch die Studierenden unter Anleitung des Dozenten zu lösen.", "pruefung": "Softwareprodukt sowie bewertete WAB (siehe Abschnitt Wissenschaftlich angeleitete Berufspraxis (WAB)).", "category": "kern", "aiRelevant": false, "ects_num": 10.0}, {"kind": "Modul", "name": "Technische Informatik (+ Microcontroller Praktikum)", "code": "TECH-IWi", "semester": 4, "workload": "125 h", "credits": "5 ECTS", "language": "deutsch", "wab": "Nein", "angebot": "jedes", "hours": {"praesenz_h": "22,5", "vc_h": "15", "selbststudium_h": "87,5", "gruppengroesse": "35"}, "lernergebnisse": "Die Lehrveranstaltung vermittelt Grundlagenwissen im Bereich der Logik und des Schaltungsentwurfs. Es wird gezeigt, wie die Funktionalität eines Rechners in elementare Operationen zerlegt werden kann, die in Form von Logikgattern dann eine physikalische Realisierung erfahren. Darüber hinaus werden gängige Schaltungen vermittelt. Die Themen Virtualisierung und XaaS, also insb. Infrastructure as a Service, Platform as a Service und Software as a Service werden im Kontext der erlernten technischen Grundlagen vermittelt und reflektiert. Ergänzt wird das Modul durch ein Praktikum, welches den Entwurf typischer Systeme mit Mikrocontrollern sowie deren Programmierung vermittelt. Die Studierenden wenden dies praktisch an.", "inhalte": ["Technische Grundlagen: Stromkreis, Dioden, Transistoren", "Logikgatter in Theorie und praktischer Umsetzung", "Schaltalgebra", "Schaltnetze", "Schaltwerke", "Rechnerarchitekturen", "XaaS", "aktuelle Themen der technischen Informatik", "Mikrocontroller-Praktikum a. Ein- und Ausgabe mittels PINs und Protokollen b. Einführung in den spezifischen Mikrocontroller für das Praktikum c. Micropython als Programmiersprache für eingebettete Systeme d. Digitaler Input und Interrupts e. Analoger Input und Output, Spannungsteiler f. Kommunikationsprotokolle und Busse g. Networking in eingebetteten Systemen (WiFi AP mode, WiFi Station mode) h. Serversoftware auf Mikrocontrollern i. MQTT und Publish-Subscribe-Mechanismen j. IoT k. Stromsparmechanismen"], "lehrformen": "Übungsmaterialien zur selbstständigen Bearbeitung dienen der Vor- und Nachbereitung und fließen inhaltlich mit in die Abschlussklausur ein.", "virtual_classroom": "Inhaltlich vertiefen die jeweiligen Virtual Classroom-Lektionen den in der Vorlesung erarbeiteten Stoff. Außerdem ergänzen angeleitete Übungslektionen das Präsenzstudium. Die Studierenden sollen jeweils die Bearbeitung von analytischen Aufgabenstellungen trainieren und den Umgang mit Lösungsverfahren des Stoffgebiets beherrschen lernen. Die durch den Dozenten bereitgestellten Übungslektionen sind durch die Studierenden unter Anleitung des Dozenten zu lösen.", "pruefung": "60-minütige Abschlussklausur.", "category": "kern", "aiRelevant": false, "ects_num": 5.0}, {"kind": "Modul", "name": "Human-Computer-Interaction", "code": "HCI-IWi", "semester": 4, "workload": "125 h", "credits": "5 ECTS", "language": "deutsch/englisch", "wab": "Nein", "angebot": "jedes", "hours": {"praesenz_h": "22,5", "vc_h": "7,5", "selbststudium_h": "95", "gruppengroesse": "35"}, "lernergebnisse": "Das Themenfeld Human-Computer Interaction (HCI) beschäftigt sich mit der benutzergerechten Gestaltung von Nutzerschnittstellen anhand von Usability und User Experience. Anhand von zahlreichen Beispielen moderner und historischer Nutzerschnittstellen wird eine umfassende Einführung in das Thema HCI gegeben. Unter anderem wird vorgestellt, welche verschiedenen Typen von Nutzerschnittstellen es gibt, wohin es in der Zukunft geht, wie man “gute” Interfaces erstellt, was “gut” hier bedeutet und wie diese insbesondere durch Nutzerstudien evaluiert werden können.", "inhalte": ["Theoretische Grundlagen aus (Kognitions-) Psychologie und Interaktionsgestaltung als Basis für die Gestaltung von Nutzerschnittstellen", "Überblick über verschiedene Typen von Nutzerschnittstellen", "Grafische Nutzerschnittstellen", "Interaktive Oberflächen, u.a. Tabletops, Multitouch", "Mobile user interfaces", "Alternative Nutzerschnittstellen: Tangible user interfaces, Naturaluser interfaces, Brain-Computer Interfaces und Sprachbasierte User Interfaces", "Beurteilung, Messung, Bewertung von Nutzerschnittstellen (u.a. Heuristiken, Analytische Methoden)", "Design und Durchführung von Nutzerstudien, einschließlich quantitativen und qualitativen Evaluationsmethoden", "Nutzerzentrierte Softwareentwicklung, Human-Centered Design Process, Ideation, Prototyping", "Augmented-, Virtual-, und Extended-Reality"], "lehrformen": "Übungsmaterialien zur selbstständigen Bearbeitung dienen der Vor- und Nachbereitung und fließen inhaltlich mit in die Abschlussklausur ein.", "virtual_classroom": "Inhaltlich vertiefen die jeweiligen Virtual Classroom-Lektionen den in der Vorlesung erarbeiteten Stoff. Außerdem ergänzen angeleitete Übungslektionen das Präsenzstudium. Die Studierenden sollen jeweils die Bearbeitung von analytischen Aufgabenstellungen trainieren und den Umgang mit Lösungsverfahren des Stoffgebiets beherrschen lernen. Die durch den Dozenten bereitgestellten Übungslektionen sind durch die Studierenden unter Anleitung des Dozenten zu lösen.", "pruefung": "90-minütige Abschlussklausur.", "category": "kern", "aiRelevant": false, "ects_num": 5.0}, {"kind": "Modul", "name": "Data Analytics & Big Data", "code": "DABD-IWi", "semester": 4, "workload": "125 h", "credits": "5 ECTS", "language": "deutsch", "wab": "Nein", "angebot": "jedes", "hours": {"praesenz_h": "22,5", "vc_h": "7,5", "selbststudium_h": "95", "gruppengroesse": "35"}, "lernergebnisse": "kompetenzorientiert Die Verbreitung digitaler Technologien mit digitalen Speicher- und Aufzeichnungsmedien hat riesige Mengen verschiedener Daten erzeugt, die für Marketing und viele andere Zwecke verwendet werden können. Das Konzept von Data Analytics & Big Data bezieht sich sowohl auf massiv und oft unstrukturierte Daten, auf denen die Verarbeitungsmöglichkeiten traditioneller Datenmanagement-Tools basieren Ergebnis unzureichend sind, als auch auf Wert-orientierte Analyse von Daten aller Art. Big Data kann in verschiedenen Terabytes und Petabyte Speicherplatz belegen, Formate wie Text, Video, Ton, Bilder und mehr. Die Veranstaltung gibt einen Überblick über das Phänomen Big Data und konzentriert sich dann auf die Wertgewinnung mit Predictive Analytics-Techniken. Darüber hinaus findet eine Einführung in die Programmiersprache Python statt. Diese wird im Modul Künstliche Intelligenz und Maschinelles Lernen weiter vertieft.", "inhalte": ["Das Phänomen Big Data", "Abgrenzung zu klassischen Data Warehouse Systemen", "Die wichtigsten Big Data-Tools (Hadoop & Spark & Map-Reduce)", "Möglicher Einsatz in einer Unternehmensumgebung – Value oriented Data Analytics", "Predictive Analytics", "Data Mining", "Web Mining", "Data Mining für Recommender Systeme", "Datenvorverarbeitung", "Data Mining Werkzeuge", "Weiterführung des Python-Crashkurses aus dem Modul: Grundlagen der Informatik"], "lehrformen": "Übungsmaterialien zur selbstständigen Bearbeitung dienen der Vor- und Nachbereitung und fließen inhaltlich mit in die Abschlussklausur ein.", "virtual_classroom": "Inhaltlich vertiefen die jeweiligen Virtual Classroom-Lektionen den in der Vorlesung erarbeiteten Stoff. Außerdem ergänzen angeleitete Übungslektionen das Präsenzstudium. Die Studierenden sollen jeweils die Bearbeitung von analytischen Aufgabenstellungen trainieren und den Umgang mit Lösungsverfahren des Stoffgebiets beherrschen lernen. Die durch den Dozenten bereitgestellten Übungslektionen sind durch die Studierenden unter Anleitung des Dozenten zu lösen.", "pruefung": "90-minütige Abschlussklausur.", "category": "kern", "aiRelevant": true, "ects_num": 5.0}, {"kind": "Modul", "name": "Interkulturelle Kompetenzen & Heterogene Teams", "code": "IKHT-PHS", "semester": 4, "workload": "125 h", "credits": "5 ECTS", "language": "deutsch/englisch", "wab": "Nein", "angebot": "jedes", "hours": {"praesenz_h": "18", "vc_h": "12", "selbststudium_h": "95", "gruppengroesse": "35"}, "lernergebnisse": "Ziel des Teils „Interkulturelle Kompetenzen“ ist die Vermittlung und vor allem Anwendung der zentralen Prinzipien und Theorien interkultureller Kommunikation. Besonderer Schwerpunkt ist hierbei die interkulturelle Wirtschaftskommunikation beruhend auf der Interaktion in betrieblichen Standardsituationen und bei der Zusammenarbeit in internationalen Teams. – Die Studierenden erwerben die Fähigkeit zur Analyse und Interpretation aktueller internationaler Problemlagen im Licht der interkulturellen Wirtschaftskommunikation. – Sie sind in der Lage, Soziales und ökonomisches Handeln aus kultureller Sicht zu betrachten und zu verstehen. – Die Studierenden können die vorgestellten Theorien und Konzepte analytisch und kritisch anhand von Alltagssituationen bzw. Situationen aus dem Arbeitsleben anwenden. – Sie sind dabei in der Lage, qualitative oder quantitative Validierungen zu nutzen. Nach Abschluss des Teils „Heterogene Teams“ sind die Studierenden in der Lage Gesetzmäßigkeiten und informelle Regeln von Organisationen zu überblicken und strategisch zu nutzen. Sie haben die Kompetenz strategische Ziele in taktische und operative Ziele zu überführen und ihre Teams damit zielgerichtet zu führen. Sie lernen das Handwerkszeug zur Führung internationaler und diverser Teams. Darüber hinaus kennen sie die Mechanismen lateraler und virtueller Führung. Sie erweitern ihre Kompetenzen in der Prozessorganisation", "inhalte": ["Im ersten Teil der Veranstaltung werden die Grundkenntnisse der interkulturellen Kommunikation vermittelt (z.B. Theorien von Hall, Hofstede und Trompenaars/Hamden-Turner) und anhand von Fallstudien erarbeitet, im zweiten Teil präsentieren die Studierenden ihre Ergebnisse zu zentralen Inhalten anhand von festgelegten Themen beziehungsweise Case Studies: 1. Grundprobleme der interkulturellen Kommunikation. 2. Herausforderungen bei interkulturellen Vertragsverhandlungen. 3. Die Rolle von Kulturuniversalien und Kulturstandards in der interkulturellen Kommunikation. 4. die Kulturdimensionen und ihre Konfliktpotenziale. 5. die Besonderheiten von Unternehmenskulturen. Im Zusammenhang mit heterogenen Teams stehen die folgenden Ansätze im Fokus: Management von Diversity, Virtuelle Organisation, Wissensorganisation, Prozessoptimierung in der Zusammenarbeit, Strukturen und Prozesse in Organisationen, Management Skills, Führungsfähigkeit, Strategische Orientierung und Übersetzung in taktische und operative Ziele, informelle Regeln in Organisationen; Management der Übergänge im Personallebenszyklus; Wissensmanagement (Überblick)."], "lehrformen": "Konzeption und Theorien werden auch über Fallstudien aus den Unternehmen vermittelt, die in Kombination mit Leitfragen die Studierenden dazu befähigen sollen, sich kritisch und aus gesamtheitlicher Sicht mit realen kulturellen Ausgangssituationen, Problemen der interkulturellen Kommunikation und heterogen Teams und möglichen Lösungsansätzen auseinander zu setzen. Case Studies, Gruppenarbeiten und Präsentationen kommen zum Einsatz. Die Studierenden sind aufgefordert, eigene Fälle in die Vorlesung zu integrieren, um an aktuellen und relevanten Beispielen zu lernen und die eigenen Fähigkeiten zu erproben.", "virtual_classroom": "Inhaltlich vertiefen die jeweiligen Virtual Classroom-Lektionen den in der Vorlesung erarbeiteten Stoff. Außerdem ergänzen angeleitete Übungslektionen das Präsenzstudium. Die Studierenden sollen jeweils die Bearbeitung von analytischen Aufgabenstellungen trainieren und den Umgang mit Lösungsverfahren des Stoffgebiets beherrschen lernen. Die durch den Dozenten bereitgestellten Übungslektionen sind durch die Studierenden unter Anleitung des Dozenten zu lösen.", "pruefung": "Gruppenbericht und Gruppenpräsentation des jeweiligen Projektteams (die Gesamtnote ergibt sich zu 50% aus dem Gruppenbericht und zu 50% aus der Abschlusspräsentation).", "category": "quer", "aiRelevant": false, "ects_num": 5.0}, {"kind": "Modul", "name": "Projektpraktikum", "code": "PP-IWi", "semester": 5, "workload": "250 h", "credits": "10 ECTS", "language": "deutsch/englisch", "wab": "Ja", "angebot": "jedes", "hours": {"praesenz_h": "22,5", "vc_h": "7,5", "selbststudium_h": "95", "gruppengroesse": "35"}, "lernergebnisse": "Im Team üben die Studierenden ihre fachlichen und kommunikativen sowie sozialen Kompetenzen, um gemeinsam ein (Software-)Produkt zu entwickeln, aber insbesondere auch, um den hierzu gehörenden Entwicklungsprozess selbstständig zu organisieren. Hierbei geht es nicht primär nur um die eigentliche Programmieraufgabe. Vielmehr zählen zur Aufgabe auch die Beachtung der organisatorischen Veränderungen, die durch den Einsatz von Informationssystemen ermöglicht werden.", "inhalte": ["Alle Studierenden müssen einen Teil zur Gesamtlösung des (Software-)Projekts beitragen. Zu Beginn des Semesters stellen Studierende ihre Fähigkeiten und ggf. Projektideen vor und „bewerben“ sich bei den anderen Teilnehmern. Auf diese Art entstehen selbstorganisiert etwa gleich große Projektteams mit konkreten Projekten. Diese ist nur im Team lösbar. Die Studierenden spezialisieren sich auf Teilaufgaben des Projekts, die sie mit ihrem persönlichen technischen Know-How bewältigen und so zur Lösung des Gesamtproblems beitragen können. Gleichzeitig erfahren sie verschiedene Aspekte von Gruppendynamik, Kommunikation und sozialer Interaktion, die typisch für Entwicklungsprojekte sind, und lernen hierbei auftretende Probleme zu erkennen und zu lösen."], "lehrformen": "Ziel dieses Moduls ist die gemeinschaftliche Bearbeitung einer größeren Projektaufgabe im Team. Dementsprechend sind Teilaufgaben durch einzelne oder Teilgruppen zwischen den Veranstaltungsterminen zu erstellen und dann während der Präsenztermine zu koordinieren.", "virtual_classroom": "Inhaltlich vertiefen die jeweiligen Virtual Classroom-Lektionen den in der Vorlesung erarbeiteten Stoff. Außerdem ergänzen angeleitete Übungslektionen das Präsenzstudium. Die Studierenden sollen jeweils die Bearbeitung von analytischen Aufgabenstellungen trainieren und den Umgang mit Lösungsverfahren des Stoffgebiets beherrschen lernen. Die durch den Dozenten bereitgestellten Übungslektionen sind durch die Studierenden unter Anleitung des Dozenten zu lösen.", "pruefung": "Entwicklungsergebnis inkl. Dokumentation (in Form einer WAB, siehe auch Wissenschaftlich angeleitete Berufspraxis (WAB)), Präsentationen", "category": "kern", "aiRelevant": false, "ects_num": 10.0}, {"kind": "Modul", "name": "Softwareanwendungsarchitekturen & Microservice APIs", "code": "SAAMS-IWi", "semester": 5, "workload": "125 h", "credits": "5 ECTS", "language": "deutsch", "wab": "Nein", "angebot": "jedes", "hours": {"praesenz_h": "22,5", "vc_h": "15", "selbststudium_h": "87,5", "gruppengroesse": "35"}, "lernergebnisse": "Ziel der Lehrveranstaltung ist es, bei den Studierenden ein Verständnis für Softwarearchitekturen zu schaffen und grundsätzliche Strukturierungsmethoden vorzustellen. Hierbei erfolgt eine Orientierung an Best Practices, etwa der Softwarearchitektur Quasar. Es werden aber auch (Analysis) Pattern als Medium zur Beschreibung von Softwarearchitekturen vorgestellt und diskutiert. Schließlich behandelt die Vorlesung aktuelle Trends wie die Entwicklung von Serviceorientierten Architekturen (SOA) sowie Microservice APIs und aus diesen ableitbaren Modelle für IT-Governance.", "inhalte": ["Softwaresysteme und ihre Modellierung", "Konzepte und Best Practices von Softwarearchitekturen", "Quasar", "Analysis Pattern, Design Pattern", "Pattern für Enterprise Application Architectures", "Serviceorientierte Architekturen und Microservice APIs", "Moderne IT Infrastrukturen", "(Referenz-)Modelle für IT-Governance"], "lehrformen": "Zur Vor- und Nachbearbeitung des Stoffes sind angeleitete Übungen von den Studierenden zu bearbeiten. Inhaltlich vertiefen und festigen die Aufgaben den in der Vorlesung erarbeiteten Stoff. Darüber hinaus dienen Turboübungen mit vorgegebener Bearbeitungszeit als Vorbereitung auf die Klausur.", "virtual_classroom": "Inhaltlich vertiefen die jeweiligen Virtual Classroom-Lektionen den in der Vorlesung erarbeiteten Stoff. Außerdem ergänzen angeleitete Übungslektionen das Präsenzstudium. Die Studierenden sollen jeweils die Bearbeitung von analytischen Aufgabenstellungen trainieren und den Umgang mit Lösungsverfahren des Stoffgebiets beherrschen lernen. Die durch den Dozenten bereitgestellten Übungslektionen sind durch die Studierenden unter Anleitung des Dozenten zu lösen.", "pruefung": "60-minütige Abschlussklausur.", "category": "kern", "aiRelevant": false, "ects_num": 5.0}, {"kind": "Modul", "name": "Maschinelles Lernen & Artificial Intelligence", "code": "MLAI-IWi", "semester": 5, "workload": "125 h", "credits": "5 ECTS", "language": "deutsch/englisch", "wab": "Nein", "angebot": "jedes", "hours": {"praesenz_h": "27", "vc_h": "10,5", "selbststudium_h": "87,5", "gruppengroesse": "35"}, "lernergebnisse": "Der besondere Reiz, aber auch die besondere Schwierigkeit, in diesem Fach ist das Zusammenspiel vieler sehr unterschiedlicher Wissenschaften wie Logik, Statistik, Neuronale Netze und Kognitionswissenschaften. Das Lernziel ist, den Studierenden zunächst einen Überblick über das heute sehr weit verzweigte Gebiet der Künstlichen Intelligenz (KI) und dem Maschinellen Lernen zu vermitteln und ebenso Handwerkzeuge hierfür wie die Programmiersprache Prolog und vertiefend auch Python an die Hand zu geben. Nach erfolgreichem Abschluss des Moduls sind die Studierenden in der Lage, • die historische Entwicklung des Fachgebietes und seiner Kernideen, insbesondere vom regelbasierten zum netzbasierten Ansatz, zu benennen. • bei konkreten Aufgabenstellungen die verschiedenen Methoden der KI gegenüberzustellen und auszuwählen. • die grundlegenden Ansätze für neuronale Netze zu beschreiben. • einfache KI-Anwendungen auf Basis bestehender Bibliotheken und Dienste zu entwickeln. • die Möglichkeiten und Grenzen von künstlicher Intelligenz zu diskutieren.", "inhalte": ["Einführung, Geschichte", "Intelligente Agenten", "Suchen, Spielen, Problemlösen", "Prolog, Expertensysteme", "Evolutionäre Algorithmen", "Schließen mit Unsicherheit", "Neuronale Netzwerke, Maschinelles Lernen, Supervised Learning, Unsupervised Learning, Reinforcement Learning, Deep Learning"], "lehrformen": "Zur Vor- und Nachbearbeitung des Stoffes sind angeleitete Übungen von den Studierenden zu bearbeiten. Inhaltlich vertiefen und festigen die Aufgaben den in der Vorlesung erarbeiteten Stoff. Darüber hinaus dienen Turboübungen mit vorgegebener Bearbeitungszeit als Vorbereitung auf die Klausur.", "virtual_classroom": "Inhaltlich vertiefen die jeweiligen Virtual Classroom-Lektionen den in der Vorlesung erarbeiteten Stoff. Außerdem ergänzen angeleitete Übungslektionen das Präsenzstudium. Die Studierenden sollen jeweils die Bearbeitung von analytischen Aufgabenstellungen trainieren und den Umgang mit Lösungsverfahren des Stoffgebiets beherrschen lernen. Die durch den Dozenten bereitgestellten Übungslektionen sind durch die Studierenden unter Anleitung des Dozenten zu lösen.", "pruefung": "60-minütige Abschlussklausur.", "category": "kern", "aiRelevant": true, "ects_num": 5.0}, {"kind": "Modul", "name": "IT-Service-Management", "code": "ITSM-IWi", "semester": 5, "workload": "125 h", "credits": "5 ECTS", "language": "deutsch", "wab": "Nein", "angebot": "jedes", "hours": {"praesenz_h": "15", "vc_h": "7,5", "selbststudium_h": "102,5", "gruppengroesse": "35"}, "lernergebnisse": "Ziel im Rahmen des Teils Betriebswirtschaftslehre ist die Bereiche Wirtschaftliches Umfeld (VWL), Unternehmensformen, Organisation, Investition und Finanzierung, Marketing sowie Rechnungswesen zu vermitteln. Der Teil IT-Service-Management behandelt die Kernprozesse des IT-Service Management sowie Methoden zur systematischen Planung, Erbringung und Unterstützung von IT-Dienstleistungen. Für jeden Prozess werden Zielsetzung, Aufgaben, Abgrenzung, Wirkungsweise und die Abhängigkeiten zu den jeweils anderen Prozessen erarbeitet. Die Studierenden erlangen damit die Kompetenz, die einschlägigen Fachbegriffe zu kennen und in praktischen Situationen anzuwenden.", "inhalte": ["Teil 1. Grundlagen der Betriebswirtschaftslehre", "Unternehmensformen, Organisation", "Investition und Finanzierung", "Marketing", "Rechnungswesen Teil 2. IT-Service-Management", "Kernprozesse des IT-Service-Management", "Rollen und Verantwortlichkeiten", "Referenzmodelle mit Orientierung an ITIL oder COBIT"], "lehrformen": "Zur Vor- und Nachbearbeitung des Stoffes sind angeleitete Übungen von den Studierenden zu bearbeiten. Inhaltlich vertiefen und festigen die Aufgaben den in der Vorlesung erarbeiteten Stoff. Darüber hinaus dienen Turboübungen mit vorgegebener Bearbeitungszeit als Vorbereitung auf die Klausur.", "virtual_classroom": "Inhaltlich vertiefen die jeweiligen Virtual Classroom-Lektionen den in der Vorlesung erarbeiteten Stoff. Außerdem ergänzen angeleitete Übungslektionen das Präsenzstudium. Die Studierenden sollen jeweils die Bearbeitung von analytischen Aufgabenstellungen trainieren und den Umgang mit Lösungsverfahren des Stoffgebiets beherrschen lernen. Die durch den Dozenten bereitgestellten Übungslektionen sind durch die Studierenden unter Anleitung des Dozenten zu lösen.", "pruefung": "60-minütige Abschlussklausur.", "category": "kern", "aiRelevant": false, "ects_num": 5.0}, {"kind": "Vertiefungsfach 1", "name": "Mobile Anwendungen", "code": "MA-IWi", "semester": 5, "workload": "125 h", "credits": "5 ECTS", "language": "deutsch/englisch", "wab": "Nein", "angebot": "im", "hours": {"praesenz_h": "22,5", "vc_h": "15", "selbststudium_h": "87,5", "gruppengroesse": "35"}, "lernergebnisse": "Die Studierenden besitzen ein grundlegendes Verständnis von Mobilen Geräten und Anwendungen, deren Geschichte, und der aktuellen Trends. Sie kennen Fähigkeiten und Plattformen (einschl. Frameworks) für die Entwicklung mobiler Anwendungen. Sie können anhand von Anforderungen mobile Anwendungen konzipieren und entwickeln.", "inhalte": ["Teil A: Grundlagen und Einführung", "Geschichte, Arten und Trends mobiler Geräte", "Märkte für mobile Anwendungen Teil B: Grundlegende Themen der mobilen Anwendungsentwicklung (Fokus Android)", "Android Plattform, Versionen, und Software Stack", "Android SDK, Emulator, und Entwicklungsprozess", "Kotlin", "Grundlagen der Entwicklung: Manifest, Layouts, Activities, Intents, Services", "Webservices mit Android (REST, gRPC, GraphQL)", "Persistenz von Daten (Jetpack Room, SQLite und ContentProvider, Preferences, Dateien) Teil C: Cross-Plattform Entwicklung", "Webanwendungen, Hybrid-Apps, Zwischencode, portabler Code", "App-Entwicklung mit Flutter Teil D: Weiterführende Themen der mobilen Anwendungsentwicklung", "Location und Maps", "Sicherheit", "Monetarisierung und Marktplätze"], "lehrformen": "Ziel dieser Veranstaltung ist es, ein grundlegendes Wissen über die Entwicklung mobiler Anwendungen auf Google Android zu vermitteln. Android wurde gewählt, da es deutschlandweit und weltweit den größten Marktanteil aller mobilen Betriebssysteme hat; weiterhin stehen Entwicklungswerkzeuge für alle gängigen Betriebssysteme (GNU/Linux, MacOS, ChromeOS, Windows) bereit. Den Studierenden werden die wichtigsten Merkmale und Techniken der Entwicklung mobiler Anwendungen vorgestellt. Sie müssen diese dann auch praktisch anwenden. Gleichzeitig dient der Kurs der Vertiefung von Kenntnissen der Anwendungsprogrammierung im objektorientierten Softwareentwicklungsparadigma. Durch den Kurs wird der wachsenden Bedeutung von Know-how zur Entwicklung von Smartphone-Applikationen Rechnung getragen.", "virtual_classroom": "Inhaltlich vertiefen die jeweiligen Virtual Classroom-Lektionen den in der Vorlesung erarbeiteten Stoff. Außerdem ergänzen angeleitete Übungslektionen das Präsenzstudium. Die Studierenden sollen jeweils die Bearbeitung von analytischen Aufgabenstellungen trainieren und den Umgang mit Lösungsverfahren des Stoffgebiets beherrschen lernen. Die durch den Dozenten bereitgestellten Übungslektionen sind durch die Studierenden unter Anleitung des Dozenten zu lösen.", "pruefung": "60-minütige Abschlussklausur.", "category": "vertiefung", "aiRelevant": false, "ects_num": 5.0}, {"kind": "Vertiefungsfach 1", "name": "Technikfolgenabschätzung", "code": "TFA-IWi", "semester": 5, "workload": "125 h", "credits": "5 ECTS", "language": "deutsch/englisch", "wab": "Nein", "angebot": "im", "hours": {"praesenz_h": "22,5", "vc_h": "15", "selbststudium_h": "87,5", "gruppengroesse": "35"}, "lernergebnisse": "Dieses Modul erlaubt es den Studierenden, Technologieeinsatz und dessen Folgen zu bewerten und einzuordnen. Dies beinhaltet Interessenkonflikte sowie Lösungsansätze. Ebenfalls geht es darum, Zukunftskompetenzen bei der Einschätzung und Einordnung von Potenzialen wie Risiken von bestimmten Technologien zu beurteilen. Erlangung eines grundlegenden Verständnisses, wie Technikfolgenabschätzung eingesetzt werden kann, um Herausforderungen an Gesellschaft und Politik durch Technikeinsatz und Technikentwicklung zu begegnen. Erlangung eines ersten Überblicks zu Methoden der Risiko- und Szenariobewertung sowie anderer qualitativer und quantitativer Methoden zur Gewinnung von Zukunftswissen Verbesserung der eigenen Diskussionsstärke und speziell der Fähigkeit den Bias eigener und fremder Argumente zu erkennen. Sensibilisierung bezüglich der Schwierigkeiten bei der Festlegung von Definition und der Setzung von Begriffen.", "inhalte": ["Interessenkonflikte beim Einsatz und der Entwicklung von Technik", "Lösungsansätze der Technikfolgenabschätzung", "Strukturierung von Projekten zur Technikfolgenabschätzung", "Herausforderungen bei der Gewinnung von Zukunftswissen", "Qualitative und quantitative Methoden zur Gewinnung von Zukunftswissen", "Praktische Beispiele für Technikfolgenabschätzung"], "lehrformen": "Übungen vertiefen und festigen den in der Vorlesung erarbeiteten Stoff.", "virtual_classroom": "Inhaltlich vertiefen die jeweiligen Virtual Classroom-Lektionen den in der Vorlesung erarbeiteten Stoff. Außerdem ergänzen angeleitete Übungslektionen das Präsenzstudium. Die Studierenden sollen jeweils die Bearbeitung von analytischen Aufgabenstellungen trainieren und den Umgang mit Lösungsverfahren des Stoffgebiets beherrschen lernen. Die durch den Dozenten bereitgestellten Übungslektionen sind durch die Studierenden unter Anleitung des Dozenten zu lösen.", "pruefung": "60-minütige Abschlussklausur.", "category": "vertiefung", "aiRelevant": false, "ects_num": 5.0}, {"kind": "Vertiefungsfach 1", "name": "Privacy Enhancement Technologies", "code": "PET-IWi", "semester": 5, "workload": "125 h", "credits": "5 ECTS", "language": "englisch", "wab": "Nein", "angebot": "im", "hours": {"praesenz_h": "22,5", "vc_h": "15", "selbststudium_h": "87,5", "gruppengroesse": "35"}, "lernergebnisse": "Students are familiar with the basic approaches of Privacy Enhancing Technologies (PETs) and can select the necessary technologies and adapt and further develop them if necessary. To this end, students have the fundamental skills to analyze and evaluate data and its processing with regard to privacy protection. In addition, the students are also able to discuss (existing) systems with regard to possible data protection concerns.", "inhalte": ["Privacy definitions and concepts", "Introduction to PETs and privacy-by-design", "Privacy-preserving crypto-based solutions", "Anonymization and data hiding: e.g., generalization, masking, aggregation", "Privacy in communication systems (protecting metadata): e.g., anonymous communications systems", "Privacy engineering: design, assessment and evaluation (methodologies and evaluation metrics )", "Privacy and Machine Learning"], "lehrformen": "The lecture provides a basic understanding of Privacy Enhancing Technologies. Case studies and discussions complement the lessons. Exercise materials for independent work are used for preparation and follow-up. The integration of theory and practice is achieved through the WAB and through current and relevant case studies from the business environment. 6 Teilnahmevoraussetzungen Formal: keine Inhaltlich: Modul: Netze & Verteilte Systeme, Modul: Informationssicherheit 7 Prüfungsformen 60-minütige Abschlussklausur. 8 Voraussetzungen für die Vergabe von Kreditpunkten Bestehen der angegebenen Prüfungsformen. 9 Stellenwert der Note für die Endnote Gewichtung entsprechend der ECTS. 10 Modulbeauftragte/r und Lehrende Modulverantwortlich: Dr. Lamya Abdullah Dozentin: Dr. Lamya Abdullah und wechselnde Dozent:innen des FB IWI und externe Lehrbeauftragte 11 Bezug zu anderen Lehrveranstaltungen Rechtliche Aspekte des Datenschutzes werden im Modul: Recht & Datenschutz aufgegriffen und vertieft. 12 Sonstige Informationen Lehrmaterial und Übungsaufgaben werden elektronisch zur Verfügung gestellt. 13 Literatur Solove, D. J. (2009): Understanding Privacy. Harvard University Press. Adams, C. (2023): Introduction to Privacy Enhancing Technologies—A Classification-Based Approach to Understanding PETs.Springer. Module des 6. Semesters Im 6. Fachsemester wird zusätzlich das Vertiefungsfach 2 gewählt. Die zur Auswahl stehenden Module sind am Ende des Abschnitts zu finden. Die Anzahl der tatsächlich angebotenen Module richtet sich nach der Jahrgangsgröße. Weiterhin kann aufgrund der hohen Spezifität der Module die Auswahl aufgrund der Verfügbarkeit von Dozierenden beschränkt sein. Grundsätzlich werden aber immer zumindest 3 Module zur Wahl angeboten. Das Zustandekommen eines Moduls nach der Wahl richtet sich nach der Anzahl der Stimmen. Aus didaktischen Gründen (etwa Gruppenarbeit) kann das Zustandekommen eines Moduls mit weniger als 12 Stimmen nicht garantiert werden.", "virtual_classroom": "", "pruefung": "60-minütige Abschlussklausur.", "category": "vertiefung", "aiRelevant": false, "ects_num": 5.0}, {"kind": "Modul", "name": "New Trends in IT & Management der Digitalen Transformation", "code": "NTIT-IWi", "semester": 6, "workload": "125 h", "credits": "5 ECTS", "language": "deutsch", "wab": "Nein", "angebot": "jedes", "hours": {"praesenz_h": "22,5", "vc_h": "15", "selbststudium_h": "87,5", "gruppengroesse": "35"}, "lernergebnisse": "Die Studierenden erwerben ein grundlegendes Verständnis über die neuesten Trends in der IT anhand des Gartner Hype Cycles. Sie erlernen dabei die Methodik, um zukünftige Trends zu erkennen und deren zukünftige Bedeutung richtig einzuschätzen. Die Schwerpunkte der Veranstaltung werden hierbei in Abstimmung mit den Studierenden festgesetzt. Im zweiten Teil der Veranstaltung erwerben die Studierenden die Kenntnisse neue Technologien auch in Unternehmen einzuführen. Diese Veranstaltung befähigt die Studierenden • digitale Geschäftsstrategien zu analysieren und zu modellieren • unterschiedliche Phasen der digitalen Transformation zu unterscheiden • Einfluss und Auswirkungen der Digitalisierung auf Geschäfts- und Betriebsmodelle zu bestimmen • künftige Entwicklungstendenzen der Digitalisierung einzuschätzen • neben den Möglichkeiten des technologischen Fortschritts auch dessen ethische Aspekte kritisch zu würdigen • die vielschichtigen Einflüsse des Themas auf Wirtschaft und Gesellschaft zu verstehen", "inhalte": ["1. Neue Trends in der IT (beispielsweise anhand des Gartner Hype Cycles) 2. Geschäftsmodelldisruption und Zusammenhang mit digitaler Transformation sowie die Handlungsbedarfe auf Geschäfts- und Betriebsmodelle 3. Leitlinien für die strategische Planung von Geschäfts- und Betriebsmodellen im digitalen Kontext 4. Der Einfluss der Digitalisierung auf die Customer Experience 5. Digitalisierung der Geschäftsprozesse sowie Betriebsmodelle"], "lehrformen": "Zur Vor- und Nachbearbeitung des Stoffes sind angeleitete Übungen von den Studierenden zu bearbeiten. Inhaltlich vertiefen und festigen die Aufgaben den in der Vorlesung erarbeiteten Stoff. Darüber hinaus dienen Turboübungen mit vorgegebener Bearbeitungszeit als Vorbereitung auf die Klausur.", "virtual_classroom": "Inhaltlich vertiefen die jeweiligen Virtual Classroom-Lektionen den in der Vorlesung erarbeiteten Stoff. Außerdem ergänzen angeleitete Übungslektionen das Präsenzstudium. Die Studierenden sollen jeweils die Bearbeitung von analytischen Aufgabenstellungen trainieren und den Umgang mit Lösungsverfahren des Stoffgebiets beherrschen lernen. Die durch den Dozenten bereitgestellten Übungslektionen sind durch die Studierenden unter Anleitung des Dozenten zu lösen.", "pruefung": "60-minütige Abschlussklausur oder „Build your Own Agent“ Dokumentation Die gewählte Prüfungsform muss nachweislich zu Beginn des Semesters an die Studierenden und das Prüfungsamt kommuniziert werden. Spätere Änderungen sind immer durch den Studien- und Prüfungsausschuss zu genehmigen.", "category": "quer", "aiRelevant": false, "ects_num": 5.0}, {"kind": "Modul", "name": "Recht & Datenschutz", "code": "RDS-IWi", "semester": 6, "workload": "125 h", "credits": "5 ECTS", "language": "deutsch", "wab": "Nein", "angebot": "jedes", "hours": {"praesenz_h": "22,5", "vc_h": "15", "selbststudium_h": "87,5", "gruppengroesse": "35"}, "lernergebnisse": "Die Studierenden kennen die grundlegenden Rechtsbegriffe des Zivilrechts (Vertragsabschluss, AGBs, Urheberrecht) und besitzen im Speziellen erweiterte Kenntnisse über das Datenschutzrecht. Die Studierenden sind in der Lage juristische Fallgestaltungen selbstständig zu lösen. Außerdem werden die folgenden außerfachlichen Kompetenzen erworben: Strukturierte Problemlösung Urteilsfähigkeit, Gesamtbetrachtung der Projektarbeit unter rechtlichen Aspekten", "inhalte": ["Teil 1: Grundlagen Recht", "Vertragsgestaltung", "Allgemeine Geschäftsbedingungen", "Gewährleistungs- und Haftungsansprüche", "Schnittstellen zum Urheberrecht Teil 2: Grundlagen Datenschutz", "Begriffe des Datenschutzes", "Rechte der Betroffenen", "Datenschutz im internationalen Bereich", "Schnittstelle IT-Sicherheit"], "lehrformen": "Zur Vor- und Nachbearbeitung des Stoffes sind angeleitete Übungen von den Studierenden zu bearbeiten. Inhaltlich vertiefen und festigen die Aufgaben den in der Vorlesung erarbeiteten Stoff. Darüber hinaus dienen Turboübungen mit vorgegebener Bearbeitungszeit als Vorbereitung auf die Klausur.", "virtual_classroom": "Inhaltlich vertiefen die jeweiligen Virtual Classroom-Lektionen den in der Vorlesung erarbeiteten Stoff. Außerdem ergänzen angeleitete Übungslektionen das Präsenzstudium. Die Studierenden sollen jeweils die Bearbeitung von analytischen Aufgabenstellungen trainieren und den Umgang mit Lösungsverfahren des Stoffgebiets beherrschen lernen. Die durch den Dozenten bereitgestellten Übungslektionen sind durch die Studierenden unter Anleitung des Dozenten zu lösen.", "pruefung": "60-minütige Abschlussklausur.", "category": "kern", "aiRelevant": false, "ects_num": 5.0}, {"kind": "Modul", "name": "Bachelor-Thesis", "code": "BT-PHS", "semester": 6, "workload": "300 h", "credits": "12 ECTS", "language": "deutsch/englisch", "wab": "Nein", "angebot": "jedes", "hours": {"praesenz_h": "6", "vc_h": "6", "selbststudium_h": "288", "gruppengroesse": null}, "lernergebnisse": "Die Studierenden sind in der Lage in einem vorgegebenen Zeitraum für eine im Zusammenhang mit dem beruflichen Umfeld stehende Problemstellung des Fachgebiets Informatik Lösungsansätze zu entwickeln. Die Vorgehensweise ist wissenschaftlich; das heißt: Die Studierenden wenden die in den Modulen des Studiengangs Informatik vermittelten Vorgehensweisen und Ergebnisse in nachvollziehbarer Weise an. Dabei zeigen die Studierenden, dass sie die Tragweiten ihrer Vorgehensweisen und Ergebnisse bewerten und die Optimalität der vorgeschlagenen Lösungsansätze oder Lösungen belegbar einschätzen können.", "inhalte": ["Die Bachelor-Thesis zeigt: Die Studierenden besitzen hinreichende analytische Fähigkeiten und Fachkompetenz, um komplexe Aufgaben der Praxis in einfache Teilaufgaben aufzubrechen, für diese Lösungsansätze zu entwickeln, Kriterien zur Auswahl der jeweils besten Lösung anzugeben und die favorisierten Teillösungen als Lösung der Gesamtaufgabe darzustellen. Die Ergebnisse sind nachvollziehbar. Die Vorgehensweisen und Überlegungen sind im Dokument der Thesis übersichtlich und verständlich beschrieben. Recherchen (z.B. Literatur, Expertengespräche) sind belegt, ebenso ggf. empirische Untersuchungen (z.B. Befragungen) und ihre Auswertungen. Die Form entspricht anerkannten Standards (Zitate, Quellennachweise, Fußnoten und, soweit sinnvoll: Anhang mit Index, Glossar, Abkürzungsverzeichnis, Bildverzeichnis). Das Dokument ist mit einer Zusammenfassung und einem Inhaltsverzeichnis versehen."], "lehrformen": "Selbständige wissenschaftliche Arbeit des Studierenden", "virtual_classroom": "6 Teilnahmevoraussetzungen Laut ‚Allgemeine Studien- und Prüfungsordnung für Bachelor-Studiengänge mit Unternehmenskooperation…“ 7 Prüfungsformen Die Bachelor-Thesis wird als wissenschaftliche Arbeit bewertet und erhält 12 ECTS. 8 Voraussetzungen für die Vergabe von Kreditpunkten laut Prüfungsordnung 9 Stellenwert der Note für die Endnote Gewichtung entsprechend der ECTS. 10 Modulbeauftragte/r und Lehrende Modulverantwortlich: Prof. Dr. Jörg Daubert Dozent: Dozent:innen des FB IWI und externe Lehrbeauftragte 11 Bezug zu anderen Lehrveranstaltungen Je nach Thema der Bachelor-Thesis kommen Kenntnisse und praktische Fähigkeiten, die in den Modulen der Semester 1 bis 6 erworben wurden, unterschiedlich stark zur Anwendung. Durch die in jedem Semester im Rahmen der Wissenschaftlich angeleitete Berufspraxis (WAB) sind den Studierenden wissenschaftliche Vorgehensweisen und ihre Dokumentierung vertraut. 12 Sonstige Informationen Lehrmaterial und Übungsaufgaben werden elektronisch zur Verfügung gestellt. 13 Literatur Hängt vom jeweiligen Thema ab.", "pruefung": "Die Bachelor-Thesis wird als wissenschaftliche Arbeit bewertet und erhält 12 ECTS.", "category": "abschluss", "aiRelevant": false, "ects_num": 12.0}, {"kind": "Modul", "name": "Kolloquium zur Bachelor-Thesis", "code": "KBT-PHS", "semester": 6, "workload": "75 h", "credits": "3 ECTS", "language": "deutsch/englisch", "wab": "Nein", "angebot": "jedes", "hours": {"praesenz_h": null, "vc_h": null, "selbststudium_h": null, "gruppengroesse": null}, "lernergebnisse": "Die Studierenden können die Ergebnisse ihrer wissenschaftlichen Arbeit strukturiert und verständlich einem Fachpublikum präsentieren. Sie können dabei Ihre Annahmen, Methoden und Ergebnisse begründen, gegen kritische Fragen verteidigen und in einen erweiterten Kontext einordnen.", "inhalte": ["Präsentation für das Modul: Bachelor-Thesis mit anschließenden Fragen der Prüfenden."], "lehrformen": "6 Teilnahmevoraussetzungen Laut ‚Allgemeine Studien- und Prüfungsordnung für Bachelor-Studiengänge mit Unternehmenskooperation…“ 7 Prüfungsformen Kolloquium 8 Voraussetzungen für die Vergabe von Kreditpunkten Kolloquium bestanden 9 Stellenwert der Note für die Endnote Gewichtung entsprechend der ECTS. 10 Modulbeauftragte/r und Lehrende Modulverantwortlich: Prof. Dr. Jörg Daubert (Studiengangleiter) Dozent: Dozent:innen des FB IWI und externe Lehrbeauftragte 11 Bezug zu anderen Lehrveranstaltungen Modul: Bachelor-Thesis 12 Sonstige Informationen 13 Literatur Hängt vom jeweiligen Thema ab.", "virtual_classroom": "", "pruefung": "Kolloquium", "category": "abschluss", "aiRelevant": false, "ects_num": 3.0}, {"kind": "Vertiefungsfach 2", "name": "Webanwendungen", "code": "WAW-IWi", "semester": 6, "workload": "125 h", "credits": "5 ECTS", "language": "deutsch/englisch", "wab": "Nein", "angebot": "im", "hours": {"praesenz_h": "22,5", "vc_h": "15", "selbststudium_h": "87,5", "gruppengroesse": "35"}, "lernergebnisse": "Die Studierenden kennen die wichtigsten den Stand der Technik repräsentierenden Technologien und Standards zur Entwicklung von traditionellen Web-Anwendungen. Die Architektur von traditionellen Web- Anwendungen ist verstanden. Die Softwarearchitektur einer traditionellen Web-Anwendung kann modelliert werden.", "inhalte": ["Grundlagen zu Web Anwendungen (Arten, Architektur, Kommunikation)", "Grundlagen zu HTML", "und CSS für clientsseitige Webkomponenten", "JavaScript als Sprache des Web zur Verarbeitung innerhalb des Browsers", "Entwicklung von Clientkomponenten unter Verwendung moderner Libraries bzw. Frameworks", "Entwicklung von Serverkomponenten unter Verwendung moderner Libraries bzw. Frameworks", "Nutzung REST-basierte Web Service-Schnittstellen und strukturierter Datenformate (XML und JSON) zur Kommunikation zwischen Webclients und Serverkomponenten", "Testautomatisierung von Webkomponenten", "Buildumgebungen für clientseitige und serverseitige Webkomponenten", "Sicherheit von Webanwendungen"], "lehrformen": "Zur Vor- und Nachbearbeitung des Stoffes sind angeleitete Übungen von den Studierenden zu bearbeiten. Inhaltlich vertiefen und festigen die Aufgaben den in der Vorlesung erarbeiteten Stoff. Darüber hinaus dienen Turboübungen mit vorgegebener Bearbeitungszeit als Vorbereitung auf die Klausur.", "virtual_classroom": "Inhaltlich vertiefen die jeweiligen Virtual Classroom-Lektionen den in der Vorlesung erarbeiteten Stoff. Außerdem ergänzen angeleitete Übungslektionen das Präsenzstudium. Die Studierenden sollen jeweils die Bearbeitung von analytischen Aufgabenstellungen trainieren und den Umgang mit Lösungsverfahren des Stoffgebiets beherrschen lernen. Die durch den Dozenten bereitgestellten Übungslektionen sind durch die Studierenden unter Anleitung des Dozenten zu lösen.", "pruefung": "60-minütige Abschlussklausur.", "category": "vertiefung", "aiRelevant": false, "ects_num": 5.0}, {"kind": "Vertiefungsfach 2", "name": "Embedded Systems & Software", "code": "ESS-IWi", "semester": 6, "workload": "125 h", "credits": "5 ECTS", "language": "deutsch/englisch", "wab": "Nein", "angebot": "im", "hours": {"praesenz_h": "22,5", "vc_h": "15", "selbststudium_h": "87,5", "gruppengroesse": "35"}, "lernergebnisse": "Die Vorlesung führt in die Hard- und Software-Entwicklung eingebetteter Echtzeitsysteme ein. Bei Echtzeitsystemen kommen zusätzlich Aspekte der Rechtzeitigkeit hinzu, d.h., es geht um Systeme, die nicht nur eine korrekte Antwort liefern müssen, sondern die Systemantwort zusätzlich innerhalb einer vorgegebenen und garantierten Zeitspanne berechnen.", "inhalte": ["Spezifikationssprachen", "Hardware Eingebetteter Systeme", "Middleware und Betriebssysteme", "Implementierung / Hardware- Software Codesign", "Bewertung und Benchmarks", "Optimierungsstrategien"], "lehrformen": "Die Studierenden sind in der Lage komplexe Aufgaben unter Benutzung Eingebetteter Systeme zu lösen. Sie kennen die wichtigsten Ausprägungen und haben mit einigen speziellen Formen Eingebetteter Systeme weiterreichende handwerkliche Fähigkeiten. Die Studierenden diskutieren einige aktuelle Entwicklungen Eingebetteter Systeme, führen eine Literaturrecherche unter Zuhilfenahme von Primärliteratur durch und können nachvollziehbare Schlussfolgerungen als eigene Meinung schriftlich darlegen. Die Studierenden sind in der Lage bekannte Lösungen auf neuartige Problemstellungen anzuwenden. Sie verfügen über weiterführende Fähigkeiten in der Bewertung fremder Arbeiten und wenden fortgeschrittene Präsentationstechniken an.", "virtual_classroom": "Inhaltlich vertiefen die jeweiligen Virtual Classroom-Lektionen den in der Vorlesung erarbeiteten Stoff. Außerdem ergänzen angeleitete Übungslektionen das Präsenzstudium. Die Studierenden sollen jeweils die Bearbeitung von analytischen Aufgabenstellungen trainieren und den Umgang mit Lösungsverfahren des Stoffgebiets beherrschen lernen. Die durch den Dozenten bereitgestellten Übungslektionen sind durch die Studierenden unter Anleitung des Dozenten zu lösen.", "pruefung": "60-minütige Abschlussklausur Andere Prüfungsformen sind nach Maßgabe der Dozierenden möglich, sofern sie das Lernergebnis gleichermaßen unterstützen; jegliche Änderung muss vor Beginn des Semesters durch die Studiengangleitung genehmigt werden. Die genehmigte Änderung muss nachweislich zu Beginn des Semesters an die Studierenden und das Prüfungsamt kommuniziert werden. Spätere Änderungen sind immer durch den Studien- und Prüfungsausschuss zu genehmigen.", "category": "vertiefung", "aiRelevant": false, "ects_num": 5.0}, {"kind": "Vertiefungsfach 2", "name": "Resiliente Netzwerke", "code": "RN-IWi", "semester": 6, "workload": "125 h", "credits": "5 ECTS", "language": "deutsch/englisch", "wab": "Nein", "angebot": "im", "hours": {"praesenz_h": "22,5", "vc_h": "15", "selbststudium_h": "87,5", "gruppengroesse": "35"}, "lernergebnisse": "Die Veranstaltung bietet den Studierenden einen Überblick über Grundlagen sicherer Netzwerke sowie über aktuelle Bedrohungen und mögliche Gegenmaßnahmen. Die Studierenden werden mit dem aktuellen Stand der Forschung zu widerstandsfähigen Netzwerken mit Hilfe des Unterrichts und der Reading Group vertraut gemacht. Dabei lernen die Studierenden auch proaktive und reaktive Maßnahmen zur Verbesserung der Widerstandsfähigkeit kennen und können diese Situationsgerecht einordnen. Proaktive Maßnahmen unterteilen sich wiederum in die Abgrenzung kritischer Komponenten und das Einfügen zusätzlicher Redundanz. Reaktive Maßnahmen lassen sich in drei Phasen gliedern: die Erkennung von Angriffen, die Eingrenzung des Angriffs sowie die Wiederherstellung des Normalzustands. Mittels der praktischen Übungen erlernen die Studierenden auch den grundlegenden Umgang mit typischen Werkzeugen (siehe Abschnitt #4 Lernformen).", "inhalte": ["Vertiefung der Graphentheorie für Computernetzwerke", "Entwurf von widerstandsfähigen Netzwerken", "Widerstandsfähiges Routing", "Netzwerk-Monitoring und Einbruchserkennung", "Sicherheit des Domain Name Systems (DNS)", "Denial of Service (DoS) Angriffe und Gegenmaßnahmen Sowie aktuelle Themen aus dem Bereich der resilienten Netzwerke und Diskussion von aktuellen Vorfällen."], "lehrformen": "Neben dem Erwerb der theoretischen Grundlagen im Rahmen des Unterrichts führen die Studierenden regelmäßig praktische Übungen durch. Dabei werden in der Praxis übliche Werkzeuge wie etwa Jupyter Lab, ILOG CPLEX und Wireshark/Zeek eingesetzt. Zusätzlich werden aktuelle wissenschaftliche Themen im Rahmen einer ‚Reading Group‘ behandelt, in welcher Studierende vorgegebene Paper und Artikel lesen/erarbeiten, und zum nächsten Unterrichtstermin vorstellen und diskutieren. 6 Teilnahmevoraussetzungen Formal: keine Inhaltlich: Modul: Netze & Verteilte Systeme, Modul: Informationssicherheit 7 Prüfungsformen 60-minütige Abschlussklausur. 8 Voraussetzungen für die Vergabe von Kreditpunkten Bestehen der angegebenen Prüfungsformen. 9 Stellenwert der Note für die Endnote Gewichtung entsprechend der ECTS. 10 Modulbeauftragte/r und Lehrende Modulverantwortlich: Prof. Dr. Jörg Daubert Dozent: Prof. Dr. Jörg Daubert und wechselnde Dozent:innen des FB IWI und externe Lehrbeauftragte 11 Bezug zu anderen Lehrveranstaltungen 12 Sonstige Informationen Lehrmaterial und Übungsaufgaben werden elektronisch zur Verfügung gestellt. 13 Literatur Schäfer G. & Rossberg M. (2014): Netzsicherheit - Grundlagen & Protokolle - Mobile & drahtlose Kommunikation - Schutz von Kommunikationsinfrastrukturen. dpunkt.verlag Eckert C. (2023): IT-Sicherheit: Konzepte - Verfahren – Protokolle. De Gruyter", "virtual_classroom": "", "pruefung": "60-minütige Abschlussklausur.", "category": "vertiefung", "aiRelevant": false, "ects_num": 5.0}]
+</script>
+<script>
+const DATA = JSON.parse(document.getElementById('module-data').textContent);
+
+const CAT_LABEL = {
+  kern: 'Kernbereich',
+  quer: 'Querschnitt',
+  vertiefung: 'Vertiefung',
+  abschluss: 'Abschlussarbeit'
+};
+const CAT_VAR = {
+  kern: '--kern',
+  quer: '--quer',
+  vertiefung: '--vertiefung',
+  abschluss: '--abschluss'
+};
+
+const SEM_LABELS = {1:'Semester 1',2:'Semester 2',3:'Semester 3',4:'Semester 4',5:'Semester 5',6:'Semester 6'};
+
+function byNum(a,b){ return a-b; }
+
+function groupBySemester(mods){
+  const map = {};
+  mods.forEach(m => {
+    (map[m.semester] = map[m.semester] || []).push(m);
+  });
+  return map;
+}
+
+function semesterMeta(mods){
+  const pflicht = mods.filter(m => m.category !== 'vertiefung');
+  const vertiefungen = mods.filter(m => m.category === 'vertiefung');
+  const ects = pflicht.reduce((s,m) => s + m.ects_num, 0);
+  const angebot = mods[0] && mods[0].angebot ? mods[0].angebot : '';
+  return { count: mods.length, ects, vertiefungen, angebot };
+}
+
+function buildNav(semesters){
+  const nav = document.getElementById('semnav');
+  semesters.forEach(s => {
+    const a = document.createElement('a');
+    a.href = '#semester-' + s;
+    a.dataset.sem = s;
+    a.innerHTML = `<span class="n">${String(s).padStart(2,'0')}</span>${SEM_LABELS[s].replace('Semester ', '')}`;
+    nav.appendChild(a);
+  });
+}
+
+function cardTemplate(m){
+  const wabTag = m.wab === 'Ja' ? `<span class="tag wab">WAB</span>` : '';
+  const aiTag = m.aiRelevant ? `<span class="tag ai">KI-relevant</span>` : '';
+  return `
+    <button class="card" style="--cat-color:var(${CAT_VAR[m.category]})" data-code="${m.code}" aria-haspopup="dialog">
+      <span class="code mono">${m.code}</span>
+      <span class="name">${m.name}</span>
+      <span class="tags">
+        <span class="tag">${m.credits}</span>
+        <span class="tag">${langShort(m.language)}</span>
+        ${wabTag}
+        ${aiTag}
+      </span>
+    </button>
+  `;
+}
+
+function langShort(lang){
+  if(lang.includes('/')) return 'DE / EN';
+  if(lang.toLowerCase().startsWith('englisch')) return 'EN';
+  return 'DE';
+}
+
+function renderMain(){
+  const main = document.getElementById('main');
+  const grouped = groupBySemester(DATA);
+  const semesters = Object.keys(grouped).map(Number).sort(byNum);
+  buildNav(semesters);
+
+  semesters.forEach(s => {
+    const mods = grouped[s].slice().sort((a,b) => {
+      // keep electives grouped at the end within a semester
+      if(a.category === 'vertiefung' && b.category !== 'vertiefung') return 1;
+      if(a.category !== 'vertiefung' && b.category === 'vertiefung') return -1;
+      return 0;
+    });
+    const meta = semesterMeta(mods);
+
+    const section = document.createElement('section');
+    section.className = 'semester';
+    section.id = 'semester-' + s;
+
+    const pflichtCards = mods.filter(m => m.category !== 'vertiefung').map(cardTemplate).join('');
+    const electiveCards = mods.filter(m => m.category === 'vertiefung').map(cardTemplate).join('');
+
+    section.innerHTML = `
+      <div class="sem-head">
+        <h2><span class="no">${String(s).padStart(2,'0')}</span>${SEM_LABELS[s]}</h2>
+        <span class="sem-meta">${meta.count} Module · ${meta.ects} ECTS Pflicht${meta.vertiefungen.length ? ' + 1 Wahlpflicht (5 ECTS)' : ''} · ${meta.angebot ? 'startet ' + meta.angebot : ''}</span>
+      </div>
+      <div class="grid">
+        ${pflichtCards}
+        ${electiveCards ? `<div class="elective-note">Wahlpflicht — wähle 1 von ${meta.vertiefungen.length}:</div>` : ''}
+        ${electiveCards}
+      </div>
+    `;
+    main.appendChild(section);
+  });
+
+  main.addEventListener('click', (e) => {
+    const card = e.target.closest('.card');
+    if(!card) return;
+    openDrawer(card.dataset.code);
+  });
+}
+
+function hourBar(hours, total){
+  const p = parseFloat((hours.praesenz_h||'0').replace(',','.'));
+  const v = parseFloat((hours.vc_h||'0').replace(',','.'));
+  const s = parseFloat((hours.selbststudium_h||'0').replace(',','.'));
+  const sum = p+v+s;
+  if(!sum) return `<p class="mono" style="font-size:12.5px;color:var(--ink-faint)">Keine detaillierte Stundenaufteilung angegeben (reines Kolloquium/Prüfungsformat).</p>`;
+  const pw = (p/sum*100).toFixed(1), vw = (v/sum*100).toFixed(1), sw = (s/sum*100).toFixed(1);
+  return `
+    <div class="wbar">
+      <span class="pres" style="width:${pw}%"></span>
+      <span class="vc" style="width:${vw}%"></span>
+      <span class="self" style="width:${sw}%"></span>
+    </div>
+    <div class="wlegend">
+      <span><span class="dot" style="background:var(--kern)"></span>Präsenz: ${hours.praesenz_h||'–'} h</span>
+      <span><span class="dot" style="background:var(--quer)"></span>Virtual Classroom: ${hours.vc_h||'–'} h</span>
+      <span><span class="dot" style="background:var(--ink-faint)"></span>Selbststudium: ${hours.selbststudium_h||'–'} h</span>
+    </div>
+  `;
+}
+
+function inhalteList(arr){
+  if(!arr || !arr.length) return '<p>–</p>';
+  if(arr.length === 1) return `<p>${arr[0]}</p>`;
+  return '<ul>' + arr.map(i => `<li>${i}</li>`).join('') + '</ul>';
+}
+
+function openDrawer(code){
+  const m = DATA.find(x => x.code === code);
+  if(!m) return;
+  const drawer = document.getElementById('drawer');
+  const scrim = document.getElementById('scrim');
+  const content = document.getElementById('drawerContent');
+
+  const wabTag = m.wab === 'Ja' ? `<span class="tag wab">WAB in diesem Modul</span>` : '';
+  const aiTag = m.aiRelevant ? `<span class="tag ai">KI-relevant</span>` : '';
+
+  content.innerHTML = `
+    <div class="d-code mono">${m.code} · Semester ${m.semester} · ${CAT_LABEL[m.category]}</div>
+    <h3>${m.name}</h3>
+    <div class="tags">
+      <span class="tag">${m.credits}</span>
+      <span class="tag">${m.workload} Workload</span>
+      <span class="tag">${langShort(m.language)}</span>
+      ${wabTag}
+      ${aiTag}
+    </div>
+
+    <div class="d-section">
+      <h4>Workload — Präsenz / Online / Selbststudium</h4>
+      <div class="workload-total"><span class="big">${m.workload}</span><span class="small">insgesamt · ${m.credits}</span></div>
+      ${hourBar(m.hours)}
+    </div>
+
+    <div class="d-section">
+      <h4>Grober Inhalt</h4>
+      ${inhalteList(m.inhalte)}
+    </div>
+
+    <div class="d-section">
+      <h4>Lernergebnisse</h4>
+      <p>${m.lernergebnisse || '–'}</p>
+    </div>
+
+    <div class="d-section">
+      <h4>Lehrformen</h4>
+      <p>${m.lehrformen || '–'}</p>
+    </div>
+
+    <div class="d-section">
+      <h4>Virtual Classroom</h4>
+      <p>${m.virtual_classroom || '–'}</p>
+    </div>
+
+    <div class="d-section">
+      <h4>Prüfungsform</h4>
+      <div class="pruefung-box"><p>${m.pruefung || '–'}</p></div>
+    </div>
+  `;
+
+  drawer.classList.add('open');
+  drawer.setAttribute('aria-hidden', 'false');
+  scrim.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('drawerClose').focus();
+}
+
+function closeDrawer(){
+  document.getElementById('drawer').classList.remove('open');
+  document.getElementById('drawer').setAttribute('aria-hidden', 'true');
+  document.getElementById('scrim').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('drawerClose').addEventListener('click', closeDrawer);
+document.getElementById('scrim').addEventListener('click', closeDrawer);
+document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeDrawer(); });
+
+renderMain();
+
+// Scroll-spy for sticky nav
+const navLinks = Array.from(document.querySelectorAll('#semnav a'));
+const sections = Array.from(document.querySelectorAll('section.semester'));
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    const link = navLinks.find(a => a.getAttribute('href') === '#' + entry.target.id);
+    if(!link) return;
+    if(entry.isIntersecting) {
+      navLinks.forEach(a => a.classList.remove('active'));
+      link.classList.add('active');
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px' });
+sections.forEach(s => io.observe(s));
+
+</script>
+</body>
+</html>
