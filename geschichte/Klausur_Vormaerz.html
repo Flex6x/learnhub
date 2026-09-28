@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="de"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vormärz & Revolution 1848/49 – Lernübersicht</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f6f7f9;--card:#fff;--ink:#1b1f27;--mute:#5d6675;--line:#e2e5ea;--ac:#1f4fd8;--acs:#e8eefc;--ok:#16794a;--oks:#e3f4ea;--no:#b3261e;--nos:#fbe7e5;--gold:#c58a00}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14161a;--card:#1d2026;--ink:#eceef2;--mute:#9aa3b2;--line:#2c313a;--ac:#7c9cff;--acs:#232b45;--ok:#5fd39a;--oks:#173226;--no:#ff8b83;--nos:#3a1f1d;--gold:#e0b03a}}
+:root[data-theme="dark"]{--bg:#14161a;--card:#1d2026;--ink:#eceef2;--mute:#9aa3b2;--line:#2c313a;--ac:#7c9cff;--acs:#232b45;--ok:#5fd39a;--oks:#173226;--no:#ff8b83;--nos:#3a1f1d;--gold:#e0b03a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{max-width:860px;margin:0 auto;padding:28px 20px 8px}
+h1{font:700 1.7rem/1.2 Georgia,"Times New Roman",serif;margin:0 0 4px;letter-spacing:-.01em}
+.sub{color:var(--mute);font-size:.92rem;margin:0}
+.bar{height:6px;background:var(--line);border-radius:9px;margin-top:14px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--ac);transition:width .4s}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+nav div{max-width:860px;margin:0 auto;display:flex;gap:4px;overflow-x:auto;padding:8px 14px}
+nav button{flex:none;border:0;background:none;color:var(--mute);font:inherit;font-size:.9rem;padding:7px 12px;border-radius:8px;cursor:pointer}
+nav button:hover{color:var(--ink)}
+nav button[aria-selected=true]{background:var(--acs);color:var(--ac);font-weight:600}
+button:focus-visible,summary:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+main{max-width:860px;margin:0 auto;padding:20px}
+section{display:none}section.on{display:block}
+h2{font:700 1.35rem Georgia,serif;margin:0 0 14px}
+h3{font-size:1.02rem;margin:22px 0 6px}
+.c{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:0 0 12px}
+.c h3{margin-top:0}
+ul{margin:6px 0;padding-left:20px}li{margin:3px 0}
+.y{font-weight:700;color:var(--ac);white-space:nowrap}
+.key{color:var(--gold);font-weight:700}
+.tl{border-left:2px solid var(--line);margin-left:6px;padding-left:16px}
+.tl div{position:relative;margin:0 0 12px}
+.tl div:before{content:"";position:absolute;left:-23px;top:8px;width:10px;height:10px;border-radius:50%;background:var(--card);border:2px solid var(--ac)}
+.tl div.k:before{background:var(--ac)}
+details{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:0 0 10px;padding:0 16px}
+summary{cursor:pointer;padding:13px 0;font-weight:600}
+details[open] summary{border-bottom:1px solid var(--line);margin-bottom:8px}
+details>div{padding-bottom:10px}
+.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;padding:9px 16px;border-radius:9px;cursor:pointer}
+.btn.p{background:var(--ac);border-color:var(--ac);color:#fff}
+.btn:hover{border-color:var(--ac)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:12px 0}
+.tag{font-size:.8rem;color:var(--mute)}
+.fc{perspective:1000px;min-height:230px;cursor:pointer}
+.fi{position:relative;min-height:230px;transition:transform .5s;transform-style:preserve-3d}
+.fc.f .fi{transform:rotateY(180deg)}
+.fs{position:absolute;inset:0;backface-visibility:hidden;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:1.1rem}
+.fs.b{transform:rotateY(180deg);background:var(--acs);font-size:1rem}
+@media (prefers-reduced-motion:reduce){.fi,.bar i{transition:none}}
+.opt{display:block;width:100%;text-align:left;margin:8px 0;padding:12px 14px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;font:inherit;cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--ac)}
+.opt.ok{background:var(--oks);border-color:var(--ok)}.opt.no{background:var(--nos);border-color:var(--no)}
+.ex{margin-top:10px;padding:10px 14px;border-radius:10px;background:var(--acs);font-size:.94rem}
+.ck{display:flex;gap:10px;align-items:flex-start;padding:8px 0;cursor:pointer}
+.ck input{margin-top:6px;accent-color:var(--ac);width:17px;height:17px}
+.ck.d span{color:var(--mute);text-decoration:line-through}
+input[type=search]{width:100%;padding:11px 14px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font:inherit;margin-bottom:14px}
+dt{font-weight:700}dd{margin:0 0 12px;color:var(--mute)}dd b{color:var(--ink)}
+</style></head><body>
+<header><h1>Vormärz & Revolution 1848/49</h1>
+<p class="sub">Geschichte LK – Lernübersicht · <span id="pt">0</span> % abgehakt</p>
+<div class="bar"><i id="pb"></i></div></header>
+<nav><div id="tabs" role="tablist"></div></nav>
+<main>
+
+<section id="t0"><h2>Überblick & Zeitstrahl</h2>
+<div class="c"><b>Roter Faden:</b> Nach dem Wiener Kongress 1815 unterdrücken die Konservativen die Ideen der Französischen Revolution. Liberalismus und Nationalismus wachsen dennoch im Bürgertum. 1848 entlädt sich der Druck in der Revolution. Die Paulskirche scheitert 1849 an inneren Gegensätzen und an der Ablehnung der Kaiserkrone.</div>
+<div class="tl">
+<div class="k"><span class="y">1815</span> Wiener Kongress, Deutscher Bund (Restauration)</div>
+<div><span class="y">1817</span> Wartburgfest (<span class="key">18.10.1817</span>)</div>
+<div class="k"><span class="y">1819</span> Mord an Kotzebue (23.3.), Karlsbader Beschlüsse (<span class="key">20.9.1819</span>)</div>
+<div><span class="y">1830</span> Julirevolution in Frankreich</div>
+<div class="k"><span class="y">1832</span> Hambacher Fest (<span class="key">27.5.1832</span>)</div>
+<div><span class="y">1834</span> Wiener Ministerialkonferenz, Verhaftungswelle</div>
+<div><span class="y">1837</span> Verfassungsbruch in Hannover, „Göttinger Sieben“</div>
+<div><span class="y">1846/47</span> Missernten, Hungerkrise</div>
+<div class="k"><span class="y">Feb. 1848</span> Februarrevolution in Frankreich</div>
+<div class="k"><span class="y">März 1848</span> Märzforderungen; Wien 13.3. (Metternich geht); Berlin 18./19.3. Barrikadenkämpfe</div>
+<div><span class="y">21.3.1848</span> Proklamation Friedrich Wilhelms IV.</div>
+<div><span class="y">31.3.1848</span> Vorparlament in der Paulskirche</div>
+<div class="k"><span class="y">18.5.1848</span> Nationalversammlung tritt zusammen</div>
+<div><span class="y">Nov. 1848</span> Preußischer König beendet die Revolution in Berlin mit Militär</div>
+<div class="k"><span class="y">28.3.1849</span> Verfassung verabschiedet, Wahl zum Erbkaiser</div>
+<div class="k"><span class="y">3.4.1849</span> Friedrich Wilhelm IV. lehnt die Krone ab</div>
+</div></section>
+
+<section id="t1"><h2>Vormärz (1815–1848)</h2>
+<div class="c"><b>Begriff:</b> Zeitraum zwischen Wiener Kongress 1815 und Märzrevolution 1848. Die Beschlüsse des Kongresses konnten die Ideen der Französischen Revolution langfristig nicht unterdrücken. Kampf zwischen Konservativen („Heilige Allianz“, deutsche Fürsten) und national-liberalen Kräften (Studenten, Professoren).</div>
+<details open><summary>Burschenschaften & Wartburgfest 1817</summary><div><ul><li>Burschenschaften: „Ehre – Freiheit – Vaterland“, z. B. Jenaische Burschenschaft.</li><li>Wartburgfest <span class="key">18.10.1817</span>, ca. 500 Studenten. Die Anliegen des Bildungsbürgertums waren beim Wiener Kongress ignoriert worden.</li><li>Anlass: 4. Jahrestag der Völkerschlacht bei Leipzig und 300 Jahre Reformation (in den Notizen: „bei Jena“, bitte mit deinem Material abgleichen).</li><li>Politische Reden, Bücherverbrennung freiheitsfeindlicher Autoren, schwarz-rot-goldene Fahnen.</li><li>Ziele: politische Freiheit, Einheit Deutschlands.</li></ul></div></details>
+<details><summary>Kotzebue-Mord & Karlsbader Beschlüsse 1819</summary><div><ul><li>Mord an Kotzebue (<span class="key">23.3.1819</span>) durch Burschenschaftler Karl Sand (1820 hingerichtet). Kotzebue: konservativ, antiliberal, gegen Studenten, „Verräter des Vaterlandes“.</li><li>Folge: Angst der Herrschenden vor Umsturz. Metternich lässt beschließen.</li><li>Karlsbader Beschlüsse <span class="key">20.9.1819</span> (deutsche Fürsten). Ziel: Unterdrückung der national-liberalen Bewegung.</li><li>Mittel: Verbot der Burschenschaften, Entlassung liberaler Professoren, Pressezensur, Überwachung.</li></ul></div></details>
+<details><summary>Hambacher Fest 1832</summary><div><ul><li>Auslöser: Julirevolution in Frankreich 1830, Bewegung „Junges Deutschland“.</li><li><span class="key">27.5.1832</span>, Hambacher Schloss bei Neustadt an der Weinstraße, ca. 30.000 Bürger, Arbeiter, Bauern.</li><li><b>Nationale Einheit:</b> grenzüberschreitende Hilfe, konföderiertes republikanisches Europa, Frieden.</li><li><b>Freiheit:</b> Volkssouveränität, freie Wahlen, Versammlungs- und Redefreiheit, Gleichberechtigung Mann/Frau, freier Handel; Demokratie.</li><li>Verlauf: Musik, Hissen der deutschen Flagge, Reden mit Forderungen.</li><li><b>Bedeutung:</b> politisches Bewusstsein und Massenkommunikation entstehen; Forderungen enden in der Revolution 1848/49; Symbol der deutschen Demokratie; Schwarz-Rot-Gold wird Symbol der Einheit. Trotz sofortiger Unterdrückung wirkte es weiter.</li></ul></div></details>
+<details><summary>Reaktion der Herrschenden 1834–1837</summary><div><ul><li>Wiener Ministerialkonferenz 1834: Vertreter der wichtigsten Staaten, Verschärfung der Gesetze, Verfolgung Andersdenkender, große Verhaftungswelle.</li><li>Emigration nach Frankreich, u. a. Heine, Marx.</li><li>1837 Verfassungsbruch in Hannover: König Ernst August hebt die 1833 gewährte Verfassung auf. Protest der „Göttinger Sieben“ (Professoren), Entlassung aus dem Dienst, teils Ausweisung.</li></ul></div></details>
+<details><summary>Quelle: „Der Deutschen Mai“ (1832)</summary><div><ul><li><b>Kritik:</b> Fürsten = Barbaren mit Räuberkrallen und finsterem Angesicht; Deutschland zu zersplittert (zu viele Flaggenfarben).</li><li><b>Forderungen:</b> mit aufs Hambacher Schloss ziehen und für die Freiheit kämpfen; ewiger Bund der Patrioten; Widerstand statt Unterwerfung unter die Fürsten; Deutschland als Einheit mit einer Farbe.</li></ul></div></details>
+<details><summary>Biedermeier – der Rückzug ins Private</summary><div><ul><li>Begriff: von der Satire um Biedermann und Bummelmeier.</li><li>Tugenden: Schlichtheit, Bürgertreue, Bescheidenheit, Ordnung, Idylle und Harmonie.</li><li>Familie: strenge Hierarchie (Mann = Oberhaupt, Frau und Kinder untergeordnet); Frau: Erziehung und Haushalt; Kinder: brav, respektvoll, strebsam; Privatsphäre frei von staatlichen Spitzeln.</li><li>Wohnung: schlichte Möbel, persönliche Wandbilder, Musikinstrumente, Porzellan und Schmuck in Vitrinen.</li><li>Deutung: unpolitischer Rückzug als Folge von Zensur und Überwachung.</li></ul></div></details>
+</section>
+
+<section id="t2"><h2>Revolution 1848: Ursachen bis Märzkämpfe</h2>
+<div class="c"><h3>Begriff „Revolution“</h3>Lat. „Umwälzung“: die bestehende Ordnung wird grundlegend verändert. Formen: <b>gewaltsam</b> (Französische Revolution 1789), <b>friedlich</b> (DDR 1989), <b>durch Wissenschaft und Technik</b> (Buchdruck, Dampfmaschine, PC, Internet).</div>
+<details open><summary>Ursachen</summary><div>
+<b>Politisch:</b> Fürstenherrschaft, fehlende Mitbestimmung, keine Verfassung, Zensur, keine Meinungsfreiheit, Wunsch nach deutscher Einheit, Steuern für Hof und Militär.<br>
+<b>Sozial:</b> Armut, schlechte Lebens- und Arbeitsbedingungen, Bevölkerungswachstum (1815–1848: 22 auf 35 Mio.), Pauperismus und „Soziale Frage“, soziale Ungleichheit.<br>
+<b>Wirtschaftlich:</b> Missernten 1846/47, steigende Lebensmittelpreise, Hungerkrise, Arbeitslosigkeit, internationale Konkurrenz, Ruin des traditionellen Handwerks (Gewerbefreiheit, frühe Industrialisierung).<br>
+<b>Ideen:</b> Liberalismus, Nationalismus, sozialistische Denker.</div></details>
+<details><summary>Anlass & Märzforderungen</summary><div><ul><li><b>Anlass:</b> Februarrevolution 1848 in Frankreich (Sturz des Bürgerkönigs Louis Philippe durch Kleinbürger, Studenten, Arbeiter). Die „revolutionäre Welle“ erfasst Europa.</li><li>Märzforderungen zuerst im Feb. 1848 im süddeutschen Raum, lokal unterschiedlich formuliert.</li><li><b>Forderungen:</b> Presse-, Meinungs-, Versammlungsfreiheit, Volksvertretung, Verfassung/Grundrechte, Gleichheit vor dem Gesetz, unabhängige Gerichte (Geschworenengerichte), gleiches Wahlrecht für Männer, Volksbewaffnung, kostenlose Schulbildung, Recht auf Arbeit, deutsches Parlament, Nationalstaat.</li></ul></div></details>
+<details><summary>Revolutionäre Dynamik (Land, Stadt, Berlin)</summary><div>
+<b>Land:</b> abhängige Bauern gegen Adlige; Ende der Feudallasten, Sturm auf Archive; Adel verzichtet auf grundherrliche Rechte; konservative Allianz zwischen freien Bauern und Adel.<br>
+<b>Stadt:</b> Studenten, Bürger, Arbeiter gegen Fürsten: Massendemonstrationen; Zugeständnisse, liberale „Märzregierungen“, Ende der Repression, neue Bundesfahne Schwarz-Rot-Gold. Liberale und Mehrheit der Demokraten sehen die Revolution als beendet an.<br>
+<b>Berlin:</b> 13.3. Straßengefechte; 16.3. Verfassungsversprechen; 18.3. Schüsse auf Bürger vor dem Schloss, Barrikaden, viele Tote; Rückzug der Truppen, Entschuldigung des Königs. Folge: liberale Regierung, preußische Nationalversammlung. Landadel und Militär stützen den König, der die Revolution im November 1848 beendet.</div></details>
+<details><summary>Barrikadenkämpfe: Wien & Berlin</summary><div><ul><li><b>Wien, <span class="key">13.3.1848</span>:</b> Studentendemo, mehrstündiger Straßenkampf, die kaiserliche Regierung gibt sofort nach, <b>Metternich tritt ab</b>.</li><li><b>Berlin, <span class="key">18.3.1848</span>:</b> Demonstranten ziehen zum Schloss, Soldaten gegen Bürger, Zusagen (Deutscher Bund als Staat mit Armee, Gerichten, Parlament; Pressefreiheit), trotzdem töten Soldaten hunderte Bürger.</li><li><b>Berlin, <span class="key">19.3.1848</span>:</b> Berliner präsentieren die Leichen am Schloss, der König verneigt sich; neue Regierung, preußische Nationalversammlung, neue Verfassung.</li></ul></div></details>
+<details><summary>Proklamation Friedrich Wilhelms IV. (21.3.1848)</summary><div>Er trägt die alten deutschen Farben und verspricht: Vereinigung der Fürsten und Völker unter einer Leitung, Deutsche Ständeversammlung, allgemeines Landesheer, einheitliche Maße, „neues Deutschland“, Einheit mit Freiheit, gleiche politische und bürgerliche Freiheit. <i>Einordnung:</i> Anpassung des Königs an die national-liberale Bewegung aus taktischen Gründen.</div></details>
+</section>
+
+<section id="t3"><h2>Paulskirche & Verfassung</h2>
+<details open><summary>Vorparlament (31.3.1848)</summary><div><ul><li>Frankfurter Paulskirche, 574 Männer (v. a. Abgeordnete der Landesparlamente). Ziel: Beratung und Wahlen zur Nationalversammlung.</li><li><b>Spaltung in zwei Flügel:</b> <b>radikale Demokraten</b> (Umwandlung der Monarchie in eine deutsche Republik; Hecker, Struve) und <b>gemäßigte Liberale</b> (Zusammenarbeit mit den Fürsten, schnelle Wahl; Heinrich von Gagern).</li></ul></div></details>
+<details><summary>Nationalversammlung (18.5.1848)</summary><div><ul><li>Ca. 600 Abgeordnete, v. a. Beamte, Professoren, Richter, Anwälte, Ärzte = <b>Bildungsbürger</b>. Großgrundbesitzer, Bauern, Handwerker unterrepräsentiert, Unterschicht nicht vertreten; keine Frauen.</li><li>Ziele: Grundrechte festlegen, Verfassung ausarbeiten. Präsident: Heinrich von Gagern.</li><li>Fraktionen trafen sich in Cafés und Gasthäusern.</li></ul>
+<dl><dt>Donnersberg (ganz links)</dt><dd>Volkssouveränität, Freiheit aller Völker, starke Kontrolle der Exekutive.</dd>
+<dt>Deutscher Hof</dt><dd>demokratisch-parlamentarische Republik, Einkammersystem, Gewaltverzicht.</dd>
+<dt>Württemberger Hof</dt><dd>bundesstaatliche Ordnung (nicht mit Einzelstaaten vereinbar).</dd>
+<dt>Casino</dt><dd>starke Zentralgewalt, Beschränkung der Volksvertretung, Kaiser.</dd>
+<dt>Café Milani (rechts)</dt><dd>großdeutsch-föderaler Staatenbund, monarchische Verfassungselemente, minimale Kontrollmöglichkeit der Regierung.</dd></dl></div></details>
+<details><summary>Verfassung: Kernfragen</summary><div><ul><li>Zu klären: Staatsform, Staatsoberhaupt, Reichsgrenzen, Grundrechtekatalog.</li><li><b>Staatsform:</b> Liberale = konstitutionelle Monarchie, Demokraten = Republik. Ergebnis: Bundesstaat mit starkem Reich (unitarische Elemente): Außenpolitik, Heer, Marine, Post, Eisenbahn, Zoll, Maße; Einzelstaaten regeln den Rest.</li><li><b>Kaiser:</b> Erbkaiser (statt Wahlkaiser), Spitze der Exekutive, ernennt Regierung, kann das Parlament auflösen; Gegenzeichnungsrecht der Minister.</li><li><b>Reichstag:</b> Budgetrecht, Gesetzesinitiative. <b>Wahlrecht:</b> allgemein, gleich, geheim, direkt, für Männer.</li><li><b>Reichsgrenzen:</b> kleindeutsche Lösung unter preußischer Führung (ohne Österreich).</li><li>Nachteil des Tagungsortes Paulskirche: Ausschüsse weit verstreut, kein Raum für Besprechungen und Erfrischungen bei 6–8 Stunden Sitzung.</li></ul></div></details>
+<details><summary>Kaiserkrone & Ablehnung</summary><div><ul><li><span class="key">28.3.1849</span>: Verfassung verabschiedet, Friedrich Wilhelm IV. zum Kaiser gewählt. Deputation bietet die Krone an; Ablehnung am <span class="key">3.4.1849</span>.</li><li><b>Motive (Brief an Karl Friedrich, 10.1.1849 laut Notizen):</b> schon 16 Mio. Untertanen, 45 Mio. zu viel; die Krone sei keine Frucht tausendjähriger Geschichte, sondern „Geburt des Scheusals“; Untertanen können keine Krone überreichen; er wäre den Untertanen unterlegen; will Deutschland nicht schwächen; will die Verfassung nicht legitimieren.</li><li><b>Motive (an die Deputation):</b> traut sich die Verantwortung nicht zu; die Länder sollen weiter selbst regeln.</li><li><i>Kern:</i> Gottesgnadentum und Legitimität gegen Volkssouveränität.</li></ul></div></details>
+</section>
+
+<section id="t4"><h2>Scheitern & Bedeutung</h2>
+<div class="c"><h3>Nur eine „halbe“ Revolution? Gründe des Scheiterns</h3><ul>
+<li>Paulskirche war mit der Aufgabe, einen liberalen Verfassungsstaat neu zu schaffen, nahezu überfordert.</li>
+<li>Spaltung im bürgerlichen Lager: Republikaner gegen Konstitutionelle (Monarchie beibehalten).</li>
+<li>Territoriale Zersplitterung und fehlendes Zentrum, kein koordiniertes Vorgehen möglich.</li>
+<li>Zu lange Verhandlungen, die Reaktion erstarkte; loyales Militär gegen unbewaffnete Paulskirche.</li>
+<li>Ablehnung der Kaiserkrone durch Friedrich Wilhelm IV. = Scheitern.</li>
+<li>Soziale Frage kaum berücksichtigt, Unterschichten nicht vertreten.</li></ul></div>
+<div class="c"><h3>Bedeutung & Nachwirkungen</h3><ul>
+<li>Erstes gesamtdeutsches Parlament, Grundlage demokratischer Politikkultur (Fraktionen, Debatte).</li>
+<li>Grundrechte und Verfassungsentwurf wirken später nach.</li>
+<li>Schwarz-Rot-Gold bleibt Symbol für Einheit und Freiheit.</li>
+<li>Für die Klausur: Bewertungsfrage „Gerede oder Grundlage?“ mit Pro und Kontra begründen.</li></ul></div></section>
+
+<section id="t5"><h2>Tutorial: Textanalyse</h2>
+<details open><summary>1. Einleitung (Formalia, Basissatz)</summary><div>Ein Satz mit: <b>Autor, Titel/Textart, Datum, Adressat, Thema, Quellenart</b> (Primärquelle). Dann Einordnung in den Kontext.<br><div class="ex">„Bei dem vorliegenden Text handelt es sich um einen Brief, den Friedrich Wilhelm IV. am … an … schrieb. Er thematisiert die Ablehnung der Kaiserkrone und ist in die Zeit der Revolution 1848/49 einzuordnen.“</div></div></details>
+<details><summary>2. Hauptteil A: Inhalt (Operator: „zusammenfassen“)</summary><div>Mit eigenen Worten, sachlich, Präsens, Konjunktiv I für indirekte Rede, gegliedert in Sinnabschnitte. Keine Zitatsammlung.<ul><li>„Der Autor argumentiert, dass …“</li><li>„Im ersten Abschnitt (Z. 1–5) stellt er dar, …“</li><li>„Er begründet seine Haltung damit, dass …“</li></ul></div></details>
+<details><summary>3. Hauptteil B: Historischer Kontext & Analyse</summary><div>Vorwissen einbringen: Wer ist der Autor, welche Lage, welche Ereignisse davor? Dann Intention, Wirkung, Adressat, Sprache und Argumentationsweise.<ul><li>„Der Text ist vor dem Hintergrund von … zu verstehen.“</li><li>„Der Autor verfolgt die Absicht, …“</li><li>„Die abwertende Wortwahl (‚Scheusal‘) zeigt, dass …“</li></ul>Beispiel-Kontext: Volkssouveränität gegen Gottesgnadentum; Verfassung 28.3.1849; Spaltung der Bewegung.</div></details>
+<details><summary>4. Schluss: Beurteilung (Operator: „beurteilen“)</summary><div>Kriterien nennen, Pro/Kontra abwägen, <b>eigenes begründetes Urteil</b> mit Bezug zum Kontext. Perspektive der Quelle kritisch hinterfragen (Interessen des Autors, Reichweite, Repräsentativität).<ul><li>„Zusammenfassend lässt sich festhalten, dass …“</li><li>„Einerseits …, andererseits …“</li><li>„Aus heutiger Sicht ist zu urteilen, dass …“</li></ul></div></details>
+<details><summary>Operatoren & Formulierungshilfen</summary><div><b>Nennen:</b> ohne Erklärung aufzählen. <b>Beschreiben:</b> sachlich darstellen. <b>Erläutern:</b> mit Beispielen und Belegen. <b>Analysieren:</b> systematisch untersuchen. <b>Erörtern/Beurteilen/Bewerten:</b> Pro und Kontra, begründetes Urteil.<ul><li>Verben: darlegen, verdeutlichen, betonen, kritisieren, fordern, rechtfertigen.</li><li>Verknüpfungen: daher, folglich, dennoch, im Gegensatz dazu, dies zeigt.</li><li>Fachsprache verwenden: Restauration, Volkssouveränität, konstitutionelle Monarchie, Legitimität.</li></ul></div></details>
+</section>
+
+<section id="t6"><h2>Glossar</h2><input type="search" id="gs" placeholder="Begriff suchen …"><dl id="gl"></dl></section>
+<section id="t7"><h2>Karteikarten</h2><div id="fcw"></div></section>
+<section id="t8"><h2>Quiz</h2><div id="qz"></div></section>
+<section id="t9"><h2>Fortschritt</h2><div class="c" id="ckl"></div><div class="row"><button class="btn" id="rst">Alles zurücksetzen</button></div></section>
+</main>
+<script>
+const $=s=>document.querySelector(s);
+const M={};
+const S={get(k,d){try{const v=localStorage.getItem('g48:'+k);return v?JSON.parse(v):d}catch(e){return k in M?M[k]:d}},set(k,v){M[k]=v;try{localStorage.setItem('g48:'+k,JSON.stringify(v))}catch(e){}}};
+const T=['Überblick','Vormärz','Revolution 1848','Paulskirche','Scheitern','Textanalyse','Glossar','Karteikarten','Quiz','Fortschritt'];
+const tb=$('#tabs');
+T.forEach((t,i)=>{const b=document.createElement('button');b.textContent=t;b.setAttribute('role','tab');b.onclick=()=>show(i);tb.appendChild(b)});
+function show(i){document.querySelectorAll('section').forEach((s,j)=>s.classList.toggle('on',i===j));tb.childNodes.forEach((b,j)=>b.setAttribute('aria-selected',i===j));S.set('tab',i);scrollTo(0,0)}
+const G=[['Vormärz','Zeit zwischen Wiener Kongress 1815 und Märzrevolution 1848.'],['Restauration','Wiederherstellung der alten Ordnung (Monarchien) nach 1815.'],['Wiener Kongress','1815: Neuordnung Europas nach Napoleon; Deutscher Bund; Ideen der Franz. Revolution ignoriert.'],['Heilige Allianz','Bündnis konservativer Monarchen zur Sicherung der alten Ordnung.'],['Liberalismus','Freiheitsrechte, Verfassung, Gewaltenteilung, Mitbestimmung des Bürgertums.'],['Nationalismus','Streben nach einem einheitlichen Nationalstaat.'],['Burschenschaft','Studentische Verbindung, Ideal: Ehre – Freiheit – Vaterland.'],['Karlsbader Beschlüsse','1819: Verbot der Burschenschaften, Zensur, Überwachung, Entlassung liberaler Professoren.'],['Zensur','Staatliche Kontrolle und Unterdrückung von Presse und Meinung.'],['Biedermeier','Rückzug ins Private mit Tugenden wie Ordnung, Bescheidenheit, Idylle.'],['Pauperismus','Massenarmut im frühen 19. Jh. durch Bevölkerungswachstum und Strukturkrise.'],['Soziale Frage','Problem der Armut und Ungleichheit der Arbeiter und Handwerker.'],['Gewerbefreiheit','Freie Berufsausübung; verschärft die Konkurrenz für das Handwerk.'],['Märzforderungen','Forderungen 1848: Pressefreiheit, Verfassung, Parlament, Nationalstaat u. a.'],['Märzregierungen','Liberale Regierungen, die 1848 von Fürsten berufen wurden.'],['Volkssouveränität','Die Staatsgewalt geht vom Volk aus.'],['Konstitutionelle Monarchie','Monarch durch Verfassung gebunden.'],['Republik','Staatsform ohne Monarch, Staatsoberhaupt gewählt.'],['Großdeutsche Lösung','Nationalstaat mit Österreich.'],['Kleindeutsche Lösung','Nationalstaat ohne Österreich, unter preußischer Führung.'],['Fraktion','Politische Gruppe im Parlament mit gemeinsamen Zielen.'],['Erbkaiser','Erblich vergebene Kaiserwürde (statt gewähltem Kaiser).'],['Gottesgnadentum','Herrschaft legitimiert durch Gott, nicht durch das Volk.'],['Grundrechte','Unverletzliche Freiheitsrechte des Einzelnen gegenüber dem Staat.']];
+function gl(q){$('#gl').innerHTML=G.filter(g=>(g[0]+g[1]).toLowerCase().includes(q)).map(g=>`<dt>${g[0]}</dt><dd>${g[1]}</dd>`).join('')||'<dd>Kein Treffer.</dd>'}
+$('#gs').oninput=e=>gl(e.target.value.toLowerCase());gl('');
+const F=[['Was bedeutet Vormärz?','Zeit zwischen Wiener Kongress 1815 und Märzrevolution 1848.'],['Wann war das Wartburgfest und was forderte es?','18.10.1817, ca. 500 Studenten; politische Freiheit und Einheit Deutschlands.'],['Warum kam es 1819 zu den Karlsbader Beschlüssen?','Nach dem Mord an Kotzebue (23.3.1819) durch Karl Sand; Angst vor Umsturz; Verbot der Burschenschaften, Zensur, Überwachung.'],['Hambacher Fest: Datum, Teilnehmer, Bedeutung?','27.5.1832, ca. 30.000; Forderungen nach Einheit, Freiheit, Demokratie; Symbol; Schwarz-Rot-Gold; wirkt bis 1848 nach.'],['Wiener Ministerialkonferenz 1834?','Verschärfte Gesetze, Verfolgung Andersdenkender, Verhaftungswelle.'],['Göttinger Sieben 1837?','Sieben Professoren protestierten gegen den Verfassungsbruch in Hannover und wurden entlassen.'],['Kennzeichen des Biedermeier?','Rückzug ins Private: Ordnung, Bescheidenheit, Idylle, schlichte Wohnung, strenge Familienhierarchie.'],['Nenne drei Ursachenbereiche der Revolution 1848.','Politisch (keine Verfassung, Zensur), sozial (Pauperismus, Bevölkerungswachstum 22 auf 35 Mio.), wirtschaftlich (Missernten 1846/47, Handwerkskrise).'],['Anlass der Märzrevolution?','Februarrevolution 1848 in Frankreich (Sturz Louis Philippes).'],['Was geschah am 13.3.1848 in Wien?','Studentendemo, Straßenkampf, Regierung gibt nach, Metternich tritt ab.'],['Was geschah am 18./19.3.1848 in Berlin?','Schüsse auf Bürger, Barrikaden, Tote; der König verneigt sich vor den Leichen; neue Regierung, preußische Nationalversammlung.'],['Wie beendete der preußische König die Revolution?','Im November 1848 mit Hilfe von Landadel und Militär.'],['Vorparlament vs. Nationalversammlung?','Vorparlament 31.3.1848 (574 Männer), Beratung. NV 18.5.1848 (ca. 600 Abgeordnete), Verfassung.'],['Zwei Flügel im Vorparlament?','Radikale Demokraten (Republik; Hecker, Struve) und gemäßigte Liberale (Zusammenarbeit mit Fürsten; Gagern).'],['Wer saß in der Nationalversammlung?','Vor allem Bildungsbürger; Bauern, Handwerker, Unterschicht unterrepräsentiert.'],['Was wollte das Casino?','Starke Zentralgewalt, Beschränkung der Volksvertretung, Kaiser.'],['Was wollte Donnersberg?','Volkssouveränität, Freiheit aller Völker, starke Kontrolle der Exekutive.'],['Wichtige Punkte der Verfassung?','Bundesstaat mit starkem Reich, Erbkaiser, Reichstag mit Budgetrecht, Wahlrecht für Männer, kleindeutsche Lösung.'],['Wann lehnte Friedrich Wilhelm IV. die Krone ab?','3.4.1849 (Verfassung 28.3.1849). Er lehnte Krone „vom Volk“ ab (Gottesgnadentum).'],['Nenne vier Gründe für das Scheitern.','Überforderung, Spaltung der Bürgerlichen, Zersplitterung, zu lange Verhandlungen und Militär loyal zum alten System, Ablehnung der Krone.']];
+let fi=0,fs=S.get('fc',{});
+function rf(){const k=Object.values(fs).filter(v=>v===1).length;$('#fcw').innerHTML=`<p class="tag">Karte ${fi+1} von ${F.length} · gewusst: ${k}</p><div class="fc" id="fcd" tabindex="0" role="button"><div class="fi"><div class="fs">${F[fi][0]}</div><div class="fs b">${F[fi][1]}</div></div></div><div class="row"><button class="btn" id="a">Zurück</button><button class="btn" id="n">Nicht gewusst</button><button class="btn p" id="y">Gewusst</button><button class="btn" id="b">Weiter</button><button class="btn" id="s">Mischen</button></div><p class="tag">Karte antippen zum Umdrehen.${fs[fi]===1?' Diese Karte ist als gewusst markiert.':''}</p>`;
+const c=$('#fcd');c.onclick=()=>c.classList.toggle('f');c.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();c.click()}};
+$('#a').onclick=()=>{fi=(fi+F.length-1)%F.length;rf()};$('#b').onclick=()=>{fi=(fi+1)%F.length;rf()};
+$('#y').onclick=()=>{fs[fi]=1;S.set('fc',fs);fi=(fi+1)%F.length;rf()};$('#n').onclick=()=>{fs[fi]=0;S.set('fc',fs);fi=(fi+1)%F.length;rf()};
+$('#s').onclick=()=>{const o=F.map((c,i)=>i).sort(()=>Math.random()-.5);fi=o[0];rf()}}
+rf();
+const Q=[['Welcher Zeitraum wird als Vormärz bezeichnet?',['1789–1815','1815–1848','1848–1871','1830–1850'],1,'Zwischen Wiener Kongress 1815 und Märzrevolution 1848.'],['Wann fand das Wartburgfest statt?',['1817','1819','1832','1848'],0,'18.10.1817, ca. 500 Studenten.'],['Was löste die Karlsbader Beschlüsse aus?',['Das Hambacher Fest','Der Mord an Kotzebue','Die Julirevolution','Der Sturz Metternichs'],1,'Kotzebue wurde am 23.3.1819 von Karl Sand ermordet.'],['Was gehörte NICHT zu den Karlsbader Beschlüssen?',['Verbot der Burschenschaften','Pressezensur','Einführung der Pressefreiheit','Entlassung liberaler Professoren'],2,'Sie unterdrückten die Bewegung.'],['Wie viele Menschen kamen zum Hambacher Fest 1832?',['500','5.000','30.000','300.000'],2,'Ca. 30.000 Bürger, Arbeiter und Bauern.'],['Wer emigrierte nach 1834 nach Frankreich?',['Heine und Marx','Gagern und Hecker','Metternich und Sand','Struve und Kotzebue'],0,'Verfolgung durch die Wiener Ministerialkonferenz.'],['Wofür stehen die „Göttinger Sieben“?',['Sieben Fraktionen','Protest gegen Verfassungsbruch in Hannover','Sieben Märzforderungen','Sieben Burschenschaften'],1,'1837, Entlassung aus dem Dienst.'],['Was ist typisch für das Biedermeier?',['Politischer Aktivismus','Rückzug ins Private','Barrikadenbau','Industrialisierung'],1,'Ordnung, Bescheidenheit, Idylle.'],['Welcher Anlass löste die Märzrevolution aus?',['Julirevolution 1830','Februarrevolution 1848 in Frankreich','Wiener Kongress','Hambacher Fest'],1,'Sturz Louis Philippes in Paris.'],['Was geschah am 13.3.1848 in Wien?',['Kaiserkrönung','Metternich tritt ab','Vorparlament','Verfassung verabschiedet'],1,'Studentendemo, Straßenkampf, Nachgeben der Regierung.'],['Wie viele Einwohner hatte Deutschland 1815 laut Notizen?',['15 Mio.','22 Mio.','35 Mio.','45 Mio.'],1,'Bis 1848 Anstieg auf 35 Mio.'],['Welche wirtschaftliche Ursache spielte 1846/47 eine Rolle?',['Börsencrash','Missernten und Hungerkrise','Ölkrise','Ende der Gewerbefreiheit'],1,'Steigende Lebensmittelpreise, Arbeitslosigkeit.'],['Wann trat die Nationalversammlung zusammen?',['31.3.1848','18.5.1848','28.3.1849','3.4.1849'],1,'In der Frankfurter Paulskirche.'],['Wer war Präsident der Nationalversammlung?',['Hecker','Struve','Heinrich von Gagern','Friedrich Wilhelm IV.'],2,'Gemäßigter Liberaler.'],['Welche Fraktion wollte eine starke Zentralgewalt und einen Kaiser?',['Donnersberg','Deutscher Hof','Casino','Württemberger Hof'],2,'Casino = rechts-liberal.'],['Wer war in der Nationalversammlung besonders stark vertreten?',['Bauern','Bildungsbürger','Arbeiter','Adlige Großgrundbesitzer'],1,'Beamte, Professoren, Juristen, Ärzte.'],['Wann lehnte Friedrich Wilhelm IV. die Kaiserkrone ab?',['18.3.1848','21.3.1848','28.3.1849','3.4.1849'],3,'Verfassung bereits 28.3.1849.'],['Was war ein Motiv der Ablehnung?',['Er wollte Republik','Krone „vom Volk“ nicht akzeptabel (Gottesgnadentum)','Er war zu jung','Die Verfassung war zu konservativ'],1,'Untertanen können keine Krone überreichen.'],['Nenne einen Grund für das Scheitern:',['Fehlende Zeit durch Kurzsitzungen','Militär stand auf Seiten der Revolution','Spaltung zwischen Republikanern und Konstitutionellen','Zu wenig Zensur'],2,'Außerdem: Zersplitterung, Zeitverlust, Militär loyal zu den Fürsten.'],['Welche Lösung wählte die Paulskirche bei den Reichsgrenzen?',['Großdeutsch','Kleindeutsch unter preußischer Führung','Nur Österreich','Kein Nationalstaat'],1,'Ohne Österreich.']];
+let qa=S.get('qa',{}),qi=0;
+function rq(){const done=Object.keys(qa).length,sc=Object.values(qa).filter(v=>v.ok).length;
+if(qi>=Q.length){const b=S.get('best',0);if(sc>b)S.set('best',sc);$('#qz').innerHTML=`<div class="c"><h3>Ergebnis: ${sc} von ${Q.length}</h3><p>Bestwert: ${Math.max(b,sc)}</p><button class="btn p" id="rr">Quiz neu starten</button></div>`;$('#rr').onclick=()=>{qa={};S.set('qa',qa);qi=0;rq()};return}
+const q=Q[qi],a=qa[qi];
+$('#qz').innerHTML=`<p class="tag">Frage ${qi+1} von ${Q.length} · richtig: ${sc}</p><div class="c"><h3>${q[0]}</h3>${q[1].map((o,i)=>`<button class="opt${a?(i===q[2]?' ok':i===a.c?' no':''):''}" data-i="${i}" ${a?'disabled':''}>${o}</button>`).join('')}${a?`<div class="ex">${a.ok?'Richtig. ':'Falsch. '}${q[3]}</div><div class="row"><button class="btn p" id="nx">${qi+1<Q.length?'Nächste Frage':'Auswertung'}</button></div>`:''}</div>`;
+document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;qa[qi]={c:i,ok:i===q[2]};S.set('qa',qa);rq()});
+const n=$('#nx');if(n)n.onclick=()=>{qi++;rq()}}
+qi=(()=>{let i=0;while(qa[i]&&i<Q.length)i++;return i})();rq();
+const C=[['Vormärz','Begriff und Kampf Konservative vs. Liberale'],['Vormärz','Wartburgfest 1817'],['Vormärz','Kotzebue-Mord und Karlsbader Beschlüsse 1819'],['Vormärz','Hambacher Fest 1832 samt Bedeutung'],['Vormärz','Ministerialkonferenz 1834, Emigration, Göttinger Sieben 1837'],['Vormärz','Quelle „Der Deutschen Mai“'],['Vormärz','Biedermeier'],['1848','Begriff und Formen der Revolution'],['1848','Ursachen (politisch, sozial, wirtschaftlich)'],['1848','Anlass und Märzforderungen'],['1848','Dynamik: Land, Stadt, Berlin'],['1848','Barrikadenkämpfe Wien und Berlin'],['1848','Proklamation vom 21.3.1848'],['Paulskirche','Vorparlament und zwei Flügel'],['Paulskirche','Zusammensetzung der Nationalversammlung'],['Paulskirche','Fünf Fraktionen und ihre Ziele'],['Paulskirche','Verfassungsinhalte'],['Paulskirche','Kaiserkrone und Motive der Ablehnung'],['Scheitern','Gründe des Scheiterns'],['Scheitern','Bedeutung und Bewertung'],['Methodik','Aufbau der Textanalyse'],['Methodik','Operatoren und Formulierungen'],['Lernen','Glossar durchgehen'],['Lernen','Karteikarten mit gewusst markiert'],['Lernen','Quiz ohne Fehler geschafft']];
+let cs=S.get('ck',{});
+function rc(){let h='',g='';C.forEach((c,i)=>{if(c[0]!==g){g=c[0];h+=`<h3>${g}</h3>`}h+=`<label class="ck${cs[i]?' d':''}"><input type="checkbox" data-i="${i}" ${cs[i]?'checked':''}><span>${c[1]}</span></label>`});$('#ckl').innerHTML=h;
+document.querySelectorAll('#ckl input').forEach(x=>x.onchange=()=>{cs[x.dataset.i]=x.checked;S.set('ck',cs);rc();pr()});pr()}
+function pr(){const p=Math.round(Object.values(cs).filter(Boolean).length/C.length*100);$('#pt').textContent=p;$('#pb').style.width=p+'%'}
+$('#rst').onclick=()=>{if(confirm('Wirklich alle Fortschritte löschen?')){cs={};fs={};qa={};qi=0;S.set('ck',cs);S.set('fc',fs);S.set('qa',qa);fi=0;rc();rf();rq()}};
+rc();show(S.get('tab',0));
+</script></body></html>
