@@ -1,0 +1,1484 @@
+<!DOCTYPE html>
+<html lang="de" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sonne & Astrophysik - LK Astronomie (15 NP Übersicht)</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        solar: {
+                            50: '#fffbe1',
+                            100: '#fff3b4',
+                            200: '#ffe469',
+                            300: '#ffd024',
+                            400: '#fbb500',
+                            500: '#e59700',
+                            600: '#c27200',
+                            700: '#9b5000',
+                            800: '#7f3f07',
+                            900: '#69340c',
+                            950: '#3d1a01',
+                        },
+                        space: {
+                            900: '#0b0f19',
+                            800: '#111827',
+                            700: '#1f293d',
+                            600: '#374151',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- KaTeX CDN for LaTeX rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+
+    <!-- Google Fonts & Lucide Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #080c14;
+            color: #f3f4f6;
+        }
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+        .transform-style-3d {
+            transform-style: preserve-3d;
+        }
+        .backface-hidden {
+            backface-visibility: hidden;
+        }
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #111827;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #374151;
+            border-radius: 3px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #fbb500;
+        }
+        .glow-solar {
+            box-shadow: 0 0 25px -5px rgba(251, 181, 0, 0.3);
+        }
+        .glow-cyan {
+            box-shadow: 0 0 25px -5px rgba(6, 182, 212, 0.3);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col bg-[#080c14] text-gray-100 antialiased selection:bg-solar-500 selection:text-black">
+
+    <!-- Top Navigation Header -->
+    <header class="sticky top-0 z-50 bg-space-900/90 backdrop-blur-md border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Brand Title -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-solar-600 via-amber-400 to-yellow-200 flex items-center justify-center shadow-lg shadow-solar-500/20">
+                        <i data-lucide="sun" class="w-6 h-6 text-space-900 stroke-[2.5]"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-lg font-bold bg-gradient-to-r from-amber-200 via-solar-400 to-yellow-500 bg-clip-text text-transparent">
+                            ASTROPHYSİK LK <span class="text-xs px-2 py-0.5 rounded-full bg-solar-500/10 text-solar-400 border border-solar-500/20 font-semibold">15 NP Target</span>
+                        </h1>
+                        <p class="text-xs text-gray-400">Kompendium: Die Sonne & Energieprozesse</p>
+                    </div>
+                </div>
+
+                <!-- Global Progress Badge -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <div class="text-right">
+                        <div class="text-xs text-gray-400">Gesamt-Lernfortschritt</div>
+                        <div class="text-sm font-bold text-solar-400" id="global-progress-percent">0%</div>
+                    </div>
+                    <div class="w-32 bg-gray-800 h-2 rounded-full overflow-hidden border border-gray-700">
+                        <div id="global-progress-bar" class="bg-gradient-to-r from-solar-500 to-amber-300 h-full w-0 transition-all duration-500"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Navigation Bar -->
+            <nav class="flex space-x-1 overflow-x-auto custom-scrollbar py-2 border-t border-gray-800/60" id="nav-tabs">
+                <button onclick="switchTab('tab-data')" id="btn-tab-data" class="tab-btn active px-3.5 py-2 text-xs font-semibold rounded-lg whitespace-nowrap transition-all flex items-center space-x-1.5 bg-solar-500/20 text-solar-300 border border-solar-500/30">
+                    <i data-lucide="database" class="w-4 h-4"></i>
+                    <span>1. Grunddaten</span>
+                </button>
+                <button onclick="switchTab('tab-layers')" id="btn-tab-layers" class="tab-btn px-3.5 py-2 text-xs font-semibold rounded-lg whitespace-nowrap transition-all flex items-center space-x-1.5 text-gray-400 hover:text-gray-200 hover:bg-space-800">
+                    <i data-lucide="layers" class="w-4 h-4"></i>
+                    <span>2. Schichten-Aufbau</span>
+                </button>
+                <button onclick="switchTab('tab-radiation')" id="btn-tab-radiation" class="tab-btn px-3.5 py-2 text-xs font-semibold rounded-lg whitespace-nowrap transition-all flex items-center space-x-1.5 text-gray-400 hover:text-gray-200 hover:bg-space-800">
+                    <i data-lucide="wifi" class="w-4 h-4"></i>
+                    <span>3. Strahlung & $S_0$-Versuch</span>
+                </button>
+                <button onclick="switchTab('tab-fusion')" id="btn-tab-fusion" class="tab-btn px-3.5 py-2 text-xs font-semibold rounded-lg whitespace-nowrap transition-all flex items-center space-x-1.5 text-gray-400 hover:text-gray-200 hover:bg-space-800">
+                    <i data-lucide="atom" class="w-4 h-4"></i>
+                    <span>4. Fusion & $E=mc^2$</span>
+                </button>
+                <button onclick="switchTab('tab-activity')" id="btn-tab-activity" class="tab-btn px-3.5 py-2 text-xs font-semibold rounded-lg whitespace-nowrap transition-all flex items-center space-x-1.5 text-gray-400 hover:text-gray-200 hover:bg-space-800">
+                    <i data-lucide="activity" class="w-4 h-4"></i>
+                    <span>5. Sonnenaktivität</span>
+                </button>
+                <button onclick="switchTab('tab-formulas')" id="btn-tab-formulas" class="tab-btn px-3.5 py-2 text-xs font-semibold rounded-lg whitespace-nowrap transition-all flex items-center space-x-1.5 text-gray-400 hover:text-gray-200 hover:bg-space-800">
+                    <i data-lucide="calculator" class="w-4 h-4"></i>
+                    <span>6. Formeln & Aufgaben</span>
+                </button>
+                <button onclick="switchTab('tab-glossary')" id="btn-tab-glossary" class="tab-btn px-3.5 py-2 text-xs font-semibold rounded-lg whitespace-nowrap transition-all flex items-center space-x-1.5 text-gray-400 hover:text-gray-200 hover:bg-space-800">
+                    <i data-lucide="book-open" class="w-4 h-4"></i>
+                    <span>7. Glossar</span>
+                </button>
+                <button onclick="switchTab('tab-cards')" id="btn-tab-cards" class="tab-btn px-3.5 py-2 text-xs font-semibold rounded-lg whitespace-nowrap transition-all flex items-center space-x-1.5 text-gray-400 hover:text-gray-200 hover:bg-space-800">
+                    <i data-lucide="credit-card" class="w-4 h-4"></i>
+                    <span>8. Karteikarten</span>
+                </button>
+                <button onclick="switchTab('tab-quiz')" id="btn-tab-quiz" class="tab-btn px-3.5 py-2 text-xs font-semibold rounded-lg whitespace-nowrap transition-all flex items-center space-x-1.5 text-gray-400 hover:text-gray-200 hover:bg-space-800">
+                    <i data-lucide="help-circle" class="w-4 h-4"></i>
+                    <span>9. LK-Quiz</span>
+                </button>
+                <button onclick="switchTab('tab-checklist')" id="btn-tab-checklist" class="tab-btn px-3.5 py-2 text-xs font-semibold rounded-lg whitespace-nowrap transition-all flex items-center space-x-1.5 text-gray-400 hover:text-gray-200 hover:bg-space-800">
+                    <i data-lucide="check-square" class="w-4 h-4"></i>
+                    <span>10. Checkliste</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+        <!-- TAB 1: PHYSIKALISCHE GRUNDDATEN -->
+        <section id="tab-data" class="tab-content block space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-gradient-to-r from-space-800 to-space-900 p-6 rounded-2xl border border-gray-800 shadow-xl">
+                <div>
+                    <h2 class="text-2xl font-bold text-solar-400 flex items-center gap-2">
+                        <i data-lucide="sun" class="w-6 h-6"></i> Physikalische Grunddaten & Kennzahlen der Sonne
+                    </h2>
+                    <p class="text-gray-400 text-sm mt-1">Exakte Werte aus den LK-Unterlagen – essenziell für Rechenaufgaben & Vergleichskennzahlen.</p>
+                </div>
+                <div class="px-4 py-2 rounded-xl bg-solar-500/10 border border-solar-500/30 text-solar-300 text-xs font-semibold self-start md:self-auto">
+                    Spektraltyp: <span class="text-white font-mono text-sm">G2V</span> (Hauptreihenzwerg)
+                </div>
+            </div>
+
+            <!-- Key Metrics Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="p-5 bg-space-800/80 rounded-2xl border border-gray-800 hover:border-solar-500/40 transition">
+                    <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Masse $M_\odot$</div>
+                    <div class="text-2xl font-bold text-amber-300 font-mono mt-1">$1,989 \times 10^{30}\text{ kg}$</div>
+                    <div class="text-xs text-gray-400 mt-2 flex items-center justify-between">
+                        <span>Erdvergleich:</span>
+                        <span class="text-solar-400 font-semibold">$\approx 330.000 \, m_E$</span>
+                    </div>
+                </div>
+
+                <div class="p-5 bg-space-800/80 rounded-2xl border border-gray-800 hover:border-solar-500/40 transition">
+                    <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Radius $R_\odot$</div>
+                    <div class="text-2xl font-bold text-amber-300 font-mono mt-1">$6,96 \times 10^{8}\text{ m}$</div>
+                    <div class="text-xs text-gray-400 mt-2 flex items-center justify-between">
+                        <span>Erdvergleich:</span>
+                        <span class="text-solar-400 font-semibold">$\approx 109 \, R_E$</span>
+                    </div>
+                </div>
+
+                <div class="p-5 bg-space-800/80 rounded-2xl border border-gray-800 hover:border-solar-500/40 transition">
+                    <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Leuchtkraft $L_\odot$</div>
+                    <div class="text-2xl font-bold text-amber-300 font-mono mt-1">$3,8 \times 10^{26}\text{ W}$</div>
+                    <div class="text-xs text-gray-400 mt-2">Gesamte Strahlungsleistung im Raum</div>
+                </div>
+
+                <div class="p-5 bg-space-800/80 rounded-2xl border border-gray-800 hover:border-solar-500/40 transition">
+                    <div class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Solarkonstante $S_0$</div>
+                    <div class="text-2xl font-bold text-amber-300 font-mono mt-1">$1360\text{ W/m}^2$</div>
+                    <div class="text-xs text-gray-400 mt-2">Außerhalb der Erdatmosphäre (1 AE)</div>
+                </div>
+            </div>
+
+            <!-- Detailed Table & Composition -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Data Table -->
+                <div class="lg:col-span-2 bg-space-800/60 rounded-2xl border border-gray-800 p-6 overflow-hidden">
+                    <h3 class="text-lg font-bold text-gray-200 mb-4 flex items-center gap-2">
+                        <i data-lucide="list" class="w-5 h-5 text-solar-400"></i> Detaillierte Physikalische Größen
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm">
+                            <thead class="text-xs uppercase bg-space-900/80 text-gray-400 border-b border-gray-800">
+                                <tr>
+                                    <th class="py-3 px-4">Eigenschaft / Größe</th>
+                                    <th class="py-3 px-4">Exakter Wert</th>
+                                    <th class="py-3 px-4">Anmerkung / LK-Kontext</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-800/60">
+                                <tr class="hover:bg-space-800/40">
+                                    <td class="py-3 px-4 font-semibold text-gray-300">Mittlere Dichte $\bar{\rho}$</td>
+                                    <td class="py-3 px-4 text-solar-300 font-mono">$1,409\text{ g/cm}^3$ ($1409\text{ kg/m}^3$)</td>
+                                    <td class="py-3 px-4 text-xs text-gray-400">Geringfügig höher als Wasser (Gaskugel)</td>
+                                </tr>
+                                <tr class="hover:bg-space-800/40">
+                                    <td class="py-3 px-4 font-semibold text-gray-300">Zentrumsdichte $\rho_\text{Z}$</td>
+                                    <td class="py-3 px-4 text-solar-300 font-mono">$1,6 \times 10^{5}\text{ kg/m}^3$ ($160\text{ g/cm}^3$)</td>
+                                    <td class="py-3 px-4 text-xs text-gray-400">Extremer Druck im Kernplasma</td>
+                                </tr>
+                                <tr class="hover:bg-space-800/40">
+                                    <td class="py-3 px-4 font-semibold text-gray-300">Effektivtemperatur $T_\text{eff}$</td>
+                                    <td class="py-3 px-4 text-solar-300 font-mono">$5785\text{ K}$</td>
+                                    <td class="py-3 px-4 text-xs text-gray-400">Oberflächentemperatur (Photosphäre)</td>
+                                </tr>
+                                <tr class="hover:bg-space-800/40">
+                                    <td class="py-3 px-4 font-semibold text-gray-300">Kerntemperatur $T_\text{Z}$</td>
+                                    <td class="py-3 px-4 text-solar-300 font-mono">$1,5 \times 10^7\text{ K}$ (15 Mio. K)</td>
+                                    <td class="py-3 px-4 text-xs text-gray-400">Voraussetzung für thermonukleare fusion</td>
+                                </tr>
+                                <tr class="hover:bg-space-800/40">
+                                    <td class="py-3 px-4 font-semibold text-gray-300">Absolute visu. Helligkeit $M_v$</td>
+                                    <td class="py-3 px-4 text-solar-300 font-mono">$+4{,}79^{\text{m}}$</td>
+                                    <td class="py-3 px-4 text-xs text-gray-400">Helligkeit in 10 pc Entfernung</td>
+                                </tr>
+                                <tr class="hover:bg-space-800/40">
+                                    <td class="py-3 px-4 font-semibold text-gray-300">Scheinbare Helligkeit $m_\odot$</td>
+                                    <td class="py-3 px-4 text-solar-300 font-mono">$-26{,}83^{\text{m}}$</td>
+                                    <td class="py-3 px-4 text-xs text-gray-400 font-bold text-amber-400">$450.000\times$ heller als Vollmond!</td>
+                                </tr>
+                                <tr class="hover:bg-space-800/40">
+                                    <td class="py-3 px-4 font-semibold text-gray-300">Mittlerer Abstand Erde-Sonne</td>
+                                    <td class="py-3 px-4 text-solar-300 font-mono">$1\text{ AE} \approx 149{,}6 \times 10^6\text{ km}$</td>
+                                    <td class="py-3 px-4 text-xs text-gray-400">$1{,}496 \times 10^{11}\text{ m}$</td>
+                                </tr>
+                                <tr class="hover:bg-space-800/40">
+                                    <td class="py-3 px-4 font-semibold text-gray-300">Scheinbarer Durchmesser</td>
+                                    <td class="py-3 px-4 text-solar-300 font-mono">$32'$ (Winkelminuten)</td>
+                                    <td class="py-3 px-4 text-xs text-gray-400">Nahezu identisch mit dem Vollmond ($31'$)</td>
+                                </tr>
+                                <tr class="hover:bg-space-800/40">
+                                    <td class="py-3 px-4 font-semibold text-gray-300">Oberflächenbeschleunigung $g_\odot$</td>
+                                    <td class="py-3 px-4 text-solar-300 font-mono">$274\text{ m/s}^2$</td>
+                                    <td class="py-3 px-4 text-xs text-gray-400">Ca. $28\times$ Erdbeschleunigung ($9{,}81\text{ m/s}^2$)</td>
+                                </tr>
+                                <tr class="hover:bg-space-800/40">
+                                    <td class="py-3 px-4 font-semibold text-gray-300">Rotationsdauer (Differentielle Rot.)</td>
+                                    <td class="py-3 px-4 text-solar-300 font-mono">Äquator: $25\text{ d}$ | $60^\circ$ Breite: $29\text{ d}$</td>
+                                    <td class="py-3 px-4 text-xs text-gray-400">Gaskugel rochiert nicht als starrer Körper!</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Composition & Magnetic Field Card -->
+                <div class="space-y-6">
+                    <div class="bg-space-800/60 rounded-2xl border border-gray-800 p-6">
+                        <h3 class="text-lg font-bold text-gray-200 mb-4 flex items-center gap-2">
+                            <i data-lucide="pie-chart" class="w-5 h-5 text-solar-400"></i> Chemische Zusammensetzung
+                        </h3>
+                        <p class="text-xs text-gray-400 mb-4">Massenanteile an der Sonnenoberfläche:</p>
+
+                        <div class="space-y-3">
+                            <div>
+                                <div class="flex justify-between text-xs mb-1">
+                                    <span class="font-semibold text-gray-300">Wasserstoff ($\text{H}_2$)</span>
+                                    <span class="text-solar-400 font-bold">73 %</span>
+                                </div>
+                                <div class="w-full bg-space-900 h-2.5 rounded-full overflow-hidden border border-gray-800">
+                                    <div class="bg-solar-400 h-full w-[73%]"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs mb-1">
+                                    <span class="font-semibold text-gray-300">Helium ($\text{He}$)</span>
+                                    <span class="text-amber-400 font-bold">25 %</span>
+                                </div>
+                                <div class="w-full bg-space-900 h-2.5 rounded-full overflow-hidden border border-gray-800">
+                                    <div class="bg-amber-400 h-full w-[25%]"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs mb-1">
+                                    <span class="font-semibold text-gray-300">Schwere Elemente (Metalle)</span>
+                                    <span class="text-cyan-400 font-bold">2 %</span>
+                                </div>
+                                <div class="w-full bg-space-900 h-2.5 rounded-full overflow-hidden border border-gray-800">
+                                    <div class="bg-cyan-400 h-full w-[2%]"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-space-800/60 rounded-2xl border border-gray-800 p-6">
+                        <h3 class="text-lg font-bold text-gray-200 mb-3 flex items-center gap-2">
+                            <i data-lucide="zap" class="w-5 h-5 text-solar-400"></i> Magnetfeldstärke
+                        </h3>
+                        <ul class="space-y-2 text-xs text-gray-300">
+                            <li class="flex justify-between p-2 rounded bg-space-900/60 border border-gray-800">
+                                <span>Allgemeines Magnetfeld:</span>
+                                <span class="font-mono text-solar-300 font-semibold">$5 \times 10^{-4}\text{ T}$</span>
+                            </li>
+                            <li class="flex justify-between p-2 rounded bg-space-900/60 border border-gray-800">
+                                <span>In Sonnenflecken:</span>
+                                <span class="font-mono text-amber-400 font-semibold">$10\text{--}10.000\times$ stärkere Felder!</span>
+                            </li>
+                            <li class="p-2 rounded bg-solar-500/10 border border-solar-500/20 text-solar-300 text-[11px]">
+                                Magnetfeld in Flecken: $0{,}05\text{ T}$ bis $0{,}5\text{ T}$ (behinderung der Konvektion).
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: AUFBAU & SCHICHTEN DER SONNE -->
+        <section id="tab-layers" class="tab-content hidden space-y-6">
+            <div class="bg-gradient-to-r from-space-800 to-space-900 p-6 rounded-2xl border border-gray-800 shadow-xl">
+                <h2 class="text-2xl font-bold text-solar-400 flex items-center gap-2">
+                    <i data-lucide="layers" class="w-6 h-6"></i> Aufbau & Schichten der Sonne
+                </h2>
+                <p class="text-gray-400 text-sm mt-1">Unterteilung in Innere Sonne (Fusion & Transport) und Sonnenatmosphäre (sichtbare Phänomene).</p>
+            </div>
+
+            <!-- Sun Layers Diagram & Accordion -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Visual Breakdown Card -->
+                <div class="bg-space-800/80 rounded-2xl border border-gray-800 p-6 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-200 mb-4">Schnittbild der Schichten</h3>
+                        <div class="relative w-full aspect-square max-w-[380px] mx-auto rounded-full bg-gradient-to-br from-yellow-300 via-solar-500 to-amber-700 flex items-center justify-center p-3 shadow-2xl shadow-solar-500/20">
+                            <!-- Corona -->
+                            <div class="w-full h-full rounded-full border-2 border-dashed border-amber-200/40 flex items-center justify-center animate-spin-slow">
+                                <!-- Chromosphere -->
+                                <div class="w-[85%] h-[85%] rounded-full bg-red-900/40 border border-red-500/50 flex items-center justify-center p-2">
+                                    <!-- Photosphere -->
+                                    <div class="w-[90%] h-[90%] rounded-full bg-amber-600/60 border border-amber-300 flex items-center justify-center">
+                                        <!-- Convection Zone -->
+                                        <div class="w-[80%] h-[80%] rounded-full bg-solar-600/70 border border-amber-400/80 flex items-center justify-center">
+                                            <!-- Radiative Zone -->
+                                            <div class="w-[65%] h-[65%] rounded-full bg-yellow-500/80 border border-yellow-200 flex items-center justify-center">
+                                                <!-- Core -->
+                                                <div class="w-[40%] h-[40%] rounded-full bg-white flex flex-col items-center justify-center text-space-900 font-bold text-center p-1 shadow-inner">
+                                                    <span class="text-[10px] uppercase font-black">Kern</span>
+                                                    <span class="text-[8px]">15 Mio K</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6 text-xs text-gray-400 text-center space-y-1">
+                        <p><span class="inline-block w-2.5 h-2.5 rounded-full bg-white"></span> Zentralgebiet ($0\text{--}0{,}25 \, R_\odot$)</p>
+                        <p><span class="inline-block w-2.5 h-2.5 rounded-full bg-yellow-400"></span> Strahlungszone ($0{,}25\text{--}0{,}85 \, R_\odot$)</p>
+                        <p><span class="inline-block w-2.5 h-2.5 rounded-full bg-solar-500"></span> Konvektionszone ($0{,}85\text{--}1{,}0 \, R_\odot$)</p>
+                        <p><span class="inline-block w-2.5 h-2.5 rounded-full bg-red-500"></span> Chromosphäre & Korona</p>
+                    </div>
+                </div>
+
+                <!-- 6 Layers Description Grid -->
+                <div class="space-y-4 custom-scrollbar max-h-[600px] overflow-y-auto pr-2">
+                    
+                    <!-- 1. Kern -->
+                    <div class="p-4 bg-space-800/90 rounded-xl border border-gray-800 hover:border-solar-500/40 transition">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-solar-400 uppercase tracking-wide">1. Innere Sonne</span>
+                            <span class="text-xs px-2 py-0.5 rounded bg-solar-500/10 text-solar-300 font-mono">$r \approx 0 \text{ bis } 0{,}25 \, R_\odot$</span>
+                        </div>
+                        <h4 class="text-base font-bold text-white mt-1">Zentralgebiet (Kern)</h4>
+                        <ul class="mt-2 text-xs text-gray-300 space-y-1">
+                            <li>• <strong>Funktion:</strong> Ort der Kernfusion (Wasserstoff zu Helium).</li>
+                            <li>• <strong>Temperatur:</strong> $T \approx 15 \cdot 10^6\text{ K}$ (15 Millionen Kelvin).</li>
+                            <li>• <strong>Dichte:</strong> $\rho \approx 160\text{ g/cm}^3 = 1{,}6 \cdot 10^5\text{ kg/m}^3$.</li>
+                            <li>• <strong>Druck:</strong> Extrem hoch; Plasma vollkommen ionisiert.</li>
+                        </ul>
+                    </div>
+
+                    <!-- 2. Strahlungszone -->
+                    <div class="p-4 bg-space-800/90 rounded-xl border border-gray-800 hover:border-solar-500/40 transition">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-solar-400 uppercase tracking-wide">2. Innere Sonne</span>
+                            <span class="text-xs px-2 py-0.5 rounded bg-solar-500/10 text-solar-300 font-mono">$r \approx 0{,}25 \text{ bis } 0{,}85 \, R_\odot$</span>
+                        </div>
+                        <h4 class="text-base font-bold text-white mt-1">Strahlungszone (Radiative Zone)</h4>
+                        <ul class="mt-2 text-xs text-gray-300 space-y-1">
+                            <li>• <strong>Energietransport:</strong> Durch elektromagnetische Strahlung via kontinuierlicher Absorption, Emission und Re-Emission der Photonen.</li>
+                            <li>• <strong>Temperaturabfall:</strong> Von ca. $10 \cdot 10^6\text{ K}$ auf $2 \cdot 10^6\text{ K}$.</li>
+                            <li>• <strong>Besonderheit:</strong> Ein Photon benötigt aufgrund der ständigen Streuung ("Random Walk") $10.000$ bis $100.000$ Jahre bis zur Oberfläche!</li>
+                        </ul>
+                    </div>
+
+                    <!-- 3. Konvektionszone -->
+                    <div class="p-4 bg-space-800/90 rounded-xl border border-gray-800 hover:border-solar-500/40 transition">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-solar-400 uppercase tracking-wide">3. Innere Sonne</span>
+                            <span class="text-xs px-2 py-0.5 rounded bg-solar-500/10 text-solar-300 font-mono">Dicke ca. $150.000\text{ km}$</span>
+                        </div>
+                        <h4 class="text-base font-bold text-white mt-1">Konvektionszone</h4>
+                        <ul class="mt-2 text-xs text-gray-300 space-y-1">
+                            <li>• <strong>Energietransport:</strong> Durch Strömung (Konvektion). Heißere Gasmassen steigen auf, kühlen ab und sinken wieder ab.</li>
+                            <li>• <strong>Strukturen:</strong> Riesenzellen (Konvektionszellen) mit Ausdehnungen bis zu $200.000\text{ km}$.</li>
+                        </ul>
+                    </div>
+
+                    <!-- 4. Photosphäre -->
+                    <div class="p-4 bg-space-800/90 rounded-xl border border-gray-800 hover:border-solar-500/40 transition">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-solar-400 uppercase tracking-wide">4. Sonnenatmosphäre</span>
+                            <span class="text-xs px-2 py-0.5 rounded bg-solar-500/10 text-solar-300 font-mono">Dicke ca. $400\text{ km}$</span>
+                        </div>
+                        <h4 class="text-base font-bold text-white mt-1">Photosphäre (Sichtbare Oberfläche)</h4>
+                        <ul class="mt-2 text-xs text-gray-300 space-y-1">
+                            <li>• <strong>Temperatur:</strong> Fällt von $9000\text{ K}$ (innen) auf $4300\text{ K}$ (außen); effektiver Mittelwert: $5785\text{ K}$.</li>
+                            <li>• <strong>Erscheinung 1 – Granulation:</strong> Zellige/körnige Struktur. Helle Flecken = Aufsteigendes heißes Gas; dunkle Ränder = Absinkendes kühleres Gas.</li>
+                            <li>• <strong>Erscheinung 2 – Randverdunklung:</strong> Am optischen Sonnenrand blicken wir unter flachem Winkel nur in höhere, kältere Schichten. Nach Stefan-Boltzmann ($M = \sigma T^4$) strahlen diese weniger intensiv.</li>
+                        </ul>
+                    </div>
+
+                    <!-- 5. Chromosphäre -->
+                    <div class="p-4 bg-space-800/90 rounded-xl border border-gray-800 hover:border-solar-500/40 transition">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-solar-400 uppercase tracking-wide">5. Sonnenatmosphäre</span>
+                            <span class="text-xs px-2 py-0.5 rounded bg-solar-500/10 text-solar-300 font-mono">Dicke $10.000\text{--}30.000\text{ km}$</span>
+                        </div>
+                        <h4 class="text-base font-bold text-white mt-1">Chromosphäre</h4>
+                        <ul class="mt-2 text-xs text-gray-300 space-y-1">
+                            <li>• <strong>Eigenschaften:</strong> Leicht rötlich (H-$\alpha$-Linie), durchsichtig, $1000\times$ höherer Dichte als Korona ($10^{-8} \to 10^{-12}\text{ g/cm}^3$).</li>
+                            <li>• <strong>Temperaturanstieg:</strong> Steigt stark an von $4500\text{ K}$ auf bis zu $1 \cdot 10^6\text{ K}$.</li>
+                            <li>• <strong>Störgebiete:</strong> Fackeln, Eruptionen, Protuberanzen.</li>
+                        </ul>
+                    </div>
+
+                    <!-- 6. Korona -->
+                    <div class="p-4 bg-space-800/90 rounded-xl border border-gray-800 hover:border-solar-500/40 transition">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-solar-400 uppercase tracking-wide">6. Sonnenatmosphäre</span>
+                            <span class="text-xs px-2 py-0.5 rounded bg-solar-500/10 text-solar-300 font-mono">Mehrere Sonnenradien</span>
+                        </div>
+                        <h4 class="text-base font-bold text-white mt-1">Korona</h4>
+                        <ul class="mt-2 text-xs text-gray-300 space-y-1">
+                            <li>• <strong>Eigenschaften:</strong> Äußerste Hülle, extrem geringe Dichte (Gesamtmasse nur ca. $1\text{ kg}$).</li>
+                            <li>• <strong>Temperatur:</strong> Extremely hoch ($1 \cdot 10^6\text{ K}$ bis $2 \cdot 10^6\text{ K}$, Maximum bei ca. $20.000\text{ km}$).</li>
+                            <li>• <strong>Sichtbarkeit:</strong> Nur bei totaler Sonnenfinsternis oder mit Spezialteleskop (Koronograph).</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: SONNENSTRAHLUNG & ATMOSPHÄRE -->
+        <section id="tab-radiation" class="tab-content hidden space-y-6">
+            <div class="bg-gradient-to-r from-space-800 to-space-900 p-6 rounded-2xl border border-gray-800 shadow-xl">
+                <h2 class="text-2xl font-bold text-solar-400 flex items-center gap-2">
+                    <i data-lucide="wifi" class="w-6 h-6"></i> Sonnenstrahlung, Laufzeiten & Schülerexperiment
+                </h2>
+                <p class="text-gray-400 text-sm mt-1">Gegenüberstellung EM-Strahlung vs. Teilchenstrahlung sowie Bestimmung der Solarkonstanten im Experiment.</p>
+            </div>
+
+            <!-- Comparison EM vs Particle Radiation -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- EM Radiation -->
+                <div class="bg-space-800/80 rounded-2xl border border-gray-800 p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 text-xs font-bold border border-cyan-500/20">Elektromagnetische Strahlung</span>
+                            <i data-lucide="zap" class="w-5 h-5 text-cyan-400"></i>
+                        </div>
+                        <ul class="text-xs text-gray-300 space-y-2">
+                            <li><strong>Arten:</strong> Gamma, Röntgen, UV, Sichtbares Licht, Wärmestrahlung (IR), Radiowellen.</li>
+                            <li><strong>Geschwindigkeit:</strong> Lichtgeschwindigkeit $c = 300.000\text{ km/s} = 3 \times 10^8\text{ m/s}$.</li>
+                            <li><strong>Laufzeit zur Erde:</strong>
+                                <div class="p-2 mt-1 bg-space-900 rounded border border-gray-800 font-mono text-solar-300">
+                                    $$t = \frac{s}{v} = \frac{150.000.000\text{ km}}{300.000\text{ km/s}} = 500\text{ s} \approx 8{,}3\text{ min}$$
+                                </div>
+                            </li>
+                            <li><strong>Auswirkung auf Erde:</strong> Licht & Wärme als Grundvoraussetzung für das Leben.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Particle Radiation -->
+                <div class="bg-space-800/80 rounded-2xl border border-gray-800 p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 text-xs font-bold border border-amber-500/20">Teilchenstrahlung (Sonnenwind)</span>
+                            <i data-lucide="wind" class="w-5 h-5 text-amber-400"></i>
+                        </div>
+                        <ul class="text-xs text-gray-300 space-y-2">
+                            <li><strong>Arten:</strong> Protonen ($p^+$), Elektronen ($e^-$), Heliumkerne ($\alpha$-Teilchen).</li>
+                            <li><strong>Geschwindigkeit:</strong> $v \approx 300\text{ km/s}$ bis $600\text{ km/s}$.</li>
+                            <li><strong>Laufzeit zur Erde:</strong>
+                                <div class="p-2 mt-1 bg-space-900 rounded border border-gray-800 font-mono text-amber-300">
+                                    $$t = \frac{s}{v} = \frac{150.000.000\text{ km}}{300\text{ km/s}} = 500.000\text{ s} \approx 5{,}8\text{ Tage}$$
+                                </div>
+                            </li>
+                            <li><strong>Auswirkung:</strong> Magnetstürme, Polarlichter, Funkstörungen, Verformung des Erdmagnetfeldes (Magnetfeldschweif).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Experiment Box: Solarkonstante $S_0$ -->
+            <div class="bg-space-800/60 rounded-2xl border border-solar-500/30 p-6">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="p-2 rounded-lg bg-solar-500/20 text-solar-400">
+                        <i data-lucide="flask-conical" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-white">Schülerexperiment: Bestimmung der Solarkonstanten $S_0$</h3>
+                        <p class="text-xs text-gray-400">Ablauf, Formel und Auswertung des Erlenmeyerkolben-Versuchs</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Experiment Setup & Formula -->
+                    <div class="space-y-4 text-xs text-gray-300">
+                        <div class="p-4 bg-space-900/80 rounded-xl border border-gray-800 space-y-2">
+                            <p class="font-semibold text-solar-300 text-sm">Versuchsaufbau & Parameter:</p>
+                            <p>• <strong>Gefäß:</strong> Erlenmeyerkolben gefüllt mit $V = 300\text{ ml}$ Wasser ($m = 0{,}3\text{ kg}$).</p>
+                            <p>• <strong>Schwarze Schicht (Ruß):</strong> Bodenseite geschwärzt für maximale Absorption ($\approx 100\%$).</p>
+                            <p>• <strong>Messgrößen:</strong> Grundfläche $A = \frac{\pi}{4} d^2$, Temperaturänderung $\Delta T$ in der Zeit $\Delta t \approx 10\text{--}15\text{ min}$.</p>
+                            <p>• <strong>Wärmekapazität Wasser:</strong> $c_w = 4{,}19\text{ kJ/(kg}\cdot\text{K)}$.</p>
+                        </div>
+
+                        <div class="p-4 bg-space-900/80 rounded-xl border border-solar-500/30 space-y-2">
+                            <p class="font-semibold text-solar-400 text-sm">Herleitung der Formel:</p>
+                            <p>Thermische Energie: $W = m \cdot c_w \cdot \Delta T$</p>
+                            <p>Strahlungsleistung pro Fläche: $S_0 = \frac{W}{A \cdot \Delta t}$</p>
+                            <div class="p-3 bg-black/40 rounded border border-solar-500/40 text-center font-mono text-solar-300 text-sm my-2">
+                                $$S_0 = \frac{m \cdot c_w \cdot \Delta T}{A \cdot \Delta t}$$
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Atmospheric Absorption & Window -->
+                    <div class="space-y-4 text-xs text-gray-300">
+                        <div class="p-4 bg-space-900/80 rounded-xl border border-gray-800 space-y-2">
+                            <p class="font-semibold text-amber-300 text-sm">Atmosphärische Absorption & Dämpfung:</p>
+                            <p>• <strong>Außerhalb der Atmosphäre:</strong> $S_0 = 1360\text{ W/m}^2$.</p>
+                            <p>• <strong>In der Erdatmosphäre:</strong> Ca. $50\%$ der Strahlung wird durch Absorption & Streuung geschwächt.</p>
+                            <p>• <strong>Auf Erdoberfläche:</strong> Es kommen nur ca. $700\text{ W/m}^2$ an!</p>
+                        </div>
+
+                        <div class="p-4 bg-space-900/80 rounded-xl border border-gray-800 space-y-2">
+                            <p class="font-semibold text-cyan-300 text-sm">Atmosphärische Fenster:</p>
+                            <p>• <strong>Optisches Fenster:</strong> Wollenlänge $0{,}3\text{ µm}$ bis $1\text{ µm}$ (Sichtbares Licht dringt bis zum Boden durch).</p>
+                            <p>• <strong>Radiofenster:</strong> Wellenlänge $1\text{ cm}$ bis $10\text{ m}$ (Radioastronomie vom Erdboden möglich).</p>
+                            <p>• <strong>Gefilterte Strahlung:</strong> Gamma- & Röntgenstrahlung werden in Thermosphäre ($>100\text{ km}$) absorbiert; UV-Strahlung großteils in Ozonschicht ($20\text{--}50\text{ km}$).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4: ENERGIEPROZESSE & KERNFUSION -->
+        <section id="tab-fusion" class="tab-content hidden space-y-6">
+            <div class="bg-gradient-to-r from-space-800 to-space-900 p-6 rounded-2xl border border-gray-800 shadow-xl">
+                <h2 class="text-2xl font-bold text-solar-400 flex items-center gap-2">
+                    <i data-lucide="atom" class="w-6 h-6"></i> Energieprozesse, Kernfusion & Massendefekt
+                </h2>
+                <p class="text-gray-400 text-sm mt-1">Exakte Reaktionsgleichungen des Proton-Proton-Zyklus, CNO-Zyklus und Salpeter-Prozesses.</p>
+            </div>
+
+            <!-- Proton-Proton Cycle Deep Dive -->
+            <div class="bg-space-800/80 rounded-2xl border border-solar-500/40 p-6 space-y-6 glow-solar">
+                <div class="flex items-center justify-between border-b border-gray-800 pb-4">
+                    <div>
+                        <span class="px-2.5 py-1 rounded bg-solar-500/20 text-solar-300 text-xs font-bold uppercase">Hauptenergiequelle der Sonne</span>
+                        <h3 class="text-xl font-bold text-white mt-1">Proton-Proton-Zyklus (pp-Zyklus)</h3>
+                    </div>
+                    <div class="text-right text-xs text-gray-400 font-mono">
+                        Voraussetzung: $T > 5 \cdot 10^6\text{ K}$<br>
+                        Effektiv ab: <span class="text-solar-400 font-bold">$T \ge 10 \cdot 10^6\text{ K}$</span>
+                    </div>
+                </div>
+
+                <p class="text-xs text-gray-300">
+                    Bei den extremen Kerntemperaturen ($\approx 15 \cdot 10^6\text{ K}$) überwinden Protonen durch hohe kinetische Energie (Tunnel-Effekt) die elektrostatische Coulomb-Abstoßung.
+                </p>
+
+                <!-- Steps 1 to 3 -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <!-- Step 1 -->
+                    <div class="p-4 bg-space-900/90 rounded-xl border border-gray-800 space-y-2">
+                        <div class="text-xs font-bold text-solar-400 uppercase">Schritt 1 (muss 2x ablaufen)</div>
+                        <div class="font-mono text-xs text-amber-200 bg-black/40 p-2 rounded">
+                            $${}^1\text{H} + {}^1\text{H} \to {}^2\text{H} + e^+ + \nu + \gamma$$
+                        </div>
+                        <p class="text-[11px] text-gray-400">
+                            Zwei Protonen verschmelzen zu Deuterium. Freigesetzte Energie: <strong class="text-white">$1{,}6 \cdot 10^{-13}\text{ J}$</strong>. ($e^+$ = Positron, $\nu$ = Neutrino, $\gamma$ = Gamma-Quant).
+                        </p>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="p-4 bg-space-900/90 rounded-xl border border-gray-800 space-y-2">
+                        <div class="text-xs font-bold text-solar-400 uppercase">Schritt 2 (muss 2x ablaufen)</div>
+                        <div class="font-mono text-xs text-amber-200 bg-black/40 p-2 rounded">
+                            $${}^2\text{H} + {}^1\text{H} \to {}^3\text{He} + \gamma$$
+                        </div>
+                        <p class="text-[11px] text-gray-400">
+                            Deuterium fängt ein weiteres Proton ein und bildet Helium-3. Freigesetzte Energie: <strong class="text-white">$8{,}78 \cdot 10^{-13}\text{ J}$</strong>.
+                        </p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="p-4 bg-space-900/90 rounded-xl border border-gray-800 space-y-2">
+                        <div class="text-xs font-bold text-solar-400 uppercase">Schritt 3 (1x Ablauf)</div>
+                        <div class="font-mono text-xs text-amber-200 bg-black/40 p-2 rounded">
+                            $${}^3\text{He} + {}^3\text{He} \to {}^4\text{He} + {}^1\text{H} + {}^1\text{H}$$
+                        </div>
+                        <p class="text-[11px] text-gray-400">
+                            Zwei Helium-3 Kerne verschmelzen zu einem stabileren Helium-4 Kern. Zwei Protonen werden frei. Energie: <strong class="text-white">$20{,}56 \cdot 10^{-13}\text{ J}$</strong>.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Total Balance -->
+                <div class="p-4 bg-solar-500/10 rounded-xl border border-solar-500/30 flex flex-col md:flex-row items-center justify-between gap-4">
+                    <div>
+                        <div class="text-xs font-bold text-solar-400 uppercase">Gesamtbilanz pp-Zyklus</div>
+                        <div class="font-mono text-sm text-white mt-1">
+                            $$4 {}^1\text{H} \to {}^4\text{He} + 2 e^+ + 2\nu + 2\gamma + \Delta E$$
+                        </div>
+                    </div>
+                    <div class="text-right font-mono text-xs text-solar-300">
+                        Freigesetzte Gesamtenergie pro ${}^4\text{He}$-Kern:<br>
+                        <span class="text-base font-bold text-amber-300">$\Delta E \approx 26{,}7\text{ MeV} \approx 4{,}192 \times 10^{-12}\text{ J}$</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mass Defect & Einstein's Formula -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Mass Defect Calculation -->
+                <div class="bg-space-800/80 rounded-2xl border border-gray-800 p-6 space-y-3">
+                    <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                        <i data-lucide="scale" class="w-5 h-5 text-solar-400"></i> Massendefekt & $E = \Delta m \cdot c^2$
+                    </h3>
+                    <div class="text-xs text-gray-300 space-y-2">
+                        <p>Die Ausgangsprodukte ($4\text{ Protonen}$) sind schwerer als das Endprodukt ($1\text{ Helium-4 Kern}$):</p>
+                        <div class="p-3 bg-space-900 rounded font-mono text-xs space-y-1">
+                            <div>Masse $4 \text{ Protonen} = 6{,}69056 \times 10^{-27}\text{ kg}$</div>
+                            <div>Masse $1 \text{ } {}^4\text{He}\text{-Kern} = 6{,}64476 \times 10^{-27}\text{ kg}$</div>
+                            <div class="text-amber-400 font-bold border-t border-gray-800 pt-1">
+                                Massendefekt $\Delta m = 0{,}04580 \times 10^{-27}\text{ kg}$ ($0{,}7\%$)
+                            </div>
+                        </div>
+                        <p class="text-gray-400">
+                            Bei der Umwandlung von $1\text{ g Wasserstoff}$ in Helium wird die gewaltige Energie von <strong class="text-solar-300">$172.000\text{ kWh}$</strong> frei!
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Mass Loss per Second -->
+                <div class="bg-space-800/80 rounded-2xl border border-gray-800 p-6 space-y-3">
+                    <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                        <i data-lucide="flame" class="w-5 h-5 text-solar-400"></i> Stoffumsatz der Sonne pro Sekunde
+                    </h3>
+                    <div class="p-4 bg-space-900 rounded-xl border border-gray-800 text-xs space-y-2 font-mono">
+                        <div class="flex justify-between text-gray-300">
+                            <span>Verbrauchter Wasserstoff:</span>
+                            <span class="text-solar-300 font-bold">$670 \times 10^6\text{ t/s}$</span>
+                        </div>
+                        <div class="flex justify-between text-gray-300">
+                            <span>Erzeugtes Helium:</span>
+                            <span class="text-amber-400 font-bold">$562{,}8 \times 10^6\text{ t/s}$</span>
+                        </div>
+                        <div class="flex justify-between text-solar-400 border-t border-gray-800 pt-2 font-bold text-sm">
+                            <span>Reine Energieumwandlung:</span>
+                            <span>$4{,}2 \times 10^6\text{ t/s}$</span>
+                        </div>
+                    </div>
+                    <p class="text-[11px] text-gray-400">
+                        Der Wasserstoffanteil im Kern sinkt stetig, während der Heliumgehalt ansteigt.
+                    </p>
+                </div>
+            </div>
+
+            <!-- CNO Cycle & Salpeter Process -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- CNO Cycle -->
+                <div class="bg-space-800/80 rounded-2xl border border-gray-800 p-6 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-base font-bold text-white">C-N-O-Zyklus (Bethe-Weizsäcker)</h3>
+                        <span class="text-xs px-2 py-0.5 rounded bg-gray-700 text-gray-300 font-mono">$T > 16 \cdot 10^6\text{ K}$</span>
+                    </div>
+                    <p class="text-xs text-gray-400">
+                        Tritt ab $10 \cdot 10^6\text{ K}$ auf, wird aber erst ab $>16 \cdot 10^6\text{ K}$ überlegen. Spielt auf der Sonne nur eine <strong>untergeordnete Rolle</strong>.
+                    </p>
+                    <div class="p-3 bg-space-900 rounded font-mono text-[11px] text-gray-300 space-y-1">
+                        <div>1. ${}^{12}\text{C} + {}^1\text{H} \to {}^{13}\text{N} + \gamma$</div>
+                        <div>2. ${}^{13}\text{N} \to {}^{13}\text{C} + e^+ + \nu$</div>
+                        <div>3. ${}^{13}\text{C} + {}^1\text{H} \to {}^{14}\text{N} + \gamma$</div>
+                        <div>4. ${}^{14}\text{N} + {}^1\text{H} \to {}^{15}\text{O} + \gamma$</div>
+                        <div>5. ${}^{15}\text{O} \to {}^{15}\text{N} + e^+ + \nu$</div>
+                        <div>6. ${}^{15}\text{N} + {}^1\text{H} \to {}^{12}\text{C} + {}^4\text{He}$</div>
+                    </div>
+                    <p class="text-[11px] text-amber-300 font-semibold">
+                        Kohlenstoff (${}^{12}\text{C}$) wirkt als Katalysator und steht am Ende unverändert zur Verfügung.
+                    </p>
+                </div>
+
+                <!-- Salpeter Process -->
+                <div class="bg-space-800/80 rounded-2xl border border-gray-800 p-6 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-base font-bold text-white">Salpeter-Prozess (3-$\alpha$-Prozess)</h3>
+                        <span class="text-xs px-2 py-0.5 rounded bg-red-500/20 text-red-400 font-mono font-bold">$T \ge 10^8\text{ K}$ ($100 \text{ Mio K}$)</span>
+                    </div>
+                    <div class="p-2 rounded bg-red-500/10 border border-red-500/20 text-red-300 text-xs font-semibold">
+                        Wichtig für die Klausur: Läuft AKTUELL NOCH NICHT auf der Sonne ab! (Erst in der Roter-Riese-Phase).
+                    </div>
+                    <div class="p-3 bg-space-900 rounded font-mono text-xs text-gray-300 space-y-2">
+                        <div>${}^4\text{He} + {}^4\text{He} \to {}^8\text{Be} - 0{,}15 \cdot 10^{-13}\text{ J}$ (endotherm)</div>
+                        <div>${}^8\text{Be} + {}^4\text{He} \to {}^{12}\text{C} + 11{,}84 \cdot 10^{-13}\text{ J}$ (exotherm)</div>
+                    </div>
+                    <p class="text-xs text-gray-400">
+                        Aus drei Heliumkernen ($\alpha$-Teilchen) wird ein Kohlenstoffkern gebildet.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 5: SONNENAKTIVITÄT & ERSCHEINUNGEN -->
+        <section id="tab-activity" class="tab-content hidden space-y-6">
+            <div class="bg-gradient-to-r from-space-800 to-space-900 p-6 rounded-2xl border border-gray-800 shadow-xl">
+                <h2 class="text-2xl font-bold text-solar-400 flex items-center gap-2">
+                    <i data-lucide="activity" class="w-6 h-6"></i> Sonnenaktivität & Magnetische Erscheinungen
+                </h2>
+                <p class="text-gray-400 text-sm mt-1">Sonnenflecken, Relativzahl-Formel, Protuberanzen, Fackeln und Eruptionen.</p>
+            </div>
+
+            <!-- Sunspots & Relative Number Formula -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Sunspots Intro -->
+                <div class="bg-space-800/80 rounded-2xl border border-gray-800 p-6 space-y-3">
+                    <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                        <i data-lucide="eye" class="w-5 h-5 text-solar-400"></i> Sonnenflecken (Galilei & Scheiner)
+                    </h3>
+                    <ul class="text-xs text-gray-300 space-y-2">
+                        <li>• <strong>Entdeckung:</strong> Anfang des 17. Jahrhunderts durch Galileo Galilei und Christoph Scheiner.</li>
+                        <li>• <strong>Ursache:</strong> Starke Magnetfelder ($0{,}05\text{ T}$ bis $0{,}5\text{ T}$) hemmen die Konvektion. Kältere Gasbereiche ($\approx 4000\text{ K}$) erscheinen gegenüber der heißeren Photosphäre ($5785\text{ K}$) dunkel (Kontrasteffekt).</li>
+                        <li>• <strong>Eigenschaften:</strong> Tauchen meist in Gruppen auf, sind instabil, verändert in Anzahl und Position.</li>
+                    </ul>
+                </div>
+
+                <!-- Relative Number Formula Box -->
+                <div class="bg-space-800/80 rounded-2xl border border-solar-500/40 p-6 space-y-3 glow-solar">
+                    <span class="text-xs font-bold text-solar-400 uppercase">Zentralformel Sonnenaktivität</span>
+                    <h3 class="text-lg font-bold text-white">Relativzahl $R$</h3>
+                    <div class="p-4 bg-space-900 rounded-xl border border-solar-500/30 text-center font-mono text-xl text-solar-300">
+                        $$R = k \cdot (10 \cdot G + F)$$
+                    </div>
+                    <div class="text-xs text-gray-300 space-y-1">
+                        <p>• $R$: Relativzahl (Maß für die Aktivität der Sonne).</p>
+                        <p>• $G$: Anzahl der Fleckengruppen.</p>
+                        <p>• $F$: Gesamtzahl aller Einzelflecken.</p>
+                        <p>• $k$: Korrekturfaktor (abhängig von Instrument & Sichtbedingungen, meist $k \approx 1$).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Protuberances Comparison -->
+            <div class="bg-space-800/60 rounded-2xl border border-gray-800 p-6">
+                <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                    <i data-lucide="flame" class="w-5 h-5 text-solar-400"></i> Protuberanzen (Ruhend vs. Aktiv)
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Ruhende Protuberanzen -->
+                    <div class="p-4 bg-space-900/80 rounded-xl border border-gray-800 space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-cyan-400 uppercase">Ruhende Protuberanzen</span>
+                            <span class="text-[10px] px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-300 font-mono">Langlebig</span>
+                        </div>
+                        <ul class="text-xs text-gray-300 space-y-1">
+                            <li>• <strong>Lebensdauer:</strong> Über mehrere Sonnenrotationsdauern stabil.</li>
+                            <li>• <strong>Mittlere Höhe:</strong> ca. $50.000\text{ km}$.</li>
+                            <li>• <strong>Entstehung:</strong> Häufig in fleckenfreien Fackelgebieten.</li>
+                            <li>• <strong>Struktur:</strong> Folgen den ruhigen magnetischen Feldlinien.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Aktive Protuberanzen -->
+                    <div class="p-4 bg-space-900/80 rounded-xl border border-amber-500/30 space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-amber-400 uppercase">Aktive Protuberanzen</span>
+                            <span class="text-[10px] px-2 py-0.5 rounded bg-amber-500/10 text-amber-300 font-mono">Dynamisch</span>
+                        </div>
+                        <ul class="text-xs text-gray-300 space-y-1">
+                            <li>• <strong>Lebensdauer:</strong> Verändern ihre Form extrem rasch (nur wenige Minuten).</li>
+                            <li>• <strong>Maximalhöhe:</strong> Erreichen Höhen von über $100.000\text{ km}$.</li>
+                            <li>• <strong>Entstehung:</strong> Gehauft direkt über Sonnenflecken.</li>
+                            <li>• <strong>Struktur:</strong> Bogenförmig (Schleifenprotuberanzen), umspannen weite Teile der Oberfläche.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flares and Faculae -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-space-800/80 rounded-2xl border border-gray-800 p-5 space-y-2">
+                    <h4 class="text-sm font-bold text-solar-300">Sonnenfackeln (Faculae)</h4>
+                    <p class="text-xs text-gray-300">
+                        Helle Gebiete erhöhter Temperatur in der Photosphäre und Chromosphäre. Entstehen oft im Umfeld von Sonnenflecken vor deren Bildung oder nach deren Auflösung.
+                    </p>
+                </div>
+
+                <div class="bg-space-800/80 rounded-2xl border border-gray-800 p-5 space-y-2">
+                    <h4 class="text-sm font-bold text-amber-300">Eruptionen (Flares)</h4>
+                    <p class="text-xs text-gray-300">
+                        Plötzliche, gewaltige Energieausbrüche in der Chromosphäre und Korona. Freisetzung von hochenergetischer EM-Strahlung und hochenergetischen Teilchenstürmen.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 6: FORMELSAMMLUNG & RECHENBEISPIELE -->
+        <section id="tab-formulas" class="tab-content hidden space-y-6">
+            <div class="bg-gradient-to-r from-space-800 to-space-900 p-6 rounded-2xl border border-gray-800 shadow-xl">
+                <h2 class="text-2xl font-bold text-solar-400 flex items-center gap-2">
+                    <i data-lucide="calculator" class="w-6 h-6"></i> Formelsammlung & Schritt-für-Schritt Musteraufgaben
+                </h2>
+                <p class="text-gray-400 text-sm mt-1">Alle Klausurformeln inklusive Einheiten-Herleitungen und vollständigen Rechenwegen.</p>
+            </div>
+
+            <!-- Formula Summary Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="p-4 bg-space-800/80 rounded-xl border border-gray-800 space-y-2">
+                    <span class="text-xs font-bold text-solar-400 uppercase">Solarkonstante $S_0$</span>
+                    <div class="font-mono text-sm text-white">$$S_0 = \frac{m \cdot c_w \cdot \Delta T}{A \cdot \Delta t}$$</div>
+                    <div class="text-[11px] text-gray-400">Einheit: $\text{W/m}^2 = \text{J/(s}\cdot\text{m}^2)$</div>
+                </div>
+
+                <div class="p-4 bg-space-800/80 rounded-xl border border-gray-800 space-y-2">
+                    <span class="text-xs font-bold text-solar-400 uppercase">Leuchtkraft $L$</span>
+                    <div class="font-mono text-sm text-white">$$L = 4\pi r^2 \cdot S_0$$</div>
+                    <div class="text-[11px] text-gray-400">$r = 1\text{ AE} = 149{,}6 \times 10^9\text{ m}$</div>
+                </div>
+
+                <div class="p-4 bg-space-800/80 rounded-xl border border-gray-800 space-y-2">
+                    <span class="text-xs font-bold text-solar-400 uppercase">Massendefekt $E$</span>
+                    <div class="font-mono text-sm text-white">$$E = \Delta m \cdot c^2$$</div>
+                    <div class="text-[11px] text-gray-400">$c = 3 \times 10^8\text{ m/s}$</div>
+                </div>
+            </div>
+
+            <!-- Step-by-Step Worked Examples -->
+            <div class="space-y-6">
+
+                <!-- Example 1: Solarkonstante & Leuchtkraft -->
+                <div class="bg-space-800/60 rounded-2xl border border-solar-500/30 p-6 space-y-4">
+                    <div class="flex items-center justify-between border-b border-gray-800 pb-3">
+                        <span class="text-xs font-bold text-solar-400 uppercase">Musteraufgabe 1 (Experimentelle Auswertung)</span>
+                        <span class="text-xs text-gray-400">Klausurniveau 15 NP</span>
+                    </div>
+                    <p class="text-xs text-gray-200">
+                        <strong>Aufgabenstellung:</strong> In einem Schülerexperiment werden $V = 300\text{ ml}$ Wasser ($m = 0{,}3\text{ kg}$) in einem Erlenmeyerkolben mit $d = 8\text{ cm}$ Bodendurchmesser bestrahlt. In $\Delta t = 10\text{ min}$ erwärmt sich das Wasser um $\Delta T = 8{,}2\text{ K}$. Berechne die im Experiment gemessene Strahlungsleistung pro Fläche sowie die daraus resultierende Gesamtleuchtkraft der Sonne.
+                    </p>
+
+                    <div class="p-4 bg-space-900 rounded-xl border border-gray-800 space-y-3 font-mono text-xs">
+                        <div class="text-solar-300 font-bold">1. Grundfläche $A$ des Kolbenbodens:</div>
+                        <div class="text-gray-300">$$A = \frac{\pi}{4} \cdot d^2 = \frac{\pi}{4} \cdot (0{,}08\text{ m})^2 \approx 0{,}005027\text{ m}^2$$</div>
+
+                        <div class="text-solar-300 font-bold">2. Eingestrahlte Leistung pro Fläche $S$:</div>
+                        <div class="text-gray-300">
+                            $$S = \frac{m \cdot c_w \cdot \Delta T}{A \cdot \Delta t} = \frac{0{,}3\text{ kg} \cdot 4190\text{ J/(kg}\cdot\text{K)} \cdot 8{,}2\text{ K}}{0{,}005027\text{ m}^2 \cdot 600\text{ s}} \approx 3416\text{ W/m}^2$$
+                        </div>
+
+                        <div class="text-solar-300 font-bold">3. Leuchtkraft der Sonne mit tatsächlichem $S_0 = 1360\text{ W/m}^2$:</div>
+                        <div class="text-amber-300 font-bold">
+                            $$L = 4\pi r^2 S_0 = 4\pi (149{,}6 \times 10^9\text{ m})^2 \cdot 1360\text{ W/m}^2 \approx 3{,}82 \times 10^{26}\text{ W}$$
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Example 2: Mass loss calculation -->
+                <div class="bg-space-800/60 rounded-2xl border border-gray-800 p-6 space-y-4">
+                    <div class="flex items-center justify-between border-b border-gray-800 pb-3">
+                        <span class="text-xs font-bold text-amber-400 uppercase">Musteraufgabe 2 (Massendefekt & Lebensdauer)</span>
+                        <span class="text-xs text-gray-400">Klausurniveau 15 NP</span>
+                    </div>
+                    <p class="text-xs text-gray-200">
+                        <strong>Aufgabenstellung:</strong> Wie viel Masse verliert die Sonne pro Sekunde durch Abstrahlung ihrer Leuchtkraft $L = 3{,}8 \times 10^{26}\text{ W}$?
+                    </p>
+
+                    <div class="p-4 bg-space-900 rounded-xl border border-gray-800 space-y-3 font-mono text-xs">
+                        <div class="text-solar-300 font-bold">Lösungsweg über $E = m \cdot c^2$:</div>
+                        <div class="text-gray-300">
+                            $$L = \frac{\Delta E}{\Delta t} \implies \frac{\Delta m}{\Delta t} = \frac{L}{c^2}$$
+                        </div>
+                        <div class="text-amber-300 font-bold">
+                            $$\frac{\Delta m}{\Delta t} = \frac{3{,}8 \times 10^{26}\text{ W}}{(3 \times 10^8\text{ m/s})^2} = \frac{3{,}8 \times 10^{26}}{9 \times 10^{16}} \approx 4{,}22 \times 10^9\text{ kg/s} = 4{,}22 \times 10^6\text{ t/s}$$
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- TAB 7: GLOSSAR -->
+        <section id="tab-glossary" class="tab-content hidden space-y-6">
+            <div class="bg-gradient-to-r from-space-800 to-space-900 p-6 rounded-2xl border border-gray-800 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-solar-400 flex items-center gap-2">
+                        <i data-lucide="book-open" class="w-6 h-6"></i> Fachglossar Astrophysik
+                    </h2>
+                    <p class="text-gray-400 text-sm mt-1">Prägnante Definitionen der wichtigsten Begriffe für die mündliche und schriftliche Leistungskurs-Klausur.</p>
+                </div>
+                <!-- Search Input -->
+                <div class="relative w-full md:w-64">
+                    <input type="text" id="glossary-search" onkeyup="filterGlossary()" placeholder="Begriffe suchen..." class="w-full bg-space-900 border border-gray-700 rounded-xl px-4 py-2 text-xs text-gray-200 focus:outline-none focus:border-solar-500">
+                    <i data-lucide="search" class="w-4 h-4 text-gray-400 absolute right-3 top-2.5"></i>
+                </div>
+            </div>
+
+            <!-- Glossary Items Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="glossary-grid">
+                
+                <div class="glossary-card p-4 bg-space-800/80 rounded-xl border border-gray-800 space-y-1">
+                    <h4 class="text-sm font-bold text-solar-300">Solarkonstante $S_0$</h4>
+                    <p class="text-xs text-gray-300">Die Gesamteinstrahlung der Sonne pro Flächeneinheit senkrecht zur Strahlungsrichtung im mittleren Abstand Erde-Sonne ($1\text{ AE}$) außerhalb der Erdatmosphäre ($1360\text{ W/m}^2$).</p>
+                </div>
+
+                <div class="glossary-card p-4 bg-space-800/80 rounded-xl border border-gray-800 space-y-1">
+                    <h4 class="text-sm font-bold text-solar-300">Granulation</h4>
+                    <p class="text-xs text-gray-300">Körnige Oberflächenstruktur der Photosphäre, erzeugt durch die Oberkante von Konvektionszellen. Helle Bereiche = aufsteigendes heißes Gas; dunkle Ränder = absinkendes kühleres Gas.</p>
+                </div>
+
+                <div class="glossary-card p-4 bg-space-800/80 rounded-xl border border-gray-800 space-y-1">
+                    <h4 class="text-sm font-bold text-solar-300">Randverdunklung</h4>
+                    <p class="text-xs text-gray-300">Helligkeitsabfall der Sonnen-Disk zu ihrem optischen Rand hin. Ursache: Flacher Blickwinkel erfasst nur höhere, kältere und damit strahlungsärmere Schichten der Photosphäre.</p>
+                </div>
+
+                <div class="glossary-card p-4 bg-space-800/80 rounded-xl border border-gray-800 space-y-1">
+                    <h4 class="text-sm font-bold text-solar-300">Massendefekt $\Delta m$</h4>
+                    <p class="text-xs text-gray-300">Differenz zwischen der Summe der Massen der einzelnen Protonen/Neutronen und der Masse des zusammengesetzten Atomkerns. Wird gemäß $E = \Delta m \cdot c^2$ als Bindungsenergie frei.</p>
+                </div>
+
+                <div class="glossary-card p-4 bg-space-800/80 rounded-xl border border-gray-800 space-y-1">
+                    <h4 class="text-sm font-bold text-solar-300">Differentielle Rotation</h4>
+                    <p class="text-xs text-gray-300">Unterschiedliche Rotationsgeschwindigkeiten eines Gaskörpers auf verschiedenen Breitengraden. Die Sonne rotiert am Äquator ($25\text{ d}$) schneller als in Polnähe ($29\text{ d}$ bei $60^\circ$).</p>
+                </div>
+
+                <div class="glossary-card p-4 bg-space-800/80 rounded-xl border border-gray-800 space-y-1">
+                    <h4 class="text-sm font-bold text-solar-300">Optisches Fenster</h4>
+                    <p class="text-xs text-gray-300">Wellenlängenbereich der Erdatmosphäre ($0{,}3\text{ µm}$ bis $1\text{ µm}$), für den die Luft nahezu transparent ist, sodass optisches Sonnenlicht ungehindert auf den Erdboden trifft.</p>
+                </div>
+
+                <div class="glossary-card p-4 bg-space-800/80 rounded-xl border border-gray-800 space-y-1">
+                    <h4 class="text-sm font-bold text-solar-300">Relativzahl $R$</h4>
+                    <p class="text-xs text-gray-300">Standardisiertes Maß für die Sonnenfleckenaktivität: $R = k \cdot (10 \cdot G + F)$ mit Gruppen $G$ und Einzelflecken $F$.</p>
+                </div>
+
+                <div class="glossary-card p-4 bg-space-800/80 rounded-xl border border-gray-800 space-y-1">
+                    <h4 class="text-sm font-bold text-solar-300">Salpeter-Prozess</h4>
+                    <p class="text-xs text-gray-300">Auch Drei-Alpha-Prozess genannt. Kernfusion von 3 Heliumkernen zu Kohlenstoff bei $T \ge 10^8\text{ K}$. Läuft aktuell noch nicht auf der Sonne ab.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- TAB 8: KARTEIKARTEN -->
+        <section id="tab-cards" class="tab-content hidden space-y-6">
+            <div class="bg-gradient-to-r from-space-800 to-space-900 p-6 rounded-2xl border border-gray-800 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-solar-400 flex items-center gap-2">
+                        <i data-lucide="credit-card" class="w-6 h-6"></i> Interaktive Karteikarten (Flip Cards)
+                    </h2>
+                    <p class="text-gray-400 text-sm mt-1">Klicke auf die Karte, um die Rückseite zu wenden. Speicherung deines Lernstatus im Browser!</p>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <span class="text-xs text-gray-400">Gelernt:</span>
+                    <span id="cards-learned-count" class="px-3 py-1 rounded-full bg-solar-500/20 text-solar-300 font-bold text-xs">0 / 6</span>
+                </div>
+            </div>
+
+            <!-- Card Carousel Container -->
+            <div class="max-w-xl mx-auto space-y-6">
+                <!-- Single Active Card View -->
+                <div class="perspective-1000 w-full aspect-[16/10] cursor-pointer" onclick="flipCard()">
+                    <div id="flashcard-inner" class="relative w-full h-full duration-500 transform-style-3d bg-space-800 border-2 border-solar-500/30 rounded-2xl p-6 flex flex-col items-center justify-center text-center shadow-2xl">
+                        <!-- Front -->
+                        <div id="card-front-content" class="absolute inset-0 backface-hidden p-6 flex flex-col justify-between items-center">
+                            <span class="text-xs font-bold text-solar-400 uppercase tracking-widest" id="card-category">Kategorie</span>
+                            <div class="text-lg font-bold text-white my-auto" id="card-front-text">Frage lädt...</div>
+                            <span class="text-[11px] text-gray-500 flex items-center gap-1">
+                                <i data-lucide="rotate-cw" class="w-3.5 h-3.5"></i> Klick zum Umdrehen
+                            </span>
+                        </div>
+                        <!-- Back -->
+                        <div id="card-back-content" class="absolute inset-0 backface-hidden rotate-y-180 p-6 flex flex-col justify-between items-center bg-space-900 rounded-2xl border border-gray-700">
+                            <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">Antwort / Erklärung</span>
+                            <div class="text-sm text-gray-200 my-auto space-y-2" id="card-back-text">Antwort lädt...</div>
+                            <span class="text-[11px] text-gray-500">Klick zum Zurückdrehen</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Controls & Status Buttons -->
+                <div class="flex items-center justify-between gap-4">
+                    <button onclick="prevCard()" class="px-4 py-2 bg-space-800 border border-gray-700 rounded-xl text-xs font-semibold text-gray-300 hover:border-solar-500">
+                        &larr; Vorherige
+                    </button>
+
+                    <div class="flex space-x-2">
+                        <button onclick="markCardStatus(false)" class="px-3 py-2 bg-red-500/10 border border-red-500/30 text-red-400 rounded-xl text-xs font-semibold hover:bg-red-500/20">
+                            Noch üben
+                        </button>
+                        <button onclick="markCardStatus(true)" class="px-3 py-2 bg-solar-500/20 border border-solar-500/40 text-solar-300 rounded-xl text-xs font-semibold hover:bg-solar-500/30">
+                            Gewusst!
+                        </button>
+                    </div>
+
+                    <button onclick="nextCard()" class="px-4 py-2 bg-space-800 border border-gray-700 rounded-xl text-xs font-semibold text-gray-300 hover:border-solar-500">
+                        Nächste &rarr;
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 9: INTERAKTIVES QUIZ -->
+        <section id="tab-quiz" class="tab-content hidden space-y-6">
+            <div class="bg-gradient-to-r from-space-800 to-space-900 p-6 rounded-2xl border border-gray-800 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-solar-400 flex items-center gap-2">
+                        <i data-lucide="help-circle" class="w-6 h-6"></i> LK-Klausur Simulation (Quiz)
+                    </h2>
+                    <p class="text-gray-400 text-sm mt-1">Multiple-Choice & Rechenfragen mit direkter Rückmeldung und Erläuterung.</p>
+                </div>
+                <div class="px-4 py-2 rounded-xl bg-space-900 border border-gray-800 text-right">
+                    <div class="text-xs text-gray-400">Erreichter Quiz-Score:</div>
+                    <div class="text-lg font-bold text-solar-400 font-mono" id="quiz-score-display">0 / 5 Punkte</div>
+                </div>
+            </div>
+
+            <!-- Quiz Questions Container -->
+            <div class="space-y-6" id="quiz-container">
+                <!-- Rendered dynamically by JS -->
+            </div>
+        </section>
+
+        <!-- TAB 10: FORTSCHRITTS-CHECKLISTE -->
+        <section id="tab-checklist" class="tab-content hidden space-y-6">
+            <div class="bg-gradient-to-r from-space-800 to-space-900 p-6 rounded-2xl border border-gray-800 shadow-xl">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <h2 class="text-2xl font-bold text-solar-400 flex items-center gap-2">
+                            <i data-lucide="check-square" class="w-6 h-6"></i> Interaktive Fortschritts-Checkliste
+                        </h2>
+                        <p class="text-gray-400 text-sm mt-1">Hake alle gelernten Themen ab, um deinen 15-NP-Prüfungsstatus zu überprüfen.</p>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <button onclick="resetChecklist()" class="px-3 py-1.5 rounded-lg bg-gray-800 hover:bg-gray-700 text-xs text-gray-300 border border-gray-700">
+                            Zurücksetzen
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="mt-6 space-y-2">
+                    <div class="flex justify-between text-xs font-semibold">
+                        <span class="text-gray-300">Vorbereitungsgrad:</span>
+                        <span class="text-solar-400 font-mono" id="checklist-percent">0%</span>
+                    </div>
+                    <div class="w-full bg-space-900 h-3 rounded-full overflow-hidden border border-gray-800">
+                        <div id="checklist-progress-fill" class="bg-gradient-to-r from-solar-500 to-amber-300 h-full w-0 transition-all duration-300"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Checklist Category Groups -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="checklist-items-container">
+                <!-- Rendered dynamically via JS -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-space-900 border-t border-gray-800 py-6 mt-12 text-center text-xs text-gray-500">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div>Astronomie Leistungskurs (Astro-LK) - 12. Klasse Gymnasium</div>
+            <div>Erstellt für 15 Notenpunkte in der Klausur</div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        
+        // Tab Switcher
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active', 'bg-solar-500/20', 'text-solar-300', 'border', 'border-solar-500/30');
+                btn.classList.add('text-gray-400', 'hover:text-gray-200');
+            });
+
+            document.getElementById(tabId).classList.remove('hidden');
+            const activeBtn = document.getElementById('btn-' + tabId);
+            if (activeBtn) {
+                activeBtn.classList.add('active', 'bg-solar-500/20', 'text-solar-300', 'border', 'border-solar-500/30');
+                activeBtn.classList.remove('text-gray-400');
+            }
+
+            // Re-render KaTeX in case formulas were hidden during initial load
+            if (window.renderMathInElement) {
+                renderMathInElement(document.getElementById(tabId));
+            }
+        }
+
+        function filterGlossary() {
+            const query = document.getElementById('glossary-search').value.toLowerCase();
+            const cards = document.querySelectorAll('.glossary-card');
+            cards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                card.style.display = text.includes(query) ? 'block' : 'none';
+            });
+        }
+
+        const flashcardsData = [
+            {
+                cat: "Grunddaten",
+                front: "Wie lautet die Solarkonstante $S_0$ und was gibt sie genau an?",
+                back: "<b>$S_0 = 1360\\text{ W/m}^2$</b>.<br>Sie gibt die Strahlungsleistung der Sonne pro $1\\text{ m}^2$ senkrechter Fläche im mittleren Abstand Erde-Sonne ($1\\text{ AE}$) außerhalb der Erdatmosphäre an."
+            },
+            {
+                cat: "Innere Sonne",
+                front: "Welche Temperaturbedingung gilt für den Beginn und die Effektivität des pp-Zyklus?",
+                back: "Voraussetzung: <b>$T > 5 \\cdot 10^6\\text{ K}$</b>.<br>Effektiv ab: <b>$T \\ge 10 \\cdot 10^6\\text{ K}$</b> (Kernplasma der Sonne $\\approx 15 \\cdot 10^6\\text{ K}$)."
+            },
+            {
+                cat: "Atmosphäre",
+                front: "Warum kommt es zum Phänomen der Randverdunklung bei der Photosphäre?",
+                back: "Beim Blick auf den Rand der Sonnenscheibe blicken wir unter flachem Winkel nur in höhere, kältere Schichten. Da die emittierte Strahlungsleistung proportional zu $T^4$ ist, erscheint der Rand dunkler."
+            },
+            {
+                cat: "Kernfusion",
+                front: "Was geschieht beim Salpeter-Prozess (3-$\\alpha$-Prozess) und läuft er auf der Sonne ab?",
+                back: "Drei Heliumkerne verschmelzen zu Kohlenstoff (${}^{12}\\text{C}$).<br>Bedingung: <b>$T \\ge 10^8\\text{ K}$</b>.<br><b>Er läuft AKTUELL NOCH NICHT auf der Sonne ab!</b>"
+            },
+            {
+                cat: "Aktivität",
+                front: "Wie lautet die Formel der Relativzahl $R$ für Sonnenflecken?",
+                back: "<b>$R = k \\cdot (10 \\cdot G + F)$</b><br>($G$ = Fleckengruppen, $F$ = Einzelflecken, $k$ = Beobachtungsfaktor)."
+            },
+            {
+                cat: "Strahlung",
+                front: "Wie unterscheidet sich die Laufzeit von EM-Strahlung und Teilchenstrahlung zur Erde?",
+                back: "EM-Strahlung ($c = 300.000\\text{ km/s}$): <b>$t \\approx 8{,}3\\text{ min}$</b>.<br>Teilchenstrahlung ($v \\approx 300\\text{ km/s}$): <b>$t \\approx 5{,}8\\text{ Tage}$</b>."
+            }
+        ];
+
+        let currentCardIndex = 0;
+        let cardStatus = JSON.parse(localStorage.getItem('astro_flashcards_status')) || Array(flashcardsData.length).fill(false);
+
+        function updateCardUI() {
+            const card = flashcardsData[currentCardIndex];
+            document.getElementById('card-category').innerText = card.cat;
+            document.getElementById('card-front-text').innerHTML = card.front;
+            document.getElementById('card-back-text').innerHTML = card.back;
+            
+            // Reset rotation
+            document.getElementById('flashcard-inner').classList.remove('rotate-y-180');
+
+            // Update learned counter
+            const learnedCount = cardStatus.filter(Boolean).length;
+            document.getElementById('cards-learned-count').innerText = `${learnedCount} / ${flashcardsData.length}`;
+
+            // Re-render KaTeX
+            if (window.renderMathInElement) {
+                renderMathInElement(document.getElementById('flashcard-inner'));
+            }
+            updateGlobalProgress();
+        }
+
+        function flipCard() {
+            document.getElementById('flashcard-inner').classList.toggle('rotate-y-180');
+        }
+
+        function nextCard() {
+            currentCardIndex = (currentCardIndex + 1) % flashcardsData.length;
+            updateCardUI();
+        }
+
+        function prevCard() {
+            currentCardIndex = (currentCardIndex - 1 + flashcardsData.length) % flashcardsData.length;
+            updateCardUI();
+        }
+
+        function markCardStatus(isLearned) {
+            cardStatus[currentCardIndex] = isLearned;
+            localStorage.setItem('astro_flashcards_status', JSON.stringify(cardStatus));
+            nextCard();
+        }
+
+        const quizQuestions = [
+            {
+                id: 0,
+                q: "1. Wie viel Prozent der eingestrahlten Sonnenenergie werden von der Erdatmosphäre absorbiert/gestreut?",
+                options: ["Ca. 10%", "Ca. 25%", "Ca. 50%", "Ca. 80%"],
+                correct: 2,
+                explain: "Ca. 50% der Solarkonstante ($1360\\text{ W/m}^2$) werden absorbiert. Auf der Erdoberfläche kommen nur ca. $700\\text{ W/m}^2$ an."
+            },
+            {
+                id: 1,
+                q: "2. Welcher Prozess ist die HAUPTENERGIEQUELLE der Sonne im aktuellen Hauptreihenstadium?",
+                options: ["C-N-O-Zyklus", "Proton-Proton-Zyklus (pp-Zyklus)", "Salpeter-Prozess (3-Alpha)", "Uran-Spaltung"],
+                correct: 1,
+                explain: "Der pp-Zyklus ist bei Kerntemperaturen von 15 Millionen Kelvin der dominierende Fusionsprozess der Sonne."
+            },
+            {
+                id: 2,
+                q: "3. Ein Beobachter zählt 3 Fleckengruppen und 14 Einzelflecken ($k=1$). Wie hoch ist die Relativzahl $R$?",
+                options: ["R = 17", "R = 44", "R = 143", "R = 314"],
+                correct: 1,
+                explain: "$R = k \cdot (10 \cdot G + F) = 1 \cdot (10 \cdot 3 + 14) = 30 + 14 = 44$."
+            },
+            {
+                id: 3,
+                q: "4. Welcher Temperaturbereich herrscht in der Korona der Sonne?",
+                options: ["5.785 K", "15.000 K", "4.300 K", "1 bis 2 Millionen Kelvin"],
+                correct: 3,
+                explain: "Die Korona weist trotz extrem geringer Dichte Temperaturen von $1 \cdot 10^6\text{ K}$ bis $2 \cdot 10^6\text{ K}$ auf."
+            },
+            {
+                id: 4,
+                q: "5. Wie viel Wasserstoff wandelt die Sonne pro Sekunde in Helium um?",
+                options: ["670 Millionen Tonnen", "4,2 Millionen Tonnen", "150.000 Tonnen", "1,989 x 10^30 Tonnen"],
+                correct: 0,
+                explain: "Die Sonne fusioniert $670 \times 10^6\text{ t}$ Wasserstoff zu $562{,}8 \times 10^6\text{ t}$ Helium. Die Differenz von $4{,}2 \times 10^6\text{ t}$ wird als reine Energie abgestrahlt."
+            }
+        ];
+
+        let quizUserAnswers = JSON.parse(localStorage.getItem('astro_quiz_answers')) || {};
+
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = '';
+
+            let score = 0;
+
+            quizQuestions.forEach((q, idx) => {
+                const isAnswered = quizUserAnswers.hasOwnProperty(idx);
+                const userAnswer = quizUserAnswers[idx];
+                if (isAnswered && userAnswer === q.correct) score++;
+
+                const qEl = document.createElement('div');
+                qEl.className = 'p-5 bg-space-800/80 rounded-2xl border border-gray-800 space-y-3';
+                
+                let optionsHTML = '';
+                q.options.forEach((opt, oIdx) => {
+                    let btnStyle = 'bg-space-900 border-gray-800 text-gray-300 hover:border-solar-500/40';
+                    if (isAnswered) {
+                        if (oIdx === q.correct) {
+                            btnStyle = 'bg-solar-500/20 border-solar-500 text-solar-300 font-bold';
+                        } else if (oIdx === userAnswer) {
+                            btnStyle = 'bg-red-500/20 border-red-500 text-red-300';
+                        }
+                    }
+
+                    optionsHTML += `
+                        <button onclick="selectQuizAnswer(${idx}, ${oIdx})" ${isAnswered ? 'disabled' : ''} class="w-full text-left p-3 rounded-xl border text-xs font-medium transition ${btnStyle}">
+                            ${opt}
+                        </button>
+                    `;
+                });
+
+                let explanationHTML = '';
+                if (isAnswered) {
+                    explanationHTML = `
+                        <div class="p-3 bg-space-900 rounded-xl border border-gray-700 text-xs text-gray-300 mt-2">
+                            <strong>Erklärung:</strong> ${q.explain}
+                        </div>
+                    `;
+                }
+
+                qEl.innerHTML = `
+                    <div class="text-sm font-bold text-white">${q.q}</div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">${optionsHTML}</div>
+                    ${explanationHTML}
+                `;
+
+                container.appendChild(qEl);
+            });
+
+            document.getElementById('quiz-score-display').innerText = `${score} / ${quizQuestions.length} Punkte`;
+            if (window.renderMathInElement) {
+                renderMathInElement(container);
+            }
+            updateGlobalProgress();
+        }
+
+        function selectQuizAnswer(qIdx, optionIdx) {
+            quizUserAnswers[qIdx] = optionIdx;
+            localStorage.setItem('astro_quiz_answers', JSON.stringify(quizUserAnswers));
+            renderQuiz();
+        }
+
+        const checklistCategories = [
+            {
+                title: "1. Physikalische Grunddaten",
+                items: [
+                    "Masse $M_\\odot = 1,989 \\times 10^{30}\\text{ kg} \\approx 330.000 m_E$",
+                    "Radius $R_\\odot = 6,96 \\times 10^8\\text{ m} \\approx 109 R_E$",
+                    "Solarkonstante $S_0 = 1360\\text{ W/m}^2$ & Leuchtkraft $L = 3,8 \\times 10^{26}\\text{ W}$",
+                    "Spektraltyp G2V, $T_\\text{eff} = 5785\\text{ K}$, Kerntemperatur $15 \\text{ Mio K}$",
+                    "Scheinbare Helligkeit $m_\\odot = -26{,}83^\\text{m}$, Abs. Helligkeit $M_v = +4{,}79^\\text{m}$"
+                ]
+            },
+            {
+                title: "2. Aufbau der Sonne",
+                items: [
+                    "Schichten der Inneren Sonne (Kern, Strahlungszone, Konvektionszone)",
+                    "Schichten der Sonnenatmosphäre (Photosphäre, Chromosphäre, Korona)",
+                    "Granulation (Konvektionszellen) & Randverdunklung herleiten können"
+                ]
+            },
+            {
+                title: "3. Energieprozesse & Kernfusion",
+                items: [
+                    "Proton-Proton-Zyklus (Schritt 1 bis 3 exakt mit Formeln & MeV/Joule)",
+                    "Massendefekt $E = \\Delta m c^2$ berechnen ($0{,}7\\%$ Massenverlust)",
+                    "CNO-Zyklus & Salpeter-Prozess Bedingungen unterscheiden"
+                ]
+            },
+            {
+                title: "4. Aktivität & Experimente",
+                items: [
+                    "Schülerexperiment $S_0$ (Erlenmeyerkolben, Ruß, $c_w$, Formel)",
+                    "Sonnenflecken & Relativzahl $R = k(10G + F)$ berechnen",
+                    "Protuberanzen (ruhend vs. aktiv) & Fackeln / Flares"
+                ]
+            }
+        ];
+
+        let checklistState = JSON.parse(localStorage.getItem('astro_checklist_state')) || {};
+
+        function renderChecklist() {
+            const container = document.getElementById('checklist-items-container');
+            container.innerHTML = '';
+
+            let totalItems = 0;
+            let checkedItems = 0;
+
+            checklistCategories.forEach((cat, cIdx) => {
+                const groupEl = document.createElement('div');
+                groupEl.className = 'p-5 bg-space-800/80 rounded-2xl border border-gray-800 space-y-3';
+
+                let itemsHTML = '';
+                cat.items.forEach((item, iIdx) => {
+                    const key = `${cIdx}_${iIdx}`;
+                    totalItems++;
+                    const isChecked = !!checklistState[key];
+                    if (isChecked) checkedItems++;
+
+                    itemsHTML += `
+                        <label class="flex items-start space-x-3 cursor-pointer text-xs text-gray-300 hover:text-white">
+                            <input type="checkbox" onchange="toggleChecklist('${key}')" ${isChecked ? 'checked' : ''} class="mt-0.5 rounded border-gray-700 bg-space-900 text-solar-500 focus:ring-solar-500">
+                            <span>${item}</span>
+                        </label>
+                    `;
+                });
+
+                groupEl.innerHTML = `
+                    <h3 class="text-sm font-bold text-solar-400 uppercase tracking-wider">${cat.title}</h3>
+                    <div class="space-y-2.5 pt-1">${itemsHTML}</div>
+                `;
+
+                container.appendChild(groupEl);
+            });
+
+            const percent = totalItems > 0 ? Math.round((checkedItems / totalItems) * 100) : 0;
+            document.getElementById('checklist-percent').innerText = `${percent}%`;
+            document.getElementById('checklist-progress-fill').style.width = `${percent}%`;
+
+            if (window.renderMathInElement) {
+                renderMathInElement(container);
+            }
+            updateGlobalProgress();
+        }
+
+        function toggleChecklist(key) {
+            checklistState[key] = !checklistState[key];
+            localStorage.setItem('astro_checklist_state', JSON.stringify(checklistState));
+            renderChecklist();
+        }
+
+        function resetChecklist() {
+            checklistState = {};
+            localStorage.removeItem('astro_checklist_state');
+            renderChecklist();
+        }
+
+        function updateGlobalProgress() {
+            // Flashcards progress (weight 30%)
+            const learnedCards = cardStatus.filter(Boolean).length;
+            const cardsPercent = (learnedCards / flashcardsData.length) * 100;
+
+            // Quiz progress (weight 30%)
+            const quizScore = Object.keys(quizUserAnswers).filter(idx => quizUserAnswers[idx] === quizQuestions[idx].correct).length;
+            const quizPercent = (quizScore / quizQuestions.length) * 100;
+
+            // Checklist progress (weight 40%)
+            let totalItems = 0;
+            let checkedItems = 0;
+            checklistCategories.forEach((cat, cIdx) => {
+                cat.items.forEach((_, iIdx) => {
+                    totalItems++;
+                    if (checklistState[`${cIdx}_${iIdx}`]) checkedItems++;
+                });
+            });
+            const checklistPercent = totalItems > 0 ? (checkedItems / totalItems) * 100 : 0;
+
+            const globalPercent = Math.round((cardsPercent * 0.3) + (quizPercent * 0.3) + (checklistPercent * 0.4));
+
+            document.getElementById('global-progress-percent').innerText = `${globalPercent}%`;
+            document.getElementById('global-progress-bar').style.width = `${globalPercent}%`;
+        }
+
+        window.onload = function() {
+            // Initialize Feather / Lucide icons
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+
+            // Initialize Card, Quiz & Checklist UI
+            updateCardUI();
+            renderQuiz();
+            renderChecklist();
+
+            // Default KaTeX rendering for the entire document
+            if (window.renderMathInElement) {
+                renderMathInElement(document.body, {
+                    delimiters: [
+                        {left: "$$", right: "$$", display: true},
+                        {left: "$", right: "$", display: false}
+                    ]
+                });
+            }
+        };
+    </script>
+</body>
+</html>
