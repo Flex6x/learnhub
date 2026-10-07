@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="de" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klausur-Guide: Gedichtinterpretation (Expressionismus & Großstadtlyrik)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            900: '#14532d',
+                        },
+                        accent: {
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+        .accordion-content.open { max-height: 1000px; }
+    </style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100 min-h-screen transition-colors duration-200 font-sans pb-12">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-brand-600 dark:text-brand-500">Deutsch GK 12 — Kompakt-Lernübersicht</span>
+                <h1 class="text-xl md:text-2xl font-bold">Gedichtinterpretation: Expressionismus & Großstadtlyrik</h1>
+            </div>
+            
+            <div class="flex items-center gap-3">
+                <button id="themeToggle" onclick="toggleTheme()" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition">
+                    <span id="themeIcon">🌙 Light Mode</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="max-w-6xl mx-auto px-4 flex border-t border-gray-200 dark:border-gray-700 overflow-x-auto">
+            <button onclick="switchTab('tab1')" id="tabBtn-tab1" class="tab-btn px-6 py-3 font-semibold text-sm border-b-2 border-brand-500 text-brand-600 dark:text-brand-500 flex items-center gap-2 whitespace-nowrap">
+                <span>📋</span> 1. Die 6 Arbeitsschritte
+            </button>
+            <button onclick="switchTab('tab2')" id="tabBtn-tab2" class="tab-btn px-6 py-3 font-semibold text-sm border-b-2 border-transparent text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 flex items-center gap-2 whitespace-nowrap">
+                <span>⚡</span> 2. Fachwissen-Crashkurs
+            </button>
+            <button onclick="switchTab('tab3')" id="tabBtn-tab3" class="tab-btn px-6 py-3 font-semibold text-sm border-b-2 border-transparent text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 flex items-center gap-2 whitespace-nowrap">
+                <span>✍️</span> 3. Fließtext-Anleitung & Bausteine
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 mt-6">
+
+        <!-- TAB 1: DIE 6 ARBEITSSCHRITTE -->
+        <section id="tab1" class="tab-content active space-y-4">
+            <div class="bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800 p-4 rounded-xl flex items-start gap-3">
+                <span class="text-xl">💡</span>
+                <p class="text-sm text-blue-900 dark:text-blue-200">
+                    <strong>Hinweis für die Klausur:</strong> Gehe in der Analyse systematisch vor. Form- und Sprachanalysen dürfen niemals isoliert stehen, sondern müssen <strong>immer direkt mit ihrer Wirkung/Funktion verknüpft werden!</strong>
+                </p>
+            </div>
+
+            <div class="grid gap-4">
+                <!-- Schritt 1 -->
+                <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 shadow-sm">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex gap-4 items-start">
+                            <input type="checkbox" class="mt-1 w-5 h-5 rounded accent-brand-500 cursor-pointer">
+                            <div>
+                                <span class="inline-block px-2.5 py-0.5 rounded text-xs font-bold bg-brand-100 text-brand-800 dark:bg-brand-900/60 dark:text-brand-300 mb-1">Schritt 1</span>
+                                <h3 class="text-lg font-bold">Thema & Kontext</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-3 grid md:grid-cols-2 gap-4 text-sm border-t border-gray-100 dark:border-gray-700/50 pt-3">
+                        <div>
+                            <span class="font-semibold text-gray-500 dark:text-gray-400 block mb-1">Konkretes Vorgehen in der Klausur:</span>
+                            <p class="text-gray-700 dark:text-gray-300">Bestimme das Kernthema (z. B. Einsamkeit in der Masse, Entfremdung, Zerstörung) und ordne es dem Expressionismus / der Großstadtlyrik zu.</p>
+                        </div>
+                        <div class="bg-gray-50 dark:bg-gray-700/30 p-3 rounded-lg">
+                            <span class="font-semibold text-brand-600 dark:text-brand-400 block mb-1">Wirkung / Ziel:</span>
+                            <p class="text-gray-600 dark:text-gray-300">Setzt den Deutungsrahmen für deine gesamte Interpretation.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Schritt 2 -->
+                <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 shadow-sm">
+                    <div class="flex gap-4 items-start">
+                        <input type="checkbox" class="mt-1 w-5 h-5 rounded accent-brand-500 cursor-pointer">
+                        <div class="w-full">
+                            <span class="inline-block px-2.5 py-0.5 rounded text-xs font-bold bg-brand-100 text-brand-800 dark:bg-brand-900/60 dark:text-brand-300 mb-1">Schritt 2</span>
+                            <h3 class="text-lg font-bold">Überschrift & Sprecher</h3>
+                        </div>
+                    </div>
+                    <div class="mt-3 grid md:grid-cols-2 gap-4 text-sm border-t border-gray-100 dark:border-gray-700/50 pt-3">
+                        <div>
+                            <span class="font-semibold text-gray-500 dark:text-gray-400 block mb-1">Konkretes Vorgehen in der Klausur:</span>
+                            <p class="text-gray-700 dark:text-gray-300">Analysiere Schlüsselwörter im Titel (z. B. <em>"Weltende"</em> = Zerfall; <em>"Städter"</em> = Individuum in Masse). Bestimme den lyrischen Sprecher (Ich-Perspektive vs. beobachtende Distanz).</p>
+                        </div>
+                        <div class="bg-gray-50 dark:bg-gray-700/30 p-3 rounded-lg">
+                            <span class="font-semibold text-brand-600 dark:text-brand-400 block mb-1">Wirkung / Ziel:</span>
+                            <p class="text-gray-600 dark:text-gray-300">Erkenntnis über die Haltung, Perspektive und Verunsicherung des Sprechers.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Schritt 3 -->
+                <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 shadow-sm border-l-4 border-l-amber-500">
+                    <div class="flex gap-4 items-start">
+                        <input type="checkbox" class="mt-1 w-5 h-5 rounded accent-brand-500 cursor-pointer">
+                        <div class="w-full">
+                            <span class="inline-block px-2.5 py-0.5 rounded text-xs font-bold bg-brand-100 text-brand-800 dark:bg-brand-900/60 dark:text-brand-300 mb-1">Schritt 3</span>
+                            <h3 class="text-lg font-bold">Formale Analyse (WICHTIG!)</h3>
+                        </div>
+                    </div>
+                    <div class="mt-3 grid md:grid-cols-2 gap-4 text-sm border-t border-gray-100 dark:border-gray-700/50 pt-3">
+                        <div>
+                            <span class="font-semibold text-gray-500 dark:text-gray-400 block mb-1">Konkretes Vorgehen in der Klausur:</span>
+                            <p class="text-gray-700 dark:text-gray-300">Zähle Strophen & Verse. Bestimme Reimschema (z. B. abab) und Metrum (z. B. Jambus).</p>
+                            <span class="inline-block mt-2 text-xs font-bold text-amber-600 dark:text-amber-400 uppercase">WICHTIG: Form IMMER mit Funktion verknüpfen!</span>
+                        </div>
+                        <div class="bg-amber-50 dark:bg-amber-950/30 p-3 rounded-lg border border-amber-200 dark:border-amber-800">
+                            <span class="font-semibold text-amber-800 dark:text-amber-300 block mb-1">Wirkung / Funktion:</span>
+                            <p class="text-gray-700 dark:text-gray-300">
+                                • <strong>Starre Form / Sonett:</strong> Enge, Fassade, Aufrechterhaltung der Ordnung, Korsett der Stadt.<br>
+                                • <strong>Freie Form / Abweichungen:</strong> Seelisches Chaos, Ausbruch, Kontrollverlust.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Schritt 4 -->
+                <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 shadow-sm">
+                    <div class="flex gap-4 items-start">
+                        <input type="checkbox" class="mt-1 w-5 h-5 rounded accent-brand-500 cursor-pointer">
+                        <div>
+                            <span class="inline-block px-2.5 py-0.5 rounded text-xs font-bold bg-brand-100 text-brand-800 dark:bg-brand-900/60 dark:text-brand-300 mb-1">Schritt 4</span>
+                            <h3 class="text-lg font-bold">Inhaltlicher Aufbau</h3>
+                        </div>
+                    </div>
+                    <div class="mt-3 grid md:grid-cols-2 gap-4 text-sm border-t border-gray-100 dark:border-gray-700/50 pt-3">
+                        <div>
+                            <span class="font-semibold text-gray-500 dark:text-gray-400 block mb-1">Konkretes Vorgehen in der Klausur:</span>
+                            <p class="text-gray-700 dark:text-gray-300">Gliedere das Gedicht Strophe für Strophe. Beschreibe kurz die inhaltliche Progression (z. B. Entwicklung vom Außenraum Straßenbahn $\rightarrow$ Innenraum Wohnung).</p>
+                        </div>
+                        <div class="bg-gray-50 dark:bg-gray-700/30 p-3 rounded-lg">
+                            <span class="font-semibold text-brand-600 dark:text-brand-400 block mb-1">Wirkung / Ziel:</span>
+                            <p class="text-gray-600 dark:text-gray-300">Zeigt den roten Faden der Handlung und den gedanklichen Verlauf.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Schritt 5 -->
+                <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 shadow-sm">
+                    <div class="flex gap-4 items-start">
+                        <input type="checkbox" class="mt-1 w-5 h-5 rounded accent-brand-500 cursor-pointer">
+                        <div>
+                            <span class="inline-block px-2.5 py-0.5 rounded text-xs font-bold bg-brand-100 text-brand-800 dark:bg-brand-900/60 dark:text-brand-300 mb-1">Schritt 5</span>
+                            <h3 class="text-lg font-bold">Sprache & Stilmittel</h3>
+                        </div>
+                    </div>
+                    <div class="mt-3 grid md:grid-cols-2 gap-4 text-sm border-t border-gray-100 dark:border-gray-700/50 pt-3">
+                        <div>
+                            <span class="font-semibold text-gray-500 dark:text-gray-400 block mb-1">Konkretes Vorgehen in der Klausur:</span>
+                            <p class="text-gray-700 dark:text-gray-300">Untersuche Wortfelder (Kälte, Stein, Zerstörung), Personifikationen, Metaphern und Vergleiche. Verknüpfe jedes Stilmittel direkt mit seiner Bedeutung.</p>
+                        </div>
+                        <div class="bg-gray-50 dark:bg-gray-700/30 p-3 rounded-lg">
+                            <span class="font-semibold text-brand-600 dark:text-brand-400 block mb-1">Wirkung / Ziel:</span>
+                            <p class="text-gray-600 dark:text-gray-300">Kernerkenntnis der Textwirkung und Verdeutlichung der Gefühle des Sprechers.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Schritt 6 -->
+                <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 shadow-sm">
+                    <div class="flex gap-4 items-start">
+                        <input type="checkbox" class="mt-1 w-5 h-5 rounded accent-brand-500 cursor-pointer">
+                        <div>
+                            <span class="inline-block px-2.5 py-0.5 rounded text-xs font-bold bg-brand-100 text-brand-800 dark:bg-brand-900/60 dark:text-brand-300 mb-1">Schritt 6</span>
+                            <h3 class="text-lg font-bold">Entwicklung & Fazit</h3>
+                        </div>
+                    </div>
+                    <div class="mt-3 grid md:grid-cols-2 gap-4 text-sm border-t border-gray-100 dark:border-gray-700/50 pt-3">
+                        <div>
+                            <span class="font-semibold text-gray-500 dark:text-gray-400 block mb-1">Konkretes Vorgehen in der Klausur:</span>
+                            <p class="text-gray-700 dark:text-gray-300">Wie verändert sich die Stimmung vom Anfang zum Ende? Gibt es eine Steigerung oder Zäsur (z. B. beim Sonett nach Strophe 2)?</p>
+                        </div>
+                        <div class="bg-gray-50 dark:bg-gray-700/30 p-3 rounded-lg">
+                            <span class="font-semibold text-brand-600 dark:text-brand-400 block mb-1">Wirkung / Ziel:</span>
+                            <p class="text-gray-600 dark:text-gray-300">Gesamtdeutung & Abrundung der Interpretation.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: FACHWISSEN CRASHKURS -->
+        <section id="tab2" class="tab-content space-y-6">
+            
+            <!-- Motive -->
+            <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-sm">
+                <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
+                    <span class="text-brand-500">📌</span> Zentrale Motive der Großstadtlyrik (1900–1920)
+                </h2>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="p-4 bg-gray-50 dark:bg-gray-700/40 rounded-lg">
+                        <h4 class="font-bold text-brand-600 dark:text-brand-400 mb-1">Anonymität & Entfremdung</h4>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">Menschen leben auf engstem Raum dicht beieinander, sind sich aber im Inneren völlig fremd und isoliert.</p>
+                    </div>
+                    <div class="p-4 bg-gray-50 dark:bg-gray-700/40 rounded-lg">
+                        <h4 class="font-bold text-brand-600 dark:text-brand-400 mb-1">Entindividualisierung</h4>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">Der Einzelne verliert seine Persönlichkeit und geht als gesichtsloses Wesen in der grauen Masse oder Mechanik der Stadt unter.</p>
+                    </div>
+                    <div class="p-4 bg-gray-50 dark:bg-gray-700/40 rounded-lg">
+                        <h4 class="font-bold text-brand-600 dark:text-brand-400 mb-1">Die Stadt als Dämon / Moloch</h4>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">Die Großstadt wird personifiziert als übermächtiges, verschlingendes und bedrohliches Wesen (z. B. "Der Gott der Stadt").</p>
+                    </div>
+                    <div class="p-4 bg-gray-50 dark:bg-gray-700/40 rounded-lg">
+                        <h4 class="font-bold text-brand-600 dark:text-brand-400 mb-1">Apokalypse & Weltuntergang</h4>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">Gefühl des Zerfalls alter gesellschaftlicher Ordnungen, Orientierungsverlust und der "Tod Gottes" (z. B. "Weltende").</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Formale Besonderheiten -->
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 shadow-sm">
+                    <h3 class="font-bold text-lg mb-2">🏛️ Das Sonett</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-300 mb-3">
+                        <strong>Aufbau:</strong> 14 Verse (2 Quartette + 2 Terzette). Oft mit gedanklicher Zäsur nach den Quartetten.
+                    </p>
+                    <div class="bg-gray-50 dark:bg-gray-700/40 p-3 rounded text-xs text-gray-700 dark:text-gray-300">
+                        <strong>Häufige Wirkung:</strong> Die starre Form bildet einen geordneten Kontrast zum inhaltlichen Chaos oder verstärkt das Gefühl des Gefangenseins in den Engpässen der Stadt.
+                    </div>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-5 shadow-sm">
+                    <h3 class="font-bold text-lg mb-2">🎵 Metrum</h3>
+                    <ul class="text-sm space-y-2 text-gray-600 dark:text-gray-300">
+                        <li>
+                            <strong class="text-gray-900 dark:text-gray-100">Jambus (v –):</strong> unbetont-betont $\rightarrow$ wirkt treibend, geordnet, manchmal monoton ratternd wie eine Maschine.
+                        </li>
+                        <li>
+                            <strong class="text-gray-900 dark:text-gray-100">Trochäus (– v):</strong> betont-unbetont $\rightarrow$ wirkt drängend, fallend, beklemmend oder marschierend.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Stilmittel Tabelle -->
+            <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-sm">
+                <h3 class="text-xl font-bold mb-4">🎨 Die 5 wichtigsten Stilmittel & Wirkung</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-sm">
+                        <thead>
+                            <tr class="border-b border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400">
+                                <th class="py-2 px-3">Stilmittel</th>
+                                <th class="py-2 px-3">Erklärung / Beispiel aus Quellen</th>
+                                <th class="py-2 px-3">Typische Wirkung im Expressionismus</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100 dark:divide-gray-700/50">
+                            <tr>
+                                <td class="py-3 px-3 font-bold text-brand-600 dark:text-brand-400">Metapher</td>
+                                <td class="py-3 px-3">Bildhafte Übertragung<br><em class="text-xs text-gray-500">"ein Meer von Feuer", "bleierner Schatten"</em></td>
+                                <td class="py-3 px-3">Erzeugt anschauliche, oft verstörende und beängstigende Inneneindrücke.</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-3 font-bold text-brand-600 dark:text-brand-400">Personifikation</td>
+                                <td class="py-3 px-3">Unbelebtes handelt menschlich<br><em class="text-xs text-gray-500">"Acht Fenster siehn sich an", "Die Städte knien um ihn"</em></td>
+                                <td class="py-3 px-3">Die Stadt wirkt mächtig, lebendig und bedrohlich, während der Mensch passiv und hilflos wird.</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-3 font-bold text-brand-600 dark:text-brand-400">Vergleich ("wie")</td>
+                                <td class="py-3 px-3">Verknüpfung zweier Bereiche<br><em class="text-xs text-gray-500">"In einander eingehakt wie Gewürgte", "wie in Särgen"</em></td>
+                                <td class="py-3 px-3">Verdeutlicht körperliche Enge, Qual, Ersticken und Ausweglosigkeit.</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-3 font-bold text-brand-600 dark:text-brand-400">Antithese / Kontrast</td>
+                                <td class="py-3 px-3">Gegenüberstellung von Gegensätzen<br><em class="text-xs text-gray-500">körperliche Nähe vs. seelische Distanz</em></td>
+                                <td class="py-3 px-3">Zeigt die innere Zerrissenheit und das Paradoxon des modernen Großstadtlebens.</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-3 font-bold text-brand-600 dark:text-brand-400">Wortfelder</td>
+                                <td class="py-3 px-3">Begriffe aus Kälte, Stein, Zerstörung<br><em class="text-xs text-gray-500">"Mauer", "Marmor", "Dunkelheit", "Kalt"</em></td>
+                                <td class="py-3 px-3">Verstärkt die düstere Grundstimmung und das Motiv der seelischen Versteinerung.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: FLIESSTEXT LEITFADEN -->
+        <section id="tab3" class="tab-content space-y-6">
+
+            <!-- Wichtige Regel -->
+            <div class="bg-amber-50 dark:bg-amber-950/40 border border-amber-300 dark:border-amber-800 p-4 rounded-xl flex items-start gap-3 text-amber-900 dark:text-amber-200">
+                <span class="text-2xl">⚠️</span>
+                <div>
+                    <h4 class="font-bold">Wichtige Klausur-Vorgabe:</h4>
+                    <p class="text-sm">In eurer Klausur wird <strong>keine gesonderte Einleitung und kein gesonderter Schluss</strong> gefordert! Der Fließtext beginnt <strong>direkt mit dem verpflichtenden Basissatz (TATTE-Formel)</strong>.</p>
+                </div>
+            </div>
+
+            <!-- TATTE Formel -->
+            <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-sm">
+                <h3 class="text-xl font-bold mb-3">🏷️ Der verpflichtende Basissatz (TATTE-Formel)</h3>
+                <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">Verbinde diese 5 Bausteine im allerersten Satz deines Fließtexts:</p>
+                
+                <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 text-center font-bold text-xs mb-6">
+                    <div class="bg-blue-100 text-blue-800 dark:bg-blue-900/60 dark:text-blue-300 p-2 rounded">T — Titel</div>
+                    <div class="bg-green-100 text-green-800 dark:bg-green-900/60 dark:text-green-300 p-2 rounded">A — Autor</div>
+                    <div class="bg-purple-100 text-purple-800 dark:bg-purple-900/60 dark:text-purple-300 p-2 rounded">T — Textsorte</div>
+                    <div class="bg-amber-100 text-amber-800 dark:bg-amber-900/60 dark:text-amber-300 p-2 rounded">T — Thema</div>
+                    <div class="bg-red-100 text-red-800 dark:bg-red-900/60 dark:text-red-300 p-2 rounded">E — Epoche/Zeit</div>
+                </div>
+
+                <!-- Muster Beispielsatz -->
+                <div class="bg-gray-50 dark:bg-gray-700/40 p-4 rounded-lg border border-gray-200 dark:border-gray-600">
+                    <span class="text-xs font-bold uppercase tracking-wider text-brand-600 dark:text-brand-400 block mb-1">Muster-Beispiel (Wolfenstein):</span>
+                    <p class="text-sm italic text-gray-800 dark:text-gray-200 leading-relaxed">
+                        »Das <span class="text-purple-600 dark:text-purple-400 font-semibold">expressionistische Gedicht</span> <span class="text-blue-600 dark:text-blue-400 font-semibold">'Städter'</span>, verfasst von <span class="text-green-600 dark:text-green-400 font-semibold">Alfred Wolfenstein</span> im Jahr <span class="text-red-600 dark:text-red-400 font-semibold">1914</span>, thematisiert <span class="text-amber-600 dark:text-amber-400 font-semibold">die seelische Isolation und Entfremdung des Menschen in der modernen Großstadt trotz extremer räumlicher Nähe</span>.«
+                    </p>
+                </div>
+            </div>
+
+            <!-- Fließtext Struktur Schritt-für-Schritt -->
+            <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-sm">
+                <h3 class="text-xl font-bold mb-4">📐 Schritt-für-Schritt-Aufbau im Fließtext</h3>
+                <ol class="relative border-l border-gray-200 dark:border-gray-700 ml-3 space-y-6 text-sm">
+                    <li class="ml-6">
+                        <span class="absolute flex items-center justify-center w-6 h-6 bg-brand-100 text-brand-800 dark:bg-brand-900 dark:text-brand-300 rounded-full -left-3 font-bold text-xs">1</span>
+                        <h4 class="font-bold text-base">Basissatz am Anfang (TATTE)</h4>
+                        <p class="text-gray-600 dark:text-gray-300">Direkter Einstieg ohne Umschweife mit allen bibliografischen Angaben und Kernthema.</p>
+                    </li>
+                    <li class="ml-6">
+                        <span class="absolute flex items-center justify-center w-6 h-6 bg-brand-100 text-brand-800 dark:bg-brand-900 dark:text-brand-300 rounded-full -left-3 font-bold text-xs">2</span>
+                        <h4 class="font-bold text-base">Titeldeutung & Sprecheranalyse</h4>
+                        <p class="text-gray-600 dark:text-gray-300">Erläutere kurz die Bedeutung des Titels und bestimme die Perspektive des lyrischen Sprechers (Ich-Sprecher vs. distanzierter Beobachter).</p>
+                    </li>
+                    <li class="ml-6">
+                        <span class="absolute flex items-center justify-center w-6 h-6 bg-brand-100 text-brand-800 dark:bg-brand-900 dark:text-brand-300 rounded-full -left-3 font-bold text-xs">3</span>
+                        <h4 class="font-bold text-base">Formale Kennzeichen & Wirkung</h4>
+                        <p class="text-gray-600 dark:text-gray-300">Nenne Strophenzahl, Reim und Metrum und begründe direkt deren Wirkung (z. B. <em>"Das starre Sonettkorsett spiegelt die äußere Verengung wider..."</em>).</p>
+                    </li>
+                    <li class="ml-6">
+                        <span class="absolute flex items-center justify-center w-6 h-6 bg-brand-100 text-brand-800 dark:bg-brand-900 dark:text-brand-300 rounded-full -left-3 font-bold text-xs">4</span>
+                        <h4 class="font-bold text-base">Strophenweise Feinanalyse (Hauptteil)</h4>
+                        <p class="text-gray-600 dark:text-gray-300">Gehe Strophe für Strophe vor. Analysiere den Inhalt und verknüpfe ihn direkt mit sprachlichen Mitteln und Zitaten (Verse in Klammern angeben!).</p>
+                    </li>
+                    <li class="ml-6">
+                        <span class="absolute flex items-center justify-center w-6 h-6 bg-brand-100 text-brand-800 dark:bg-brand-900 dark:text-brand-300 rounded-full -left-3 font-bold text-xs">5</span>
+                        <h4 class="font-bold text-base">Gesamtfazit / Entwicklung</h4>
+                        <p class="text-gray-600 dark:text-gray-300">Fasse am Ende kurz zusammen, wie sich die Stimmung verändert hat (z. B. Zunahme von Zerstörung oder Ausweglosigkeit).</p>
+                    </li>
+                </ol>
+            </div>
+
+            <!-- Formulierungshilfen -->
+            <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-sm">
+                <h3 class="text-xl font-bold mb-4">💬 Formulierungshilfen für eine hohe Note</h3>
+                <p class="text-xs text-gray-500 mb-3">Klicke auf einen Baustein, um ihn zu kopieren:</p>
+                <div class="grid md:grid-cols-2 gap-3 text-sm">
+                    <button onclick="copyText('Dies verdeutlicht die seelische Entfremdung des Individuums...')" class="text-left p-3 bg-gray-50 dark:bg-gray-700/40 hover:bg-brand-50 dark:hover:bg-brand-950/40 border border-gray-200 dark:border-gray-700 rounded-lg transition group">
+                        <span class="font-semibold text-brand-600 dark:text-brand-400 group-hover:underline">» Dies verdeutlicht die seelische Entfremdung... «</span>
+                    </button>
+                    <button onclick="copyText('Unterstrichen wird diese beklemmende Atmosphäre durch...')" class="text-left p-3 bg-gray-50 dark:bg-gray-700/40 hover:bg-brand-50 dark:hover:bg-brand-950/40 border border-gray-200 dark:border-gray-700 rounded-lg transition group">
+                        <span class="font-semibold text-brand-600 dark:text-brand-400 group-hover:underline">» Unterstrichen wird diese Atmosphäre durch... «</span>
+                    </button>
+                    <button onclick="copyText('Auf formaler Ebene spiegelt sich das seelische Chaos wider in...')" class="text-left p-3 bg-gray-50 dark:bg-gray-700/40 hover:bg-brand-50 dark:hover:bg-brand-950/40 border border-gray-200 dark:border-gray-700 rounded-lg transition group">
+                        <span class="font-semibold text-brand-600 dark:text-brand-400 group-hover:underline">» Auf formaler Ebene spiegelt sich das Chaos wider in... «</span>
+                    </button>
+                    <button onclick="copyText('Die Personifikation verdeutlicht die Passivität und Hilflosigkeit des Menschen...')" class="text-left p-3 bg-gray-50 dark:bg-gray-700/40 hover:bg-brand-50 dark:hover:bg-brand-950/40 border border-gray-200 dark:border-gray-700 rounded-lg transition group">
+                        <span class="font-semibold text-brand-600 dark:text-brand-400 group-hover:underline">» Die Personifikation verdeutlicht die Passivität... «</span>
+                    </button>
+                    <button onclick="copyText('Der Vergleich mit [...] bringt zum Ausdruck, dass...')" class="text-left p-3 bg-gray-50 dark:bg-gray-700/40 hover:bg-brand-50 dark:hover:bg-brand-950/40 border border-gray-200 dark:border-gray-700 rounded-lg transition group">
+                        <span class="font-semibold text-brand-600 dark:text-brand-400 group-hover:underline">» Der Vergleich mit [...] bringt zum Ausdruck, dass... «</span>
+                    </button>
+                    <button onclick="copyText('Das Wortfeld der Versteinerung symbolisiert die Unfähigkeit zur menschlichen Nähe...')" class="text-left p-3 bg-gray-50 dark:bg-gray-700/40 hover:bg-brand-50 dark:hover:bg-brand-950/40 border border-gray-200 dark:border-gray-700 rounded-lg transition group">
+                        <span class="font-semibold text-brand-600 dark:text-brand-400 group-hover:underline">» Das Wortfeld der Versteinerung symbolisiert... «</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- JavaScript für Interaktivität -->
+    <script>
+        // Tab Wechsel
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('border-brand-500', 'text-brand-600', 'dark:text-brand-500');
+                btn.classList.add('border-transparent', 'text-gray-500', 'dark:text-gray-400');
+            });
+
+            document.getElementById(tabId).classList.add('active');
+            const activeBtn = document.getElementById('tabBtn-' + tabId);
+            activeBtn.classList.remove('border-transparent', 'text-gray-500', 'dark:text-gray-400');
+            activeBtn.classList.add('border-brand-500', 'text-brand-600', 'dark:text-brand-500');
+        }
+
+        // Dark / Light Mode Toggle
+        function toggleTheme() {
+            const html = document.documentElement;
+            const themeIcon = document.getElementById('themeIcon');
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                themeIcon.textContent = '☀️ Dark Mode';
+            } else {
+                html.classList.add('dark');
+                themeIcon.textContent = '🌙 Light Mode';
+            }
+        }
+
+        // Text kopieren
+        function copyText(text) {
+            navigator.clipboard.writeText(text);
+            alert('Formulierungshilfe kopiert:\n"' + text + '"');
+        }
+    </script>
+</body>
+</html>
