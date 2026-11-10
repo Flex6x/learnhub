@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="de"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Genetik – Lernübersicht Bio 12</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#0f0e17;--sf:#1a1928;--cd:#22213a;--a1:#e8a838;--a2:#4ecdc4;--a3:#ff6b6b;--a4:#a8dadc;--tx:#fffffe;--mu:#a7a9be;--bd:rgba(255,255,255,.07);color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.6 "DM Sans",system-ui,sans-serif;min-height:100vh;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 20% 10%,rgba(232,168,56,.08),transparent 60%),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(78,205,196,.07),transparent 60%);pointer-events:none;z-index:0}
+header,.tabs,main,footer{position:relative;z-index:1;max-width:1100px;margin-left:auto;margin-right:auto;padding-left:24px;padding-right:24px}
+header{text-align:center;padding-top:48px;padding-bottom:32px;border-bottom:1px solid var(--bd)}
+.badge{display:inline-block;background:rgba(232,168,56,.15);border:1px solid rgba(232,168,56,.4);color:var(--a1);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:6px 16px;border-radius:20px;margin-bottom:20px}
+h1,h2,h3{font-family:"Playfair Display",Georgia,serif;line-height:1.2;margin:0 0 .5em}
+h1{font-size:clamp(32px,5vw,56px);font-weight:900;margin-bottom:12px;background:linear-gradient(135deg,#fffffe,var(--a1));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+header p{color:var(--mu);margin:0}
+h2{font-size:22px;font-weight:700;margin:1.6em 0 20px;display:flex;align-items:center;gap:12px}
+h2::after{content:"";flex:1;height:1px;background:var(--bd)}
+section>h2:first-child{margin-top:0}
+h3{font-size:17px;font-weight:700;color:var(--tx)}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:28px;margin-bottom:32px}
+.tab{padding:10px 18px;border-radius:10px;border:1px solid var(--bd);background:var(--sf);color:var(--mu);font:500 13px "DM Sans",sans-serif;cursor:pointer;transition:all .2s}
+.tab:hover{border-color:var(--a1);color:var(--a1)}
+.tab[aria-selected=true]{background:var(--a1);border-color:var(--a1);color:#0f0e17;font-weight:600}
+button:focus-visible,input:focus-visible,select:focus-visible,.fc:focus-visible{outline:3px solid var(--a2);outline-offset:2px}
+main{padding-bottom:16px}
+section{display:none}section.on{display:block;animation:fi .4s ease}
+@keyframes fi{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+p{color:var(--mu);font-size:14px;line-height:1.7;margin:.4em 0}b,strong{color:var(--tx)}
+.c{background:var(--cd);border:1px solid var(--bd);border-radius:16px;padding:24px;margin:14px 0;transition:transform .2s,border-color .2s}
+.c:hover{border-color:rgba(255,255,255,.15)}
+.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:14px 0}.g .c{margin:0}.g .c:hover{transform:translateY(-3px)}
+.card-icon{font-size:28px;margin-bottom:12px}
+.k{background:var(--cd);border:1px solid rgba(232,168,56,.3);border-left:4px solid var(--a1);border-radius:12px;padding:18px 22px;margin:14px 0;color:var(--mu);font-size:14px;line-height:1.7}
+.w{background:rgba(255,107,107,.1);border:1px solid rgba(255,107,107,.3);border-left:4px solid var(--a3);border-radius:12px;padding:14px 18px;margin:14px 0;color:var(--mu);font-size:13.5px}
+ul{list-style:none;padding:0;margin:.3em 0}
+ul li{position:relative;padding:6px 0 6px 22px;color:var(--mu);font-size:13.5px;line-height:1.55;border-bottom:1px solid var(--bd)}
+ul li:last-child{border-bottom:0}ul li::before{content:"→";position:absolute;left:0;color:var(--a1)}
+li ul{margin-top:4px}li ul li{border:0;padding-top:3px;padding-bottom:3px}
+ol{padding-left:1.4em;margin:.4em 0}ol li{color:var(--mu);font-size:13.5px;padding:5px 0 5px 6px}ol li::marker{color:var(--a1);font-weight:700}
+.tag{display:inline-block;background:rgba(232,168,56,.2);color:var(--a1);border-radius:6px;padding:3px 10px;font-weight:600;font-size:12px;letter-spacing:.5px}
+.tw{background:var(--cd);border:1px solid var(--bd);border-radius:16px;overflow-x:auto;margin:14px 0}
+table{border-collapse:collapse;width:100%;min-width:480px}
+th,td{padding:12px 18px;text-align:left;vertical-align:top;border-bottom:1px solid var(--bd);font-size:13.5px;color:var(--mu)}
+th{background:rgba(232,168,56,.1);color:var(--a1);font-weight:600}tr:last-child td{border-bottom:0}td:first-child{color:var(--tx);font-weight:500}
+.c .tw{background:var(--sf)}.pn td,.pn th{text-align:center;min-width:70px;border:1px solid var(--bd)}.pn td:first-child{font-weight:400}
+.btn{border:0;background:var(--a1);color:#0f0e17;border-radius:10px;padding:10px 18px;font:600 13px "DM Sans",sans-serif;cursor:pointer;transition:all .2s}
+.btn:hover{filter:brightness(1.1)}.btn.s{background:var(--sf);color:var(--mu);border:1px solid var(--bd)}.btn.s:hover{border-color:var(--a1);color:var(--a1)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:14px 0}
+.fc{min-height:220px;display:flex;align-items:center;justify-content:center;text-align:center;font:700 22px/1.4 "Playfair Display",Georgia,serif;cursor:pointer;background:var(--cd);border:1px solid rgba(232,168,56,.4);box-shadow:0 0 40px rgba(232,168,56,.08);border-radius:20px;padding:28px;user-select:none;transition:all .2s}
+.fc.back{background:linear-gradient(135deg,var(--a1),#f0c36a);color:#0f0e17;font:500 17px/1.6 "DM Sans",sans-serif}
+.bar{height:10px;background:var(--sf);border:1px solid var(--bd);border-radius:99px;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--a1),var(--a2));width:0;transition:width .3s}
+.opt{display:block;width:100%;text-align:left;margin:10px 0;border:1px solid var(--bd);background:var(--sf);color:var(--mu);border-radius:10px;padding:12px 16px;font:13.5px "DM Sans",sans-serif;cursor:pointer;transition:all .2s}
+.opt:hover:not(:disabled){border-color:var(--a1);color:var(--tx)}
+.opt.ok{background:rgba(78,205,196,.15);border-color:var(--a2);color:var(--a2)}.opt.no{background:rgba(255,107,107,.15);border-color:var(--a3);color:var(--a3)}
+.chk label{display:flex;gap:12px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--bd);cursor:pointer;color:var(--mu);font-size:14px}.chk label:last-child{border:0}.chk label:hover{color:var(--tx)}
+.chk input{width:20px;height:20px;margin-top:1px;accent-color:var(--a2)}
+select{font:inherit;padding:8px 10px;border-radius:8px;border:1px solid var(--bd);background:var(--sf);color:var(--tx)}
+small{color:var(--mu)}
+footer{text-align:center;padding-top:40px;padding-bottom:32px;color:var(--mu);font-size:12px;border-top:1px solid var(--bd);margin-top:60px}footer span{color:var(--a1)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<header><div class="badge">Biologie · Klasse 12 · Klausur</div><h1>Genetik</h1><p>Alles, was du für die Klausur brauchst, kompakt und interaktiv</p></header>
+<div class="tabs" role="tablist" id="nav"></div>
+<main>
+
+<section id="mut"><h2>Mutationen</h2>
+<div class="k"><b>Mutation:</b> sprunghaft (plötzlich) auftretende, erbliche, zufällige und ungerichtete Veränderung des Erbguts (Genotyp), die zu Merkmalsänderungen (Phänotyp) führen kann. Mutationen können Erbkrankheiten bzw. Stoffwechselstörungen auslösen.</div>
+<div class="g">
+<div class="c"><div class="card-icon">🔤</div><h3>Genmutation</h3><p>Veränderung einzelner Gene (Basenabfolge eines Gens).</p><ul><li><b>Punktmutation:</b> Austausch einer einzelnen Base</li><li><b>Rastermutation:</b> zusätzliches Nukleotid eingeschoben oder Nukleotid entfällt</li></ul></div>
+<div class="c"><div class="card-icon">🔢</div><h3>Genommutation</h3><p>Zahlenmäßige Veränderung einzelner Chromosomen oder des gesamten Chromosomensatzes.</p><ul><li><b>Euploidie:</b> gesamter Satz verändert – Haploidie (n), Triploidie (3n), Hexaploidie (6n) …</li><li><b>Aneuploidie:</b> einzelne Chromosomen verändert<ul><li><b>Monosomie</b> (1 Chromosom fehlt), z. B. Turner-Syndrom (XO)</li><li><b>Trisomie</b> (1 Chromosom zu viel), z. B. Trisomie 21 = Down-Syndrom</li></ul></li></ul></div>
+<div class="c"><div class="card-icon">🧩</div><h3>Chromosomenmutation</h3><p>Strukturelle Veränderung der Chromosomen.</p><ul><li><b>Deletion:</b> Verlust eines Abschnitts</li><li><b>Duplikation:</b> Verdopplung eines Abschnitts</li><li><b>Translokation:</b> Verlagerung eines Abschnitts auf ein anderes Chromosom</li><li><b>Inversion:</b> Drehung eines Abschnitts um 180°</li></ul></div></div>
+<div class="k"><b>Merkhilfe:</b> Gen = Basen · Genom = Anzahl · Chromosom = Struktur.</div></section>
+
+<section id="met"><h2>Arbeitstechniken der Humangenetik</h2>
+<div class="g">
+<div class="c"><div class="card-icon">👶</div><h3>Pränatale Diagnostik</h3><p>Vorgeburtliche Diagnostik (Verfahren zur Aufklärung von Erbkrankheiten vor der Geburt).</p></div>
+<div class="c"><div class="card-icon">🧫</div><h3>Karyogramm</h3><p>Geordnete Darstellung aller Chromosomen. Zeigt Genom- und Chromosomenmutationen.</p></div>
+<div class="c"><div class="card-icon">🌳</div><h3>Stammbaumanalyse</h3><p>Nur bei <b>Genmutationen</b> anwendbar. Ziele: Erbganganalyse und Vorhersage von Wahrscheinlichkeiten für Erbkrankheiten → genetische Beratung.</p></div>
+<div class="c"><div class="card-icon">🔗</div><h3>Hybridisierung</h3><p>Anlagerung komplementärer Einzelstränge (z. B. Primer an DNA).</p></div>
+<div class="c"><div class="card-icon">🔁</div><h3>PCR</h3><p>Gezielte Vervielfältigung von DNA-Abschnitten (eigener Tab).</p></div>
+<div class="c"><div class="card-icon">🧬</div><h3>DNA-Sequenzierung</h3><p>Bestimmung der Basenabfolge.</p></div>
+<div class="c"><div class="card-icon">✂️</div><h3>Gentechnik</h3><p>Weiterführend: Stammzellforschung, Gentherapie.</p></div></div>
+<div class="k">Anwendungsgebiete der PCR: Forensik (Täteridentifizierung), Medizin (Erregernachweis), Paläogenetik (z. B. Ötzi).</div></section>
+
+<section id="stb"><h2>Stammbaumanalyse</h2>
+<div class="k">Alle Genmutationen folgen der <b>dominant-rezessiven Vererbung</b>. Das krankheits- bzw. merkmalsbestimmende Allel benennt den Erbgang.</div>
+<div class="c"><h3>Erbgänge</h3><ul><li>autosomal dominant</li><li>autosomal rezessiv</li><li>X-chromosomal dominant</li><li>X-chromosomal rezessiv</li><li>(Y-chromosomal – im Skript „5 mögliche“, aufgezählt sind 4; Y-chromosomal ergänzt: nur Väter→Söhne)</li></ul></div>
+<div class="c"><h3>Vorgehen bei der Auswertung</h3><ul><li>Ausschlussprinzip anwenden</li><li>Allen Personen einen Genotyp zuweisen</li><li>Schlüsselstellen als Beleg des Erbgangs nutzen</li><li>Alle Genotypen müssen am Ende stimmen</li><li>Kleine Stammbäume können mehrdeutig sein</li><li>Indizien zum Beleg des Erbgangs angeben</li></ul></div>
+<h2>Beispiel 1: Polydaktylie (LB S. 40 Nr. 7)</h2>
+<div class="c"><p><span class="tag">autosomal-dominant</span> (P = Polydaktylie, p = gesund)</p>
+<p><b>Begründung:</b> Eltern 6 und 7 sind beide merkmalstragend, haben aber ein gesundes Kind (10). Das Merkmal kann nicht rezessiv sein. Beide Geschlechter sind gleich betroffen, also autosomal.</p>
+<ul><li>Person 1 (♀ gesund): pp · Person 2 (♂ krank): Pp (Kind 3 gesund)</li><li>Personen 3, 4, 8, 9, 10, 12, 13, 16: pp</li><li>Personen 5, 6, 7: Pp (6 heterozygot, da Mutter 1 pp ist und nur p vererbt)</li><li>Person 11 (krank): PP oder Pp</li><li>Eltern 6 × 7: <b>75 %</b> krankes Kind (25 % PP, 50 % Pp, 25 % pp)</li></ul></div>
+<h2>Beispiel 2: Bluterkrankheit im Adelsstammbaum (LB S. 41 Nr. 10)</h2>
+<div class="c"><p><span class="tag">X-chromosomal-rezessiv</span> (X<sup>H</sup> gesund, X<sup>h</sup> Bluterkrankheit)</p>
+<p><b>Begründung:</b> Ausschließlich Männer sind betroffen. Vererbung über gesunde Mütter (Konduktorinnen/Überträgerinnen).</p>
+<ul><li>Irene von Hessen (Konduktorin): X<sup>H</sup>X<sup>h</sup></li><li>Prinz Heinrich von Preußen (gesund): X<sup>H</sup>Y</li><li>Sohn Waldemar (bluterkrank): X<sup>h</sup>Y · Sohn Sigismund (gesund): X<sup>H</sup>Y · Sohn Heinrich (bluterkrank): X<sup>h</sup>Y</li></ul></div></section>
+
+<section id="pcr"><h2>Polymerase-Kettenreaktion (PCR)</h2>
+<div class="k"><b>Definition:</b> künstliches, enzymabhängiges Verfahren zur gezielten Vervielfältigung bestimmter Gensequenzen innerhalb einer DNA. <b>Ziel:</b> aus einem oder wenigen DNA-Molekülen eine große, genetisch identische Menge herstellen.</div>
+<div class="c"><h3>Ausgangsstoffe</h3><ul><li>zu vervielfältigender DNA-Abschnitt</li><li>2 Primer (kurze einzelsträngige DNA-Stücke als Startpunkt)</li><li>4 Nucleotide (dATP, dTTP, dCTP, dGTP)</li><li>hitzebeständige Taq-Polymerase</li></ul><p>Alles im Puffer im Reagenzgefäß, dann in den Thermocycler.</p></div>
+<div class="g">
+<div class="c"><div class="card-icon">🔥</div><h3>1. Denaturierung</h3><p>ca. <b>95 °C</b>. DNA trennt sich in 2 Einzelstränge (Wasserstoffbrücken lösen sich).</p></div>
+<div class="c"><div class="card-icon">❄️</div><h3>2. Hybridisierung</h3><p><b>45–65 °C</b> (primerabhängig). Primer docken an die Einzelstränge an (3’-Enden).</p></div>
+<div class="c"><div class="card-icon">⚙️</div><h3>3. Elongation</h3><p>ca. <b>72 °C</b>. Taq-Polymerase ergänzt in 5’→3’-Richtung komplementäre Nucleotide.</p></div></div>
+<div class="k">Pro Zyklus verdoppelt sich die DNA-Menge. Nach ca. 30 Zyklen entstehen ca. 1 Milliarde Kopien.</div>
+<h2>Vergleich: Replikation vs. PCR</h2>
+<p><b>Gemeinsam:</b> Syntheserichtung 5’→3’, Primer als Start, dNTPs als Bausteine, komplementäre Basenpaarung.</p>
+<div class="tw"><table><tr><th>Kriterium</th><th>DNA-Replikation (in vivo)</th><th>PCR (in vitro)</th></tr><tr><td>Ort</td><td>lebende Zelle</td><td>Reagenzgefäß / Thermocycler</td></tr><tr><td>Strangtrennung</td><td>enzymatisch (Helicase)</td><td>thermisch (ca. 95 °C)</td></tr><tr><td>Polymerase</td><td>zelleigene DNA-Polymerase</td><td>hitzebeständige Taq-Polymerase</td></tr><tr><td>Primer / Umfang</td><td>RNA-Primer / gesamtes Genom</td><td>DNA-Primer / nur Zielabschnitt</td></tr></table></div>
+<h2>Aufgabe Ötzi (LB S. 28)</h2>
+<div class="c"><p>Wie viele Zyklen für 500.000 Moleküle? 2<sup>n</sup> ≥ 500.000 → n = log₂(500.000) ≈ 18,93 → mindestens <b>19 Zyklen</b> (2¹⁹ = 524.288).</p><p>Zeit bei 2 Min./Zyklus: 19 × 2 = <b>38 Minuten</b>.</p></div></section>
+
+<section id="prx"><h2>Praxis-Tipps: Die 3 Kernmethoden</h2>
+<h2>Kreuzungsschema nach Mendel</h2>
+<div class="c"><ol><li>Genotypen der Eltern (P) aufschreiben, Allele festlegen (Großbuchstabe = dominant).</li><li>Gameten bilden: jeder Elter gibt pro Keimzelle <b>ein</b> Allel weiter.</li><li>Kombinationsquadrat zeichnen, Gameten an die Ränder, Felder ausfüllen (F1).</li><li>Auswerten: Genotyp- und Phänotypverhältnis, Wahrscheinlichkeiten in %.</li></ol>
+<ul><li><b>Uniformitätsregel:</b> AA × aa → alle F1 Aa, einheitlich</li><li><b>Spaltungsregel:</b> Aa × Aa → Genotyp 1:2:1, Phänotyp 3:1</li><li><b>Unabhängigkeitsregel</b> (nichtgekoppelt): Dihybrid AaBb × AaBb → Phänotyp 9:3:3:1</li></ul></div>
+<div class="c"><h3>Kreuzungsschema-Rechner zum Üben</h3>
+<div class="row"><select id="pm" aria-label="Erbgang"><option value="a">autosomal (A/a)</option><option value="x">X-chromosomal (H/h)</option></select><select id="p1" aria-label="Elter 1"></select><span>×</span><select id="p2" aria-label="Elter 2"></select></div>
+<div id="pout" class="tw"></div></div>
+<h2>Karyogramm</h2>
+<div class="c"><ul><li>Mensch: 46 Chromosomen = 22 Autosomenpaare + 2 Gonosomen (XX ♀, XY ♂).</li><li>Chromosomen werden nach Größe, Lage des Zentromers und Bandenmuster geordnet.</li><li>Erst <b>zählen</b> (46?), dann Geschlechtschromosomen, dann Paar für Paar prüfen.</li><li>3 statt 2 Chromosomen = Trisomie (z. B. 47, XX, +21 = Down-Syndrom). Nur 1 = Monosomie (z. B. 45, X = Turner).</li><li>Strukturelle Fehler (Deletion, Translokation …) erkennt man an Länge, Form und Bandenmuster.</li><li>Genmutationen sind im Karyogramm <b>nicht</b> sichtbar.</li></ul></div>
+<h2>Stammbaumanalyse: Schlüsselstellen</h2>
+<div class="tw"><table><tr><th>Beobachtung</th><th>Schluss</th></tr><tr><td>Gesunde Eltern haben ein krankes Kind</td><td>rezessiv (Eltern heterozygot)</td></tr><tr><td>Kranke Eltern haben ein gesundes Kind</td><td>dominant (Eltern heterozygot)</td></tr><tr><td>Merkmal in jeder Generation</td><td>spricht für dominant</td></tr><tr><td>Generationen werden übersprungen</td><td>spricht für rezessiv</td></tr><tr><td>Kranke Tochter, aber gesunder Vater</td><td>X-rezessiv ausgeschlossen → autosomal-rezessiv</td></tr><tr><td>Fast nur Männer krank, über gesunde Mütter vererbt</td><td>X-rezessiv</td></tr><tr><td>Kranke Mutter, alle Söhne krank</td><td>X-rezessiv wahrscheinlich</td></tr></table></div>
+<div class="w">Ergänzende Faustregeln, nicht alle stehen wörtlich im Skript. Immer am Ende alle Genotypen auf Widersprüche prüfen. Symbolik: □ Mann, ○ Frau, ausgefüllt = merkmalstragend (siehe Klasse 10).</div></section>
+
+<section id="kar"><h2>Karteikarten</h2><p id="kinfo" class="k"></p><div class="fc" id="card" tabindex="0" role="button" aria-label="Karte umdrehen"></div>
+<div class="row"><button class="btn s" id="kp">Zurück</button><button class="btn s" id="kf">Umdrehen</button><button class="btn s" id="kn">Weiter</button><button class="btn" id="kok">Gewusst</button><button class="btn s" id="kno">Nochmal</button><button class="btn s" id="ksh">Mischen</button></div></section>
+
+<section id="qz"><h2>Quiz</h2><div id="qbox"></div></section>
+
+<section id="cl"><h2>Fortschritt</h2><div class="bar"><i id="pb"></i></div><p id="pt" class="k"></p><div class="c chk" id="cbox"></div><button class="btn s" id="crs">Zurücksetzen</button></section>
+
+<section id="tip"><h2>Lerntipps für die Klausur</h2>
+<div class="g">
+<div class="c"><div class="card-icon">🌙</div><h3>Heute Abend</h3><ul><li>Karteikarten, bis alle „Gewusst“ sind</li><li>Je einen Stammbaum und ein Kreuzungsschema ohne Hilfe lösen</li><li>Chromosomen- und PCR-Zahlen wiederholen (95 / 45–65 / 72 °C)</li><li>Nicht bis spät in die Nacht: Schlaf hilft dem Gedächtnis</li></ul></div>
+<div class="c"><div class="card-icon">🎯</div><h3>Aktiv lernen</h3><ul><li>Laut erklären, als würdest du es einem Freund beibringen</li><li>Antwort zuerst aus dem Kopf, dann prüfen</li><li>Schwache Themen zuerst, nicht nur das Vertraute</li><li>Mutationsübersicht aus dem Gedächtnis aufzeichnen</li></ul></div>
+<div class="c"><div class="card-icon">📝</div><h3>In der Klausur</h3><ul><li>Aufgabe und Operator genau lesen (nennen, beschreiben, erklären, begründen, auswerten)</li><li>Erst die leichten Aufgaben, Zeit pro Punkt einteilen</li><li>Fachbegriffe sauber verwenden (Genotyp, Phänotyp, heterozygot …)</li><li>Bei Stammbäumen: Genotypen eintragen und Schlüsselstelle benennen</li></ul></div>
+<div class="c"><div class="card-icon">⚠️</div><h3>Typische Fehler</h3><ul><li>Gen-, Genom- und Chromosomenmutation verwechseln</li><li>Beim Erbgang nur „dominant“ schreiben, ohne Begründung</li><li>Gameten vergessen oder Allele vertauschen</li><li>Bei Rechnungen Einheit und Rundung vergessen (19 Zyklen, nicht 18,93)</li></ul></div></div></section>
+</main>
+<footer>Viel Erfolg bei der Klausur <span>🧬</span></footer>
+<script>
+const $=s=>document.querySelector(s),T=[["mut","🧬 Mutationen"],["met","🔬 Methoden"],["stb","🌳 Stammbaum"],["pcr","⚗️ PCR"],["prx","✏️ Praxis"],["kar","🃏 Karteikarten"],["qz","🧠 Quiz"],["cl","✅ Fortschritt"],["tip","💡 Lerntipps"]];
+const nav=$("#nav");
+T.forEach(([id,l],i)=>{const b=document.createElement("button");b.textContent=l;b.className="tab";b.setAttribute("role","tab");b.dataset.t=id;b.onclick=()=>show(id);nav.append(b)});
+function show(id){document.querySelectorAll("section").forEach(s=>s.classList.toggle("on",s.id===id));nav.querySelectorAll("button").forEach(b=>b.setAttribute("aria-selected",b.dataset.t===id));scrollTo(0,0)}
+show("mut");
+/* Karteikarten */
+let C=[["Definition Mutation?","Sprunghaft, erblich, zufällig und ungerichtet auftretende Veränderung des Erbguts (Genotyp), die den Phänotyp verändern kann."],["Genmutation: Unterarten?","Punktmutation (Austausch einer Base) und Rastermutation (Nukleotid eingeschoben oder entfallen)."],["Genommutation?","Zahlenmäßige Veränderung einzelner Chromosomen oder des ganzen Satzes."],["Euploidie vs. Aneuploidie?","Euploidie: ganzer Satz verändert (n, 3n, 6n). Aneuploidie: einzelne Chromosomen (Mono-/Trisomie)."],["Monosomie, Beispiel?","1 Chromosom fehlt, z. B. Turner-Syndrom (X0)."],["Trisomie, Beispiel?","1 Chromosom zu viel, z. B. Trisomie 21 (Down-Syndrom)."],["Chromosomenmutation?","Strukturelle Veränderung: Deletion, Duplikation, Translokation, Inversion."],["Deletion / Duplikation?","Verlust / Verdopplung eines Chromosomenabschnitts."],["Translokation / Inversion?","Verlagerung auf ein anderes Chromosom / Drehung eines Abschnitts um 180°."],["Arbeitstechniken der Humangenetik?","Karyogramme, Stammbaumanalyse, Hybridisierung, PCR, DNA-Sequenzierung, Gentechnik."],["Wofür Stammbaumanalyse?","Erbganganalyse und Vorhersage von Wahrscheinlichkeiten (genetische Beratung). Nur bei Genmutationen."],["Welche Erbgänge gibt es?","Autosomal dominant/rezessiv, X-chromosomal dominant/rezessiv."],["Vorgehen Stammbaum?","Ausschlussprinzip, allen Personen Genotypen zuweisen, Schlüsselstellen finden, alle Genotypen prüfen."],["Gesunde Eltern, krankes Kind?","Rezessiver Erbgang, Eltern heterozygot."],["Kranke Eltern, gesundes Kind?","Dominanter Erbgang, Eltern heterozygot."],["Bluterkrankheit: Erbgang?","X-chromosomal-rezessiv. Nur Männer krank, Übertragung über Konduktorinnen (X<sup>H</sup>X<sup>h</sup>)."],["Polydaktylie: Erbgang?","Autosomal-dominant."],["PCR: Definition?","Enzymabhängige Vervielfältigung bestimmter DNA-Abschnitte im Reagenzgefäß."],["PCR: Ausgangsstoffe?","Ziel-DNA, 2 Primer, 4 Nucleotide, Taq-Polymerase, Puffer."],["PCR: Phase 1?","Denaturierung, ca. 95 °C, Strangtrennung (H-Brücken lösen)."],["PCR: Phase 2?","Hybridisierung, 45–65 °C, Primer lagern sich an."],["PCR: Phase 3?","Elongation, ca. 72 °C, Taq-Polymerase synthetisiert 5’→3’."],["Replikation vs. PCR: Strangtrennung?","Helicase (Zelle) vs. Hitze 95 °C (PCR)."],["Gemeinsamkeiten Replikation/PCR?","5’→3’, Primer, dNTPs, komplementäre Basenpaarung."],["Zyklen für 500.000 Moleküle?","2ⁿ ≥ 500.000 → n = 19 (2¹⁹ = 524.288), also 38 Minuten bei 2 Min./Zyklus."]];
+let ci=0,fl=false,kn=new Set;
+function rc(){const c=$("#card"),[q,a]=C[ci];c.className="fc"+(fl?" back":"");c.innerHTML=fl?a:q;$("#kinfo").textContent=`Karte ${ci+1} von ${C.length} · gewusst: ${kn.size}`}
+const mv=d=>{ci=(ci+d+C.length)%C.length;fl=false;rc()};
+$("#card").onclick=$("#kf").onclick=()=>{fl=!fl;rc()};$("#card").onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();fl=!fl;rc()}};
+$("#kp").onclick=()=>mv(-1);$("#kn").onclick=()=>mv(1);
+$("#kok").onclick=()=>{kn.add(C[ci][0]);mv(1)};$("#kno").onclick=()=>{kn.delete(C[ci][0]);mv(1)};
+$("#ksh").onclick=()=>{C.sort(()=>Math.random()-.5);ci=0;fl=false;rc()};rc();
+/* Quiz */
+const Q=[["Welche Aussage definiert eine Mutation korrekt?",["Gezielte, ungerichtete Anpassung an die Umwelt","Zufällige, erbliche Veränderung des Erbguts","Nur Veränderung des Phänotyps ohne Erbgut","Immer schädliche Veränderung"],1,"Mutationen sind sprunghaft, erblich, zufällig und ungerichtet."],["Austausch einer einzelnen Base ist …",["Rastermutation","Punktmutation","Deletion","Aneuploidie"],1,"Punktmutation (Genmutation)."],["Trisomie 21 ist eine …",["Genmutation","Chromosomenmutation","Genommutation (Aneuploidie)","Rastermutation"],2,"Ein Chromosom ist zu viel, die Zahl ist verändert."],["Turner-Syndrom (X0) ist eine …",["Monosomie","Trisomie","Triploidie","Inversion"],0,"Ein Geschlechtschromosom fehlt."],["Drehung eines Chromosomenabschnitts um 180° heißt …",["Translokation","Duplikation","Deletion","Inversion"],3,"Inversion."],["Welche Methode ist nur bei Genmutationen anwendbar?",["Karyogramm","Stammbaumanalyse","PCR","Sequenzierung"],1,"So steht es im Skript."],["Gesunde Eltern haben ein krankes Kind. Erbgang?",["dominant","rezessiv","unmöglich","nur X-dominant"],1,"Das Merkmal blieb bei den Eltern verdeckt, also rezessiv."],["Bluterkrankheit tritt fast nur bei Männern auf, weil …",["Y-Chromosom das Allel trägt","das Allel X-chromosomal rezessiv ist","sie autosomal dominant ist","Frauen nie Träger sind"],1,"Männer haben nur ein X, Frauen können Konduktorinnen sein."],["Bei welcher Temperatur läuft die Denaturierung in der PCR ab?",["ca. 72 °C","45–65 °C","ca. 95 °C","ca. 37 °C"],2,"95 °C trennt die Stränge."],["Was passiert bei der Elongation?",["Primer binden","Taq-Polymerase ergänzt Nucleotide (5’→3’)","Helicase trennt Stränge","DNA wird abgebaut"],1,"Bei ca. 72 °C."],["Wie viele PCR-Zyklen braucht man mind. für 500.000 Moleküle?",["18","19","20","25"],1,"2¹⁹ = 524.288, 2¹⁸ = 262.144."],["Wodurch unterscheidet sich die Replikation von der PCR?",["Replikation läuft ohne Primer","Strangtrennung per Helicase statt Hitze","PCR läuft in der Zelle","Replikation nutzt kein dNTP"],1,"Helicase (in vivo) vs. Hitze (in vitro)."],["Aa × Aa: Welches Phänotypverhältnis ist zu erwarten?",["1:1","3:1","1:2:1","9:3:3:1"],1,"Spaltungsregel: 3 dominant : 1 rezessiv."]];
+let qi=0,qs=0;
+function rq(){const b=$("#qbox");if(qi>=Q.length){b.innerHTML=`<div class="c"><h3>Ergebnis: ${qs} von ${Q.length}</h3><p>${qs>=Q.length*.8?"Stark! Wiederhole nur noch die Fehler.":"Geh die falschen Themen nochmal in den Tabs durch."}</p><button class="btn" id="qr">Neu starten</button></div>`;$("#qr").onclick=()=>{qi=qs=0;rq()};return}
+const [q,o,c,e]=Q[qi];b.innerHTML=`<div class="bar"><i style="width:${qi/Q.length*100}%"></i></div><div class="c"><p><b>Frage ${qi+1}/${Q.length}:</b> ${q}</p>${o.map((t,i)=>`<button class="opt" data-i="${i}">${t}</button>`).join("")}<div id="fb"></div></div>`;
+b.querySelectorAll(".opt").forEach(x=>x.onclick=()=>{const i=+x.dataset.i;b.querySelectorAll(".opt").forEach(y=>{y.disabled=true;if(+y.dataset.i===c)y.classList.add("ok")});if(i===c)qs++;else x.classList.add("no");$("#fb").innerHTML=`<div class="k">${i===c?"Richtig. ":"Leider falsch. "}${e}</div><button class="btn" id="qn">Weiter</button>`;$("#qn").onclick=()=>{qi++;rq()}})}
+rq();
+/* Checkliste */
+const L=["Gen-, Genom- und Chromosomenmutation unterscheiden","Alle Mutationsarten mit Beispielen nennen","Mutation definieren","Arbeitstechniken der Humangenetik aufzählen","Karyogramm lesen und auswerten","Erbgänge benennen und begründen","Stammbaum: Genotypen zuweisen","Polydaktylie-Beispiel erklären","Bluterkrankheit-Beispiel erklären","Kreuzungsschema mit Gameten zeichnen","Mendel-Regeln anwenden (1:2:1, 3:1, 9:3:3:1)","PCR: Ausgangsstoffe nennen","PCR: 3 Phasen mit Temperaturen","Replikation und PCR vergleichen","Zyklen und Zeit bei PCR berechnen","PCR-Anwendungsgebiete nennen"];
+let ck={};try{ck=JSON.parse(localStorage.getItem("gk")||"{}")}catch(e){}
+function rk(){$("#cbox").innerHTML=L.map((t,i)=>`<label><input type="checkbox" data-i="${i}"${ck[i]?" checked":""}><span>${t}</span></label>`).join("");
+$("#cbox").querySelectorAll("input").forEach(x=>x.onchange=()=>{ck[x.dataset.i]=x.checked;try{localStorage.setItem("gk",JSON.stringify(ck))}catch(e){}up()});up()}
+function up(){const n=L.filter((_,i)=>ck[i]).length;$("#pb").style.width=n/L.length*100+"%";$("#pt").textContent=`${n} von ${L.length} Themen sicher${n===L.length?" – bereit für die Klausur!":""}`}
+$("#crs").onclick=()=>{ck={};try{localStorage.removeItem("gk")}catch(e){}rk()};rk();
+/* Kreuzungsschema */
+const G={a:["A|A","A|a","a|a"],x:["XH|XH","XH|Xh","Xh|Xh","XH|Y","Xh|Y"]};
+const fm=(g,m)=>g.split("|").map(a=>m==="x"&&a[0]==="X"?"X<sup>"+a[1]+"</sup>":a).join("");
+function fill(){const m=$("#pm").value;[$("#p1"),$("#p2")].forEach(s=>s.innerHTML=G[m].map(g=>`<option value="${g}">${fm(g,m).replace(/<\/?sup>/g,m==="x"?"":"")}</option>`).join(""));
+$("#p1").value=G[m][1]||G[m][0];$("#p2").value=m==="x"?"XH|Y":"A|a";cross()}
+const rk2=a=>a==="Y"?3:/[A-Z]$/.test(a)?0:1;
+function cross(){const m=$("#pm").value,a=$("#p1").value.split("|"),b=$("#p2").value.split("|"),cnt={},ph={};
+let h=`<table class="pn"><tr><th></th>${b.map(x=>`<th>${fm(x,m)}</th>`).join("")}</tr>`;
+a.forEach(x=>{h+=`<tr><th>${fm(x,m)}</th>`;b.forEach(y=>{const g=[x,y].sort((p,q)=>rk2(p)-rk2(q)).join("|");cnt[g]=(cnt[g]||0)+1;
+let p=m==="a"?(/[A-Z]/.test(g)?"dominant":"rezessiv"):(g.includes("Y")?(g.includes("Xh")?"♂ krank":"♂ gesund"):(g==="Xh|Xh"?"♀ krank":g==="XH|Xh"?"♀ Überträgerin":"♀ gesund"));
+ph[p]=(ph[p]||0)+1;h+=`<td>${fm(g,m)}<br><small>${p}</small></td>`});h+="</tr>"});
+const f=o=>Object.entries(o).map(([k,v])=>`${k.includes("|")?fm(k,m):k}: ${v/4*100} %`).join(" · ");
+$("#pout").innerHTML=h+`</table><p><b>Genotypen:</b> ${f(cnt)}</p><p><b>Phänotypen:</b> ${f(ph)}</p>`}
+$("#pm").onchange=fill;$("#p1").onchange=$("#p2").onchange=cross;fill();
+</script></body></html>
